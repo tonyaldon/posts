@@ -1,0 +1,30 @@
+#+TITLE: Posts
+#+AUTHOR: Tony aldon
+
+* About
+
+The posts about "emacs/elisp" that I publish on the subreddit
+[[https://www.reddit.com/r/emacs/][r/emacs]] in an org document.
+
+* Install
+
+The posts are in the file [[./posts.org]] and this file is meant to be
+read inside Emacs.
+
+To make the internal local links to Emacs and Org-mode repositories
+work correctly, make sure to clone those repositories.
+
+A clean procedure to get started with this document is:
+
+#+BEGIN_SRC bash
+git clone https://github.com/tonyaldon/posts
+cd posts
+git clone git://git.sv.gnu.org/emacs.git
+git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+#+END_SRC
+
+* Read the posts on Reddit
+
+- [2022-02-26 Sat] [[https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/][Have you ever wondered how org-mode toggles the visibility of headings?]]
+- [2022-02-20 Sun] [[https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/][You want to write a custom org backend? let's write onlybold backend together to get you started]]
+- [2022-02-11 Fri] [[https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/][Some examples on closures and lexical-binding]]
