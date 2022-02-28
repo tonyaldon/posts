@@ -1,0 +1,1079 @@
+# -*- coding: utf-8 -*-
+#+TITLE: Posts
+#+AUTHOR: Tony aldon
+#+DATE: <2022-02-28 Mon>
+
+# This document is meant to be read inside Emacs.  To make the internal
+# local links to Emacs and Org-mode repositories work correctly,
+# make sure to clone those repositories under this directory:
+#
+#    git clone git://git.sv.gnu.org/emacs.git
+#    git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+
+#+LINK: emacs      ./emacs/
+#+LINK: org-mode   ./org-mode/
+
+* [2022-02-26 Sat] Have you ever wondered how org-mode toggles the visibility of headings?
+:PROPERTIES:
+:CUSTOM_ID: /2022-02-26/org-mode-visibility-of-headings/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/
+:END:
+
+Have you ever wondered how org-mode toggles the visibility of headings?
+
+YES!!!  me either!
+
+Let's get into it ;)
+
+** org-mode visibility of headings
+
+~org-mode~ is built on top of ~outline-mode~ that is responsible of the
+visibility changes of the headings.
+
+How does it work?
+
+~outline-mode~ uses overlays, specifically the overlay property
+~invisible~ to toggle the visibility of the headings:
+
+1) To hide the body of a heading, ~outline-mode~ makes an overlay from
+   the end of the line of the heading to the end of the body of the
+   heading, and set the property ~invisible~ of the overlay to be the
+   symbol ~outline~.  Hence, the part of the buffer with this overlay
+   is "replaced" (visually, not the content of the buffer) by
+   ellipsis.  Why is this?  Because, when ~outline-mode~ is turned
+   on, it adds the cons ~(outline . t)~ to the variable
+   ~buffer-invisibility-spec~ which became buffer local and is
+   responsible for the invisibility of each buffer.
+2) To make visible the body of a heading, ~outline-mode~ removes any
+   overlays in the body of the heading that have its property
+   ~invisible~ set to the symbol ~outline~.
+
+To see exactly how this is achieved you can refer to the functions
+[[emacs:lisp/outline.el::(defun outline-flag-region][outline-flag-region]], [[emacs:lisp/outline.el::(defun outline-hide-entry][outline-hide-entry]] and [[emacs:lisp/outline.el::(defun outline-show-entry][outline-show-entry]] defined
+in the file [[emacs:lisp/outline.el]] and also the definition of the mode
+[[emacs:lisp/outline.el::(define-derived-mode outline-mode][outline-mode]] in the same file.
+
+You can get emacs's source code by running the following command:
+
+: git clone git://git.sv.gnu.org/emacs.git
+
+OK!
+
+The mechanism of ~outline-mode~ uses overlays, [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("buffer-invisibility-spec"][buffer-invisibility-spec]]
+and ellipsis.
+
+But how do those "emacs/elisp features" play together?
+
+In the next parts of this post, we build examples using them to try to
+get a good feel for their use.
+
+** text properties
+
+In a buffer, each character point can have text properties attached to
+it that can be used to do many things (like controling the appearance
+of the character).
+
+For instance, in an ~emacs-lisp-mode~ buffer, with the following s-exp,
+and the cursor (the point) after the first parenthesis:
+
+#+BEGIN_SRC emacs-lisp
+(setq my-var nil)
+#+END_SRC
+
+if we run:
+
+: M-x eval-expression RET (text-properties-at (point))
+
+we get:
+
+#+BEGIN_SRC emacs-lisp
+(face font-lock-keyword-face fontified t)
+#+END_SRC
+
+The character point "s" (point 2, i.e. the "s" at the second position
+in the buffer) has:
+
+1) the text property ~face~ equal to the face [[emacs:lisp/font-lock.el::(defface font-lock-keyword-face][font-lock-keyword-face]]
+   which is why it is display with a different foreground color
+   (depending on your theme) than the text ~my-var~ for instance,
+2) the text property ~fontified~ equal to ~t~ which we don't describe
+   here.
+
+We can read more about the special text properties in the manual
+([[info:elisp#Special Properties]]).
+
+If we want more information (not only the text properties) about the
+character point "s" (point 2), we can run (still with with the cursor
+after the first parenthesis):
+
+: M-x describe-char
+
+which pops up the following help buffer:
+
+#+BEGIN_SRC text
+             position: 2 of 18 (6%), column: 1
+            character: s (displayed as s) (codepoint 115, #o163, #x73)
+              charset: ascii (ASCII (ISO646 IRV))
+code point in charset: 0x73
+               script: latin
+               syntax: w 	which means: word
+             category: .:Base, L:Left-to-right (strong), a:ASCII, l:Latin, r:Roman
+             to input: type "C-x 8 RET 73" or "C-x 8 RET LATIN SMALL LETTER S"
+          buffer code: #x73
+            file code: #x73 (encoded by coding system prefer-utf-8-unix)
+              display: by this font (glyph code)
+    ftcrhb:-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (#x56)
+
+Character code properties: customize what to show
+  name: LATIN SMALL LETTER S
+  general-category: Ll (Letter, Lowercase)
+  decomposition: (115) ('s')
+
+There are text properties here:
+  face                 font-lock-keyword-face
+  fontified            t
+#+END_SRC
+
+Note that it might differs in your running emacs (different fonts,
+maybe information about overlays if you are using ~hl-line-mode~, ...).
+
+** Why are we talking about text properties if the mechanism of ~outline-mode~ uses overlays?
+
+Because:
+
+1) Both text properties and overlays can "alter/control" the
+   appearance of the buffer's text on the screen and so we have to
+   know something important that is (from the manual
+   [[info:elisp#Overlay Properties]]):
+
+   #+BEGIN_SRC text
+   all overlays take priority over text properties.
+   #+END_SRC
+
+2) buffer invisibility can also be achieve with text property (for
+   instance, this is what ~org-mode~ does to hide the brackets and the
+   link part of links like this ~[[link][description]]~), and it is
+   important to notice it.
+
+** overlays, invisible overlay property, buffer-invisibility-spec
+
+We can make a part of a buffer invisible using:
+
+1) the ~invisible~ text property (of that part),
+2) the ~invisible~ overlay property ("on top of that part").
+
+The "admitted" values of the ~invisible~ overlay property (or text
+property) and the invisibility effect expected depend on the value of
+the variable [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("buffer-invisibility-spec"][buffer-invisibility-spec]].
+
+In this section:
+
+1) we define overlays,
+2) we set the variable ~buffer-invisibility-spec~,
+3) we give different values to the ~invisible~ property of the overlays,
+4) we observe the appearance of the buffer,
+5) we repeat several times step 2) to 4).
+6) we hope we get a good feeling of invisibility in Emacs.
+
+Also note that all the evaluations of the s-expressions are done in the
+minibuffer with ~M-x eval-expression~ and the point in the buffer we
+operate on, that we call ~*invisible*~.
+
+Let's switch to the new "fresh" buffer ~*invisible*~ in ~fundamental-mode~
+by evaluating the following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(switch-to-buffer (get-buffer-create "*invisible*"))
+#+END_SRC
+
+Let's insert the characters ~XXXXXX~ at the beginning of the buffer
+~*invisible*~:
+
+#+BEGIN_SRC text
+XXXXXX
+#+END_SRC
+
+*** ~buffer-invisibility-spec~ equal to ~t~
+
+Now if we evaluate the variable ~buffer-invisibility-spec~, we should
+get ~t~ (the default) in the echo area.
+
+If not, we set this variable to ~t~ like this:
+
+#+BEGIN_SRC emacs-lisp
+(setq buffer-invisibility-spec t)
+#+END_SRC
+
+Now, we make an overlay "on top" of ~XXXXXX~ (from point 1 to point 7 in
+the buffer) that we assign to the variable ~ov-x~ using [[emacs:src/buffer.c::DEFUN ("make-overlay"][make-overlay]]:
+
+#+BEGIN_SRC emacs-lisp
+(setq ov-x (make-overlay 1 7))
+#+END_SRC
+
+and we see the following in the echo area:
+
+#+BEGIN_SRC text
+#<overlay from 1 to 7 in *invisible*>
+#+END_SRC
+
+Now, by setting the property ~invisible~ of the overlay ~ov-x~ to ~t~ using
+the function  [[emacs:src/buffer.c::DEFUN ("overlay-put"][overlay-put]] like this
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible t)
+#+END_SRC
+
+we make the characters ~XXXXXX~ disappear.
+
+This is due to the value of ~buffer-invisibility-spec~ equal to ~t~ (the
+default) which means that text is invisible if it has a non-nil
+~invisible~ (text or overlay) property.
+
+Now, evaluating the following s-exp sets ~invisible~ property of
+the overlay ~ov-x~ to ~nil~
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible nil)
+#+END_SRC
+
+makes the characters ~XXXXXX~ to reappear in the buffer ~*invisible*~.
+
+We also could have removed the overlay ~ov-x~ to make the characters
+~XXXXXX~ to reappear.  Let's see how.
+
+First, as previously, we set the ~invisible~ property of the overlay
+~ov-x~ to ~t~ to make the characters ~XXXXXX~ to disappear:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible t)
+#+END_SRC
+
+Then, instead of setting back the ~invisible~ overlay property to ~nil~ of
+~ov-x~ we remove it.  To do so, we use the function [[emacs:lisp/subr.el::(defun remove-overlays][remove-overlays]] that
+let you remove all the overlays in a range of the buffer that have a
+specific property set to some value (in our case the property ~invisible~
+set to ~t~ in the range 1 to 7 of the buffer).
+
+So evaluating the following s-exp
+
+#+BEGIN_SRC emacs-lisp
+(remove-overlays 1 7 'invisible t)
+#+END_SRC
+
+removes the overlay ~ov-x~ in the buffer ~*invisible*~ and make the
+characters ~XXXXXX~ to reappear.
+
+*** ~buffer-invisibility-spec~ equal to ~nil~
+
+As we removed the overlay ~ov-x~, we redifined it as previously by
+evaluating the following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(setq ov-x (make-overlay 1 7))
+#+END_SRC
+
+Let's set ~buffer-invisibility-spec~ to ~nil~:
+
+#+BEGIN_SRC emacs-lisp
+(setq buffer-invisibility-spec nil)
+#+END_SRC
+
+Then, by evaluating the following s-exp, we expect the characters
+~XXXXXX~ to disappear:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible t)
+#+END_SRC
+
+BUT they don't.
+
+This is normal, as we've just set ~buffer-invisibility-spec~ to ~nil~,
+we've "disabled" the invisibility feature in the buffer ~*invisible*~.
+
+Now, we restore the ~invisible~ property of the overlay ~ov-x~ so as not to
+interfere with the next example by evaluating:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible nil)
+#+END_SRC
+
+*** ~buffer-invisibility-spec~ equal to ~((foo) t)~
+
+Let's add the characters ~YYYYYY~ after the characters ~XXXXXX~ with
+3 dashes ~---~ in between such that the buffer ~*invisible*~ is now:
+
+#+BEGIN_SRC text
+XXXXXX---YYYYYY
+#+END_SRC
+
+Now, we make an overlay "on top" of ~YYYYYY~ (from point 10 to point 16
+in the buffer) that we assign to the variable ~ov-y~ using ~make-overlay~:
+
+#+BEGIN_SRC emacs-lisp
+(setq ov-y (make-overlay 10 16))
+#+END_SRC
+
+We set back ~buffer-invisibility-spec~ to ~t~ (the default):
+
+#+BEGIN_SRC emacs-lisp
+(setq buffer-invisibility-spec t)
+#+END_SRC
+
+Then we add the list ~(foo)~ to the variable ~buffer-invisibility-spec~
+using the function [[emacs:lisp/subr.el::(defun add-to-invisibility-spec][add-to-invisibility-spec]] as follow:
+
+#+BEGIN_SRC emacs-lisp
+(add-to-invisibility-spec '(foo))
+#+END_SRC
+
+Now, the value of ~buffer-invisibility-spec~ is ~((foo) t)~.
+
+This implies that, now to make a part of the buffer invisible, the
+~invisible~ property must be ~foo~ or ~t~.  Before, it could have been any
+value that is non-nil.
+
+This way we can toggle the visibility of some parts of the buffer
+while other parts remain invisible (see [[org-mode:lisp/ol.el::(defun org-toggle-link-display][org-toggle-link-display]] for
+instance).
+
+Let's make ~XXXXXX~ disappear "permanently" by setting the ~invisible~
+property of ~ov-x~ to ~t~:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'invisible t)
+#+END_SRC
+
+The characters ~XXXXXX~ disappear and the buffer ~*invisible*~ is now:
+
+#+BEGIN_SRC text
+---YYYYYY
+#+END_SRC
+
+Now, we set the ~invisible~ property of ~ov-y~ to be equal to ~foo~:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-y 'invisible 'foo)
+#+END_SRC
+
+The characters ~YYYYYY~ disappear and the buffer ~*invisible*~ is now:
+
+#+BEGIN_SRC text
+---
+#+END_SRC
+
+Now, what we can do is to make ~YYYYYY~ appears again by removing ~(foo)~
+from the invisibility spec ~buffer-invisibility-spec~ while the
+characters ~XXXXXX~ stay invisible:
+
+#+BEGIN_SRC emacs-lisp
+(remove-from-invisibility-spec '(foo))
+#+END_SRC
+
+Now, the buffer ~*invisible*~ is:
+
+#+BEGIN_SRC text
+---YYYYYY
+#+END_SRC
+
+Note that:
+
+1) the overlay ~ov-x~ still has its property ~invisible~ equal to ~t~ and,
+2) the overlay ~ov-y~ still has its property ~invisible~ equal to ~foo~.
+
+You can verify it by evaluating the following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-get ov-x 'invisible) ; t
+(overlay-get ov-y 'invisible) ; foo
+#+END_SRC
+
+** ellipsis and ~buffer-invisibility-spec~ equal to ~((foo . t) t)~
+*** default ellipsis ~...~
+
+If the variable ~buffer-invisibility-spec~ as a list contains a cons
+~(foo . t)~, every continuous part of the buffer with the ~invisible~
+property set to ~foo~ is replaced by ellipsis which are by default ~...~.
+
+The buffer ~*invisible*~ still contains the characters ~XXXXXX---YYYYYY~,
+but maybe not all the characters are visible.  So let's put our buffer
+in an appropriate state for this section.
+
+We removes all the overlays in the buffer (which makes all the content
+of the buffer visible again).  We redifined the ~ov-x~ and ~ov-y~ as
+previously (same part of the buffer (1 to 7) and (10 to 16)).  And we
+set ~buffer-invisibility-spec~ to be ~((foo . t) t)~.  We can do this by
+evaluating the following expression (in the minibuffer with point in
+the buffer ~*invisible*~):
+
+#+BEGIN_SRC emacs-lisp
+(progn
+  (remove-overlays)
+  (setq ov-x (make-overlay 1 7))
+  (setq ov-y (make-overlay 10 16))
+  (setq buffer-invisibility-spec t)
+  (add-to-invisibility-spec '(foo . t)))
+#+END_SRC
+
+The buffer ~*invisible*~ is now:
+
+#+BEGIN_SRC text
+XXXXXX---YYYYYY
+#+END_SRC
+
+By evaluating the following s-exp, we set the ~invisible~ property
+of the overlay ~ov-y~ to ~foo~
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-y 'invisible 'foo)
+#+END_SRC
+
+and this replaces (visually not the content of the buffer) the
+characters ~YYYYYY~ by the default ellipsis ~...~ and the buffer
+~*invisible*~ looks like this:
+
+#+BEGIN_SRC text
+XXXXXX---...
+#+END_SRC
+
+*** custom ellipsis modifying the display table
+
+We assume with the buffer ~*invisible*~ is in the same state as in the
+previous section.
+
+Our goal in this section is to modify the default ellipsis ~...~.
+
+To do so we:
+
+1) create a display table with the function [[emacs:lisp/disp-table.el::(defun make-display-table][make-display-table]],
+2) we set its special slot 4 (responsible of the display of the
+   ellipsis) which must be a vector of glyph using the function
+   [[emacs:lisp/disp-table.el::(defun set-display-table-slot][set-display-table-slot]],
+3) we set the variable [[emacs:src/buffer.c::  DEFVAR_PER_BUFFER ("buffer-display-table"][buffer-display-table]] of the buffer ~*invisible*~
+   to be this new display table,
+4) we observe the appearance of the buffer ~*invisible*~.
+
+So by evaluating the following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(let ((tbl (make-display-table))
+      (glyph-vector
+       (vector (make-glyph-code ?\ 'font-lock-warning-face)
+               (make-glyph-code ?\; 'font-lock-warning-face)
+               (make-glyph-code ?- 'font-lock-warning-face)
+               (make-glyph-code ?\) 'font-lock-warning-face))))
+  (set-display-table-slot tbl 4 glyph-vector)
+  (setq buffer-display-table tbl))
+#+END_SRC
+
+the buffer ~*invisible*~ should looks like this (if the ~invisible~
+property of the overlay ~ov-y~ is still equal to ~foo~):
+
+#+BEGIN_SRC text
+XXXXXX--- ;-)
+#+END_SRC
+
+You can read more about character display and display table in the
+manual ([[info:elisp#Character Display]]).
+
+WE ARE DONE :-)
+
+* [2022-02-20 Sun] You want to write a custom org backend?  Let's write onlybold backend together to get you started
+:PROPERTIES:
+:CUSTOM_ID: /2022-02-20/onlybold-org-backend/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/
+:END:
+
+Hi Emacsers,
+
+recently I've been playing with ~org-element~ and ~org-export~.
+
+Specifically, I was interested in the mechanism of the org exporter
+system and its flexibility.
+
+The goal of this post is to get you started with the creation of org
+backends.
+
+To do so, we build an org backend that:
+
+1) keeps only ~bold~ elements,
+2) surrounds ~bold~ elements with ~***~ before and after,
+3) surrounds ~paragraph~ elements with ~::~ before and after,
+4) surrounds ~section~ elements with ~<--~ before and ~-->~ after (removing
+   the last newline).
+
+We call it ~onlybold~.
+
+Before, we start, if you are interested, I recommend you to read in
+org-mode's source code the following files:
+
+- [[org-mode:lisp/ox.el]],
+- [[org-mode:lisp/ox-html.el]],
+- [[org-mode:lisp/ox-md.el]],
+- [[org-mode:lisp/ox-org.el]],
+- [[org-mode:testing/lisp/test-ox.el]] (AMAZING).
+
+You can get org-mode's source code by running the following command:
+
+: git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+
+Let's get started.
+
+** what we want to achieve
+
+We want to export this org buffer:
+
+#+BEGIN_SRC org
+I like *bold-1* and *bold-2* and you?
+I don't.  I prefer *bold-3*.
+
+
+I've loved *bold-4* since I was a child.
+
+I'm /italic/.
+#+END_SRC
+
+into another buffer like this:
+
+#+BEGIN_SRC text
+<--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::-->
+#+END_SRC
+
+** org export mechanism
+
+When org exports an org buffer, basically it does two things:
+
+1) parse the org buffer producing a tree (a nested elisp list)
+   representing the org buffer and,
+2) recursively build a string by traversing the tree and choosing for
+   each node what to do with it by looking up for its associated
+   transcode function defined by the org backend.
+
+It means that *org* does the *hard work* for us "parsing" and
+"traversing".
+
+To build ~onlybold~ org backend and any other org backends, in the
+simplest case, we just have to provide the *transcode functions*
+(or simply *transcoders*).
+
+** transcoders, org-export-define-backend and org-export-to-buffer
+
+The function [[org-mode:lisp/ox.el::(defun org-export-define-backend][org-export-define-backend]] takes as arguments:
+
+1) the backend's name we want to define and
+2) an alist of transcoders.
+
+A *transcoder* (or a transcode function), is a function that handles an
+org element when it is being exported.
+
+For instance, our backend ~onlybold~ must define a transcoder for ~bold~
+elements that surrounds bold texts with 3 stars ~***~ like this:
+
+: bold text -> ***bold text***
+
+Most transcoders take three arguments:
+
+1) the element as it appears in the parsed tree,
+2) a content strings corresponding to the children of the element
+   already "transcoded",
+3) the communication channel that contains all the information the
+   export system needs to export correctly the document (the obvious
+   ones are the title, date and author of the document that can be
+   defined inside the document using lines starting by ~#+TITLE:~,
+   ~#+DATE:~ or ~#+AUTHOR~).
+
+Let's define ~onlybold-bold~, the transcoder of ~bold~ elements:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-bold (bold contents info)
+  (concat "***" contents "***"))
+#+END_SRC
+
+Now, we can define the first version of ~onlybold~ backend, which
+transcodes only ~bold~ elements:
+
+#+BEGIN_SRC emacs-lisp
+(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)))
+#+END_SRC
+
+Then we defined the command ~onlybold-export~ that pops up the buffer
+~*onlybold*~ which contains the exported content (using ~onlybold~
+backend) of the current buffer:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-export ()
+  (interactive)
+  (org-export-to-buffer 'onlybold "*onlybold*"))
+#+END_SRC
+
+Now, if we call the command ~onlybold-export~ inside our org buffer,
+the buffer ~*onlybold*~ pops up with *nothing* in it.
+
+We might be disappointed, but we aren't.  This is totally normal.
+
+In a specific backend, when an element doesn't have a transcoder to
+handle it, the element is skipped.  (In the same vain, if a transcoder
+return ~nil~ for an element, the element is also skipped).
+
+** parsed tree, section elements and paragraph elements
+
+In our org buffer, the bold elements belong to paragraphs that belongs
+to a section as we can see by looking at the parsed tree in the buffer
+~*Pp Eval Output*~ after running the following command (being in the org
+buffer):
+
+: M-x pp-eval-expression RET (org-element-parse-buffer)
+
+We get the following tree (where we cut off and replace by ~...~
+informations that are not related to the shape of the tree):
+
+#+BEGIN_SRC emacs-lisp
+(org-data
+ nil
+ (section
+  (...)
+  (paragraph
+   (...)
+   #("I like " ...)
+   (bold
+    (...)
+    #("bold-1" ...))
+   #("and " ...)
+   (bold
+    (...)
+    #("bold-2" ...))
+   #("and you?\nI don't.  I prefer " ...)
+   (bold
+    (...)
+    #("bold-3" ...))
+   #(".\n" ...))
+  (paragraph
+   (...)
+   #("I've loved " ...)
+   (bold
+    (...)
+    #("bold-4" ...))
+   #("since I was a child.\n" ...))
+  (paragraph
+   (...)
+   #("I'm " ...)
+   (italic
+    (...)
+    #("italic" ...))
+   #("." ...))))
+#+END_SRC
+
+Indeed, ~bold~ elements belong to ~paragraph~ elements that belong to a
+~section~ element.
+
+And as we have just seen, if a backend doesn't provide a transcoder
+for an element, this element will be ignored in the exported result.
+
+So let's write ~onlybold-section~, the transcoder of ~section~ elements
+which surrounds their content with ~<--~ and ~-->~:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-section (section contents info)
+  (concat "<--" contents "-->"))
+#+END_SRC
+
+and ~onlybold-paragraph~, the transcoder of ~paragraph~ elements
+which surrounds their content with ~::~:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-paragraph (paragraph contents info)
+  (concat "::" contents "::"))
+#+END_SRC
+
+Then, we modify ~onlybold~ backend like this:
+
+#+BEGIN_SRC emacs-lisp
+(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)
+    (section . onlybold-section)
+    (paragraph . onlybold-paragraph)))
+#+END_SRC
+
+Now, if we call the command ~onlybold-export~ inside our org buffer,
+the buffer ~*onlybold*~ pops up with this content:
+
+#+BEGIN_SRC text
+<--::I like ***bold-1*** and ***bold-2*** and you?
+I don't.  I prefer ***bold-3***.
+::
+
+
+::I've loved ***bold-4*** since I was a child.
+::
+
+::I'm .
+::
+-->
+#+END_SRC
+
+This is better:
+
+1) The ~bold~ elements has been transcoded as we expected,
+2) The "normal" text remains the same as in our org buffer and,
+3) note that the ~italic~ element has been ignored (which was expected
+   because we didn't provide a transcoder for ~italic~ elements).
+
+** only keep bold elements
+
+~plain-text~ elements are the leaves of the parsed tree, they are
+strings.  And to keep only ~bold~ elements, this is the right level to
+operate.
+
+So now, let's handle the ~plain-text~ elements and keep only ~bold~
+elements.
+
+There is a least two ways to do it:
+
+1) using the filter system provided by the org export system (and so
+   provided a filter that applies to ~plain-text~ elements) or,
+2) providing a specific transcoder for ~plain-text~ elements.
+
+We implement the later.
+
+Let's write the transcoder ~onlybold-plain-text~ which checks if the
+*parent* of the ~plain-text~ element (the string) is a ~bold~ element.  If
+this is the case, we return the string and if not we return ~nil~:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-plain-text (text info)
+  (when (eq 'bold (org-element-type (org-element-property :parent text)))
+    text))
+#+END_SRC
+
+Note that the arity (number of arguments) of ~onlybold-plain-text~ is
+different from the transcoders that we've seen so far.
+
+Then we add it to ~onlybold~ backend:
+
+#+BEGIN_SRC emacs-lisp
+(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)
+    (section . onlybold-section)
+    (paragraph . onlybold-paragraph)
+    (plain-text . onlybold-plain-text)))
+#+END_SRC
+
+Now, if we call the command ~onlybold-export~ inside our org buffer,
+the buffer ~*onlybold*~ pops up with this content:
+
+#+BEGIN_SRC text
+<--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::
+
+::::
+-->
+#+END_SRC
+
+We have filtered the text to keep only ~bold~ elements.
+
+** remove empty paragraphs and the last newline of the section
+
+Let's go further and remove the last empty paragraph.
+
+To do so, we can "ask" the transcoder ~onlybold-paragraph~ to return ~nil~
+when its contents is "empty", specifically when its content is the
+empty strings ~""~ or a newline ~"\n"~.  Here is the new implementation:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-paragraph (paragraph contents info)
+  (if (member contents '("" "\n"))
+      nil
+    (concat "::" contents "::")))
+#+END_SRC
+
+Now, if we call the command ~onlybold-export~ inside our org buffer,
+the buffer ~*onlybold*~ pops up with this content:
+
+#+BEGIN_SRC text
+<--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::
+-->
+#+END_SRC
+
+We are almost happy :)
+
+Only one thing remains...
+
+The end of the section ~-->~ alone in the last line is "quite ugly".
+
+Let's put it just after ~::~ that close the last paragraph.
+
+We can do this by modifying ~onlybold-section~ and "asking" it to
+remove the last newline of its content which is matched by the regexp
+~"\n\\'"~:
+
+#+BEGIN_SRC emacs-lisp
+(defun onlybold-section (section contents info)
+  (let ((cts (replace-regexp-in-string "\n\\'" "" contents)))
+    (concat "<--" cts "-->")))
+#+END_SRC
+
+Now, if we call the command ~onlybold-export~ inside our org buffer,
+the buffer ~*onlybold*~ pops up with this content:
+
+#+BEGIN_SRC text
+<--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::-->
+#+END_SRC
+
+We are done ;)
+
+I hope that this toy example helps you get started with the creation
+of org backends
+
+** acknowledgments
+
+I take the opportunity of this post to thank:
+
+1) Nicolas Goaziou who is the author and maintainer of
+   [[org-mode:lisp/ox.el]], and [[org-mode:lisp/org-element.el]].
+2) All the people who work and contribute to org-mode (built-in and
+   external packages),
+3) All the people who work and contribute to Emacs (built-in and
+   external packages).
+
+And I want to tell you that:
+
+Each time a piece of your code is heavy, I know that:
+
+1) this piece of code fixes a bug or,
+2) this piece of code handles an edge case or,
+3) this piece of code provides flexibility (via options) to the end
+   user.
+
+Each time your code is simple, I know that you worked hard to make
+it simple.
+
+And the more important, each time I read a piece of your code I feel
+closer to you.
+
+Emacs is pure joy and it is thanks to you.
+
+* [2022-02-11 Fri] Some examples on closures and lexical-binding
+:PROPERTIES:
+:CUSTOM_ID: /2022-02-11/closures-and-lexical-binding/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/
+:END:
+
+Hi Emacsers,
+
+I've spent some time learning Elisp closures and lexical binding.
+
+Although the documentation is clear with simple examples, I needed to
+to play with other examples to get my bearings.
+
+As you might be interested, I share them with you :)
+
+The first section contains the info nodes and help corresponding to
+the examples.
+
+The second section shows 10 "basic" examples using [[emacs:src/lread.c::  DEFVAR_LISP ("lexical-binding"][lexical-binding]],
+[[emacs:lisp/subr.el::(defmacro
+lambda][lambda]], [[emacs:lisp/emacs-lisp/byte-run.el::(defmacro defun][defun]], [[emacs:src/eval.c::DEFUN ("let"][let]], [[emacs:lisp/obsolete/cl.el::(defmacro lexical-let][lexical-let]], [[emacs:src/eval.c::DEFUN ("setq"][setq]] and [[emacs:src/eval.c::DEFUN ("defvar"][defvar]].
+
+And the third section shows a more advanced example using [[emacs:lisp/subr.el::(defmacro lambda][lambda]], [[emacs:src/eval.c::DEFUN ("let"][let]],
+[[emacs:lisp/subr.el::(defmacro
+dolist][dolist]] and [[emacs:lisp/emacs-lisp/byte-run.el::(defmacro defun][defun]].
+
+Have a nice day,
+
+ps: In the documentation, we can read "Lexical binding is also more
+compatible with concurrency, which was added to Emacs in version
+26.1.".
+
+Is someone know why is this?  And can you indicate me the
+files in the emacs source code where I can see this benefits?  I'm
+really curious... thank you.
+
+** info and help
+
+Info nodes:
+
+- ~M-x eval-expression RET (info "(elisp)Variable Scoping")~
+- ~M-x eval-expression RET (info "(elisp)Closures")~
+
+help:
+
+- ~C-h v lexical-binding~
+- ~C-h f defvar~
+- ~C-h f lambda~
+- ~C-h f lexical-let~
+
+** 10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar
+
+- example 1
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding nil)
+  (lambda (x) (* x x)) ; (lambda (x) (* x x))
+  #+END_SRC
+
+- example 2
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (lambda (x) (* x x)) ; (closure (t) (x) (* x x))
+  #+END_SRC
+
+- example 3
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding nil)
+  (let ((x 1)) (lambda (y) (+ x y)))
+  ;; (lambda (y) (+ x y))
+  #+END_SRC
+
+- example 4
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (let ((x 1)) (lambda (y) (+ x y)))
+  ;; (closure ((x . 1) t) (y) (+ x y))
+  #+END_SRC
+
+- example 5
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (let ((n 1)) (defun n+ (y) (+ n y)))
+  (n+ 1) ; 2
+  (let ((n -10)) (n+ 1)) ; 2
+  #+END_SRC
+
+- example 6
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding nil)
+  (let ((n 1)) (defun n+ (y) (+ n y)))
+  (should-error (n+ 1) :type 'void-variable) ; (void-variable n)
+  (let ((n -10)) (n+ 1)) ; -9
+  #+END_SRC
+
+- example 7
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding nil)
+  ;; Note that `lexical-let' is defined in `lisp/obsolete/cl.el'
+  (lexical-let ((n 1)) (defun n+ (y) (+ n y)))
+  (n+ 1) ; 2
+  (let ((n -10)) (n+ 1)) ; 2
+  #+END_SRC
+
+- example 8
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (setq xx 10)
+  (let ((xx 1)) (defun xx+ (y) (+ xx y)))
+  (xx+ 1) ; 2
+  (let ((x -10)) (xx+ 1)) ; 2
+  #+END_SRC
+
+- example 9
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (defvar xxx 10)
+  (let ((xxx 1)) (defun xxx+ (y) (+ xxx y)))
+  (xxx+ 1) ; 11
+  (let ((xxx -10)) (xxx+ 1)) ; -9
+  #+END_SRC
+
+- example 10
+
+  #+BEGIN_SRC emacs-lisp
+  (setq lexical-binding t)
+  (let ((xxxx 1)) (defun xxxx+ (y) (+ y xxxx)))
+  (defvar xxxx 10)
+  (xxxx+ 1) ; 11
+  (let ((xxxx -10)) (xxxx+ 1)) ; -9
+  #+END_SRC
+
+** advanced example using lambda, let, dolist, defun
+
+Evaluating the following forms with lexical binding:
+
+#+BEGIN_SRC emacs-lisp
+(setq lexical-binding t)
+
+(defun call-f (f x)
+  `(:x-in-call-f ,x
+    :result-of-f ,(funcall f x)
+    :type-of-f ,(car f)
+    :env-of-f  ,(and (eq (car f) 'closure) (cadr f))))
+
+(dolist (x '(1 2 3))
+  (let ((f (lambda (y) `(:x-in-f ,x :y ,y))))
+    (message "%S" (append `(:x-in-dolist ,x) (call-f f -1)))))
+#+END_SRC
+
+prints out the following into the message buffer:
+
+#+BEGIN_SRC emacs-lisp
+(:x-in-dolist 1
+ :x-in-call-f -1
+ :result-of-f (:x-in-f 1 :y -1)
+ :type-of-f closure
+ :env-of-f ((--dolist-tail-- 1 2 3) t))
+(:x-in-dolist 2
+ :x-in-call-f -1
+ :result-of-f (:x-in-f 2 :y -1)
+ :type-of-f closure
+ :env-of-f ((--dolist-tail-- 2 3) t))
+(:x-in-dolist 3
+ :x-in-call-f -1
+ :result-of-f (:x-in-f 3 :y -1)
+ :type-of-f closure
+ :env-of-f ((--dolist-tail-- 3) t))
+#+END_SRC
+
+Evaluating the following forms with dynamic binding:
+
+#+BEGIN_SRC emacs-lisp
+(setq lexical-binding nil)
+
+(defun call-f (f x)
+  `(:x-in-call-f ,x
+    :result-of-f ,(funcall f x)
+    :type-of-f ,(car f)
+    :env-of-f  ,(and (eq (car f) 'closure) (cadr f))))
+
+(dolist (x '(1 2 3))
+  (let ((f (lambda (y) `(:x-in-f ,x :y ,y))))
+    (message "%S" (append `(:x-in-dolist ,x) (call-f f -1)))))
+#+END_SRC
+
+prints out the following into the message buffer:
+
+#+BEGIN_SRC emacs-lisp
+(:x-in-dolist 1
+ :x-in-call-f -1
+ :result-of-f (:x-in-f -1 :y -1)
+ :type-of-f lambda
+ :env-of-f nil)
+(:x-in-dolist 2
+ :x-in-call-f -1
+ :result-of-f (:x-in-f -1 :y -1)
+ :type-of-f lambda
+ :env-of-f nil)
+(:x-in-dolist 3
+ :x-in-call-f -1
+ :result-of-f (:x-in-f -1 :y -1)
+ :type-of-f lambda
+ :env-of-f nil)
+#+END_SRC
