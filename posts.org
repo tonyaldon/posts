@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-02-28 Mon>
+#+DATE: <2022-03-06 Sun>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,495 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-03-05 Sat] I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!
+:PROPERTIES:
+:CUSTOM_ID: /2022-03-05/i-bet-you-use-hl-line-mode/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/t7doal/i_bet_you_use_hllinemode_do_you_know_how_it_works/
+:END:
+
+Hey Emacsers,
+
+How are you doing?
+
+I'm getting excited about this post because when I understood how
+[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] works, it opened new horizons for me in the world of
+Elisp.
+
+I hope you will feel the same way after:
+
+1) reading this post or,
+2) by directly reading the source code of [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] that can be
+   found in the file [[emacs:lisp/hl-line.el]] (only 205 LOC skipping
+   comments and empty lines).
+
+You can get emacs's source code by running the following command:
+
+: git clone git://git.sv.gnu.org/emacs.git
+
+** ~hl-line-mode~
+*** What is ~hl-line-mode~?
+
+[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is a minor mode that highlights the current line.
+
+If there is multiple windows in your frame using [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] you can
+control whether all windows have the line highlighted or only the
+~selected-window~ with the option [[emacs:lisp/hl-line.el::(defcustom hl-line-sticky-flag][hl-line-sticky-flag]].
+
+If you prefer not to highlight the whole line but only a range around
+the point this is also possible with [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]].
+
+In this post, we are not interested in these options, but only in the
+mechanism and the default behavior that highlights the
+entire line in the current buffer.
+
+*** How does it work?
+
+[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] moves an overlay responsible to highlight the current
+line after each command call.  This is done by adding a specific
+function to the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] when the mode [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is
+turned on.
+
+If you are already familiar with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] and Emacs overlays,
+you're done.
+
+But, if not, let's break things down together.
+
+One things to remember about Emacs ([[info:elisp#Command Loop][info:elisp#Command Loop]]) is:
+
+#+BEGIN_SRC text
+When you run Emacs, it enters the “editor command loop” almost
+immediately.  This loop reads key sequences, executes their definitions,
+and displays the results.
+#+END_SRC
+
+Specifically, each time we call a command (inserting a character also
+calls a command, ~self-insert-command~ by default), the "editor
+command loop":
+
+1) runs the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] before executing the command,
+2) runs the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] after executing the command.
+
+(run the hook ~X~ means: call all the functions in the list ~X~).
+
+So we can trigger actions after each command call by adding
+functions in the list [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+
+This is what [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] does.  When turned on, the mode adds the
+function [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] to the list [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] as follow:
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'post-command-hook #'hl-line-highlight nil t)
+#+END_SRC
+
+Note the ~t~ at the end of the previous s-exp that makes the hook
+buffer-local.
+
+So, in a buffer that has [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] turned on, each time we call a
+command (basically, "each time we do something"):
+
+1) the command is executed and,
+2) [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] is called.
+
+What exactly does [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] do?
+
+[[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]]:
+
+1) creates an overlay at point with the ~face~ property equal to
+   [[emacs:lisp/hl-line.el::(defcustom hl-line-face][hl-line-face]] (calling the function [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]]) if it
+   doesn't exist yet,
+2) assigns this overlay to the variable [[emacs:lisp/hl-line.el::(defvar-local hl-line-overlay][hl-line-overlay]] and,
+3) moves (places) this overlay on the current line (calling the
+   function [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]]).
+
+Here the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] (where I removed some details):
+
+#+BEGIN_SRC emacs-lisp
+(defun hl-line-highlight ()
+  (if hl-line-mode
+      (progn
+        (unless (overlayp hl-line-overlay)
+          (setq hl-line-overlay (hl-line-make-overlay)))
+        ;; ...
+        (hl-line-move hl-line-overlay)
+        ;; ...
+        )
+    (hl-line-unhighlight)))
+#+END_SRC
+
+The function [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]] uses the function ~make-overlay~ to
+make the overlay and uses the function [[emacs:src/buffer.c::DEFUN ("overlay-put"][overlay-put]] to set the ~priority~
+and ~face~ property of the new created overlay:
+
+#+BEGIN_SRC emacs-lisp
+(defun hl-line-make-overlay ()
+  (let ((ol (make-overlay (point) (point))))
+    (overlay-put ol 'priority hl-line-overlay-priority)
+    (overlay-put ol 'face hl-line-face)
+    ol))
+#+END_SRC
+
+As we left aside the range function [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]] (which is
+set to ~nil~ by default), we can see below a simplified implementation
+of [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]], that we call ~hl-line-move-NO-RANGE-FUNCTION~ that uses
+the function [[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]] to move the limits of the overlay and set
+them to be the beginning of the current line and beginning of the next
+line:
+
+#+BEGIN_SRC emacs-lisp
+(defun hl-line-move-NO-RANGE-FUNCTION (overlay)
+  (let ((beg (line-beginning-position))
+        (end (line-beginning-position 2)))
+    (move-overlay overlay beg end)))
+#+END_SRC
+
+We have left out some details (the functions [[emacs:lisp/hl-line.el::(defun hl-line-unhighlight][hl-line-unhighlight]]
+[[emacs:lisp/hl-line.el::(defun hl-line-maybe-unhighlight][hl-line-maybe-unhighlight]] and the use of the hook
+~change-major-mode-hook~), because our goal was to focus on the
+mechanism and not all the options and implementation details.
+
+I hope this useful.
+
+*** ~global-hl-line-mode~
+
+[[emacs:lisp/hl-line.el::(define-minor-mode global-hl-line-mode][global-hl-line-mode]] is a global minor mode that offers line
+highlighting in all buffers.
+
+The mechanism is "almost" the same as [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] and both
+share the functions [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]] and [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]], the
+variables [[emacs:lisp/hl-line.el::(defvar hl-line-overlay-priority][hl-line-overlay-priority]], [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]] and they
+use the same "face" [[emacs:lisp/hl-line.el::(defcustom hl-line-face][hl-line-face]].
+
+So, if you understand how [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] works, you already almost
+understand how [[emacs:lisp/hl-line.el::(define-minor-mode global-hl-line-mode][global-hl-line-mode]] works.
+
+In the next parts of this post, we build examples using
+[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] and overlays separately to try to get a good
+overview of their use.
+
+** Playing with ~pre-command-hook~ and ~post-command-hook~
+
+In this section everything happens in the buffer ~*test hooks*~.
+
+Let's switch to the new buffer ~*test hooks*~ in ~emacs-lisp-mode~
+by evaluating the following s-exp in the minibuffer (~M-x
+eval-expression~):
+
+#+BEGIN_SRC emacs-lisp
+(progn
+  (with-current-buffer (get-buffer-create "*test hooks*")
+    (emacs-lisp-mode))
+  (switch-to-buffer "*test hooks*"))
+#+END_SRC
+
+We've already seen that by adding functions to the hooks (lists)
+[[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] we can trigger actions before
+or after any command call.
+
+The first things we can do is to inspect the variable
+[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] by running:
+
+: M-x describe-variable RET post-command-hook RET
+
+This will pops up an help buffer that looks like this (the value
+depends on the packages you are using):
+
+#+BEGIN_SRC text
+post-command-hook is a variable defined in ‘src/keyboard.c’.
+
+Its value is
+(jit-lock--antiblink-post-command yas--post-command-handler
+eldoc-schedule-timer company-post-command t)
+Local in buffer *test hooks*; global value is
+(global-font-lock-mode-check-buffers global-eldoc-mode-check-buffers
+smartparens-global-mode-check-buffers
+show-smartparens-global-mode-check-buffers
+yas-global-mode-check-buffers magit-auto-revert-mode-check-buffers
+global-hl-line-highlight insight-check-cursor-color
+sp--post-command-hook-handler winner-save-old-configurations)
+
+  This variable may be risky if used as a file-local variable.
+  Probably introduced at or before Emacs version 19.20.
+
+Normal hook run after each command is executed.
+If an unhandled error happens in running this hook,
+the function in which the error occurred is unconditionally removed, since
+otherwise the error might happen repeatedly and make Emacs nonfunctional.
+
+It is a bad idea to use this hook for expensive processing.  If
+unavoidable, wrap your code in ‘(while-no-input (redisplay) CODE)’ to
+avoid making Emacs unresponsive while the user types.
+
+See also ‘pre-command-hook’.
+#+END_SRC
+
+In this help buffer, we see that the local value in the buffer ~*test
+hooks*~ is the list:
+
+: (jit-lock--antiblink-post-command yas--post-command-handler eldoc-schedule-timer company-post-command t)
+
+We also see its global value and the last part of the help buffer is
+the docstring of this variable where we can read:
+
+#+BEGIN_SRC text
+If an unhandled error happens in running this hook,
+the function in which the error occurred is unconditionally removed, since
+otherwise the error might happen repeatedly and make Emacs nonfunctional.
+#+END_SRC
+
+This tells us that it is safe to play with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] because if
+we add it a function that raises an error the function will be
+unconditionally removed.
+
+So let's add to [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] a symbol that has no function
+definition (so raises the error ~void-function~ when called as a
+function).  So by evaluating the following s-exp (~eval-last-sexp~ bound
+to ~C-x C-e~):
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'post-command-hook 'test-void-function)
+#+END_SRC
+
+we see in the echo area:
+
+#+BEGIN_SRC text
+Error in post-command-hook (test-void-function): (void-function test-void-function)
+#+END_SRC
+
+And if we inspect the variable [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] (as we did
+previously), we see that ~test-void-function~ symbol isn't in the hook.
+
+What happened?
+
+1) we called ~eval-last-sexp~,
+2) then the "editor command loop" ran the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]],
+3) then the expression ~(add-hook 'post-command-hook 'test-void-function)~
+   has been evaluated, which added ~test-void-function~ symbol to
+   [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]],
+4) then the "editor command loop" ran the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]], and
+   when it try to call the function ~test-void-function~, it raised the
+   error ~void-function~ and remove ~test-void-function~ from the hook.
+
+Now that we are confident that playing with the hook
+[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] won't break our running Emacs, let's build the main
+example of this section.
+
+We write 2 functions ~test-hook-pre~ and ~test-hook-post~
+that print out respectively the name of the command that is about to
+run and the name of the command that just ran.
+
+To do that we use the emacs variable [[emacs:src/keyboard.c::    DEFVAR_LISP ("this-command"][this-command]] (that holds the
+command now being executed) and adds ~test-hook-pre~ to [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]]
+and ~test-hook-post~ to [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+
+Note that the info nodes related to this examples are:
+
+- [[info:elisp#Command Overview]]
+- [[info:elisp#Command Loop Info]]
+
+Then we call some commands.
+
+And finally we observe what has been printed out in the buffer
+~*Messages*~.
+
+In the buffer ~*test hooks*~, we remove everything and add the following
+expressions:
+
+#+BEGIN_SRC emacs-lisp
+(defun test-hook-pre ()
+  (message "  BEFORE   |   %s" this-command))
+
+(defun test-hook-post ()
+  (message "   AFTER   |   %s" this-command))
+
+(add-hook 'pre-command-hook 'test-hook-pre)
+(add-hook 'post-command-hook 'test-hook-post)
+
+(message ":::::::: print me ::::::::")
+#+END_SRC
+
+Then with the point after the last s-exp (last parenthesis), we do in
+order (without doing anything else, this is important for the messages
+we want to see printed):
+
+1) ~M-x eval-buffer~ (this evaluate all this expressions),
+2) ~C-a~ (move to the beginning),
+3) ~C-e~ (move to the end of line),
+4) ~C-x C-e~ (eval the last expression).
+
+Then, we should see in the buffer (almost at the end) ~*Messages*~ the
+following:
+
+#+BEGIN_SRC text
+:::::::: print me ::::::::
+   AFTER   |   eval-buffer
+  BEFORE   |   move-beginning-of-line
+   AFTER   |   move-beginning-of-line
+  BEFORE   |   move-end-of-line
+   AFTER   |   move-end-of-line
+  BEFORE   |   eval-last-sexp
+:::::::: print me ::::::::
+":::::::: print me ::::::::"
+   AFTER   |   eval-last-sexp
+#+END_SRC
+
+This gives us an overview of the behavior of the "editor command
+loop".
+
+Are you annoyed by the noise you have in your echo area?
+
+Me too.
+
+Let's remove the functions ~test-hook-pre~ and ~test-hook-post~
+respectively from the hooks [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] by
+evaluating the following s-exps.  This should "clean up" our echo
+area.
+
+#+BEGIN_SRC emacs-lisp
+(remove-hook 'pre-command-hook 'test-hook-pre)
+(remove-hook 'post-command-hook 'test-hook-post)
+#+END_SRC
+
+We are done with the hooks [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+Let's play with overlays.
+
+** Moving overlays and priorities
+
+In the post [[#/2022-02-26/org-mode-visibility-of-headings/][Have you ever wondered how org-mode toggles the visibility
+of headings?]], we already played with overlays specifically the ~invisible~
+property of overlay.  We also know that overlays take priority over
+text properties.
+
+Here, we see:
+
+1) how to move overlays ([[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]]) and,
+2) which overlay wins when they overlap (~priority~ property).
+
+Note that all the evaluations of the s-expressions are done in the
+minibuffer with ~M-x eval-expression~ and the point in the buffer we
+operate on, that we call ~*overlays*~.
+
+Let's switch to the new buffer ~*overlays*~ in ~fundamental-mode~
+by evaluating the following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(switch-to-buffer (get-buffer-create "*overlays*"))
+#+END_SRC
+
+Let's insert the characters ~FOO---BAR---BAZ~ such that the buffer
+~*overlays*~ look likes this:
+
+#+BEGIN_SRC text
+FOO---BAR---BAZ
+#+END_SRC
+
+We make two overlays:
+
+1) ~ov-x~ on top of ~FOO~ with a background green (~#00ff00~),
+2) ~ov-y~ on top of ~BAZ~ with a background red (~#ff0000~).
+
+To do so, we evaluate the following form:
+
+#+BEGIN_SRC emacs-lisp
+(progn
+  (setq ov-x (make-overlay 1 4))
+  (overlay-put ov-x 'face '(:background "#00ff00"))
+  (setq ov-y (make-overlay 13 16))
+  (overlay-put ov-y 'face '(:background "#ff0000")))
+#+END_SRC
+
+Now we have ~FOO~ with a background green and ~BAZ~ with a background
+red.
+
+Let's move the overlay ~ov-x~ (the green) on top of the characters ~BAR~
+the same way [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] does.  To do so we use the function
+[[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]] as follow:
+
+#+BEGIN_SRC emacs-lisp
+(move-overlay ov-x 7 10)
+#+END_SRC
+
+When more than one overlay overlap, Emacs decides for each property,
+which overlay "wins" (see [[info:elisp#Overlay
+Properties][info:elisp#Overlay Properties]]) over the
+others by looking up at the overlay property ~priority~ which should be
+a positive integer or ~nil~, thought the higher value "wins".
+
+Let's see this on our example.
+
+First, we set the overlay ~ov-x~ to have a ~priority~ equal to ~10~ and the
+overlay ~ov-y~ to have a priority equal to ~20~ by evaluating the
+following form:
+
+#+BEGIN_SRC emacs-lisp
+(progn
+  (overlay-put ov-x 'priority 10)
+  (overlay-put ov-y 'priority 20))
+#+END_SRC
+
+Now we move the overlay ~ov-y~ to be on top of the characters ~BAR~ (and so
+overlap with the overlay ~ov-x~) by evaluating this s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(move-overlay ov-y 7 10)
+#+END_SRC
+
+The buffer ~*overlays*~ shows the characters ~BAR~ with a background red
+that corresponds to the overlay ~ov-y~ which have a priority ~20~ superior
+to the priority ~10~ of the overlay ~ov-x~.
+
+Now let's make ~ov-x~ wins by raising its priority to ~30~:
+
+#+BEGIN_SRC emacs-lisp
+(overlay-put ov-x 'priority 30)
+#+END_SRC
+
+ISN'T IT SUPER COOL!!!
+
+Something interesting we can do now is to ~M-x describe-char~, with the
+point between ~A~ and ~R~ in the word ~BAR~, which pops up the following
+help buffer:
+
+#+BEGIN_SRC text
+             position: 9 of 15 (53%), column: 8
+            character: R (displayed as R) (codepoint 82, #o122, #x52)
+              charset: ascii (ASCII (ISO646 IRV))
+code point in charset: 0x52
+               script: latin
+               syntax: w 	which means: word
+             category: .:Base, L:Left-to-right (strong), a:ASCII, l:Latin, r:Roman
+             to input: type "C-x 8 RET 52" or "C-x 8 RET LATIN CAPITAL LETTER R"
+          buffer code: #x52
+            file code: #x52 (encoded by coding system utf-8-unix)
+              display: by this font (glyph code)
+    ftcrhb:-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (#x35)
+
+Character code properties: customize what to show
+  name: LATIN CAPITAL LETTER R
+  general-category: Lu (Letter, Uppercase)
+  decomposition: (82) ('R')
+
+There are 2 overlays here:
+ From 7 to 10
+  face                 (:background "#00ff00")
+  priority             30
+ From 7 to 10
+  face                 (:background "#ff0000")
+  priority             20
+#+END_SRC
+
+Note that it might differs in your running emacs (different fonts,
+maybe information about overlays if you are using ~hl-line-mode~, ...).
+
+There are 2 overlays!!!
+
+To finish this post, we remove the overlays like this:
+
+#+BEGIN_SRC emacs-lisp
+(remove-overlays)
+#+END_SRC
+
+WE ARE DONE!!!
 
 * [2022-02-26 Sat] Have you ever wondered how org-mode toggles the visibility of headings?
 :PROPERTIES:
