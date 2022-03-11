@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-03-06 Sun>
+#+DATE: <2022-03-11 Fri 09:25>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,467 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-03-11 Fri] Did you know that org-mode's source code contains more than 5000 examples?
+:PROPERTIES:
+:CUSTOM_ID: /2022-03-11/org-mode-source-code-5000-examples/
+:END:
+
+Hey org-mode lovers,
+
+Have you ever been in the following situation?
+
+You have tried to understand a specific aspect of org-mode (say a
+command) and you have done the following:
+
+1) you have played with the command (writing your own examples),
+2) you have read all the parts in the manual dealing with this
+   command,
+3) you have read the docstring of the command,
+4) you have looked for explanations on the web,
+5) you even have read the source code of the command,
+
+but you still haven't figured it out after all the efforts.
+
+I've been in that situation and I thought it would be easier if there
+were more examples.
+
+BUT THERE ARE MORE EXAMPLES.
+
+We just have to change our lenses to see them.
+
+What if we looked at org-mode tests as examples of org-mode?
+
+BOOM we have our 5000 examples.
+
+Before going any further, let's make it clear that we don't need to
+understand or know how to use [[emacs:lisp/emacs-lisp/ert.el][ert]] (the built-in package used for
+testing) to benefit from org-mode testing.
+
+And this post is not about [[emacs:lisp/emacs-lisp/ert.el][ert]] testing but about the information
+that we can get from the org-mode test suite.
+
+In this post, we use the example of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
+(bound by default to ~M-<RET>~, that allows to insert a new heading or
+item with the same depth at point)  to "demonstrate" that the tests
+are indeed examples.
+
+Let's assume, we are already familiar with [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]], we use it
+every day, but sometimes we don't understand why it behaves the way it
+does.
+
+What can we do to find out the truth about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]?
+
+** Org manual
+
+First of all, we can take a look in the manual of org.
+
+In the info node [[info:org#Plain Lists]] we can read:
+
+#+BEGIN_SRC text
+‘M-<RET>’ (‘org-insert-heading’)
+     Insert new item at current level.  With a prefix argument, force a
+     new heading (see Structure Editing).  If this command is
+     used in the middle of an item, that item is _split_ in two, and the
+     second part becomes the new item(5).  If this command is executed
+     _before item’s body_, the new item is created _before_ the current
+     one.
+
+...
+
+   (5) If you do not want the item to be split, customize the variable
+‘org-M-RET-may-split-line’.
+#+END_SRC
+
+That might be enough, but let's say it isn't, and we continue our
+investigation to find the truth.
+
+** Help buffer
+
+Secondly, we can have more information about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
+by reading its docstring by running:
+
+: C-h f org-insert-heading RET
+
+which pops up this help buffer:
+
+#+BEGIN_SRC text
+org-insert-heading is an interactive compiled Lisp function.
+
+(org-insert-heading &optional ARG INVISIBLE-OK TOP)
+
+Insert a new heading or an item with the same depth at point.
+
+If point is at the beginning of a heading, insert a new heading
+or a new headline above the current one.  When at the beginning
+of a regular line of text, turn it into a heading.
+
+If point is in the middle of a line, split it and create a new
+headline with the text in the current line after point (see
+‘org-M-RET-may-split-line’ on how to modify this behavior).  As
+a special case, on a headline, splitting can only happen on the
+title itself.  E.g., this excludes breaking stars or tags.
+
+With a ‘C-u’ prefix, set ‘org-insert-heading-respect-content’ to
+a non-nil value for the duration of the command.  This forces the
+insertion of a heading after the current subtree, independently
+on the location of point.
+
+With a ‘C-u C-u’ prefix, insert the heading at the end of the tree
+above the current heading.  For example, if point is within a
+2nd-level heading, then it will insert a 2nd-level heading at
+the end of the 1st-level parent subtree.
+
+When INVISIBLE-OK is set, stop at invisible headlines when going
+back.  This is important for non-interactive uses of the
+command.
+
+When optional argument TOP is non-nil, insert a level 1 heading,
+unconditionally.
+#+END_SRC
+
+Now we not only know what the command does but also how to call it.
+
+There is also some information about its non-interactive use.
+
+Reading the Org manual and its docstring may have given us the
+information we wanted, but let's say we want to know more and continue
+our investigation to find the truth.
+
+** The source code
+
+The truth resides in the source code!  Isn't that right?
+
+Ok, let's take a look at the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] defined in the
+file [[org-mode:lisp/org.el]] as follow:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-insert-heading (&optional arg invisible-ok top)
+  ;; HERE WAS THE DOCSTRING
+  (interactive "P")
+  (let* ((blank? (org--blank-before-heading-p (equal arg '(16))))
+         (level (org-current-level))
+         (stars (make-string (if (and level (not top)) level 1) ?*)))
+    (cond
+     ((or org-insert-heading-respect-content
+          (member arg '((4) (16)))
+          (and (not invisible-ok)
+               (invisible-p (max (1- (point)) (point-min)))))
+      ;; Position point at the location of insertion.  Make sure we
+      ;; end up on a visible headline if INVISIBLE-OK is nil.
+      (org-with-limited-levels
+       (if (not level) (outline-next-heading) ;before first headline
+         (org-back-to-heading invisible-ok)
+         (when (equal arg '(16)) (org-up-heading-safe))
+         (org-end-of-subtree)))
+      (unless (bolp) (insert "\n"))
+      (when (and blank? (save-excursion
+                          (backward-char)
+                          (org-before-first-heading-p)))
+        (insert "\n")
+        (backward-char))
+      (when (and (not level) (not (eobp)) (not (bobp)))
+        (when (org-at-heading-p) (insert "\n"))
+        (backward-char))
+      (unless (and blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (if blank? 1 0)))
+      (insert stars " ")
+      ;; When INVISIBLE-OK is non-nil, ensure newly created headline
+      ;; is visible.
+      (unless invisible-ok
+        (pcase (get-char-property-and-overlay (point) 'invisible)
+          (`(outline . ,o)
+           (move-overlay o (overlay-start o) (line-end-position 0)))
+          (_ nil))))
+     ;; At a headline...
+     ((org-at-heading-p)
+      (cond ((bolp)
+             (when blank? (save-excursion (insert "\n")))
+             (save-excursion (insert stars " \n"))
+             (unless (and blank? (org-previous-line-empty-p))
+               (org-N-empty-lines-before-current (if blank? 1 0)))
+             (end-of-line))
+            ((and (org-get-alist-option org-M-RET-may-split-line 'headline)
+                  (org-match-line org-complex-heading-regexp)
+                  (org-pos-in-match-range (point) 4))
+             ;; Grab the text that should moved to the new headline.
+             ;; Preserve tags.
+             (let ((split (delete-and-extract-region (point) (match-end 4))))
+               (if (looking-at "[ \t]*$") (replace-match "")
+                 (org-align-tags))
+               (end-of-line)
+               (when blank? (insert "\n"))
+               (insert "\n" stars " ")
+               (when (org-string-nw-p split) (insert split))))
+            (t
+             (end-of-line)
+             (when blank? (insert "\n"))
+             (insert "\n" stars " "))))
+     ;; On regular text, turn line into a headline or split, if
+     ;; appropriate.
+     ((bolp)
+      (insert stars " ")
+      (unless (and blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (if blank? 1 0))))
+     (t
+      (unless (org-get-alist-option org-M-RET-may-split-line 'headline)
+        (end-of-line))
+      (insert "\n" stars " ")
+      (unless (and blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (if blank? 1 0))))))
+  (run-hooks 'org-insert-heading-hook))
+#+END_SRC
+
+You can get org-mode's source code by running the following command:
+
+: git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+
+Ok...
+
+The source code helps, but now we need to know a lot more about the
+implementations of ~org-mode~ and ~emacs/elisp~ than we want to spend time
+on.
+
+Indeed, if we want to understand the implementation of
+[[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] we have to understand:
+
+1) (org API) ~org--blank-before-heading-p~, ~org-current-level~,
+   ~org-with-limited-levels~, ~outline-next-heading~, ~org-back-to-heading~,
+   ~org-up-heading-safe~, ~org-end-of-subtree~,
+   ~org-before-first-heading-p~, ~org-N-empty-lines-before-current~, etc.,
+2) (emacs/elisp API) ~make-string~, ~member~, ~invisible-p~, ~bolp~,
+   ~save-excursion~, ~eobp~, ~bobp~, ~pcase~, ~get-char-property-and-overlay~, etc.
+
+So, what can we do?
+
+Maybe we can look at the test of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]].
+
+** The Tests (aka. "The Examples")
+*** [[org-mode:testing/lisp/test-org.el::(ert-deftest test-org/insert-heading][test-org/insert-heading]]
+
+In the directory [[org-mode:testing]], doing a search for
+[[org-mode:testing/lisp/test-org.el::(ert-deftest
+test-org/insert-heading][test-org/insert-heading]] [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] using ~grep~ (or ~ripgrep~)
+shows that the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] is tested in the [[emacs:lisp/emacs-lisp/ert.el][ert]] test
+[[org-mode:testing/lisp/test-org.el::(ert-deftest
+test-org/insert-heading][test-org/insert-heading]] defined in the file
+[[org-mode:testing/lisp/test-org.el]] as follow (we reproduce only the
+first 4 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms - it contains 28 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms and 1 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]]
+form):
+
+#+BEGIN_SRC emacs-lisp
+(ert-deftest test-org/insert-heading ()
+  "Test `org-insert-heading' specifications."
+  ;; In an empty buffer, insert a new headline.
+  (should
+   (equal "* "
+          (org-test-with-temp-text ""
+            (org-insert-heading)
+            (buffer-string))))
+  ;; At the beginning of a line, turn it into a headline.
+  (should
+   (equal "* P"
+          (org-test-with-temp-text "<point>P"
+            (org-insert-heading)
+            (buffer-string))))
+  ;; In the middle of a line, split the line if allowed, otherwise,
+  ;; insert the headline at its end.
+  (should
+   (equal "Para\n* graph"
+          (org-test-with-temp-text "Para<point>graph"
+            (let ((org-M-RET-may-split-line '((default . t))))
+              (org-insert-heading))
+            (buffer-string))))
+  (should
+   (equal "Paragraph\n* "
+          (org-test-with-temp-text "Para<point>graph"
+            (let ((org-M-RET-may-split-line '((default . nil))))
+              (org-insert-heading))
+            (buffer-string))))
+  ;; ...
+  )
+#+END_SRC
+
+What can we observe from those 4 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms?
+
+1) they have the same "shape", so we can deduce that if we understand
+   how the first one works, we will understand the others,
+2) they use only a few symbols (much less than in the source code of
+   [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]):
+   - [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] from [[emacs:lisp/emacs-lisp/ert.el][ert]] package,
+   - ~equal~, ~let~ and ~buffer-string~ from Emacs/Elisp,
+   - [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] specific to Org test suite and
+   - [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] and [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]], the command and
+     the variable we are testing.
+
+Now let's describe these [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms in words as best we can.
+
+After doing this, perhaps we will think of these [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms as small
+examples, each describing a behavior of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]].
+
+*** Example 1
+
+The first [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+
+#+BEGIN_SRC emacs-lisp
+(should
+   (equal "* "
+          (org-test-with-temp-text ""
+            (org-insert-heading)
+            (buffer-string))))
+#+END_SRC
+
+could be translated like this:
+
+1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+2) keep the buffer empty (~""~),
+3) keep the point at the beginning,
+4) call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]],
+5) return the string from the temporary buffer (~buffer-string~),
+6) compare this string to the string ~"* "~ (~equal~),
+7) if they are equal, return ~t~, if not, return the error
+   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+
+*** [[emacs:lisp/emacs-lisp/ert.el][ert]] and [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]
+
+To evaluate the preceding form we need to have [[emacs:lisp/emacs-lisp/ert.el][ert]] loaded (for the
+macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]) which can be achieve by evaluating the following form:
+
+#+BEGIN_SRC emacs-lisp
+(require 'ert)
+#+END_SRC
+
+and we need the macro [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] (defined in the file
+[[org-mode:testing/org-test.el]]) to be defined which can be done by
+evaluating its definition:
+
+#+BEGIN_SRC emacs-lisp
+(defmacro org-test-with-temp-text (text &rest body)
+  (declare (indent 1))
+  `(let ((inside-text (if (stringp ,text) ,text (eval ,text)))
+         (org-mode-hook nil))
+     (with-temp-buffer
+       (org-mode)
+       (let ((point (string-match "<point>" inside-text)))
+         (if point
+             (progn
+               (insert (replace-match "" nil nil inside-text))
+               (goto-char (1+ (match-beginning 0))))
+           (insert inside-text)
+           (goto-char (point-min))))
+       (font-lock-ensure (point-min) (point-max))
+       ,@body)))
+#+END_SRC
+
+*** [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]]
+
+Our examples only use the macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] but if we want to read more
+tests it is useful to know the macros [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]] and [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]] that
+[[emacs:lisp/emacs-lisp/ert.el][ert]] package provides.
+
+In the following Elisp snippet, we give some examples of the use of
+[[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]] and [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]]:
+
+#+BEGIN_SRC emacs-lisp
+(should 3)   ; 3
+(should t)   ; t
+(should nil)
+;; Debugger entered--Lisp error: (ert-test-failed ((should nil) :form nil :value nil))
+
+(should-not nil) ; nil
+(should-not t)
+;; Debugger entered--Lisp error: (ert-test-failed ((should-not t) :form t :value t))
+
+(should-error (= "1" 1)) ; (wrong-type-argument number-or-marker-p "1")
+(should-error t)
+;; Debugger entered--Lisp error: (ert-test-failed ((should-error t) :form t :value t :fail-reason "did not signal an error"))
+#+END_SRC
+
+*** Example 2
+
+The second [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+
+#+BEGIN_SRC emacs-lisp
+(should
+ (equal "* P"
+        (org-test-with-temp-text "<point>P"
+          (org-insert-heading)
+          (buffer-string))))
+#+END_SRC
+
+could be translated like this:
+
+1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+2) add the string ~P~ and place the point before ~P~ (~"<point>P"~),
+3) call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]],
+4) return the string from the temporary buffer (~buffer-string~),
+5) compare this string to the string ~"* P"~ (~equal~),
+6) if they are equal, return ~t~, if not, return the error
+   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+
+*** Example 3
+
+The third [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+
+#+BEGIN_SRC emacs-lisp
+(should
+ (equal "Para\n* graph"
+        (org-test-with-temp-text "Para<point>graph"
+          (let ((org-M-RET-may-split-line '((default . t))))
+            (org-insert-heading))
+          (buffer-string))))
+#+END_SRC
+
+could be translated like this:
+
+1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+2) add the string ~Paragraph~ and place the point between the character ~a~
+   and ~g~ (~"Para<point>graph"~),
+3) locally set the variable [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]] to the alist
+   ~'((default . t))~ and call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] with this binding
+   (~(let ...)~),
+5) return the string from the temporary buffer (~buffer-string~),
+6) compare this string to the string ~"Para\n* graph"~ (~equal~ and note
+   that ~\n~ is the newline),
+7) if they are equal, return ~t~, if not, return the error
+   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+
+*** Example 4
+
+The fourth [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+
+#+BEGIN_SRC emacs-lisp
+(should
+ (equal "Paragraph\n* "
+        (org-test-with-temp-text "Para<point>graph"
+          (let ((org-M-RET-may-split-line '((default . nil))))
+            (org-insert-heading))
+          (buffer-string))))
+#+END_SRC
+
+could be translated like this:
+
+1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+2) add the string ~Paragraph~ and place the point between the character ~a~
+   and ~g~ (~"Para<point>graph"~),
+3) locally set the variable [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]] to the alist
+   ~'((default . nil))~ and call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] with this binding
+   (~(let ...)~),
+5) return the string from the temporary buffer (~buffer-string~),
+6) compare this string to the string ~"Paragraph\n* "~ (~equal~ and note
+   that ~\n~ is the newline),
+7) if they are equal, return ~t~, if not, return the error
+   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+
+** Where the truth lives
+
+By now you should be convinced (that's what I hope) that the org-mode
+test suite is a gold mine for us (org-mode users) and that is where
+part of THE ORG-MODE TRUTH lives.
+
+... More than 5000 examples ...
+
+WE ARE DONE!
 
 * [2022-03-05 Sat] I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!
 :PROPERTIES:
