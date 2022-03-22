@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-03-11 Fri 09:25>
+#+DATE: <2022-03-22 Tue 18:48>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,561 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-03-22 Tue] Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
+:PROPERTIES:
+:CUSTOM_ID: /2022-03-22/org-speed-keys-and-self-insert-command/
+:END:
+
+Hey Emacsers,
+
+How are you doing?
+
+This post is "pretty" special to me because I can still remember and
+feel:
+
+1) the first time I discovered Org Speed Keys and,
+2) the first time I took a look at its implementation.
+
+It was two AHA moments, one in my Emacs journey and the other in my
+Elisp journey.
+
+I hope you'll enjoy it :)
+
+** Org Speed Keys
+
+Org speed keys is not a minor mode but an org-mode feature that can be
+turned on by setting the variable [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] to ~t~.
+
+It allows when the cursor is at a the beginning of a heading to call
+a command by pressing a single "printing" key (keys that would
+normally insert a character in the buffer).
+
+For instance, if we are at the beginning of a heading, and we press
+~n~, the cursor moves to the next visible heading (or stays at the
+current heading if it's the last one in the buffer) if we use the
+default bindings provided by org-mode in the variable
+[[org-mode:lisp/org-keys.el::(defcustom org-speed-commands][org-speed-commands]].
+
+It is "almost" the same that pressing ~C-c C-n~ but in SHORTER.  Isn't it
+super cool???
+
+If you've never tried it, go for it.
+
+Just run:
+
+: M-x eval-expression RET (setq org-use-speed-commands t)
+
+Open one of your org documents then with the cursor at at the very
+beginning of a heading press ~n~ or ~p~ repeatedly.
+
+We can see org speed command bindings, by typing ~?~ (which call
+[[org-mode:lisp/org-keys.el::(defun org-speed-command-help][org-speed-command-help]]) with the cursor at the very beginning of a
+heading.  This pops up the following help buffer:
+
+#+BEGIN_SRC text
+Speed commands
+==============
+
+Outline Navigation
+------------------
+n   (org-speed-move-safe 'org-next-visible-heading)
+p   (org-speed-move-safe 'org-previous-visible-heading)
+f   (org-speed-move-safe 'org-forward-heading-same-level)
+b   (org-speed-move-safe 'org-backward-heading-same-level)
+F   org-next-block
+B   org-previous-block
+u   (org-speed-move-safe 'outline-up-heading)
+j   org-goto
+g   (org-refile '(4))
+
+Outline Visibility
+------------------
+c   org-cycle
+C   org-shifttab
+    org-display-outline-path
+s   org-toggle-narrow-to-subtree
+k   org-cut-subtree
+=   org-columns
+
+... THERE ARE MORE ...
+
+?   org-speed-command-help
+#+END_SRC
+
+If we want to use our own bindings, we can modify:
+
+- the variable [[org-mode:lisp/org-keys.el::(defcustom org-speed-commands][org-speed-commands]] since org-mode 9.5,
+- the variable ~org-speed-commands-user~ for previous versions.
+
+Note: the variable ~org-speed-commands-user~ has been made obsolete
+since org-mode 9.5 but it is still supported and should be removed
+from org-mode 9.6 as we can read in the source code [[org-mode:lisp/org-keys.el]]:
+
+#+BEGIN_SRC text
+;; FIXME: don't check `org-speed-commands-user' past 9.6
+#+END_SRC
+
+** How does org-mode implement Org Speed keys?
+*** remapping ~self-insert-command~
+
+When org-mode is turned on, among other initialization tasks it remaps
+the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
+in the keymap [[org-mode:lisp/org-keys.el::(defvar org-mode-map][org-mode-map]] as we can see in the file [[org-mode:lisp/org-keys.el]]:
+
+#+BEGIN_SRC emacs-lisp
+(org-remap org-mode-map
+           'self-insert-command    'org-self-insert-command
+           'delete-char            'org-delete-char
+           'delete-backward-char   'org-delete-backward-char
+           'kill-line              'org-kill-line
+           'open-line              'org-open-line
+           'yank                   'org-yank
+           'comment-dwim           'org-comment-dwim
+           'move-beginning-of-line 'org-beginning-of-line
+           'move-end-of-line       'org-end-of-line
+           'forward-paragraph      'org-forward-paragraph
+           'backward-paragraph     'org-backward-paragraph
+           'backward-sentence      'org-backward-sentence
+           'forward-sentence       'org-forward-sentence
+           'fill-paragraph         'org-fill-paragraph
+           'delete-indentation     'org-delete-indentation
+           'transpose-words        'org-transpose-words)
+#+END_SRC
+
+In the case of [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]], the preceding remapping can be
+written like this (this is what [[org-mode:lisp/org-keys.el::(defun org-remap][org-remap]] does):
+
+#+BEGIN_SRC emacs-lisp
+(define-key org-mode-map [remap self-insert-command] 'org-self-insert-command)
+#+END_SRC
+
+As a consequence, in org-mode, when we press a printing key (that
+would by default insert a character in the buffer), let say we press ~n~,
+the "command loop editor" does several things:
+
+1) it performs a key lookup for ~n~ in the current active maps and find
+   that ~n~ is bound to [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] (due to the default binding
+   in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] which is the global map by default), then,
+2) it checks if the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] has a remapping in the
+   current active maps (with the function [[emacs:src/keymap.c::DEFUN ("command-remapping"][command-remapping]]),
+3) it finds that [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] is remapped to
+   [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] (due to the remapping in the keymap
+   [[org-mode:lisp/org-keys.el::(defvar org-mode-map][org-mode-map]]) and instead of calling [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]],
+   it calls [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]].
+
+Now, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] has the complete power over
+the actions to perform.  Nothing forces it to insert the character ~n~
+in the buffer.
+
+*** if it is magic, this is [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
+
+Before talking about how [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] performs speed keys,
+let me ask you some questions:
+
+- Have you ever noticed that when you modify the title of a headline
+  the tags are automatically re-aligned?  Guess what?  This is
+  [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] in action (calling [[org-mode:lisp/org.el::(defun org-fix-tags-on-the-fly][org-fix-tags-on-the-fly]]
+  just after inserting a character).
+- Have you ever noticed that inserting less characters in a table field
+  than its width doesn't move the right bar of the field?  This is
+  [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] in action.
+- Did you know that in a table, if you type printing keys just after
+  moving with ~TAB~, ~S-TAB~, ~RET~, the table field is made blank before
+  inserting the characters (with [[org-mode:lisp/org-table.el::(defcustom org-table-auto-blank-field][org-table-auto-blank-field]] set to ~t~)?
+  This is also [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
+  (see [[https://www.youtube.com/watch?v=w4wxGOijyZs][Inside Emacs #6 (part 5) Why is it so fast to edit tables with org-table?]]).
+
+*** [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] implementation
+
+Let's get back to our example.  We've pressed the "printing" key ~n~ and
+"the command loop editor" has called [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]].
+
+The command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] does the following (assuming we
+have set [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] to ~t~):
+
+1) locally set the variable ~kv~ to the vector ~[?n]~ corresponding to the
+   key sequence that invoked the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] (the
+   "printing" key ~n~ we've pressed),
+2) run the hook [[org-mode:lisp/org-keys.el::(defcustom org-speed-command-hook][org-speed-command-hook]] "until success" with the
+   argument ~"n"~ (a string, corresponding to the evaluation of
+   ~(make-string 1 (aref [?n] 0))~ knowing that ~kv~ is ~[?n]~).
+   Considering that the hook [[org-mode:lisp/org-keys.el::(defcustom org-speed-command-hook][org-speed-command-hook]] is equal to the
+   list ~(org-speed-command-activate org-babel-speed-command-activate)~
+   by default, the function ~run-hook-with-args-until-success~
+   evaluate successively the forms:
+   1) ~(org-speed-command-activate "n")~,
+   2) ~(org-babel-speed-command-activate "n")~,
+   stopping at the first one that returns non-nil, and return that
+   value, or return ~nil~ if both evaluate to ~nil~.
+3) Then, this returned value becomes the value of the variable
+   ~org-speed-command~,
+4) if ~org-speed-command~ is either a command, a function or a non empty
+   list, ~org-speed-command~ is called or evaluated (and
+   [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] returns "maybe" witout inserting ~n~ in the
+   buffer).  If ~org-speed-command~ is neither a command, a function nor
+   a non empty list, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] is called
+   with the variable [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] locally set to ~nil~ which
+   leads to skip the first clause of the special form ~cond~ in the body
+   of [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]], and [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] among other
+   "actions" will insert the character ~n~ in the buffer.
+
+Below you can see the parts of the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
+related to the speed keys feature that we have just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-self-insert-command (N)
+  ;; ...
+  (interactive "p")
+  (cond
+   ((and org-use-speed-commands
+         (let ((kv (this-command-keys-vector)))
+           (setq org-speed-command
+                 (run-hook-with-args-until-success
+                  'org-speed-command-hook
+                  (make-string 1 (aref kv (1- (length kv))))))))
+    (cond
+     ((commandp org-speed-command)
+      (setq this-command org-speed-command)
+      (call-interactively org-speed-command))
+     ((functionp org-speed-command)
+      (funcall org-speed-command))
+     ((and org-speed-command (listp org-speed-command))
+      (eval org-speed-command))
+     (t (let (org-use-speed-commands)
+          (call-interactively 'org-self-insert-command)))))
+   ((and
+     ;; ...
+     (org-at-table-p)
+     ;; ....
+     )
+    (self-insert-command N)
+    ;; ...
+    )
+   (t
+    ;; ...
+    (self-insert-command N)
+    (org-fix-tags-on-the-fly)
+    ;; ...
+    )))
+#+END_SRC
+
+*** ~org-speed-command-activate~
+
+We still have one function to cover: [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]]
+(knowing that [[org-mode:lisp/org-keys.el::(defun org-babel-speed-command-activate][org-babel-speed-command-activate]] does "almost the same
+thing" but for the cursor at the beginning of source blocks).
+
+Indeed, continuing with our example, if evaluating
+~(org-speed-command-activate "n")~ returns a command  (a function or a
+non empty list) this command will be called instead of inserting the
+character ~"n"~.
+
+In the simple case, when [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] is set to ~t~ (it could
+also be a function), [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]] checks:
+
+1) if the point (the cursor) is at the beginning of line ~(bolp)~ and,
+2) if this line is a heading ~(looking-at org-outline-regexp)~.
+
+If true, [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]] looks for the key ~"n"~ in the alist
+[[org-mode:lisp/org-keys.el::(defcustom org-speed-commands][org-speed-commands]] defined by default like this:
+
+#+BEGIN_SRC emacs-lisp
+(defcustom org-speed-commands
+  '(("Outline Navigation")
+    ("n" . (org-speed-move-safe 'org-next-visible-heading))
+    ("p" . (org-speed-move-safe 'org-previous-visible-heading))
+    ("f" . (org-speed-move-safe 'org-forward-heading-same-level))
+    ("b" . (org-speed-move-safe 'org-backward-heading-same-level))
+    ("F" . org-next-block)
+    ("B" . org-previous-block)
+    ;; ...
+    ))
+#+END_SRC
+
+and returns the s-exp associated with the key ~"n"~ which is by default:
+
+: (org-speed-move-safe 'org-next-visible-heading)
+
+As we left aside the case where [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] is a function
+and we anticipate the org-mode version 9.6, we can write a simplified
+version of [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]], that we call
+~org-speed-command-activate-SIMPLE~, like this:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-speed-command-activate-SIMPLE (keys)
+  (when (and (bolp) (looking-at org-outline-regexp))
+    (cdr (assoc keys org-speed-commands))))
+#+END_SRC
+
+So, when we presse the key ~n~ (in org-mode):
+org-babel-next-src-block
+1) if we are at the beginning of a heading, the cursor is
+   moved "safely" to the next visible heading,
+2) if we are at the beginning of a source block (due to
+   [[org-mode:lisp/org-keys.el::(defun org-babel-speed-command-activate][org-babel-speed-command-activate]] in the hook
+   [[org-mode:lisp/org-keys.el::(defcustom org-speed-command-hook][org-speed-command-hook]]), the cursor is moved to the next source
+   block,
+3) and if we were anywhere else, the character ~n~ is inserted in the
+   buffer.
+
+We are done with the mechanism of Org Speed Keys.
+
+Let's talk a bit about the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
+
+** ~self-insert-command~
+*** Bindings of printing characters to ~self-insert-command~ in the keymap ~global-map~
+
+In this section, our goal is to see what are the printing characters
+that are bound to the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
+
+In the info node [[info:elisp#Controlling Active Maps]], we can read the
+following:
+
+#+BEGIN_SRC text
+-- Variable: global-map
+    This variable contains the default global keymap that maps Emacs
+    keyboard input to commands.  The global keymap is normally this
+    keymap.  The default global keymap is a full keymap that binds
+    ‘self-insert-command’ to all of the printing characters.
+#+END_SRC
+
+Indeed, the variable [[emacs:lisp/subr.el::(defvar global-map][global-map]] is defined in the file [[emacs:lisp/subr.el]]
+and is set to be the global keymap (using [[emacs:src/keymap.c::DEFUN ("use-global-map"][use-global-map]]) as we can
+see:
+
+#+BEGIN_SRC emacs-lisp
+(defvar global-map
+  (let ((map (make-keymap)))
+    ;; ...
+    (define-key map "\C-i" #'self-insert-command)
+    (let* ((vec1 (make-vector 1 nil))
+           (f (lambda (from to)
+                (while (< from to)
+                  (aset vec1 0 from)
+                  (define-key map vec1 #'self-insert-command)
+                  (setq from (1+ from))))))
+      (funcall f #o040 #o0177)
+      (when (eq system-type 'ms-dos)      ;FIXME: Why?
+        (funcall f #o0200 #o0240))
+      (funcall f #o0240 #o0400))
+
+    (define-key map "\C-a" #'beginning-of-line)
+    (define-key map "\C-b" #'backward-char)
+    (define-key map "\C-e" #'end-of-line)
+    (define-key map "\C-f" #'forward-char)
+    ;; ...
+    map)
+  "..."
+  )
+(use-global-map global-map)
+#+END_SRC
+
+Many bindings in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] are added in other files.  For
+instance the key sequences ~C-g~, ~C-u~, ~C-k~, ~C-w~ and ~C-y~ are added to
+[[emacs:lisp/subr.el::(defvar global-map][global-map]] in the file [[emacs:lisp/bindings.el]] like this:
+
+#+BEGIN_SRC emacs-lisp
+(define-key global-map "\C-g" 'keyboard-quit)
+(define-key global-map "\C-u" 'universal-argument)
+(define-key global-map "\C-k" 'kill-line)
+(define-key global-map "\C-w" 'kill-region)
+(define-key global-map "\C-y" 'yank)
+#+END_SRC
+
+Now, let's focus in the ~let*~ binding in the definition of the keymap
+[[emacs:lisp/subr.el::(defvar global-map][global-map]].  In this ~let*~ binding, we define a function ~f~ that binds in
+the local keymap ~map~ all the characters (represented as integer)
+between ~from~ to ~to~ (excluded), and we apply it to the following
+limits (excluding the ms-dos case):
+
+1) from ~#o040~ to ~#o0177~,
+2) from ~#o0240~ to ~#o0400~.
+
+If it is not clear what are the printing characters that are bound to
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] we can "list" them like
+this:
+
+#+BEGIN_SRC emacs-lisp
+(with-temp-buffer
+  (dotimes (i (- #o0177 #o040))
+    (insert (+ #o040 i)))
+  (buffer-string))
+;; " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+
+(with-temp-buffer
+  (dotimes (i (- #o0400 #o0240))
+    (insert (+ #o0240 i)))
+  (buffer-string))
+;; " ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
+#+END_SRC
+
+*** Remapping ~self-insert-command~ to ~undefined~ in ~Info-mode~, ~help-mode~ and ~special-mode~
+
+In some cases (like in ~Info-mode~ and ~help-mode~) we want to override
+all printing keys to be undefined before remapping some of them to
+specific commands.
+
+This is done by remapping in the local keymap the command
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the function ~undefined~.
+
+Note that remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to ~nil~ in the local keymaps
+won't override [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the global map as we can read in
+the info node [[info:elisp#Key Lookup]]:
+
+#+BEGIN_SRC text
+The symbol ‘undefined’ is worth special mention: it means to treat
+the key as undefined.  Strictly speaking, the key is defined, and
+its binding is the command ‘undefined’; but that command does the
+same thing that is done automatically for an undefined key: it
+rings the bell (by calling ‘ding’) but does not signal an error.
+
+‘undefined’ is used in local keymaps to override a global key
+binding and make the key undefined locally.  A local binding of
+‘nil’ would fail to do this because it would not override the
+global binding.
+#+END_SRC
+
+In the case of ~Info-mode~ this is done by calling the function
+[[emacs:lisp/subr.el::(defun suppress-keymap][suppress-keymap]] (which overrides all printing keys to be undefined,
+maps ~-~ to the command ~negative-argument~ and the numbers 0,1,..., 9 to
+the command ~digit-argument~), when defining the keymap ~Info-mode-map~ as
+follow:
+
+#+BEGIN_SRC emacs-lisp
+(defvar Info-mode-map
+  (let ((map (make-keymap)))
+    (suppress-keymap map)
+    ;; ...
+    (define-key map "1" 'Info-nth-menu-item)
+    (define-key map "2" 'Info-nth-menu-item)
+    ;;...
+    (define-key map "n" 'Info-next)
+    (define-key map "p" 'Info-prev)
+    (define-key map "q" 'quit-window)
+    ;;...
+    map)
+  "...")
+#+END_SRC
+
+In the case of ~help-mode~ this is done by setting the parent keymap of
+~help-mode-map~ to be a composed keymap of ~button-buffer-map~ and the
+parent map ~special-mode-map~ (which overrides all printing keys to be
+undefined, maps ~-~ to the command ~negative-argument~ and the numbers
+0,1,..., 9 to the command ~digit-argument~), as we can see below:
+
+#+BEGIN_SRC emacs-lisp
+(defvar help-mode-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map (make-composed-keymap button-buffer-map
+                                                 special-mode-map))
+    (define-key map "n" 'help-goto-next-page)
+    (define-key map "p" 'help-goto-previous-page)
+    ;; ...
+    map)
+  "..."
+  )
+#+END_SRC
+
+*** Best function name ever: ~bitch_at_user~
+
+[[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]]!!!
+
+What a beautiful name for a function!
+
+This is a ~C~ function we can find in Emacs source code.  If I'm not
+wrong it is called in the body of 3 functions.  Mainly, this function
+when called will ring the bell.  This function is defined in the file
+[[emacs:src/dispnew.c]] as follow:
+
+#+BEGIN_SRC c
+void
+bitch_at_user (void)
+{
+  if (noninteractive)
+    putchar (07);
+  else if (!INTERACTIVE)  /* Stop executing a keyboard macro.  */
+    {
+      const char *msg
+        = "Keyboard macro terminated by a command ringing the bell";
+      Fsignal (Quser_error, list1 (build_string (msg)));
+    }
+  else
+    ring_bell (XFRAME (selected_frame));
+}
+#+END_SRC
+
+Why talking about this function?
+
+Because its name is AMAZING and because I encounter it when I was
+reading the source code of [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
+
+Indeed, the function [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]] is called in the body of
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] when the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] is invoked by
+a key sequence that is not a printing key.
+
+For instance, we can trigger it by binding for the key sequence ~C-<f1>~
+(pick any key sequence you are not using) to [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] like
+this:
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-<f1>") 'self-insert-command)
+#+END_SRC
+
+And now, if we press ~C-<f1>~, we trigger the function [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]] and:
+
+1) we see ~Wrong type argument: characterp, C-f1~ in the echo area and,
+2) depending on the "setting of the bell" (see info node ~M-x
+   eval-expression RET (info "(elisp)Beeping")~): a) nothing more
+   happens, b) we hear the bell ringing, or c) we see the screen
+   flashing.
+
+AS NO SENTENCE CAN BEAT THE SOURCE CODE, here is the source code of
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] defined in the file [[emacs:src/cmds.c]]:
+
+#+BEGIN_SRC c
+DEFUN ("self-insert-command", Fself_insert_command, Sself_insert_command, 1, 2,
+       "(list (prefix-numeric-value current-prefix-arg) last-command-event)",
+       doc: /* Insert the character you type.
+Whichever character C you type to run this command is inserted.
+The numeric prefix argument N says how many times to repeat the insertion.
+Before insertion, `expand-abbrev' is executed if the inserted character does
+not have word syntax and the previous character in the buffer does.
+After insertion, `internal-auto-fill' is called if
+`auto-fill-function' is non-nil and if the `auto-fill-chars' table has
+a non-nil value for the inserted character.  At the end, it runs
+`post-self-insert-hook'.  */)
+  (Lisp_Object n, Lisp_Object c)
+{
+  CHECK_FIXNUM (n);
+
+  /* Backward compatibility.  */
+  if (NILP (c))
+    c = last_command_event;
+
+  if (XFIXNUM (n) < 0)
+    error ("Negative repetition argument %"pI"d", XFIXNUM (n));
+
+  if (XFIXNAT (n) < 2)
+    call0 (Qundo_auto_amalgamate);
+
+  /* Barf if the key that invoked this was not a character.  */
+  if (!CHARACTERP (c))
+    bitch_at_user ();
+  else {
+    int character = translate_char (Vtranslation_table_for_input,
+                                    XFIXNUM (c));
+    int val = internal_self_insert (character, XFIXNAT (n));
+    if (val == 2)
+      Fset (Qundo_auto__this_command_amalgamating, Qnil);
+    frame_make_pointer_invisible (SELECTED_FRAME ());
+  }
+
+  return Qnil;
+}
+#+END_SRC
+
+WE ARE DONE!!!
 
 * [2022-03-11 Fri] Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
@@ -536,7 +1091,7 @@ and displays the results.
 #+END_SRC
 
 Specifically, each time we call a command (inserting a character also
-calls a command, ~self-insert-command~ by default), the "editor
+calls a command, [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] by default), the "editor
 command loop":
 
 1) runs the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] before executing the command,
