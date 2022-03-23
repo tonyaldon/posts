@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-03-23 Wed 15:26>
+#+DATE: <2022-03-23 Wed 16:03>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -16,6 +16,7 @@
 * [2022-03-22 Tue] Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
 :CUSTOM_ID: /2022-03-22/org-speed-keys-and-self-insert-command/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/
 :END:
 
 Hey Emacsers,
@@ -570,6 +571,7 @@ WE ARE DONE!!!
 * [2022-03-11 Fri] Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
 :CUSTOM_ID: /2022-03-11/org-mode-source-code-5000-examples/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/
 :END:
 
 Hey org-mode lovers,
