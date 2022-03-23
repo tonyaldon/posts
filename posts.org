@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-03-22 Tue 18:48>
+#+DATE: <2022-03-23 Wed 15:26>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -108,7 +108,7 @@ from org-mode 9.6 as we can read in the source code [[org-mode:lisp/org-keys.el]
 #+END_SRC
 
 ** How does org-mode implement Org Speed keys?
-*** remapping ~self-insert-command~
+*** Remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]]
 
 When org-mode is turned on, among other initialization tasks it remaps
 the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
@@ -159,7 +159,7 @@ Now, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-sel
 the actions to perform.  Nothing forces it to insert the character ~n~
 in the buffer.
 
-*** if it is magic, this is [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
+*** If it is magic, this is [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
 
 Before talking about how [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] performs speed keys,
 let me ask you some questions:
@@ -193,8 +193,8 @@ have set [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use
    ~(make-string 1 (aref [?n] 0))~ knowing that ~kv~ is ~[?n]~).
    Considering that the hook [[org-mode:lisp/org-keys.el::(defcustom org-speed-command-hook][org-speed-command-hook]] is equal to the
    list ~(org-speed-command-activate org-babel-speed-command-activate)~
-   by default, the function ~run-hook-with-args-until-success~
-   evaluate successively the forms:
+   by default, the function [[emacs:src/eval.c::DEFUN ("run-hook-with-args-until-success"][run-hook-with-args-until-success]] evaluate
+   successively the forms:
    1) ~(org-speed-command-activate "n")~,
    2) ~(org-babel-speed-command-activate "n")~,
    stopping at the first one that returns non-nil, and return that
@@ -251,7 +251,7 @@ related to the speed keys feature that we have just discussed:
     )))
 #+END_SRC
 
-*** ~org-speed-command-activate~
+*** [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]]
 
 We still have one function to cover: [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-speed-command-activate]]
 (knowing that [[org-mode:lisp/org-keys.el::(defun org-babel-speed-command-activate][org-babel-speed-command-activate]] does "almost the same
@@ -314,8 +314,8 @@ We are done with the mechanism of Org Speed Keys.
 
 Let's talk a bit about the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
 
-** ~self-insert-command~
-*** Bindings of printing characters to ~self-insert-command~ in the keymap ~global-map~
+** [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]]
+*** Bindings of printing characters to [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]]
 
 In this section, our goal is to see what are the printing characters
 that are bound to the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
@@ -401,14 +401,14 @@ this:
 ;; " ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ"
 #+END_SRC
 
-*** Remapping ~self-insert-command~ to ~undefined~ in ~Info-mode~, ~help-mode~ and ~special-mode~
+*** Remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to [[emacs:lisp/subr.el::(defun undefined][undefined]] in [[emacs:lisp/info.el::(define-derived-mode Info-mode][Info-mode]], [[emacs:lisp/help-mode.el::(define-derived-mode help-mode][help-mode]] and [[emacs:lisp/simple.el::(define-derived-mode special-mode][special-mode]]
 
-In some cases (like in ~Info-mode~ and ~help-mode~) we want to override
+In some cases (like in [[emacs:lisp/info.el::(define-derived-mode Info-mode][Info-mode]] and [[emacs:lisp/help-mode.el::(define-derived-mode help-mode][help-mode]]) we want to override
 all printing keys to be undefined before remapping some of them to
 specific commands.
 
 This is done by remapping in the local keymap the command
-[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the function ~undefined~.
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the function [[emacs:lisp/subr.el::(defun undefined][undefined]].
 
 Note that remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to ~nil~ in the local keymaps
 won't override [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the global map as we can read in
@@ -427,10 +427,10 @@ binding and make the key undefined locally.  A local binding of
 global binding.
 #+END_SRC
 
-In the case of ~Info-mode~ this is done by calling the function
+In the case of [[emacs:lisp/info.el::(define-derived-mode Info-mode][Info-mode]] this is done by calling the function
 [[emacs:lisp/subr.el::(defun suppress-keymap][suppress-keymap]] (which overrides all printing keys to be undefined,
-maps ~-~ to the command ~negative-argument~ and the numbers 0,1,..., 9 to
-the command ~digit-argument~), when defining the keymap ~Info-mode-map~ as
+maps ~-~ to the command [[emacs:lisp/simple.el::(defun negative-argument][negative-argument]] and the numbers 0,1,..., 9 to
+the command [[emacs:lisp/simple.el::(defun digit-argument][digit-argument]]), when defining the keymap [[emacs:lisp/info.el::(defvar Info-mode-map][Info-mode-map]] as
 follow:
 
 #+BEGIN_SRC emacs-lisp
@@ -449,11 +449,11 @@ follow:
   "...")
 #+END_SRC
 
-In the case of ~help-mode~ this is done by setting the parent keymap of
-~help-mode-map~ to be a composed keymap of ~button-buffer-map~ and the
-parent map ~special-mode-map~ (which overrides all printing keys to be
-undefined, maps ~-~ to the command ~negative-argument~ and the numbers
-0,1,..., 9 to the command ~digit-argument~), as we can see below:
+In the case of [[emacs:lisp/help-mode.el::(define-derived-mode help-mode][help-mode]] this is done by setting the parent keymap of
+[[emacs:lisp/help-mode.el::(defvar help-mode-map][help-mode-map]] to be a composed keymap of [[emacs:lisp/button.el::(defvar button-buffer-map][button-buffer-map]] and the
+parent map [[emacs:lisp/simple.el::(defvar special-mode-map][special-mode-map]] (which overrides all printing keys to be
+undefined, maps ~-~ to the command [[emacs:lisp/simple.el::(defun negative-argument][negative-argument]] and the numbers
+0,1,..., 9 to the command [[emacs:lisp/simple.el::(defun digit-argument][digit-argument]]), as we can see below:
 
 #+BEGIN_SRC emacs-lisp
 (defvar help-mode-map
@@ -468,7 +468,7 @@ undefined, maps ~-~ to the command ~negative-argument~ and the numbers
   )
 #+END_SRC
 
-*** Best function name ever: ~bitch_at_user~
+*** Best function name ever: [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]]
 
 [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]]!!!
 
@@ -516,10 +516,9 @@ this:
 And now, if we press ~C-<f1>~, we trigger the function [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]] and:
 
 1) we see ~Wrong type argument: characterp, C-f1~ in the echo area and,
-2) depending on the "setting of the bell" (see info node ~M-x
-   eval-expression RET (info "(elisp)Beeping")~): a) nothing more
-   happens, b) we hear the bell ringing, or c) we see the screen
-   flashing.
+2) depending on the "setting of the bell" (see [[info:elisp#Beeping]]) a)
+   nothing more happens, b) we hear the bell ringing, or c) we see the
+   screen flashing.
 
 AS NO SENTENCE CAN BEAT THE SOURCE CODE, here is the source code of
 [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] defined in the file [[emacs:src/cmds.c]]:
