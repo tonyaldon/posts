@@ -25,6 +25,7 @@ git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 * Read the posts on Reddit
 
+- [2022-04-04 Mon] [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
 - [2022-03-22 Tue] [[https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/][Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command]]
 - [2022-03-11 Fri] [[https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/][Did you know that org-mode's source code contains more than 5000 examples?]]
 - [2022-03-05 Sat] [[https://www.reddit.com/r/emacs/comments/t7doal/i_bet_you_use_hllinemode_do_you_know_how_it_works/][I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!]]

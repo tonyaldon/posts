@@ -13,10 +13,10 @@
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
 
-* [2022-04-04 Mon] Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point...
+* [2022-04-04 Mon] Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-04/search-options-link-abbreviations-and-org-open-at-point/
-:REDDIT_POST:
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/
 :END:
 
 Hey you, unconditional Emacser, fanatic Org user, fearless Elisp
