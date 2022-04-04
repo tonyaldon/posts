@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-03-23 Wed 16:03>
+#+DATE: <2022-04-04 Mon 16:06>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,1325 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-04 Mon] Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point...
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-04/search-options-link-abbreviations-and-org-open-at-point/
+:REDDIT_POST:
+:END:
+
+Hey you, unconditional Emacser, fanatic Org user, fearless Elisp
+programmer,
+
+This post is for you :)
+
+We all have different needs when it comes to taking notes.  Fortunately,
+with org-mode many workflows are possible.
+
+In my case, my notes consist of:
+
+1) some pieces of text (almost no markups),
+2) many code snippets (inside source blocks) and,
+3) many, MANY links to specific places (function, variables,
+   ...) in repositories that I cloned on my machine.
+
+Today I want to talk about links.
+
+Let's say we are working on the function ~next-error~ which is
+defined in the file ~/tmp/emacs/lisp/simple.el~ (assuming we have Emacs
+repository cloned under the directory ~/tmp/~) and we want to add
+a link in an org-mode file to that function.
+
+How do we do it?  How does it work?
+
+In this post, we answer to those questions.
+
+Let's go ;)
+
+To clone Emacs repository under the directory ~/tmp/~, you can run the
+following command (in a terminal):
+
+: cd /tmp/ && git clone git://git.sv.gnu.org/emacs.git
+
+** Search options in file links
+
+To link to the file ~/tmp/emacs/lisp/simple.el~ we can use the following
+"external" org link ("external" means a link outside the current
+buffer/file, see [[info:org#External Links]])
+starting with the identifier ~file~ following by a colon ~:~ and the path
+of the file:
+
+#+BEGIN_SRC org
+[[file:/tmp/emacs/lisp/simple.el]]
+#+END_SRC
+
+As the file name we are providing is "complete" (starting by ~/~, it
+also works if it starts by ~~~, ~./~ and ~../~), we can omit the ~file~
+identifier.  So, this following link will also works:
+
+#+BEGIN_SRC org
+[[/tmp/emacs/lisp/simple.el]]
+#+END_SRC
+
+Those links (as any links) can have descriptions like this:
+
+#+BEGIN_SRC org
+[[file:/tmp/emacs/lisp/simple.el][A DESCRIPTION]]
+[[/tmp/emacs/lisp/simple.el][A DESCRIPTION]]
+#+END_SRC
+
+but in this post we don't consider link's descriptions in the
+examples.
+
+If we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] (bound to ~C-c C-o~ by default) on top of
+one of the previous links, we'll visit the file
+~/tmp/emacs/lisp/simple.el~ in another window (due to the default value
+of [[org-mode:lisp/ol.el::(defcustom org-link-frame-setup][org-link-frame-setup]]).
+
+If we just wanted to link the file ~simple.el~, we can stop here.
+
+But, we want something more specific, we want to link to the
+definition of the function ~next-error~ in the file ~simple.el~.
+
+Well, Org provides a way to indicate in the link the search we want to
+perform in the file we've indicated.  This can be done (see
+[[info:org#Search Options]]):
+
+1) by adding two colons ~::~ after the "complete" file name and,
+2) adding the "search option" to perform after the two colons ~::~.
+
+*** Search by line number
+
+In our case, after visiting the file ~simple.el~, we want the result of
+the search to place the point at the beginning of the function
+definition ~next-error~.  This definition starts at the line ~320~ (with
+Emacs checked out at commit ~0e7314f6f1~).
+
+In Org link, do do a "search" by line number, we just have to add the
+line number after the two colons ~::~.
+
+So, the following link links to the definition of the function
+~next-error~ in the file ~/tmp/emacs/lisp/simple.el~ (with Emacs checked
+out at commit ~0e7314f6f1~):
+
+#+BEGIN_SRC org
+[[/tmp/emacs/lisp/simple.el::320]]
+#+END_SRC
+
+While, this works well, this is not my preferred method to link to the
+definion of ~next-error~, because any time the file ~simple.el~ changes,
+the link to the definition might be broken.  Any changes that happened
+before the line ~320~ of the function definition ~next-error~ that adds or
+removes lines in some way modifies the starting lines of the function
+definition ~next-error~.
+
+(For instance before the commit ~2ebd950239~ (2021-03-16) the starting
+point of the definition of ~next-error~ was at line ~329~).
+
+*** Text search
+
+Let's see another type of search, the "text search" type, provided by
+Org link mechanism, that can link to the function ~next-error~ and is
+perhaps less dependent on the changes that occurs in the file
+~simple.el~.
+
+Specifiying the text to search in an Org link is done by adding the
+text to search after the two colons ~::~ added after the file path.
+
+Recall that the function ~next-error~ is defined like this:
+
+#+BEGIN_SRC emacs-lisp
+(defun next-error (&optional arg reset)
+  ;; ...
+  )
+#+END_SRC
+
+So, to link to the definition of ~next-error~ in the file
+~/tmp/emacs/lisp/simple.el~, we can use the (text) search option ~(defun
+next-error (&optional~ as done in the following link:
+
+#+BEGIN_SRC org
+[[/tmp/emacs/lisp/simple.el::(defun next-error (&optional]]
+#+END_SRC
+
+Calling [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] on top of that link will effectively visit
+the file ~/tmp/emacs/lisp/simple.el~ and put the point at the beginning
+of the function definition ~next-error~.
+
+If you didn't know this was possible, isn't that SUPER COOL?
+
+With those kind of links you can take your notes to ANOTHER LEVEL.
+
+OK... But why didn't we choose another text to search like:
+
+1) ~(defun next-error (&optional arg reset))~ (the whole line) or,
+2) ~(defun next-error~ (just the beginning, up to the name of the
+   function).
+
+In the first case, using ~(defun next-error (&optional arg reset))~ as
+text search option raises an error because the text starts by a
+left parenthesis ~(~ and finish by a right parenthesis ~)~.  And so,
+after visiting the file ~simple.el~ (in some way) the function
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] searches a string that looks like ~(FOO)~ with
+[[org-mode:lisp/ol.el::(defun org-link-search (s][org-link-search]] which will do a search for a code reference (not for
+the string ~(FOO)~) and will fail.
+
+In the second case, using ~(defun next-error~ as text search option puts
+the point at the beginning of the function
+~next-error-buffer-on-selected-frame~.  This happens because the search
+done in the file ~simple.el~ starts a the beginning of the buffer and
+stop at the first match which turns to be at the function
+~next-error-buffer-on-selected-frame~ which is defined before the
+function ~next-error~.
+
+Anyway, if you really want to know why the "search option" you've used
+doesn't work "the way it should works" (note that what you think or I
+think doesn't matter, the code tell the truth), you can take a look at
+the function [[org-mode:lisp/ol.el::(defun org-link-search (s][org-link-search]].
+
+This is the function that does the search once the file has been
+visited, where its argument ~s~ is the "search option" after the two
+colon ~::~ in our links.
+
+** Link abbreviations
+
+Let's assume that in our org-mode file, we've used the previous
+described method to link to dozens of functions and variables in the
+Emacs source code.
+
+What if we move Emacs source code from ~/tmp/emacs/~ to
+~/another-path-to/emacs/~?
+
+All our links are now dead.
+
+You might tell me: "what's the problem?  You just have to search
+all the occurences of ~[[/tmp/emacs/~ and replace them by
+~[[/another-path-to/emacs/~.  There are many way to do this (with the
+utility ~sed~, or from within Emacs with ~query-replace~ for instance)."
+
+And yes this is possible, but org-mode is SO GOOD that it provides a
+mechanism that mitigates a lot this case of scenario that is call:
+link abbreviations (see [[info:org#Link Abbreviations]]).
+
+Link abbreviations allow us to declare mappings between
+abbreviations (that are a word, starting with a letter, followed by
+letters, numbers, hyphens ~-~  and underscores ~_~) and links.  And
+instead of using the links in the bracket links we use the
+abbreviations.
+
+This can be done:
+
+1) localy (that means per file/buffer) using the org keyword ~LINK~ or,
+2) globally (valid for all org files) defining the mapping in the
+   variable [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]].
+
+Let's see how to use it with an example.
+
+*** An example using ~#+LINK:~ statments
+
+By evaluating the following s-exp in the minibuffer (~M-x
+eval-expression~):
+
+#+BEGIN_SRC emacs-lisp
+(with-current-buffer (get-buffer-create "*link abbrev*")
+  (org-mode))
+(switch-to-buffer "*link abbrev*")
+#+END_SRC
+
+we create the org-mode buffer ~*link abbrev*~ and we display it in the
+selected window.
+
+In this buffer, we add the following abbreviated link that map the
+abbreviation ~emacs~ to the link ~/tmp/emacs/~:
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+#+END_SRC
+
+Then we add the following link ~[[emacs]]~ in the buffer ~*link abbrev*~,
+that should looks like this:
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]
+#+END_SRC
+
+With the point (the cursor) on top of that link, let's type ~C-c C-o~
+(bound to [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] by default).
+
+What happened?
+
+Our cursor moved to the beginning of the word ~emacs~ after the keyword
+~LINK~.
+
+What?
+
+Maybe you were expecting something different, like to visit a dired
+buffer listing the directory ~/tmp/emacs/~.
+
+But, [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] did a text search in the buffer ~*link abbrev*~
+from its beginning and stopped at the first match of the word ~emacs~.
+
+This is the normal behavior.
+
+What we forget is to "active" (to set) the abbreviated link in the
+buffer.
+
+To do so, we can type ~C-c C-c~ with point on the line starting by
+~#+LINK:~.  This restarts ~org-mode~ and as consequence, due to the
+declaration of the link abbreviation set the local variable
+[[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] to:
+
+#+BEGIN_SRC emacs-lisp
+(("emacs" . "/tmp/emacs/"))
+#+END_SRC
+
+as we can see by running the following with the buffer ~*link abbrev*~
+being the current buffer:
+
+: M-x eval-expression RET org-link-abbrev-alist-local
+
+Now, in the buffer ~*link abbrev*~, with the point on top of the link
+~[[emacs]],~ by pressing ~C-c C-o~ we visit a dired buffer listing the
+directory ~/tmp/emacs/~.
+
+If we want to link to the file ~lisp/simple.el~ in the directory
+~/tmp/emacs/~ using the abbreviation ~emacs~, we add a colon ~:~ after the
+abbreviation and the rest of the file name after this colon like this:
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]
+2) link to the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el]]
+#+END_SRC
+
+Now, in the buffer ~*link abbrev*~, with the point on top of the link
+~[[emacs:lisp/simple.el]],~ by pressing ~C-c C-o~ we visit the file
+~/tmp/emacs/lisp/simple.el~.
+
+If we want to link to the function ~next-error~ in the file ~simple.el~ as
+we did in the previous section but this time using the abbreviation
+~emacs~, we use the same syntax.  Specifically, after the abbreviated link
+~emacs:lisp/simple.el~, we add two colons ~::~ and the search option
+~(defun next-error (&optional~ like this:
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]
+2) link to the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el]]
+3) link to the function ~next-error~ in the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el::(defun next-error (&optional]]
+#+END_SRC
+
+Now, in the buffer ~*link abbrev*~, with the point on top of the link
+~[[emacs:lisp/simple.el::(defun next-error (&optional]],~ by pressing
+~C-c C-o~ we jump to the beginning of the function ~next-error~ in the
+file ~/tmp/emacs/lisp/simple.el~.
+
+*** The global variable [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]]
+
+Link abbreviations can be defined globally, by setting the variable
+[[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]].
+
+For instance, to define the abbreviation ~emacs~ that maps to the link
+(here file path) ~/tmp/emacs/~, we define [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] like
+this:
+
+#+BEGIN_SRC emacs-lisp
+(setq org-link-abbrev-alist '(("emacs" . "/tmp/emacs/")))
+#+END_SRC
+
+Assuming we also want to define the abbreviation ~org-mode~ (along with
+~emacs~ abbreviation) that maps to the link ~/tmp/org-mode/~, we can
+defined [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] like this:
+
+#+BEGIN_SRC emacs-lisp
+(setq org-link-abbrev-alist
+      '(("emacs" . "/tmp/emacs/")
+        ("org-mode" . "/tmp/org-mode/")))
+#+END_SRC
+
+Note, that per buffer link abbreviations (defined with ~#+LINK:~) take
+precedence over global abbreviation defined in [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]].
+
+** How does org-open-at-point work?
+*** Using the macro [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] to build our examples
+
+As we can read in the docstring of [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]], this command
+can "open" the link, the timestamp, the footnote or the tags at
+point.
+
+This commands is versatile and does a lot.
+
+In this post, we won't discuss all the possibilities offered by
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] depending on the "context" of the org object at
+point.
+
+We narrow our "study" to the abbreviated link discussed in the
+previous section:
+
+: [[emacs:lisp/simple.el::(defun next-error (&optional]]
+
+in a buffer where the local value of [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] is
+set to:
+
+#+BEGIN_SRC emacs-lisp
+(("emacs" . "/tmp/emacs/"))
+#+END_SRC
+
+We could use an org-mode buffer containing the following content
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+
+[[emacs:lisp/simple.el::(defun next-error (&optional]]
+#+END_SRC
+
+to do our "study", but we prefer to take another approach and build
+the examples with the macro [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] that we discussed
+in the post [[#/2022-03-11/org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]].
+
+This macro allows to evaluate the forms after the first argument being
+a string that is inserted in an org-mode buffer made current, with
+the point at the beginning of the buffer if there is no substring
+~<point>~ in the first argument.
+
+For instance, the action of calling the command [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] with
+the point before the first bracket in the previous org-mode buffer
+(assuming the link abbreviation has been set), could be reproduced by
+evaluating the following form that uses [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "#+LINK: emacs /tmp/emacs/
+
+<point>[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (org-mode-restart)
+  (org-open-at-point))
+#+END_SRC
+
+In this previous form, the call to [[org-mode:lisp/org.el::(defun org-mode-restart][org-mode-restart]] is used to set the
+(local) abbreviated link.  In other term, to set the local variable
+[[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] to ~(("emacs" . "/tmp/emacs/"))~.
+
+And to make everything "transparent", in the preceding form, we can
+replace the ~#+LINK:~ statment and the call to [[org-mode:lisp/org.el::(defun org-mode-restart][org-mode-restart]] by a ~let~
+binding of the variable [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] in which we call
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] with the point still before the first bracket:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-open-at-point)))
+#+END_SRC
+
+As we've set our working environment, we can continue our tour :)
+
+*** TLDR
+
+Before going into the details, we present an overview of the "call
+stack" implied by the call of the function [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] in the
+following form:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-open-at-point)))
+#+END_SRC
+
+The "call stack" can be represented like this:
+
+#+BEGIN_SRC text
+org-open-at-point
+│
+└> org-link-open
+   │
+   └> org-link-open-as-file
+      │
+      └> org-open-file
+         │
+         └> org-link-search
+#+END_SRC
+
+This "call stack" brings some information but not as much as if we had
+provided the arguments passed to each function for each call.
+
+Here are the function calls with their arguments as they appear when
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] is called.
+
+First, we have:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-open-at-point)))
+#+END_SRC
+
+That leads to this function call:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open
+ (link
+  (:type "file"
+   :path "/tmp/emacs/lisp/simple.el"
+   :format bracket
+   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+   :application nil
+   :search-option "(defun next-error (&optional"
+   :begin 1
+   :end 55
+   :contents-begin nil
+   :contents-end nil
+   :post-blank 0
+   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ nil)
+#+END_SRC
+
+Which leads to this function call:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open-as-file "/tmp/emacs/lisp/simple.el::(defun next-error (&optional" nil)
+#+END_SRC
+
+Which leads to this function call:
+
+#+BEGIN_SRC emacs-lisp
+(org-open-file "/tmp/emacs/lisp/simple.el" nil nil "(defun next-error")
+#+END_SRC
+
+Which after visiting the file ~/tmp/emacs/lisp/simple.el~ leads to this
+last function call:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-search "(defun next-error (&optional")
+#+END_SRC
+
+If you are interesting about the details here we go!
+
+*** [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]]
+
+Besides a check for some org modules, recording the window
+configuration and removing the occur highlights from the buffer,
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] does the following:
+
+1) check if the user has defined some functions in the hook
+   [[org-mode:lisp/org.el::(defvar org-open-at-point-functions][org-open-at-point-functions]] (~nil~ by default) that can "open" the
+   link at point:
+   1) if this the case, "open" the link with that function,
+   2) if this is not the case do other stuff that we discuss below,
+2) after the link has been followed, no matter how, run the hook
+   ~org-follow-link-hook~.
+
+Here are the parts of [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-open-at-point (&optional arg)
+  "..."
+  (interactive "P")
+  (org-load-modules-maybe)
+  (setq org-window-config-before-follow-link (current-window-configuration))
+  (org-remove-occur-highlights nil nil t)
+  (unless (run-hook-with-args-until-success 'org-open-at-point-functions)
+    ;; ...
+    )
+  (run-hook-with-args 'org-follow-link-hook))
+#+END_SRC
+
+In our case (as the hook [[org-mode:lisp/org.el::(defvar org-open-at-point-functions][org-open-at-point-functions]] is ~nil~),
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] enters in the ~unless~ block.  In, the ~unless~ block,
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]]:
+
+1) locally sets the variable ~context~ to be an appropriate org object
+   or org element (as understood by [[org-mode:lisp/org-element.el]]),
+2) locally sets the variable ~type~ to be the type of ~context~, in our
+   case, ~type~ is equal to the symbol ~link~,
+3) calls an appropriate function depending on the value of ~link~, in our
+   case, the call is the following where ~arg~ is the prefix argument:
+
+   #+BEGIN_SRC emacs-lisp
+   (org-link-open context arg)
+   #+END_SRC
+
+Here are the parts of [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-open-at-point (&optional arg)
+  "..."
+  ;; ...
+  (unless (run-hook-with-args-until-success 'org-open-at-point-functions)
+    (let* ((context
+            (org-element-lineage
+             (org-element-context)
+             '(citation citation-reference clock comment comment-block
+                        footnote-definition footnote-reference headline
+                        inline-src-block inlinetask keyword link node-property
+                        planning src-block timestamp)
+             t))
+           (type (org-element-type context))
+           ;; ...
+           )
+      (cond
+       ;; ...
+       ((eq type 'link) (org-link-open context arg))
+       ;; ...
+       )))
+  ;; ...
+  )
+#+END_SRC
+
+We can compute the value assigned to the variable ~context~ by
+evaluating this form:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-element-lineage
+     (org-element-context)
+     '(citation citation-reference clock comment comment-block
+                footnote-definition footnote-reference headline
+                inline-src-block inlinetask keyword link node-property
+                planning src-block timestamp)
+     t)))
+#+END_SRC
+
+which gives us:
+
+#+BEGIN_SRC emacs-lisp
+(link
+ (:type "file"
+  :path "/tmp/emacs/lisp/simple.el"
+  :format bracket
+  :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+  :application nil
+  :search-option "(defun next-error (&optional"
+  :begin 1
+  :end 55
+  :contents-begin nil
+  :contents-end nil
+  :post-blank 0
+  :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+#+END_SRC
+
+So in the function [[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]], our bracket link is parsed into
+a list that is then passed as first argument to the function
+[[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] that way:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open
+ (link
+  (:type "file"
+   :path "/tmp/emacs/lisp/simple.el"
+   :format bracket
+   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+   :application nil
+   :search-option "(defun next-error (&optional"
+   :begin 1
+   :end 55
+   :contents-begin nil
+   :contents-end nil
+   :post-blank 0
+   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ nil)
+#+END_SRC
+
+We'll look at this function call in a moment, but for now let's get
+closer to the parsing step.
+
+*** Parsing step
+**** [[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]]
+
+There are many things we can look at regarding the parsing of this
+link, but here we restrict our study to the path (value of ~:path~
+keyword in the plist) and the search option (value of ~:search-option~
+keyword in the plist).
+
+The way [[org-mode:lisp/org-element.el::(defun org-element-lineage][org-element-lineage]] works and the arguments we gave it
+implies that the link object we got is the same object returned by the
+function [[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]] that can be computed as follow:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-element-context)))
+#+END_SRC
+
+[[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]] returns the smallest element or object at point.
+
+This happens by:
+
+1) getting the element at point using [[org-mode:lisp/org-element.el::(defun org-element-at-point][org-element-at-point]],
+2) as this element is of type ~paragraph~, narrow the buffer according
+   to the limits of that element (nothing changed here because the
+   limits of the ~paragraph~ are the limits of the whole buffer),
+3) search for a "valid" object (i.e. that belongs to the list returned by
+   ~(org-element-restriction 'paragraph)~) in the narrowed region
+   containing point, iterating over all the objects in the narrowed
+   region using the function [[org-mode:lisp/org-element.el::(defun org-element--object-lex][org-element--object-lex]] that returns,
+   starting from point, the next object respecting a given restriction
+   which turned out to be the restriction of the container element.
+4) when the object is found, return it (with its ~:parent~ property
+   set "correctly" using [[org-mode:lisp/org-element.el::(defsubst org-element-put-property][org-element-put-property]]), if none, return
+   the element container.
+
+Here are the parts of [[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-element-context (&optional element)
+  "..."
+  (catch 'objects-forbidden
+    (org-with-wide-buffer
+     (let* ((pos (point))
+            (element (or element (org-element-at-point)))
+            (type (org-element-type element))
+            ;; ...
+            )
+       (cond
+        ;; ...
+        ;; At a paragraph, a table-row or a verse block, objects are
+        ;; located within their contents.
+        ((memq type '(paragraph table-row verse-block))
+         (let ((cbeg (org-element-property :contents-begin element))
+               (cend (org-element-property :contents-end element)))
+           (if (and cbeg cend (>= pos cbeg)
+                    (or (< pos cend) (and (= pos cend) (eobp))))
+               (narrow-to-region cbeg cend)
+             (throw 'objects-forbidden element))))
+        ;; ...
+        )
+       (goto-char (point-min))
+       (let ((restriction (org-element-restriction type))
+             (parent element)
+             last)
+         (catch 'exit
+           (while t
+             (let ((next (org-element--object-lex restriction)))
+               (when next (org-element-put-property next :parent parent))
+               (if (or (not next) (> (org-element-property :begin next) pos))
+                   (throw 'exit (or last parent))
+                 (let ((end (org-element-property :end next))
+                       (cbeg (org-element-property :contents-begin next))
+                       (cend (org-element-property :contents-end next)))
+                   (cond
+                    (
+                     ;; Skip objects ending before point. ...
+                     ;; move point
+                     (goto-char end)
+                     (when (and (= end pos) (not (memq (char-before) '(?\s ?\t))))
+                       (setq last next)))
+                    (
+                     ;; If POS is within a container object, move into that object.
+                     ;; move point
+                     (goto-char cbeg)
+                     (narrow-to-region (point) cend)
+                     (setq parent next)
+                     (setq restriction (org-element-restriction next)))
+                    (t
+                     (throw 'exit next)))))))))))))
+#+END_SRC
+
+So, the object that [[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]] returned in our specific case
+is exactly the same as the evaluation of the following s-exp returns:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let* ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/")))
+         (parent (org-element-at-point))
+         (restriction (org-element-restriction 'paragraph))
+         (object (org-element--object-lex restriction)))
+    (org-element-put-property object :parent parent)))
+#+END_SRC
+
+which is:
+
+#+BEGIN_SRC emacs-lisp
+(link
+ (:type "file"
+  :path "/tmp/emacs/lisp/simple.el"
+  :format bracket
+  :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+  :application nil
+  :search-option "(defun next-error (&optional"
+  :begin 1
+  :end 55
+  :contents-begin nil
+  :contents-end nil
+  :post-blank 0
+  :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+#+END_SRC
+
+**** [[org-mode:lisp/org-element.el::(defun org-element--object-lex][org-element--object-lex]]
+
+In [[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]], the function [[org-mode:lisp/org-element.el::(defun org-element--object-lex][org-element--object-lex]], starting
+at the beginning of the narrowed region, does the following:
+
+1) searches for the beginning of a valid object matching the regular
+   expression [[org-mode:lisp/org-element.el::(defvar org-element--object-regexp][org-element--object-regexp]],
+2) moves point to the beginning of the match,
+3) locally sets the variable ~result~ to be the previous match,
+4) finds that the character after point matches a left bracket ~[~
+   (written ~?\[~ in elisp),
+5) then finds that: a) the second element of ~result~ (~(aref result 1)~)
+   matches another left bracket and b) ~link~ is part of the valid
+   object to parse (~restriction~),
+6) due to the checks done at step 5), calls the function
+   [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]] to parse the link at point,
+7) then sets the local variable ~found~ to be that link,
+8) and finally returned ~found~ (the link).
+
+Here are the parts of [[org-mode:lisp/org-element.el::(defun org-element--object-lex][org-element--object-lex]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-element--object-lex (restriction)
+  "..."
+  (cond
+   ;; ...
+   (t
+    (let* ((start (point))
+           (limit
+            ;; ...
+            )
+           found)
+      (save-excursion
+        (while (and (not found)
+                    (re-search-forward org-element--object-regexp limit 'move))
+          (goto-char (match-beginning 0))
+          (let ((result (match-string 0)))
+            (setq found
+                  (cond
+                   ;; ..
+                   (t
+                    (pcase (char-after)
+                      ;; ...
+                      (?\[
+                       (pcase (aref result 1)
+                         ((and ?\[
+                               (guard (memq 'link restriction)))
+                          (org-element-link-parser))
+                         ;; ...
+                         ))
+                      ;; ...
+                      ))))
+            ;; ...
+            ))
+        (cond (found)
+              ;; ...
+              ))))))
+#+END_SRC
+
+**** [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]]
+
+So, leaving aside the parent of the link object that
+[[org-mode:lisp/org-element.el::(defun org-element-context][org-element-context]] returns, in our specific case the propreties of
+the link object we are interested in are computed by the function
+[[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]], and we can see that by evaluating the
+following s-exp:
+
+#+BEGIN_SRC emacs-lisp
+(org-test-with-temp-text "[[emacs:lisp/simple.el::(defun next-error (&optional]]"
+  (let* ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+    (org-element-link-parser)))
+#+END_SRC
+
+which gives us the following link object:
+
+#+BEGIN_SRC emacs-lisp
+(link
+ (:type "file"
+  :path "/tmp/emacs/lisp/simple.el"
+  :format bracket
+  :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+  :application nil
+  :search-option "(defun next-error (&optional"
+  :begin 1
+  :end 55
+  :contents-begin nil
+  :contents-end nil
+  :post-blank 0))
+#+END_SRC
+
+Let's break down what the function [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]] does when
+we evaluted the previous s-exp:
+
+1) the link at point is recognized as a bracket link via the condition
+   ~(looking-at org-link-bracket-re)~ in the second clause of the main
+   ~cond~ special form,
+2) then the expressions in the body of this clause are evaluated,
+3) one of them sets the local variable ~raw-link~ to be the link matched
+   by the first subexpression in ~org-link-bracket-re~ where some string
+   manipulation are realized before expanding the abbreviation part
+   (its first part, which is ~emacs~) using the function
+   [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]] and replaced it by ~/tmp/emacs/~,
+4) then another expression in that same clause checks that ~raw-link~
+   looks like a file, sets the local variable ~type~ to be the string
+   ~"file"~ and set the local variable ~path~ to be equal to ~raw-link~,
+5) then out of the main ~cond~ special form, given that the link is of
+   type ~file~, the local variable ~search-option~ is set to be right part
+   (part after the substring ~::~) of the variable ~path~ (still being the
+   string ~"/tmp/emacs/lisp/simple.el::(defun next-error (&optional"~),
+   and then set the variable ~path~ to be the left part (part before the
+   substring ~::~) of itself.
+6) finally, it returns the link object being a list where its car
+   is the symbol ~link~ and the cdr is a property list where for
+   instance, the keyword ~:search-option~ is associated with the value
+   ~search-option~ previously computed.
+
+Here are the parts of [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-element-link-parser ()
+  "..."
+  (catch 'no-object
+    (let ((begin (point))
+          ;; ...
+          type path raw-link search-option)
+      (cond
+       ;; ...
+       ((looking-at org-link-bracket-re)
+        (setq raw-link (org-link-expand-abbrev
+                        (org-link-unescape
+                         (replace-regexp-in-string
+                          "[ \t]*\n[ \t]*" " "
+                          (match-string-no-properties 1)))))
+        (cond
+         ((or (file-name-absolute-p raw-link)
+              (string-match "\\`\\.\\.?/" raw-link))
+          (setq type "file")
+          (setq path raw-link))
+         ;; ...
+         ))
+       ;; ...
+       (t (throw 'no-object nil)))
+      ;; ...
+      (when (string-match "\\`file\\(?:\\+\\(.+\\)\\)?\\'" type)
+        (setq application (match-string 1 type))
+        (setq type "file")
+        (when (string-match "::\\(.*\\)\\'" path)
+          (setq search-option (match-string 1 path))
+          (setq path (replace-match "" nil nil path)))
+        ;; ...
+        )
+      ;; ...
+      (list 'link
+            (list :type type
+                  :path path
+                  :raw-link (or raw-link path)
+                  :search-option search-option
+                  ;; ...
+                  )))))
+#+END_SRC
+
+***** Programming with Elisp is magic
+
+What's magic when programming Elisp code is that at any time we can
+extract a little part of the program, replace some symbols by custom
+values, send it to the minibuffer with ~M-x eval-expression~ (or
+~pp-eval-expression~), press ~RET~, and automatically get back some value
+in the echo area (or in the dedicated buffer ~*Pp Eval Output*~).
+
+In almost no time, misconceptions about what a program does (or why
+a program fails) can be spot that way.
+
+Let's say we want to be sure that the following snippet in the
+function [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]] does what it seems to do:
+
+#+BEGIN_SRC emacs-lisp
+(when (string-match "::\\(.*\\)\\'" path)
+  (setq search-option (match-string 1 path))
+  (setq path (replace-match "" nil nil path)))
+#+END_SRC
+
+In our example, at that point in the function, the local variable ~path~
+has the string value ~"/tmp/emacs/lisp/simple.el::(defun next-error
+(&optional"~.  We can test the result of the ~when~ condition by
+evaluating the following:
+
+#+BEGIN_SRC emacs-lisp
+(string-match "::\\(.*\\)\\'" "/tmp/emacs/lisp/simple.el::(defun next-error (&optional")
+;; 25
+#+END_SRC
+
+By reading the help of ~string-match~, we know that it returns the index
+of the start of the first match or nil.
+
+Ok, there's a match.
+
+But, to me the string ~"/tmp/emacs/lisp/simple.el::(defun next-error
+(&optional"~ is to long with to many repetive characters that don't
+appear in the regexp ~"::\\(.*\\)\\'"~ to wrap my head around what's
+going on.
+
+So, let's use the good ~foo~ and ~bar~ words to simplify our discoveries
+and gain confidence about this piece of code.
+
+In the regexp, the only part "that seems" of interest is ~::~, so let's
+try again with the strings ~"/tmp/foo::bar"~, ~"/tmp/foo::"~ and
+~"/tmp/foo"~:
+
+#+BEGIN_SRC emacs-lisp
+(string-match "::\\(.*\\)\\'" "/tmp/foo::bar")
+;; 8
+(string-match "::\\(.*\\)\\'" "/tmp/foo::")
+;; 8
+(string-match "::\\(.*\\)\\'" "/tmp/foo")
+;; nil
+#+END_SRC
+
+It become clearer.  We start to get a sense of the match.
+
+By reading the documentation ([[info:elisp#Simple Match Data]]), we
+learn (or recall):
+
+1) that search functions like ~string-match~ or ~looking-at~ set the
+   match data for every successful search,
+2) and if the first argument of ~match-string~ is ~0~, we get the entire
+   matching text and if it's ~1~ we get the first parenthetical
+   subexpression of the given regular expression.
+
+So, continuing with the string ~"/tmp/foo::bar"~, we
+have:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    (list (match-string 0 path)
+          (match-string 1 path))))
+;; ("::bar" "bar")
+#+END_SRC
+
+Reading the help buffer about ~replace-match~ tells us that this
+function replaces the text matched by the last search with its first
+argument.  And if we give it an optional fourth argument being a
+string, the replacement is made on that string.
+
+So replacing the entire match with the empty string ~""~ should remove
+the matched part of the string:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    (replace-match "" nil nil path)))
+;; "/tmp/foo"
+#+END_SRC
+
+Now putting everything together we can write the following example:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    `(:search-option ,(match-string 1 path)
+      :path          ,(replace-match "" nil nil path))))
+;; (:search-option "bar"
+;;  :path          "/tmp/foo")
+#+END_SRC
+
+And maybe we've removed some misconceptions about this part of the
+function [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]].
+
+**** [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]]
+
+Regarding the parsing step of the link, we still have one function
+to cover: [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]].
+
+This function replaces the link abbreviation in the link string
+looking up at the variables [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] and
+[[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]].
+
+In our case we expect it to transform the link (as a string)
+~"emacs:lisp/simple.el::(defun next-error (&optional"~ into the link (as
+a string) ~"/tmp/emacs/lisp/simple.el::(defun next-error (&optional"~
+given that the local variable [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] is set to
+~'(("emacs" . "/tmp/emacs/"))~ when we call it.
+
+A bunch of examples are often better to describe function calls than to
+stare at the source.  So, let's do 4 evaluations that shows how
+[[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]] behaves (given our specific link) and its
+relation (dependency) with the variables [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] and
+[[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]].  To make those example more readable (as
+done previously), we use as input the "fake" link ~"emacs:foo::bar"~:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-expand-abbrev "emacs:foo::bar")
+;; "emacs:foo::bar"
+
+(let ((org-link-abbrev-alist-local '(("XXX" . "/tmp/emacs/"))))
+  (org-link-expand-abbrev "emacs:foo::bar"))
+;; "emacs:foo::bar"
+
+(let ((org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+  (org-link-expand-abbrev "emacs:foo::bar"))
+;; "/tmp/emacs/foo::bar"
+
+(let ((org-link-abbrev-alist '(("emacs" . "/TMP/EMACS/"))))
+  (org-link-expand-abbrev "emacs:foo::bar"))
+;; "/TMP/EMACS/foo::bar"
+
+(let ((org-link-abbrev-alist '(("emacs" . "/TMP/EMACS/")))
+      (org-link-abbrev-alist-local '(("emacs" . "/tmp/emacs/"))))
+  (org-link-expand-abbrev "emacs:foo::bar"))
+;; "/tmp/emacs/foo::bar"
+#+END_SRC
+
+So, what did we learnt from running those examples:
+
+1) if none of the variables [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] and
+   [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] are defined the link is not expanded,
+2) If one of those variables is set when we call the function and if
+   the abbreviation is defined in one of them, the link is expanded.
+3) Finally, if both variables are set and defined the same
+   abbreviation, the buffer local wins over the global.
+
+Now by taking a look at its source, we can tell that the function
+[[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]] works like this:
+
+1) do a string matching on the link to get the part before the
+   first colon (which might be an abbreviation),
+2) do a lookup for this abbreviation in the variables
+   [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] and [[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]], prioritizing
+   the local variable,
+3) if the abbreviation is found, replace it in the link by its
+   replacement text.
+
+Here are the parts of [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link-expand-abbrev (link)
+  "Replace link abbreviations in LINK string.
+Abbreviations are defined in `org-link-abbrev-alist'."
+  (if (not (string-match "^\\([^:]*\\)\\(::?\\(.*\\)\\)?$" link)) link
+    (let* ((key (match-string 1 link))
+           (as (or (assoc key org-link-abbrev-alist-local)
+                   (assoc key org-link-abbrev-alist)))
+           (tag (and (match-end 2) (match-string 3 link)))
+           rpl)
+      (if (not as)
+          link
+        (setq rpl (cdr as))
+        (cond
+         ;; ...
+         (t (concat rpl tag)))))))
+#+END_SRC
+
+In those examples showing how the function [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]]
+works, we've left aside other super cool features of abbreviated links
+that we can read in the info node (see [[info:org#Link Abbreviations]]).
+
+We've finished our tour of the parsing step that happened in
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]] when we try to "open" the link
+
+: [[emacs:lisp/simple.el::(defun next-error (&optional]]
+
+in an org-mode buffer where the local variable
+[[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] is set to ~'(("emacs" . "/tmp/emacs/"))~.
+
+*** [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]]
+
+Now that we've looked at the parsing step that happened in
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]], what we want to understand is the following
+function call (where ~nil~ is due to the way we called
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional][org-open-at-point]], without any prefix argument):
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open
+ (link
+  (:type "file"
+   :path "/tmp/emacs/lisp/simple.el"
+   :format bracket
+   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+   :application nil
+   :search-option "(defun next-error (&optional"
+   :begin 1
+   :end 55
+   :contents-begin nil
+   :contents-end nil
+   :post-blank 0
+   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ nil)
+#+END_SRC
+
+The function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] decides what to do next according to the
+type of the link:
+
+1) As our link is of type ~file~, [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] will delegate the work
+   to the function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]].
+2) To do so, it builds up a path concatenating the corresponding value
+   of the property ~:path~ and ~:search-option~ of the link separating
+   them by two colons ~::~.  This path is locally stored in the variable
+   ~path~.  This variable will be the first argument passed to the
+   function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]].
+2) Then, it checks if we passed a prefix argument to [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] or
+   if the application (~:application~) specified in the link is ~"emacs"~
+   or ~"sys"~.  In our case, none are true, so the last argument passed
+   to the function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]] will be ~nil~.
+
+So now, fate is in the hands of the function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]],
+and more specifically, the following call:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open-as-file "/tmp/emacs/lisp/simple.el::(defun next-error (&optional" nil)
+#+END_SRC
+
+Here are the parts of [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link-open (link &optional arg)
+  "..."
+  (let ((type (org-element-property :type link))
+        (path (org-element-property :path link)))
+    (pcase type
+      ("file"
+       (let* ((option (org-element-property :search-option link))
+              (path (if option (concat path "::" option) path)))
+         (org-link-open-as-file path
+                                (pcase (org-element-property :application link)
+                                  ((guard arg) arg)
+                                  ("emacs" 'emacs)
+                                  ("sys" 'system)))))
+      ;; ...
+      )))
+#+END_SRC
+
+*** [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]]
+
+The function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]] does the following:
+
+1) split the given path ~"/tmp/emacs/lisp/simple.el::(defun next-error
+   (&optional"~ into two parts a) ~option~ (which is ~"(defun next-error
+   (&optional"~) and b) ~file-name~ (which is
+   ~"/tmp/emacs/lisp/simple.el"~).
+2) as ~file-name~ doesn't follow a pattern expected to be open with
+   dired, check if the string ~option~ represents a number, and so the
+   search in the file would happened jumping to the line with that
+   number, if not this will be a text search which is our case.  This
+   is done to determinate the last arguments passed to the function
+   [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] which return.
+
+So, now the "control" is passed to the function [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] as
+follow:
+
+#+BEGIN_SRC emacs-lisp
+(org-open-file "/tmp/emacs/lisp/simple.el" nil nil "(defun next-error")
+#+END_SRC
+
+As the function [[org-mode:lisp/ol.el::(defun org-link-open-as-file][org-link-open-as-file]] is short enough, we reproduce it totally:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link-open-as-file (path arg)
+  "..."
+  (let* ((option (and (string-match "::\\(.*\\)\\'" path)
+                      (match-string 1 path)))
+         (file-name (if (not option) path
+                      (substring path 0 (match-beginning 0)))))
+    (if (string-match "[*?{]" (file-name-nondirectory file-name))
+        (dired file-name)
+      (apply #'org-open-file
+             file-name
+             arg
+             (cond ((not option) nil)
+                   ((string-match-p "\\`[0-9]+\\'" option)
+                    (list (string-to-number option)))
+                   (t (list nil option)))))))
+#+END_SRC
+
+We get close to the end of this post ;)
+
+We just need to look at the function [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]].
+
+*** [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]]
+
+The main part of [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] is to determine which application to use
+to open the file taking into account its arguments and user options
+(specifically [[org-mode:lisp/org.el::(defcustom org-file-apps][org-file-apps]] and [[org-mode:lisp/ol.el::(defcustom org-link-frame-setup][org-link-frame-setup]]).
+
+In our case, as the first association in [[org-mode:lisp/org.el::(defcustom org-file-apps][org-file-apps]] is ~(auto-mode
+. emacs)~ (by default) and the extension of the file
+~/tmp/emacs/lisp/simple.el~ (which is ~.el~) matches one of the car of the
+associations in [[emacs:lisp/files.el::(defvar auto-mode-alist][auto-mode-alist]], the function [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] locally
+sets the variable ~cmd~ to the symbol ~emacs~.
+
+As consequence, in the main ~cond~ special form of [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]], the
+expressions in the body of the clause with the condition ~(or (stringp
+cmd) (eq cmd 'emacs))~ (which evaluate to ~t~) are evaluated.
+
+Specifically,
+
+1) a lookup in the alist [[org-mode:lisp/ol.el::(defcustom org-link-frame-setup][org-link-frame-setup]] returns the function to
+   use to visite files, which is ~find-file-other-window~ by default,
+2) this function is used to visit the file ~/tmp/emacs/lisp/simple.el~,
+3) once the file is opened, removed the narrowing restriction from the
+   current buffer (using ~widen~),
+4) and finally do the search for the text ~"(defun next-error
+   (&optional"~ using the function [[org-mode:lisp/ol.el::(defun org-link-search (s][org-link-search]].
+
+Thus, SKIPING all the details (that makes [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] functional in
+real life), specifically the lookups in the alist [[org-mode:lisp/org.el::(defcustom org-file-apps][org-file-apps]], the
+function [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] in our case can be reduced to the following
+form:
+
+#+BEGIN_SRC emacs-lisp
+(let ((file "/tmp/emacs/lisp/simple.el")      ; first argument of `org-open-file'
+      (search "(defun next-error (&optional") ; last urgument of `org-open-file'
+      (f (cdr (assq 'file org-link-frame-setup))))
+  (funcall f file)
+  (widen)
+  (org-link-search search))
+#+END_SRC
+
+Here are the parts of [[org-mode:lisp/org.el::(defun org-open-file (path][org-open-file]] we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-open-file (path &optional in-emacs line search)
+  "..."
+  (let* ((file (if (equal path "") buffer-file-name
+                 (substitute-in-file-name (expand-file-name path))))
+         (file-apps (append org-file-apps (org--file-default-apps)))
+         (apps (cl-remove-if #'org--file-apps-entry-dlink-p file-apps))
+         ;; ...
+         (a-m-a-p (assq 'auto-mode apps))
+         (dfile (downcase file))
+         ;; ...
+         (save-position-maybe
+          ;; ...
+          )
+         cmd link-match-data)
+    (cond
+     ;; ...
+     (t
+      (setq cmd (or
+                 ;; ...
+                 (assoc-default dfile
+                                (org--file-apps-regexp-alist apps a-m-a-p)
+                                'string-match)
+                 ;; ...
+                 ))))
+    ;; ...
+    (cond
+     ;; ...
+     ((or (stringp cmd)
+          (eq cmd 'emacs))
+      (funcall (cdr (assq 'file org-link-frame-setup)) file)
+      (widen)
+      (cond (line (org-goto-line line)
+                  (when (derived-mode-p 'org-mode) (org-reveal)))
+            (search (condition-case err
+                        (org-link-search search)
+                      ;; Save position before error-ing out so user
+                      ;; can easily move back to the original buffer.
+                      (error (funcall save-position-maybe)
+                             (error (nth 1 err)))))))
+     ;; ...
+     )
+    ;; ...
+    ))
+#+END_SRC
+
+WE ARE DONE!!!
 
 * [2022-03-22 Tue] Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
