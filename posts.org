@@ -3998,7 +3998,7 @@ If not return `nil'."
             ;; return non-nil, in order to use it in
             ;; the variable `org-open-at-point-functions'
             'noweb-found)
-        (message "source-code block `%s' not found in this buffer" name)))))
+        (message "source-code block `%s' not found in this buffer" ref)))))
 
 (add-to-list 'org-open-at-point-functions #'org-goto-noweb)
 #+END_SRC
