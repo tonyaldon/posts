@@ -1332,6 +1332,7 @@ Here are the parts of [[org-mode:lisp/org.el::(defun org-open-file (path][org-op
 
 WE ARE DONE!!!
 
+** [[#/questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point][Q&A]]
 * [2022-03-22 Tue] Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
 :CUSTOM_ID: /2022-03-22-org-speed-keys-and-self-insert-command/
@@ -1887,6 +1888,7 @@ a non-nil value for the inserted character.  At the end, it runs
 
 WE ARE DONE!!!
 
+** [[#/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command][Q&A]]
 * [2022-03-11 Fri] Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
 :CUSTOM_ID: /2022-03-11-org-mode-source-code-5000-examples/
@@ -2349,6 +2351,7 @@ part of THE ORG-MODE TRUTH lives.
 
 WE ARE DONE!
 
+** [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]]
 * [2022-03-05 Sat] I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!
 :PROPERTIES:
 :CUSTOM_ID: /2022-03-05-i-bet-you-use-hl-line-mode/
@@ -3902,3 +3905,306 @@ prints out the following into the message buffer:
  :type-of-f lambda
  :env-of-f nil)
 #+END_SRC
+
+* Questions and Answers
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/
+:END:
+** [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point
+:END:
+*** Is there a way to make clickable noweb references ~<<link>>~ in source blocks in order to jump to its block definition?
+
+What we want to accomplish here is to jump to the definition of a
+noweb block, let's say ~my-noweb~, by calling a command (maybe
+~org-open-at-point~) when the point is on a reference ~<<my-noweb>>~ of
+that block, for instance in an org buffer with the following content:
+
+#+BEGIN_SRC org
+,#+NAME: my-noweb
+,#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+,#+END_SRC
+
+,#+BEGIN_SRC emacs-lisp :noweb yes :results value verbatim
+<<my-noweb>>
+(reverse sentence)
+,#+END_SRC
+
+,#+RESULTS:
+: (baz bar foo)
+#+END_SRC
+
+This can be done in at least two ways.
+
+**** Using the built-in command ~org-babel-goto-named-src-block~
+
+First, we can use the built-in command ~org-babel-goto-named-src-block~
+(bound to ~C-c C-v g~ by default).
+
+After calling ~org-babel-goto-named-src-block~ with the point on top of
+the reference ~<<my-noweb>>~:
+
+1) we're asked in the minibuffer to choose a name,
+2) we pick the noweb ref ~my-noweb~, press ~RET~,
+3) we jump to the source block named ~my-noweb~.
+
+**** Using the hook ~org-open-at-point-functions~
+
+Second possibility, we can define a command that jump to a noweb
+block definition when we call it with the point on top of a noweb
+reference without prompting anything in the minibuffer.
+
+Then we can call it directly or better (if it's the behavior we
+want) we can add this command to the variable
+~org-open-at-point-functions~.
+
+And, now in a source block with the point on top of a noweb reference,
+we can call ~org-open-at-point~ (~C-c C-o~ by default) which will call
+this new command and jump to the noweb block definition at point
+(instead of running ~org-babel-open-src-block-result~).
+
+Here an implementation of such a command that we call ~org-goto-noweb~.
+
+#+BEGIN_SRC emacs-lisp
+(require 'org)
+
+(defun org-noweb-ref-p ()
+  "Return the noweb reference at point if any.
+If not return `nil'."
+  (interactive)
+  (let* ((context (org-element-context))
+         (type (org-element-type context))
+         (noweb-ref
+          (and (memq type '(inline-src-block src-block))
+               (org-in-regexp (org-babel-noweb-wrap)))))
+    (when noweb-ref
+      (buffer-substring
+       (+ (car noweb-ref) (length org-babel-noweb-wrap-start))
+       (- (cdr noweb-ref) (length org-babel-noweb-wrap-end))))))
+
+(defun org-goto-noweb ()
+  "Go to the noweb ref at point."
+  (interactive)
+  (when-let ((ref (org-noweb-ref-p)))
+    (let ((point (org-babel-find-named-block ref)))
+      (if point
+          ;; Taken from `org-open-at-point'.
+          (progn
+            (org-mark-ring-push)
+            (goto-char point)
+            (org-show-context)
+            ;; return non-nil, in order to use it in
+            ;; the variable `org-open-at-point-functions'
+            'noweb-found)
+        (message "source-code block `%s' not found in this buffer" name)))))
+
+(add-to-list 'org-open-at-point-functions #'org-goto-noweb)
+#+END_SRC
+
+And here the ~ert~ test for the command ~org-goto-noweb~:
+
+#+BEGIN_SRC emacs-lisp
+;; from org-mode: testing/org-test.el
+(defmacro org-test-with-temp-text (text &rest body)
+  "Run body in a temporary buffer with Org mode as the active
+mode holding TEXT.  If the string \"<point>\" appears in TEXT
+then remove it and place the point there before running BODY,
+otherwise place the point at the beginning of the inserted text."
+  (declare (indent 1))
+  `(let ((inside-text (if (stringp ,text) ,text (eval ,text)))
+         (org-mode-hook nil))
+     (with-temp-buffer
+       (org-mode)
+       (let ((point (string-match "<point>" inside-text)))
+         (if point
+             (progn
+               (insert (replace-match "" nil nil inside-text))
+               (goto-char (1+ (match-beginning 0))))
+           (insert inside-text)
+           (goto-char (point-min))))
+       (font-lock-ensure (point-min) (point-max))
+       ,@body)))
+
+(ert-deftest org-goto-noweb-test ()
+  (should
+   (org-test-with-temp-text
+       "#+BEGIN_SRC emacs-lisp :noweb yes
+<point><<my-noweb>>
+(reverse sentence)
+,#+END_SRC"
+     (org-noweb-ref-p)))
+  (should-not
+   (org-test-with-temp-text
+       "#+BEGIN_SRC emacs-lisp :noweb yes
+<<my-noweb>>
+(reverse sentence)
+,#+END_SRC"
+     (org-noweb-ref-p)))
+
+  ;; source blocks
+  (should
+   (org-test-with-temp-text
+       "#+NAME: my-noweb
+,#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+,#+END_SRC
+
+,#+BEGIN_SRC emacs-lisp :noweb yes
+<point><<my-noweb>>
+(reverse sentence)
+,#+END_SRC"
+     (org-goto-noweb)
+     (forward-line)
+     (looking-at "\(setq")))
+  (should-not
+   (org-test-with-temp-text
+       "#+NAME: my-noweb
+,#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+,#+END_SRC
+
+,#+BEGIN_SRC emacs-lisp :noweb yes
+<<my-noweb>>
+(reverse sentence)
+,#+END_SRC"
+     (org-goto-noweb)))
+
+  ;; inline source blocks
+  (should
+   (org-test-with-temp-text
+       "#+NAME: my-noweb
+,#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+,#+END_SRC
+
+src_emacs-lisp{<point><<my-noweb>>}"
+     (org-goto-noweb)
+     (forward-line)
+     (looking-at "\(setq"))))
+#+END_SRC
+
+** [[#/2022-03-22-org-speed-keys-and-self-insert-command/][Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command]]
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command
+:END:
+*** How are speed keys different from/better than ~evil-mode~?  Does speed keys can be use along with ~evil-mode~?
+**** Quick answer
+
+1) If we are in evil normal state ~<N>~, Org speed keys won't work
+   (because most of the printing keys are used for something else,
+   specifically they are bound in ~evil-normal-state-map~),
+2) if we are in evil insert state ~<I>~ or in evil emacs state ~<E>~, Org
+   speed keys works (because the printing keys are not bound by
+   ~evil-mode~ in ~evil-insert-state-map~ nor in ~evil-emacs-state-map~).
+
+**** Answer with more details
+
+Org speed keys are not better than ~evil-mode~ nor the other way, they
+are really differents.
+
+***** Org speed keys
+
+Org speed keys are a kind of a "hack" that hijack the "inserting emacs
+process".
+
+It can be seen as: when we try to insert a character, do not use
+the standard command for inserting, use another one that checks for the
+position of the cursor in the buffer, if it is at a specific location,
+performs a lookup for the command to call, if we find one, call it, if
+none, insert the character.  It is all about one command
+~self-insert-command~ and one remapping ~self-insert-command~ to
+~org-self-insert-command~.
+
+***** ~evil-mode~
+
+~evil-mode~ manipulates the hierarchy of all the keymaps that are
+active, making the current evil "state" map to win over the others.
+
+We can check this by inspecting the list of the current active
+keymaps with the function ~current-active-maps~.  If the same key
+sequence is bound several times to different commands in the list
+returned by ~current-active-maps~, the first binding in the list wins
+over the others.
+
+For instance, when we are in evil normal state ~<N>~, the bindings in
+the keymap ~evil-normal-state-map~ takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by ~current-active-maps~.
+
+Assuming we are in evil normal state ~<N>~, to check this previous
+assertion, we can run:
+
+: M-x pp-eval-expression RET (current-active-maps)
+
+Now, if we switch to the evil insert state ~<I>~, the bindings in
+the keymap ~evil-insert-state-map~ takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by ~current-active-maps~.
+
+Assuming we are in evil normal state ~<I>~, to check this previous
+assertion, we can run:
+
+: M-x pp-eval-expression RET (current-active-maps)
+
+Now, what's interesting, is that evil insert state ~<I>~ doesn't bind the
+printing keys nor remap the command ~self-insert-command~.  So, when
+we are in evil insert state ~<I>~, and we press the key ~n~ for
+instance, the "command loop editor", when perfoming the key lookup in
+the current active maps, won't find the binding coming from the
+keymaps ~evil-insert-state-map~ but the binding coming form the current
+global map which resolves (by default) to the command
+~self-insert-command~.   And, if we've remapped ~self-insert-command~ to
+~org-self-insert-command~, (which is the case in org-mode with
+~org-use-speed-commands~ set to ~t~), the "command loop editor" will call
+~org-self-insert-command~.
+
+*** Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?
+
+I think that the benefit of this approach (remapping
+~self-insert-command~ to ~org-self-insert-command~) over having a minor
+mode layering its keymap onto standard ~org-mode~ is that we don't have
+to switch between keymaps or minor modes to get the feature.
+
+Let's say we define a minor mode ~X-mode~ with the keymap ~X-mode-map~
+that binds the key ~n~ to ~org-next-visible-heading~.
+
+Now, when ~X-mode~ is turned on, ~X-mode-map~ "wins" over ~org-mode-map~ and
+typing ~n~ will get us (from anywhere in the buffer) to the next
+heading.
+
+Now, what should we do to insert the character ~n~ in the buffer?  We
+should turn off ~X-mode~ to remove the binding from ~X-mode-map~.
+
+With the remapping method we don't have to switch between minor modes
+before moving to the next heading by typing ~n~.  The only restriction
+is to be at the beginning of a heading.  There is always a trade off.
+
+I don't know if it is a good reason but this the only one that I see.
+
+** [[#/2022-03-11-org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]]
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples
+:END:
+*** How do you count 5000 examples?
+
+Any ~should~, ~should-not~ and ~should-error~ used in a ~ert~ test in the
+repository [[org-mode:testing]] is counted as an example.
+
+So now, to count all the examples, we have to count all those form and
+this can be done by searching recursively in the [[org-mode:testing]] for
+the string ~(should~.
+
+This can be done using ~grep~ to match recursively the string ~(should~ in
+the directory [[org-mode:testing]] and counting the number of line with ~wc~
+utility:
+
+#+BEGIN_SRC bash
+# org-mode at commit cbe3f2d69
+cd org-mode/testing/
+grep -r '(should' | wc -l
+#+END_SRC
+
+#+RESULTS:
+: 5235
