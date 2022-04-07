@@ -15,7 +15,7 @@
 
 * [2022-04-04 Mon] Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
-:CUSTOM_ID: /2022-04-04/search-options-link-abbreviations-and-org-open-at-point/
+:CUSTOM_ID: /2022-04-04-search-options-link-abbreviations-and-org-open-at-point/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/
 :END:
 
@@ -396,7 +396,7 @@ We could use an org-mode buffer containing the following content
 
 to do our "study", but we prefer to take another approach and build
 the examples with the macro [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] that we discussed
-in the post [[#/2022-03-11/org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]].
+in the post [[#/2022-03-11-org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]].
 
 This macro allows to evaluate the forms after the first argument being
 a string that is inserted in an org-mode buffer made current, with
@@ -1334,7 +1334,7 @@ WE ARE DONE!!!
 
 * [2022-03-22 Tue] Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
-:CUSTOM_ID: /2022-03-22/org-speed-keys-and-self-insert-command/
+:CUSTOM_ID: /2022-03-22-org-speed-keys-and-self-insert-command/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/
 :END:
 
@@ -1889,7 +1889,7 @@ WE ARE DONE!!!
 
 * [2022-03-11 Fri] Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
-:CUSTOM_ID: /2022-03-11/org-mode-source-code-5000-examples/
+:CUSTOM_ID: /2022-03-11-org-mode-source-code-5000-examples/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/
 :END:
 
@@ -2351,7 +2351,7 @@ WE ARE DONE!
 
 * [2022-03-05 Sat] I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!
 :PROPERTIES:
-:CUSTOM_ID: /2022-03-05/i-bet-you-use-hl-line-mode/
+:CUSTOM_ID: /2022-03-05-i-bet-you-use-hl-line-mode/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/t7doal/i_bet_you_use_hllinemode_do_you_know_how_it_works/
 :END:
 
@@ -2702,7 +2702,7 @@ Let's play with overlays.
 
 ** Moving overlays and priorities
 
-In the post [[#/2022-02-26/org-mode-visibility-of-headings/][Have you ever wondered how org-mode toggles the visibility
+In the post [[#/2022-02-26-org-mode-visibility-of-headings/][Have you ever wondered how org-mode toggles the visibility
 of headings?]], we already played with overlays specifically the ~invisible~
 property of overlay.  We also know that overlays take priority over
 text properties.
@@ -2840,7 +2840,7 @@ WE ARE DONE!!!
 
 * [2022-02-26 Sat] Have you ever wondered how org-mode toggles the visibility of headings?
 :PROPERTIES:
-:CUSTOM_ID: /2022-02-26/org-mode-visibility-of-headings/
+:CUSTOM_ID: /2022-02-26-org-mode-visibility-of-headings/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/
 :END:
 
@@ -3305,7 +3305,7 @@ WE ARE DONE :-)
 
 * [2022-02-20 Sun] You want to write a custom org backend?  Let's write onlybold backend together to get you started
 :PROPERTIES:
-:CUSTOM_ID: /2022-02-20/onlybold-org-backend/
+:CUSTOM_ID: /2022-02-20-onlybold-org-backend/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/
 :END:
 
@@ -3691,7 +3691,7 @@ Emacs is pure joy and it is thanks to you.
 
 * [2022-02-11 Fri] Some examples on closures and lexical-binding
 :PROPERTIES:
-:CUSTOM_ID: /2022-02-11/closures-and-lexical-binding/
+:CUSTOM_ID: /2022-02-11-closures-and-lexical-binding/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/
 :END:
 
