@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-04 Mon 16:06>
+#+DATE: <2022-04-09 Sat 08:42>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,298 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-09 Sat] Did you know that Org links in property drawers are not links?
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-09-org-links-in-property-drawers-are-not-links/
+:END:
+
+Wait a minute!  Are you telling me that the URL
+~https://orgmode.org/worg/~ used as property value in a property drawer
+is not a link?
+
+Yes!
+
+Even if clicking the URL opens it in my browser.
+
+Yes!
+
+Even if the URL is displayed like any other links in the buffer (using
+the face ~org-link~).
+
+Yes!
+
+But, if the URL ~https://orgmode.org/worg/~ is used in a paragraph, it
+is a link.
+
+Yes!
+
+WHY?
+
+Because, while in both cases, in a property drawer and in a paragraph,
+the URL ~https://orgmode.org/worg/~ is matched by the regexp
+~org-link-any-re~:
+1) in a property drawer (specifically in a ~node-property~), the URL
+   ~https://orgmode.org/worg/~ is not parsed as a ~link~ object by
+   the Org parser (but only as the ~:value~ of the ~node-property~ object
+   containg it) and,
+2) in a paragraph, the URL ~https://orgmode.org/worg/~ is parsed as a
+   ~link~ object by the Org parser.
+
+THIS IS THE ORG PARSER THAT DICTATES THE RULES :)
+
+END!!!
+
+Maybe not.
+
+Let's build some examples to get an idea of this difference and what it
+implies.
+
+To falicilate our discussion let's call:
+
+1) R-LINKS the parts of an org-mode buffer that match the regexp
+   ~org-link-any-re~,
+2) P-LINKS the parts of an org-mode buffer that are parsed as ~link~
+   objects by the Org parser.
+
+In an org-mode buffer, the parts that match the regexp
+~org-link-any-re~, the R-LINKS, are all:
+1) "activated", meaning they have there text properties set by the
+   function ~org-activate-links~ (triggered by ~jit-lock~ mechanism),
+2) and depending on the place of the function ~org-activate-links~ in
+   the let binded list ~org-font-lock-extra-keywords~ in the function
+   ~org-set-font-lock-defaults~ (used to set font lock defaults for the
+   current buffer), the face of those parts is either the face
+   ~org-link~, another face or ~org-link~'s face merged with another
+   face.
+
+For instance, we can look at the text properties of the URL
+~https://orgmode.org/worg/~ used in different places (comment, property
+drawer and paragraph) in the following org-mode buffer:
+
+#+BEGIN_SRC org
+# Worg's URL in a comment: https://orgmode.org/worg/
+
+,* Heading
+:PROPERTIES:
+:MY_URL: https://orgmode.org/worg/
+:END:
+
+The same URL to Worg in a paragraph: https://orgmode.org/worg/.
+#+END_SRC
+
+by evaluating (with ~pp-eval-expression~) the form
+
+: (text-properties-at (point))
+
+with the point on top of each URL.
+
+We obtains the 3 following lists:
+
+#+BEGIN_SRC emacs-lisp
+;; URL in comment
+(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face font-lock-comment-face
+ org-category "links"
+ font-lock-fontified t
+ help-echo "LINK: https://orgmode.org/worg/"
+ fontified t
+ htmlize-link (:uri "https://orgmode.org/worg/"))
+
+;; URL in a property drawer
+(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face org-link
+ org-category "links"
+ help-echo "LINK: https://orgmode.org/worg/"
+ fontified t
+ htmlize-link (:uri "https://orgmode.org/worg/")
+ rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link))
+
+;; URL in a paragraph
+(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face org-link
+ org-category "links"
+ help-echo "LINK: https://orgmode.org/worg/"
+ fontified t
+ htmlize-link (:uri "https://orgmode.org/worg/")
+ rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link))
+#+END_SRC
+
+We observe that:
+
+1) those 3 URLs can be open with ~org-open-at-mouse~ by clicking
+   (with ~mouse-2~) them (due to the text property ~keymap~),
+2) when we over the mouse on them (the 3), we see the help echo
+   showing ~LINK: https://orgmode.org/worg/~,
+3) the face (with Emacs default settings) of the URL in the comment is
+   ~font-lock-comment-face~, and the face of the URL in the property
+   drawer and in the paragraph have the same value, the face
+   ~org-link~.
+
+Now, if we parse (with the Org parser) the same previous org-mode
+buffer by evaluating (with ~pp-eval-expression~) the form:
+
+: (org-element-parse-buffer)
+
+we obtain the following structure (some parts are skipped):
+
+#+BEGIN_SRC emacs-lisp
+(org-data
+ (...)
+ (section
+  (...)
+  (comment
+   (...
+    :value "Worg's URL in a comment: https://orgmode.org/worg/"
+    ...)))
+ (headline
+  (...)
+  (section
+   (...)
+   (property-drawer
+    (...)
+    (node-property
+     (:key "MY_URL"
+      :value "https://orgmode.org/worg/"
+      ...)))
+   (paragraph
+    (...)
+    #("The same URL to Worg in a paragraph: " 0 37 (:parent #3))
+    (link
+     (:type "https"
+      :path "//orgmode.org/worg/"
+      :format plain
+      :raw-link "https://orgmode.org/worg/"
+      :application nil
+      :search-option nil
+      ...))
+    #(".\n" 0 2 (:parent #3))))))
+#+END_SRC
+
+We observe that the only URL that is parsed as a ~link~ object is the
+URL inside the paragraph.  The others are values of the property
+~:value~ of a ~comment~ element for the first one and a ~node-property~
+element for the second one.
+
+So, some R-LINKS are not P-LINKS.
+
+Now, if we look at the function ~org-element-link-parser~
+
+#+BEGIN_SRC emacs-lisp
+(defun org-element-link-parser ()
+  "..."
+  (catch 'no-object
+    (let (...)
+      (cond
+       ((and org-target-link-regexp
+	           (save-excursion (or (bolp) (backward-char))
+			                       (looking-at org-target-link-regexp)))
+        ;; ...
+        )
+       ((looking-at org-link-bracket-re)
+        ;; ...
+        )
+       ((looking-at org-link-plain-re)
+        ;; ...
+        )
+       ((looking-at org-link-angle-re)
+        ;; ...
+        )
+       (t (throw 'no-object nil)))
+      (list 'link (list ...)))))
+#+END_SRC
+
+which is responsible to parse ~link~ objects, and we look at the function
+~org-link-make-regexps~ which is responsible to set the variable
+~org-link-any-re~ (among other link related variables):
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link-make-regexps ()
+  "..."
+  (let (...)
+    (setq
+     ;; ...
+     org-link-any-re (concat "\\(" org-link-bracket-re "\\)\\|\\("
+                             org-link-angle-re "\\)\\|\\("
+                             org-link-plain-re "\\)"))))
+#+END_SRC
+
+we see that, except for radio target links (~<<...>>~), P-LINKS are
+also R-LINKS.
+
+So someone who implements a command that operates on "links" must
+decide:
+
+1) whether the command is aimed at P-LINKS only (which is the case of
+   the command ~org-next-link~ bound by default to ~C-c C-x C-n~),
+2) or at all R-LINKS more broadly (which is the case of
+   ~org-open-at-point~ bound by default to ~C-c C-o~).
+
+We can check this by calling once the command ~org-next-link~ with the
+point at the beginning of the previous org-mode buffer.  We see that
+the point moves to the third URL in the buffer, the only one that is a
+P-LINK.
+
+And if we call the command ~org-open-at-point~ with the point on each
+URL, we see that the URL ~https://orgmode.org/worg/~ is open 3 times in
+our browser.  This is because the command ~org-open-at-point~ provides
+support for R-LINKS that are not P-LINKS.
+
+We can see this by looking at the source:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-open-at-point (&optional arg)
+  "..."
+  (interactive "P")
+  ;; ...
+  (unless (run-hook-with-args-until-success 'org-open-at-point-functions)
+    (let* ((context
+            (org-element-lineage
+             (org-element-context)
+             '(citation citation-reference clock comment comment-block
+                        footnote-definition footnote-reference headline
+                        inline-src-block inlinetask keyword link node-property
+                        planning src-block timestamp)
+             t))
+           (type (org-element-type context))
+           ...)
+      (cond
+       ((not type) (user-error "No link found"))
+       ;; No valid link at point.  For convenience, look if something
+       ;; looks like a link under point in some specific places.
+       ((memq type '(comment comment-block node-property keyword))
+        (call-interactively #'org-open-at-point-global))
+       ;; ...
+       ((eq type 'link) (org-link-open context arg))
+       ;; ...
+       (t (user-error "No link found")))))
+  (run-hook-with-args 'org-follow-link-hook))
+#+END_SRC
+
+Specifically, the command ~org-open-at-point~, for the R-LINKS that are
+part of one of the following org elements ~comment~, ~comment-block~,
+~node-property~, ~keyword~, delegate the action to the command
+~org-open-at-point-global~.
+
+If you want to know more about the command ~org-open-at-point~ you can
+read this post: [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
+
+WE ARE DONE!!!
 
 * [2022-04-04 Mon] Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
