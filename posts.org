@@ -42,7 +42,8 @@ WHY?
 
 Because, while in both cases, in a property drawer and in a paragraph,
 the URL ~https://orgmode.org/worg/~ is matched by the regexp
-~org-link-any-re~:
+[[org-mode:lisp/ol.el::(defvar org-link-any-re nil][org-link-any-re]]:
+
 1) in a property drawer (specifically in a ~node-property~), the URL
    ~https://orgmode.org/worg/~ is not parsed as a ~link~ object by
    the Org parser (but only as the ~:value~ of the ~node-property~ object
@@ -62,17 +63,18 @@ implies.
 To falicilate our discussion let's call:
 
 1) R-LINKS the parts of an org-mode buffer that match the regexp
-   ~org-link-any-re~,
+   [[org-mode:lisp/ol.el::(defvar org-link-any-re nil][org-link-any-re]],
 2) P-LINKS the parts of an org-mode buffer that are parsed as ~link~
    objects by the Org parser.
 
 In an org-mode buffer, the parts that match the regexp
-~org-link-any-re~, the R-LINKS, are all:
+[[org-mode:lisp/ol.el::(defvar org-link-any-re nil][org-link-any-re]], the R-LINKS, are all:
+
 1) "activated", meaning they have there text properties set by the
-   function ~org-activate-links~ (triggered by ~jit-lock~ mechanism),
-2) and depending on the place of the function ~org-activate-links~ in
+   function [[org-mode:lisp/org.el::(defun org-activate-links (limit][org-activate-links]] (triggered by ~jit-lock~ mechanism),
+2) and depending on the place of the function [[org-mode:lisp/org.el::(defun org-activate-links (limit][org-activate-links]] in
    the let binded list ~org-font-lock-extra-keywords~ in the function
-   ~org-set-font-lock-defaults~ (used to set font lock defaults for the
+   [[org-mode:lisp/org.el::(defun org-set-font-lock-defaults (][org-set-font-lock-defaults]] (used to set font lock defaults for the
    current buffer), the face of those parts is either the face
    ~org-link~, another face or ~org-link~'s face merged with another
    face.
@@ -146,7 +148,7 @@ We obtains the 3 following lists:
 
 We observe that:
 
-1) those 3 URLs can be open with ~org-open-at-mouse~ by clicking
+1) those 3 URLs can be open with [[org-mode:lisp/org.el::(defun org-open-at-mouse (ev][org-open-at-mouse]] by clicking
    (with ~mouse-2~) them (due to the text property ~keymap~),
 2) when we over the mouse on them (the 3), we see the help echo
    showing ~LINK: https://orgmode.org/worg/~,
@@ -202,7 +204,7 @@ element for the second one.
 
 So, some R-LINKS are not P-LINKS.
 
-Now, if we look at the function ~org-element-link-parser~
+Now, if we look at the function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]]
 
 #+BEGIN_SRC emacs-lisp
 (defun org-element-link-parser ()
@@ -229,8 +231,8 @@ Now, if we look at the function ~org-element-link-parser~
 #+END_SRC
 
 which is responsible to parse ~link~ objects, and we look at the function
-~org-link-make-regexps~ which is responsible to set the variable
-~org-link-any-re~ (among other link related variables):
+[[org-mode:lisp/ol.el::(defun org-link-make-regexps (][org-link-make-regexps]] which is responsible to set the variable
+[[org-mode:lisp/ol.el::(defvar org-link-any-re nil][org-link-any-re]] (among other link related variables):
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link-make-regexps ()
@@ -250,18 +252,18 @@ So someone who implements a command that operates on "links" must
 decide:
 
 1) whether the command is aimed at P-LINKS only (which is the case of
-   the command ~org-next-link~ bound by default to ~C-c C-x C-n~),
+   the command [[org-mode:lisp/ol.el::(defun org-next-link (&optional search-backward][org-next-link]] bound by default to ~C-c C-x C-n~),
 2) or at all R-LINKS more broadly (which is the case of
-   ~org-open-at-point~ bound by default to ~C-c C-o~).
+   [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] bound by default to ~C-c C-o~).
 
-We can check this by calling once the command ~org-next-link~ with the
+We can check this by calling once the command [[org-mode:lisp/ol.el::(defun org-next-link (&optional search-backward][org-next-link]] with the
 point at the beginning of the previous org-mode buffer.  We see that
 the point moves to the third URL in the buffer, the only one that is a
 P-LINK.
 
-And if we call the command ~org-open-at-point~ with the point on each
+And if we call the command [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] with the point on each
 URL, we see that the URL ~https://orgmode.org/worg/~ is open 3 times in
-our browser.  This is because the command ~org-open-at-point~ provides
+our browser.  This is because the command [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] provides
 support for R-LINKS that are not P-LINKS.
 
 We can see this by looking at the source:
@@ -295,12 +297,13 @@ We can see this by looking at the source:
   (run-hook-with-args 'org-follow-link-hook))
 #+END_SRC
 
-Specifically, the command ~org-open-at-point~, for the R-LINKS that are
+Specifically, the command [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]], for the R-LINKS that are
 part of one of the following org elements ~comment~, ~comment-block~,
 ~node-property~, ~keyword~, delegate the action to the command
-~org-open-at-point-global~.
+[[org-mode:lisp/org.el::defun org-open-at-point-global (][org-open-at-point-global]].
 
-If you want to know more about the command ~org-open-at-point~ you can
+
+If you want to know more about the command [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] you can
 read this post: [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
 
 WE ARE DONE!!!
