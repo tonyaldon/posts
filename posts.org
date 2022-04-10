@@ -4213,7 +4213,7 @@ prints out the following into the message buffer:
 
 What we want to accomplish here is to jump to the definition of a
 noweb block, let's say ~my-noweb~, by calling a command (maybe
-~org-open-at-point~) when the point is on a reference ~<<my-noweb>>~ of
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]]) when the point is on a reference ~<<my-noweb>>~ of
 that block, for instance in an org buffer with the following content:
 
 #+BEGIN_SRC org
@@ -4256,7 +4256,7 @@ want) we can add this command to the variable
 ~org-open-at-point-functions~.
 
 And, now in a source block with the point on top of a noweb reference,
-we can call ~org-open-at-point~ (~C-c C-o~ by default) which will call
+we can call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (~C-c C-o~ by default) which will call
 this new command and jump to the noweb block definition at point
 (instead of running ~org-babel-open-src-block-result~).
 
