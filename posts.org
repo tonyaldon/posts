@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-09 Sat 08:42>
+#+DATE: <2022-04-13 Wed 18:21>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,355 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-13 Wed] Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-13-cath-throw-pattern-in-emacs-source-code/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/
+:COMMIT_EMACS: cca47ae555bfddf87b4871988555738c335f8457
+:END:
+
+Hey Elispers,
+
+Do you want to expand your Elisp toolbox?
+
+In this post we look at the ~catch/throw~ pattern offered by Elisp that
+allows to do nonlocal exits with the function ~throw~ that can be caught
+by the ~catch~ special form.
+
+For instance, in the following snippet, in a ~catch~ block:
+
+1) we define a local list ~l~,
+2) then we loop forever (~(while t ...)~),
+3) in this loop we generate a random (integer) number between ~0~ and ~9~,
+4) then:
+   - if this number is not equal to ~1~, we add it to the list ~l~ and we
+     repeat,
+   - and if it is equal to ~1~, the ~throw~ statement transfers the
+     control to the enclosing ~catch~ with the tag ~:one~ (we leave out
+     the ~while~ loop and also the ~let~ block) which returns immediately
+     the builded list ~l~ (last argument of the ~throw~ statement).
+
+#+BEGIN_SRC emacs-lisp
+(catch :one
+  (let (l)
+    (while t
+      (setq k (random 10))
+      (if (/= k 1) (push k l)
+        (throw :one l)))))
+;; (5 3 8 8 0 3)
+;; these are pseudo-random numbers that depend on the seed
+;; used by `random' on your running Emacs, so evaluting the
+;; preceding form can return something different on your machine.
+#+END_SRC
+
+Handmade examples are effective for discovering new things or
+remembering the syntax of known things.
+
+But when we have to write programs that solve "real" problems, having
+already been exposed to REAL WORLD examples is a competitive advantage.
+
+Indeed, REAL WORLD examples often provide "standard methods" to
+implement specific actions/tasks in given "environments".
+
+In this post, we first present some handmade examples of the
+~catch/throw~ pattern and then we look at REAL WORLD examples of the
+~catch/throw~ pattern that we find in Emacs source code.
+
+Let's go!
+
+** The catch/throw pattern: handmade examples
+
+In the info node about ~catch~ and ~throw~ (~M-x eval-expression RET (info
+"(elisp)Catch and Throw")~), we can read:
+
+#+BEGIN_SRC text
+Most control constructs affect only the flow of control within the
+construct itself.  The function ‘throw’ is the exception to this rule of
+normal program execution: it performs a nonlocal exit on request.
+(There are other exceptions, but they are for error handling only.)
+‘throw’ is used inside a ‘catch’, and jumps back to that ‘catch’.
+#+END_SRC
+
+So with ~throw~ inside ~catch~ we can modify the flow of control.
+
+Let's see how with the following examples.
+
+We don't provide any explanation hoping that the evaluations in
+comments show how the flow of control has been modified.
+
+Note that if you read this post inside Emacs with org-mode, you can
+hit ~C-c '~ (~org-edit-special~ by default) in the source block to
+open a dedicated ~emacs-lisp~ buffer where you can modify and evaluate
+the examples the way you want as much as you need to be confident
+about ~catch~ and ~throw~.
+
+#+BEGIN_SRC emacs-lisp
+(catch :foo
+  'evaluated
+  (throw :foo (+ 2 2))
+  'not-evaluated) ; 4
+
+(catch :foo
+  (let ((a-value (+ 3 3)))
+    'evaluated
+    (throw :foo a-value)
+    'not-evaluated)) ; 6
+
+(catch 'foo
+  'evaluated
+  (throw 'foo 'from-throw)
+  'not-evaluated) ; from-throw
+
+(let ((tag-catch 'foo)
+      (tag-throw 'foo))
+  (catch tag-catch
+    'evaluated
+    (throw tag-throw 'from-throw)
+    'not-evaluated)) ; from-throw
+
+(catch 'foo
+  'evaluated-1
+  (when nil (throw 'foo 'from-throw))
+  'evaluated-2) ; evaluated-2
+
+;; nested `catch'
+(catch 'foo
+  'evaluated-1
+  (catch 'bar
+    'evaluated-2
+    (throw 'foo 'from-throw)
+    'not-evaluated)
+  'not-evaluated) ; from-throw
+
+(catch 'foo
+  'evaluated-1
+  (catch 'bar
+    'evaluated-2
+    (throw 'bar 'from-throw)
+    'not-evaluated)
+  'evaluated-3) ; evaluated-3
+
+;; `throw' called from another function
+(let ((f-throw (lambda (x) (throw :foo x))))
+  (catch :foo (funcall f-throw :bar))) ; :bar
+
+;; raise an error
+(catch 'foo
+  'evaluated
+  (throw 'bar t)
+  'not-evaluated) ; error: (no-catch bar t)
+#+END_SRC
+
+** The catch/throw pattern: real world examples
+
+There are more than 1000 ~catch~ blocks in Emacs source code.
+
+Let's pick some of them that seems to represent in some way the
+"common" usage of ~catch~ blocks.
+
+Almost all those ~catch~ blocks follow the same structure:
+
+1) enter in a ~catch~ block,
+2) loop (either by iterating on a structure or by "traversing" a
+   buffer),
+3) for each iteration test something and decide if iterate or ~throw~,
+4) if thrown in the loop, leave the ~catch~ block and return the value
+   passed to the ~throw~ statement, if ended the loop normally, evaluate
+   the last parts of the ~catch~ block and return the last one.
+
+*** With ~dolist~
+
+Sometimes, we want to loop over a list and if some "conditions" are
+verified for an item, we want to return without looping over the rest
+of the list.
+
+This can be done in a ~catch~ block using ~dolist~ with a structure
+similar to this one:
+
+#+BEGIN_SRC emacs-lisp
+(catch :tag
+  (dolist (...)
+    ...
+    (when some-condition-is-true
+      (throw :tag 'some-value)))
+  ...)
+#+END_SRC
+
+We encounter this pattern in the function
+~emacs-lock--exit-locked-buffer~ that returns the first exit-locked
+buffer found in the list of all live buffers ~(buffer-list)~:
+
+#+BEGIN_SRC emacs-lisp
+(defun emacs-lock--exit-locked-buffer ()
+  "Return the first exit-locked buffer found."
+  (save-current-buffer
+    (catch :found
+      (dolist (buffer (buffer-list))
+        (set-buffer buffer)
+        (unless (or (emacs-lock--can-auto-unlock 'exit)
+                    (memq emacs-lock-mode '(nil kill)))
+          (throw :found buffer)))
+      nil)))
+#+END_SRC
+
+We also encounter this pattern in the function ~handle-delete-frame~
+that handles delete-frame events from the X server.  This function
+looks for a "valid frame" (among other stuff being different from the
+frame where the X event occured) in the list of frames returned by
+~(frame-list)~ in order to decide if it is safe to delete the frame
+where the X event occured with ~delete-frame~ or if it is better to call
+the function ~save-buffers-kill-emacs~:
+
+#+BEGIN_SRC emacs-lisp
+(defun handle-delete-frame (event)
+  "Handle delete-frame events from the X server."
+  (interactive "e")
+  (let* ((frame (posn-window (event-start event))))
+    (if (catch 'other-frame
+          (dolist (frame-1 (frame-list))
+            ;; A valid "other" frame is visible, has its `delete-before'
+            ;; parameter unset and is not a child frame.
+            (when (and (not (eq frame-1 frame))
+                       (frame-visible-p frame-1)
+                       (not (frame-parent frame-1))
+                       (not (frame-parameter frame-1 'delete-before)))
+              (throw 'other-frame t))))
+        (delete-frame frame t)
+      ;; xxx says it is ok to ask questions before terminating.
+      (save-buffers-kill-emacs))))
+#+END_SRC
+
+Note that ~handle-delete-frame~ is bound to the event ~delete-frame~ in
+the keymap ~special-event-map~.
+
+Now, let's have a look on the function ~newsticker--icon-read~.  This
+function is defined in the file ~lisp/net/newst-reader.el~ part of the
+package ~newsticker.el~ which is from its description section:
+
+#+BEGIN_SRC text
+... an "Atom aggregator", "RSS reader", "RSS aggregator", and "Feed Reader".
+#+END_SRC
+
+We did not choose this function for the service it provides to the
+package ~newsticker.el~ but because it is an interesting example
+dealing with two types of "controlled" nonlocal exits:
+
+1) a nonlocal exit generated by ~throw~ and handled by ~catch~ and,
+2) a nonlocal exit due to an error that can occur in a function
+   (specifically ~create-image~) and handled by ~condition-case~.
+
+This function can be seen as a direct application of the material in
+the info node (~M-x eval-expression RET (info "(elisp)Nonlocal Exits")~).
+
+The function ~newsticker--icon-read~ takes an icon name as input, try to
+create and return an Emacs image for that icon looking for the image
+from the disk in the user newsticker directory, and if it can't
+(because it doesn't exist or it fails at creating the corresponding
+image) it returns a default image provided by Emacs distribution:
+
+#+BEGIN_SRC emacs-lisp
+(defun newsticker--icon-read (feed-name-symbol)
+  "Read the cached icon for FEED-NAME-SYMBOL from disk.
+Return the image."
+  (catch 'icon
+    (when (file-exists-p (newsticker--icons-dir))
+      (dolist (file (directory-files (newsticker--icons-dir) t
+                             (concat (symbol-name feed-name-symbol) "\\..*")))
+        (condition-case error-data
+            (throw 'icon (create-image
+                          file (and (fboundp 'imagemagick-types)
+                                    (imagemagick-types)
+                                    'imagemagick)
+                          nil
+                          :ascent 'center
+                          :max-width 16
+                          :max-height 16))
+          (error
+           (message "Error: cannot create icon for %s: %s"
+                    feed-name-symbol error-data)))))
+    ;; Fallback: default icon.
+    (find-image '((:type png :file "newsticker/rss-feed.png" :ascent center)))))
+#+END_SRC
+
+Leaving out the details of this function, we can extract a simplified
+scheme, that says:
+
+1) in a ~catch~ block, if the directory ~dir~ doesn't exist, return a
+   default image, if it exists loop over all the files in the
+   directory ~dir~,
+2) in the loop, for each file try to create an image using that file, if
+   it fails, log the error in the message buffer, if it succeeds,
+   throw to the ~catch~ for the tag ~icon~ and return the created image
+   from the ~catch~:
+
+#+BEGIN_SRC emacs-lisp
+(catch 'icon
+  (when (file-exists-p dir)
+    (dolist (file (directory-files dir))
+      (condition-case err
+          (throw 'icon (create-image file ...))
+        (error (message "%s: %s" file err)))))
+  (find-image ...))
+#+END_SRC
+
+*** With ~re-search-forward~
+
+In Org related packages, a technique used to find something in the
+buffer is to:
+
+1) search in the buffer some part that match some regexp (with
+   ~re-search-forward~),
+2) when we find that part, extract the information available at point
+   (specifically we get it with ~org-element-at-point~),
+3) check some conditions on the element we've parsed,
+4) depending on the result of the previous check, we continue the
+   search in the buffer or we ~throw~ and return some result.
+
+This technique can be done with some code similar to this snippet:
+
+#+BEGIN_SRC emacs-lisp
+(let ((case-fold-search t)
+      (re ...))
+  (catch :tag
+    (while (re-search-forward re nil t)
+      (let ((element (org-element-at-point)))
+        (when ...
+          (throw :tag ...))))))
+#+END_SRC
+
+We encounter this pattern in the following functions
+~org-log-beginning~, ~org-babel-ref-resolve~ and ~org-columns-get-format~.
+
+We reproduce below the source code of ~org-babel-find-named-result~
+which also uses that technique but enclosed in a ~save-excursion~ that
+saves the point and current buffer, execute what's in the body and
+restores those things:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-babel-find-named-result (name)
+  "Find a named result.
+Return the location of the result named NAME in the current
+buffer or nil if no such result exists."
+  (save-excursion
+    (goto-char (point-min))
+    (let ((case-fold-search t)
+          (re (format "^[ \t]*#\\+%s.*?:[ \t]*%s[ \t]*$"
+                      org-babel-results-keyword
+                      (regexp-quote name))))
+      (catch :found
+        (while (re-search-forward re nil t)
+          (let ((element (org-element-at-point)))
+            (when (or (eq (org-element-type element) 'keyword)
+                      (< (point)
+                         (org-element-property :post-affiliated element)))
+              (throw :found (line-beginning-position)))))))))
+#+END_SRC
+
+The same technique is also used but backward using ~re-search-backward~
+like in the function ~org-refresh-category-properties~.
+
+WE ARE DONE!!!
 
 * [2022-04-09 Sat] Did you know that Org links in property drawers are not links?
 :PROPERTIES:
