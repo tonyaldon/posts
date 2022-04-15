@@ -25,6 +25,7 @@ git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 * Read the posts on Reddit
 
+- [2022-04-13 Wed] [[https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/][Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code]]
 - [2022-04-09 Sat] [[https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/][Did you know that Org links in property drawers are not links?]]
 - [2022-04-04 Mon] [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
 - [2022-03-22 Tue] [[https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/][Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command]]
