@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-13 Wed 18:21>
+#+DATE: <2022-04-15 Fri 18:44>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,306 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-15 Fri] ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-15-ripgrep-emacs-rg-el/
+:COMMIT_EMACS: 504779f744ccc33c2177dafa34e21d83f6c640a0
+:END:
+
+Hey Emacsers,
+
+~rg.el~ is an Emacs UI for the cli ~ripgrep~.
+
+What does that mean?
+
+Well...
+
+Let's say we want to learn how to write Elisp macros because it seems
+to fit with the problem we are facing.  We've already read the info
+node about macros (~M-x eval-expression RET (info "(elisp)Macros")~)
+that contains many examples but we want more examples.
+
+We know that macros are defined with the macro ~defmacro~, so why don't
+we search for calls of ~defmacro~ in Emacs source code to get usage
+examples of it?
+
+In the directory where we've cloned Emacs source code we can run the
+following command line (in a terminal) that searches directories for
+the regexp ~\(defmacro~ that are of type ~elisp~, while respecting
+gitignore using ~ripgrep~ (the binary ~rg~):
+
+#+BEGIN_SRC bash
+rg '\(defmacro' -t elisp
+#+END_SRC
+
+This prints the following in the standard output:
+
+#+BEGIN_SRC text
+admin/cus-test.el
+304:(defmacro cus-test-load-1 (&rest body)
+
+lisp/align.el
+1260:(defmacro align--set-marker (marker-var pos &optional type)
+
+lisp/custom.el
+231:(defmacro defcustom (symbol standard doc &rest args)
+389:(defmacro defface (face spec doc &rest args)
+492:(defmacro defgroup (symbol members doc &rest args)
+1139:(defmacro deftheme (theme &optional doc)
+
+... MORE HITS HERE
+#+END_SRC
+
+Now, you do whatever you want with those matches in the terminal.  You
+can browse the ouptut looking for some information, chose a match, the
+open the corresponding file and go to the appropriate line.
+
+Everything in the terminal...
+
+OR, you can use ~rg.el~ and use its command ~rg~ like this:
+
+1) ~M-x rg~,
+2) write the regexp: ~\(defmacro~,
+3) select the directory where Emacs source code is,
+4) choose ~elisp~ as type file,
+
+and you get the following buffer named ~*rg*~ (in the mode ~rg-mode~) with
+exactly the same matches as before with the command line:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 16:56:04
+
+/usr/bin/rg [...]
+
+File: admin/cus-test.el
+ 304  (defmacro cus-test-load-1 (&rest body)
+
+File: lisp/align.el
+1260  (defmacro align--set-marker (marker-var pos &optional type)
+
+File: lisp/custom.el
+ 231  (defmacro defcustom (symbol standard doc &rest args)
+ 389  (defmacro defface (face spec doc &rest args)
+ 492  (defmacro defgroup (symbol members doc &rest args)
+1139  (defmacro deftheme (theme &optional doc)
+
+... MORE HITS HERE
+#+END_SRC
+
+The difference is that now you can press (the bindings are defined in
+~rg-mode-map~):
+
+1) ~n~ (bound ~next-error-no-select~) to move to the next line with a
+   match, show that file in other buffer and highlight the match,
+2) ~p~ (bound ~previous-error-no-select~) move to the previous line with a
+   match, show that file in other buffer and highlight the match.
+
+isn't FANTASTIC?
+
+Assuming that we've look at some macro definitions, and we've seen
+that the file ~lisp/subr.el~ defines many of the macros that we have
+already used in our own code like ~push~, ~pop~ and ~when~.  Maybe to reduce
+the numbers of macro to look at (~1505~ calls to ~defmacro~ - commit
+~504779f744ccc33c2177dafa34e21d83f6c640a0~) we can consider only those
+defined in the file ~lisp/subr.el~.
+
+This can be done by modifying a little bit the previous command line
+like this:
+
+#+BEGIN_SRC bash
+rg '\(defmacro' lisp/subr.el
+#+END_SRC
+
+But, now that we are using ~rg.el~ (INSIDE EMACS) we no longer want to
+use directly the terminal for that task.
+
+So, we go back to the buffer ~*rg*~ and we press ~f~ (bound to
+~rg-rerun-change-files~) and we write ~subr.el~ (the last part of the file
+name), then we press ~RET~ to rerun ~rg~ with the same regexp as before
+(~\(defmacro~), but this time, only matches in the file ~lisp/subr.el~ are
+presented in the buffer ~*rg*~:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 17:29:43
+
+/usr/bin/rg [...]
+
+File: lisp/subr.el
+  32  (defmacro declare-function (_fn _file &rest _args)
+  74  (defmacro noreturn (form)
+  81  (defmacro 1value (form)
+  88  (defmacro def-edebug-spec (symbol spec)
+ 110  (defmacro lambda (&rest cdr)
+ 136  (defmacro prog2 (form1 form2 &rest body)
+ 143  (defmacro setq-default (&rest args)
+ 163  (defmacro setq-local (&rest pairs)
+ 193  (defmacro defvar-local (var val &optional docstring)
+ 210  (defmacro push (newelt place)
+ 225  (defmacro pop (place)
+ 243  (defmacro when (cond &rest body)
+
+... MORE HITS HERE
+#+END_SRC
+
+Now we've reduce our study of writing macros to 52 "classic" macros.
+Still as before, we can use ~n~ and ~p~ to look at those macro definition
+from ~*rg*~ buffer, the definition poping up in another buffer.  For me,
+this is insane.  I love it.
+
+But 52 is still an important number.  We want to look at some macro
+definitions to be able to write our own macro.  We need it.  Let's
+almost right now.
+
+Well...
+
+Let's reduce that number.  We observe that the file ~lisp/subr.el~
+defines also the macro ~with-current-buffer~ and ~with-temp-buffer~ (used
+everywhere).
+
+So, we decide to only look at the macro prefixed by ~with-~ defined in
+the file ~lisp/subr.el~.
+
+We can do it in the terminal running this command:
+
+#+BEGIN_SRC bash
+rg '\(defmacro with' lisp/subr.el
+#+END_SRC
+
+but we prefer doing it with ~rg.el~.  So we go back to the buffer ~*rg*~,
+and now we press ~r~ (bound to ~rg-rerun-change-regexp~).  This offers in
+the minibuffer to modify the current regexp ~\(defmacro~.  We modify it
+to be ~\(defmacro with~, we hit return, and we get the following 20
+matches:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 17:49:57
+
+/usr/bin/rg [...]
+
+File: lisp/subr.el
+2092  (defmacro with-wrapper-hook (hook args &rest body)
+3448  (defmacro with-undo-amalgamate (&rest body)
+4188  (defmacro with-current-buffer (buffer-or-name &rest body)
+4228  (defmacro with-selected-window (window &rest body)
+4253  (defmacro with-selected-frame (frame &rest body)
+4331  (defmacro with-output-to-temp-buffer (bufname &rest body)
+4387  (defmacro with-temp-file (file &rest body)
+4407  (defmacro with-temp-message (message &rest body)
+4430  (defmacro with-temp-buffer (&rest body)
+4445  (defmacro with-silent-modifications (&rest body)
+4469  (defmacro with-output-to-string (&rest body)
+4481  (defmacro with-local-quit (&rest body)
+4549  (defmacro with-demoted-errors (format &rest body)
+4712  (defmacro with-case-table (table &rest body)
+4726  (defmacro with-file-modes (modes &rest body)
+4738  (defmacro with-existing-directory (&rest body)
+5297  (defmacro with-eval-after-load (file &rest body)
+5417  (defmacro with-syntax-table (table &rest body)
+6384  (defmacro with-mutex (mutex &rest body)
+6570  (defmacro with-delayed-message (args &rest body)
+#+END_SRC
+
+We can now look at those definition trying to understand how macros
+are defined and how we can find ideas to solve our problem (either by
+writing our macro our deciding that a simple function might be
+enough...)
+
+While we are looking at those macro prefixed by ~with-~, we remember
+that we've seen another macro in another file that was matched in the
+previous search and so visible in the "previous" contents of ~*rg*~
+buffer, and we want to look for it.
+
+Do we have to redo everything (~M-x rg~, ....)?
+
+Absolutely not!
+
+Still in the buffer ~*rg*~ we can just visit backward and forward the
+previous searches using ~C-c <~ (bound to ~rg-forward-history~) and ~C-c >~
+(bound to ~rg-back-history~).
+
+Another mega cool feature of ~ripgrep~ is the flag ~--context~ (~-C~ in
+short) that allows to include a number of lines before and after each
+matches.
+
+For instance, if we want to add 2 lines before and after the matches
+of the regexp ~\(defmacro with~ in the file ~lisp/subr.el~, in the
+terminal we can run the following command:
+
+#+BEGIN_SRC bash
+rg --context 2 '\(defmacro with' lisp/subr.el
+#+END_SRC
+
+We can also do this with ~rg.el~.  Let's go back to the buffer ~*rg*~
+(with the search that matches ~\(defmacro with~ in the file
+~lisp/subr.el~). Now we do the following:
+
+1) we press ~m~ (bound to ~rg-menu~) that pops up a menu,
+2) we press ~-C~,
+3) then in the minibuffer we see ~--context=~, we write ~2~ and press ~RET~,
+4) then we press ~g~ (bound to ~rg-recompile~),
+
+and this "reruns" the search adding the context around matches like
+this:
+
+#+BEGIN_SRC text
+File: lisp/subr.el
+2090-
+2091-
+2092  (defmacro with-wrapper-hook (hook args &rest body)
+2093-  "Run BODY, using wrapper functions from HOOK with additional ARGS.
+2094-HOOK is an abnormal hook.  Each hook function in HOOK \"wraps\"
+--
+3446-	   (cancel-change-group ,handle))))))
+3447-
+3448  (defmacro with-undo-amalgamate (&rest body)
+3449-  "Like `progn' but perform BODY with amalgamated undo barriers.
+3450-
+--
+4186-  `(internal--track-mouse (lambda () ,@body)))
+4187-
+4188  (defmacro with-current-buffer (buffer-or-name &rest body)
+4189-  "Execute the forms in BODY with BUFFER-OR-NAME temporarily current.
+4190-BUFFER-OR-NAME must be a buffer or the name of an existing buffer.
+--
+4226-  (get-buffer-create (generate-new-buffer-name name) inhibit-buffer-hooks))
+4227-
+4228  (defmacro with-selected-window (window &rest body)
+4229-  "Execute the forms in BODY with WINDOW as the selected window.
+4230-The value returned is the value of the last form in BODY.
+--
+
+... MORE HITS HERE
+#+END_SRC
+
+When I think that life is amazing and then I look at all the work
+that has already been done everywhere, I think wowwww, this is really
+amazing.
+
+I want to thank you all for all the great programs that lives with
+us thanks to your imagination and your work.
+
+~ripgrep~ is fantastic.  ~Emacs~ is fantastic.  BOOM you get the fantastic
+~rg.el~.
+
+What can we add to this paradise?
+
+We can add org-mode to the party.
+
+Yes, if you try to open the following org link (in a org-mode buffer),
+Emacs will ask you to confirm if you want to execute this elisp form,
+and by answering yes the result of an ~rg~ search will pops up in ~*rg*~
+buffer like we did previously (assuming Emacs source code is clone
+under the directory ~/tmp/emacs/~):
+
+#+BEGIN_SRC org
+[[elisp:(rg-run "\\(defmacro with" "subr.el" "/tmp/emacs/" nil nil '("--context=2"))]]
+#+END_SRC
+
+WE ARE DONE!!!
 
 * [2022-04-13 Wed] Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
 :PROPERTIES:
