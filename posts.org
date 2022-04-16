@@ -13,15 +13,18 @@
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
 
-* [2022-04-15 Fri] ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
+* [2022-04-15 Fri] Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-15-ripgrep-emacs-rg-el/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/u4c5rc/ripgrep_is_fantastic_emacs_is_fantastic_boom_you/
 :COMMIT_EMACS: 504779f744ccc33c2177dafa34e21d83f6c640a0
 :END:
 
 Hey Emacsers,
 
-~rg.el~ is an Emacs UI for the cli ~ripgrep~.
+Do you know ~rg.el~?
+
+[[https://github.com/dajva/rg.el][rg.el]] is an Emacs UI for the cli [[https://github.com/BurntSushi/ripgrep][ripgrep]].
 
 What does that mean?
 
