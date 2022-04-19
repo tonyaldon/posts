@@ -16,6 +16,7 @@
 * [2022-04-19 Tue] If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/
 :COMMIT_ORG_MODE: 685d78f63cbe210448508b23c0b47d7be70aedfb
 :END:
 
