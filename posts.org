@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-15 Fri 18:44>
+#+DATE: <2022-04-19 Tue 08:17>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,369 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-19 Tue] If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/
+:COMMIT_ORG_MODE: 685d78f63cbe210448508b23c0b47d7be70aedfb
+:END:
+
+Hey Emacsers,
+
+Have you ever needed to rename a function that appears in several files?
+
+Let's see how we can do this with Emacs.
+
+In the post [[#/2022-04-15-ripgrep-emacs-rg-el/][the fantastic rg.el]], we've seen that ~rg.el~ is a nice Emacs
+interface to the cli ~ripgrep~ which lets us do searches for regexp in
+files interactively with ~rg~ command, get the results in a dedicated
+buffer ~*rg*~ (by default), browse those matches, modify the searches
+parameters and modify the matched regexps, all from within the
+dedicated buffer ~*rg*~.
+
+In this post we see how to rename interactively a function that
+appears in several files using [[https://github.com/dajva/rg.el][rg.el]] and [[https://github.com/mhayashi1120/Emacs-wgrep][wgrep]]!
+
+Let's go ;)
+
+** Initial state
+
+Let assume that we are working on the ~org-mode~ code base
+
+: git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+
+and we want to rename the function ~org-link-expand-abbrev~ (that
+replaces link abbreviations in a given org link, read its [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/#org-link-expand-abbrev][dedicated
+section]] in the post [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][search options and link abbreviations]] for more
+details) into ~org-link-RENAMED~ like this:
+
+: org-link-expand-abbrev  ->  org-link-RENAMED
+
+We use ~git~ (in a terminal) to "monitor" our changes in the code base
+and to revert back to the initial state at the end of this
+"demonstration".
+
+First, running ~git status~ tells us that we are on the branch ~main~, we
+have nothing to commit and our working tree is clean:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git status
+#+END_SRC
+
+prints:
+
+#+BEGIN_SRC text
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+#+END_SRC
+
+We can obtain the current commit (on which I'm running the example,
+your ouptuts might differ a little bit if you're checked out at
+another commit) by running this following command:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git rev-parse --short HEAD
+#+END_SRC
+
+that prints:
+
+#+BEGIN_SRC text
+685d78f63
+#+END_SRC
+
+Now that we are clear about the initial state, we can continue.
+
+** Call ~wgrep-change-to-wgrep-mode~, make changes and abort changes with ~wgrep-abort-changes~
+
+Let's search for the regexp ~org-link-expand-abbrev~ (that exactly matches
+the string ~org-link-expand-abbrev~) in ~org-mode~ directory using ~rg.el~:
+
+1) ~M-x rg~,
+2) write ~org-link-expand-abbrev~,
+3) select the directory where ~org-mode~ source code is,
+4) choose ~all~ as type file.
+
+We get the following buffer named ~*rg*~ (in the mode ~rg-mode~) that
+shows that we've matched ~org-link-expand-abbrev~ twice, once in the
+file [[org-mode:lisp/ol.el]] and once in the file
+[[org-mode:lisp/org-element.el]]:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-expand-abbrev (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-expand-abbrev
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59
+#+END_SRC
+
+Now in the buffer ~*rg*~, we press ~e~ (bound to
+~wgrep-change-to-wgrep-mode~) and two things happens:
+
+1) the matched lines are now editable in the buffer ~*rg*~ and,
+2) the keymap ~wgrep-mode-map~ becomes the local map.
+
+Then, in ~*rg*~ buffer, we transform ~org-link-expand-abbrev~ into
+~org-link-RENAMED~ the way we prefer (we have all the Emacs power, some
+of us might use ~query-replace~, other might use [[https://github.com/magnars/multiple-cursors.el][multiple-cursors.el]],
+other [[https://github.com/victorhge/iedit][iedit]], etc.).  And so ~*rg*~ buffer looks like this:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-RENAMED (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-RENAMED
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59
+#+END_SRC
+
+Now that we've finished editing the buffer ~*rg*~, we change our mind
+and finally decide that we no longer want to apply those changes to
+the corresponding files.
+
+No problem, we just have to hit ~C-c C-k~ (bound to ~wgrep-abort-changes~)
+to abort the changes. We're back to the "normal" ~*rg*~ buffer where
+nothing is editable and none of our changes have been taken into
+account:
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-expand-abbrev (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-expand-abbrev
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59
+#+END_SRC
+
+At that point maybe you should (must) stop me and ask:
+
+#+BEGIN_SRC text
+Are we really 'back to normal'?
+How can I be sure that my files haven't been compromised?
+Could you prove it?
+#+END_SRC
+
+As we started with a clean working tree in a ~git~ repository with
+nothing to commit, we just have to run the command:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git status
+#+END_SRC
+
+that prints:
+
+#+BEGIN_SRC text
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+#+END_SRC
+
+This way, we can be sure that none of our files have been modified.
+
+Note that when we are editing the buffer ~*rg*~, until we explicitly
+run a command (like ~wgrep-abort-changes~) of ~wgrep~ package, nothing is
+reflected in the file system (neither in the buffers that are visiting
+files that could be modified by ~wgrep~, for instance in our case
+[[org-mode:lisp/ol.el]] and [[org-mode:lisp/org-element.el]]).
+
+** Changes applied to the file system: ~wgrep-finish-edit~ and ~wgrep-save-all-buffers~
+
+Now, let's modify again the ~*rg*~ buffer, the same way as before
+(starting by pressing ~e~ (bound to ~wgrep-change-to-wgrep-mode~) to make
+the buffer editable):
+
+#+BEGIN_SRC text
+-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-RENAMED (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-RENAMED
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59
+#+END_SRC
+
+This time we want to save those changes in the buffer ~*rg*~ and want
+to see them reflected in the corresponding files.
+
+To do so, we press ~C-x C-s~ (bound to ~wgrep-finish-edit~) and we see in
+the echo area:
+
+: Successfully finished. (2 changed)
+
+We might think that those changes have been reflected in the file
+sytem but this is not the case by default and we can check it as we
+did before by running the command ~git status~.
+
+In the buffer ~*rg*~ that is no longer editable and that took into
+account those changes, we can do two things:
+
+1) navigate between the matched lines that we've changed pressing ~n~ or
+   ~p~.  We see the changes reflected in the buffers ~ol.el~ (visiting
+   the file [[org-mode:lisp/ol.el]]) and ~org-element.el~ (visiting the file
+   [[org-mode:lisp/org-element.el]]).  We also observe that those
+   modifications are not saved in the buffers.  And if we change our
+   mind again and we no longer want those changes to be applied, in
+   each buffer we can "manually" undo those changes.
+2) if we want those changes to be reflected in the file system, we can
+   call the command ~wgrep-save-all-buffers~.
+
+We decide to save all the buffers, and so we run:
+
+: M-x wgrep-save-all-buffers
+
+This time our our changes have been reflected in the file system and
+we can check it by running the following command:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git status
+#+END_SRC
+
+that prints:
+
+#+BEGIN_SRC text
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   lisp/ol.el
+	modified:   lisp/org-element.el
+
+no changes added to commit (use "git add" and/or "git commit -a")
+#+END_SRC
+
+So the files [[org-mode:lisp/ol.el]] and [[org-mode:lisp/org-element.el]] have
+been modified.
+
+To be sure that those modifications correspond to our renaming, we
+can run the following command that prints the ~git~ difference between
+the last commit and the unstaged modified files:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git diff
+#+END_SRC
+
+#+BEGIN_SRC diff
+diff --git a/lisp/ol.el b/lisp/ol.el
+index 1b2bb9a9a..642dcb5da 100644
+--- a/lisp/ol.el
++++ b/lisp/ol.el
+@@ -1008,7 +1008,7 @@ and then used in capture templates."
+ 	   if store-func
+ 	   collect store-func))
+
+-(defun org-link-expand-abbrev (link)
++(defun org-link-RENAMED (link)
+   "Replace link abbreviations in LINK string.
+ Abbreviations are defined in `org-link-abbrev-alist'."
+   (if (not (string-match "^\\([^:]*\\)\\(::?\\(.*\\)\\)?$" link)) link
+diff --git a/lisp/org-element.el b/lisp/org-element.el
+index 28339c1b8..cbfcfe074 100644
+--- a/lisp/org-element.el
++++ b/lisp/org-element.el
+@@ -3494,7 +3494,7 @@ Assume point is at the beginning of the link."
+ 	;; (e.g., insert [[shell:ls%20*.org]] instead of
+ 	;; [[shell:ls *.org]], which defeats Org's focus on
+ 	;; simplicity.
+-	(setq raw-link (org-link-expand-abbrev
++	(setq raw-link (org-link-RENAMED
+ 			(org-link-unescape
+ 			 (replace-regexp-in-string
+ 			  "[ \t]*\n[ \t]*" " "
+#+END_SRC
+
+If we were in a refactoring phase in our development where we've
+decided to rename ~org-link-expand-abbrev~ by ~org-link-RENAMED~, the next
+step would be to commit those changes.
+
+As this is not our case (and also to demonstrate how to revert back
+ALL the changes not commited that we've made in a git repository) we
+prefer to revert back to the last commit by running the following
+command:
+
+#+BEGIN_SRC bash :dir org-mode :results output
+git checkout .
+#+END_SRC
+
+And we can verify that we're back to our original state by running the
+following commands ~git status~ and ~git rev-parse --short HEAD~ as we did
+at the beginning of this post.
+
+** Make the changes automatic with ~wgrep-auto-save-buffer~
+
+As written in the documentation of ~wgrep~, if we want to save the
+buffers automatically when we call ~wgrep-finish-edit~ (and so apply
+the changes in the file system), we can set the variable
+~wgrep-auto-save-buffer~ to ~t~ like this:
+
+#+BEGIN_SRC emacs-lisp
+(setq wgrep-auto-save-buffer t)
+#+END_SRC
+
+** We could have used ~sed~ to do it non interactively
+
+Renaming a function like we did before with ~rg.el~ and ~wgrep~ could also
+be done using the cli ~sed~ (that can search some regexp in files
+(not only) and replace matches in-place with another string) combined
+with eiter ~find~ or ~grep~ to list the files we want to modify which are
+"passed" to ~sed~ using the utility ~xargs~.
+
+Specifically, in ~org-mode~ directory, we can replace the occurences of
+~org-link-expand-abbrev~ by ~org-link-RENAMED~, by running the following
+command line (in a terminal):
+
+: find . -type f -print0 | xargs -0 sed -i 's/org-link-expand-abbrev/org-link-RENAMED/g'
+
+1) ~-print0~ tells ~find~ to separate file names with the null character,
+2) ~-0~ tells ~xargs~ that arguments are separated by the null character,
+3) ~-i~ command line flag tells ~sed~ to do the substitions (command ~sd~ of
+   ~sed~) of ~org-link-expand-abbrev~ by ~org-link-RENAMED~ in-place and,
+4) the flag ~g~ (in ~'s/.../.../g'~) tells ~sed~ to apply the replacement to
+   all matches not just the first.
+
+Instead of using ~find~, we could have use ~grep~ to list not all the
+files in ~org-mode~ directory but only those that contains
+~org-link-expand-abbrev~.  And doing so, we would have made the same
+replacements.  Here is the full command line to run in a terminal
+that produces the same result:
+
+: grep -rlZ 'org-link-expand-abbrev' | xargs -0 sed -i 's/org-link-expand-abbrev/org-link-RENAMED/g'
+
+1) ~r~ flag tells ~grep~ to search recursively in the current directory,
+2) ~l~ flag tells ~grep~ to print only file names (not the matches),
+3) ~Z~ flag tells grep to print the null characher after each file
+   names,
+4) after the pipe ~|~, it's the same as before.
+
+WE ARE DONE!!!
 
 * [2022-04-15 Fri] Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
 :PROPERTIES:
@@ -1985,6 +2348,9 @@ And maybe we've removed some misconceptions about this part of the
 function [[org-mode:lisp/org-element.el::(defun org-element-link-parser][org-element-link-parser]].
 
 **** [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]]
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-04-search-options-link-abbreviations-and-org-open-at-point/#org-link-expand-abbrev
+:END:
 
 Regarding the parsing step of the link, we still have one function
 to cover: [[org-mode:lisp/ol.el::(defun org-link-expand-abbrev][org-link-expand-abbrev]].
