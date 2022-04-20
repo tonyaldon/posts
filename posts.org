@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-19 Tue 08:17>
+#+DATE: <2022-04-20 Wed 14:45>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,208 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-04-22 Fri] Programming with Elisp is magic
+:PROPERTIES:
+:CUSTOM_ID: /2022-04-22-programming-with-elisp-is-magic/
+:COMMIT_ORG_MODE: bee31004bcf49bbdf353b41d3ee4e6b0c02cc415
+:END:
+
+BOOM!!! Let's get to the point!!!
+
+What's magic when programming Elisp code is that at any time:
+
+1) we can extract a little part of the program,
+2) replace some symbols by custom values,
+3) send it to the minibuffer with ~M-x eval-expression~ (or
+   ~pp-eval-expression~), press ~RET~ and,
+4) automatically get back some value in the echo area (or in the
+   dedicated buffer ~*Pp Eval Output*~).
+
+In almost no time, misconceptions about what a program does (or why
+a program fails) can be spot that way.
+
+Those who have already read the post about [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][link abbrevations and
+org-open-at-point]] might be familiar with the above description.
+
+Indeed, today's post is literally a section extracted from this
+previous post.
+
+Why am I publishing it again?
+
+Because that post didn't received much success (maybe the wrong topic,
+maybe too long, maybe I don't know) and so does the section about the
+magic of programming with Elisp.
+
+And this is really unfortunate because it describes a super effective
+strategy do deal with Elisp code.
+
+Beside adding "print statements everywhere" (~message~ in Elisp
+parlance) this is my best tool for working with Elisp code, and I want
+everyone to know it and use it.
+
+I am not a magician who needs to keep his tricks secret, quite the
+contrary.  So, I decided to give that strategy to deal with Elisp code
+another chance with that post.
+
+I hope you find it useful.
+
+Here is the context.
+
+When we introduced the section "Programming with Elisp is magic" in
+the post about [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][link abbrevations and org-open-at-point]], we were
+studying some implementation details of the function
+[[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] that parses an Org link at point, if any.
+
+For instance, in the following org buffer (if you have never used
+"link abbreviations", I encourage you to read the info node
+[[info:org#Link Abbreviations]]:
+
+#+BEGIN_SRC org
+,#+LINK: emacs /tmp/emacs/
+
+[[emacs:lisp/simple.el::(defun next-error (&optional]]
+#+END_SRC
+
+with the point at the beginning of the link, calling the function
+[[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] returns the org object (a list):
+
+#+BEGIN_SRC emacs-lisp
+(link
+ (:type "file"
+  :path "/tmp/emacs/lisp/simple.el"
+  :format bracket
+  :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+  :application nil
+  :search-option "(defun next-error (&optional"
+  :begin 28
+  :end 82
+  :contents-begin nil
+  :contents-end nil
+  :post-blank 0))
+#+END_SRC
+
+We were particularly interested in the computation of the values of
+the properties ~:path~ and ~:search-option~.
+
+The function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] is 128 lines long, uses many
+regexp to do its jobs, mutates several times the local let binded
+variable ~path~ that is returned as the value of the property ~:path~ (the
+one we are interested in).
+
+The first time, I looked at its code, I couldn't understand all the
+subtleties of the implementation just by reading it.
+
+This is not a problem, because when reading is not enough, I always
+use the same strategy: I break the problem down into pieces until I
+arrive at simple s-expressions that I can understand.
+
+And doing it in Emacs/Elisp is super cheap because you can evaluate
+ANYTHING, ANYWHERE, ANYTIME, for FREE (you just pay the computation).
+
+Think about it!
+
+Fast feedback, this is the magic of programming with Elisp.
+
+So here we are.
+
+Let's say we want to be sure that the following snippet in the
+function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] does what it seems to do:
+
+#+BEGIN_SRC emacs-lisp
+(when (string-match "::\\(.*\\)\\'" path)
+  (setq search-option (match-string 1 path))
+  (setq path (replace-match "" nil nil path)))
+#+END_SRC
+
+In our example, at that point in the function, the local variable ~path~
+has the string value ~"/tmp/emacs/lisp/simple.el::(defun next-error
+(&optional"~.  We can test the result of the ~when~ condition by
+evaluating the following:
+
+#+BEGIN_SRC emacs-lisp
+(string-match "::\\(.*\\)\\'" "/tmp/emacs/lisp/simple.el::(defun next-error (&optional")
+;; 25
+#+END_SRC
+
+By reading the help of ~string-match~, we know that it returns the index
+of the start of the first match or ~nil~.
+
+Ok, there's a match.
+
+But, to me the string ~"/tmp/emacs/lisp/simple.el::(defun next-error
+(&optional"~ is to long with to many repetive characters that don't
+appear in the regexp ~"::\\(.*\\)\\'"~ to wrap my head around what's
+going on.
+
+So, let's use the good ~foo~ and ~bar~ words to simplify our discoveries
+and gain confidence about this piece of code.
+
+In the regexp, the only part "that seems" of interest is ~::~, so let's
+try again with the strings ~"/tmp/foo::bar"~, ~"/tmp/foo::"~ and
+~"/tmp/foo"~:
+
+#+BEGIN_SRC emacs-lisp
+(string-match "::\\(.*\\)\\'" "/tmp/foo::bar")
+;; 8
+(string-match "::\\(.*\\)\\'" "/tmp/foo::")
+;; 8
+(string-match "::\\(.*\\)\\'" "/tmp/foo")
+;; nil
+#+END_SRC
+
+It become clearer.  We start to get a sense of the match.
+
+By reading the documentation ([[info:elisp#Simple Match Data]]), we learn
+(or recall):
+
+1) that search functions like ~string-match~ or ~looking-at~ set the
+   match data for every successful search,
+2) and if the first argument of ~match-string~ is ~0~, we get the entire
+   matching text and if it's ~1~ we get the first parenthetical
+   subexpression of the given regular expression.
+
+So, continuing with the string ~"/tmp/foo::bar"~, we
+have:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    (list (match-string 0 path)
+          (match-string 1 path))))
+;; ("::bar" "bar")
+#+END_SRC
+
+Reading the help buffer about ~replace-match~ tells us that this
+function replaces the text matched by the last search with its first
+argument.  And if we give it an optional fourth argument being a
+string, the replacement is made on that string.
+
+So replacing the entire match with the empty string ~""~ should remove
+the matched part of the string:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    (replace-match "" nil nil path)))
+;; "/tmp/foo"
+#+END_SRC
+
+Now putting everything together we can write the following example:
+
+#+BEGIN_SRC emacs-lisp
+(let ((path "/tmp/foo::bar"))
+  (when (string-match "::\\(.*\\)\\'" path)
+    `(:search-option ,(match-string 1 path)
+      :path          ,(replace-match "" nil nil path))))
+;; (:search-option "bar"
+;;  :path          "/tmp/foo")
+#+END_SRC
+
+And maybe we've removed some misconceptions about this part of the
+function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]].
+
+WE ARE DONE!!!
 
 * [2022-04-19 Tue] If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
 :PROPERTIES:
