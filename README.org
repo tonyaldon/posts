@@ -25,6 +25,7 @@ git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 * Read the posts on Reddit
 
+- [2022-04-22 Fri] [[https://www.reddit.com/r/emacs/comments/u9e9r3/programming_with_elisp_is_magic/][Programming with Elisp is magic]]
 - [2022-04-19 Tue] [[https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/][If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind]]
 - [2022-04-15 Fri] [[https://www.reddit.com/r/emacs/comments/u4c5rc/ripgrep_is_fantastic_emacs_is_fantastic_boom_you/][Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el]]
 - [2022-04-13 Wed] [[https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/][Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code]]
