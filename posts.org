@@ -16,6 +16,7 @@
 * [2022-04-27 Wed] FULL example of org-mode links: internal links and search options
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/
 :COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
 :END:
 
@@ -393,6 +394,7 @@ Thank you Ihor Radchenko.
 * [2022-04-22 Fri] Programming with Elisp is magic
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-22-programming-with-elisp-is-magic/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/u9e9r3/programming_with_elisp_is_magic/
 :COMMIT_ORG_MODE: bee31004bcf49bbdf353b41d3ee4e6b0c02cc415
 :END:
 
