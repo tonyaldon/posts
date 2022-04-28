@@ -296,7 +296,7 @@ Remember that when we are working with Elisp we can obtain information
 about any symbols with the command [[emacs:lisp/help-fns.el::(defun describe-symbol][describe-symbol]] bound by default to
 ~C-h o~.
 
-In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the variable [[file:~/work/tmp/emacs/src/buffer.c::DEFVAR_PER_BUFFER ("case-fold-search"][case-fold-search]] is set ~t~ which means
+In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the variable [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("case-fold-search"][case-fold-search]] is set ~t~ which means
 that searches and matches should ignore case:
 
 #+BEGIN_SRC emacs-lisp
