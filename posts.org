@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-20 Wed 14:45>
+#+DATE: <2022-04-28 Thu 09:36>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -168,7 +168,7 @@ With [[/tmp/org-mode/lisp/ol.el::/org-link-search/]] we jump (with
    1257:	   (or starred org-link-search-must-match-exact-headline))
 ,#+END_SRC
 
-that matches the occurences of [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] (the text surrounded by
+that matches the occurences of ~org-link-search~(the text surrounded by
 two slashes ~/~ after the two colons ~::~ in the previous link) in the
 file ~/tmp/org-mode/lisp/ol.el~.
 
@@ -254,7 +254,7 @@ We still assume we have the org repository cloned under the directory
 ~/tmp/org-mode/~.
 
 With [[/tmp/org-mode/lisp/ol.el::org-link-search]] we jump (with
-~org-open-at-point~) to the first occurence of [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] in the
+~org-open-at-point~) to the first occurence of ~org-link-search~ in the
 file ~/tmp/org-mode/lisp/ol.el~ which happens to be on the variable
 ~org-link-search-must-match-exact-headline~:
 
@@ -264,11 +264,11 @@ file ~/tmp/org-mode/lisp/ol.el~ which happens to be on the variable
 ,#+END_SRC
 
 Note that as the file ~/tmp/org-mode/lisp/ol.el~ is not "open" in
-org-mode, [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] does a fuzzy text search and doesn't look
+org-mode, ~org-link-search~ does a fuzzy text search and doesn't look
 for target, named elements or headlines.
 
 If the search option (or internal links) we've used doesn't "match"
-one of the previous search, [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] raises an error.
+one of the previous search, ~org-link-search~ raises an error.
 
 We still assume we have the org repository cloned under the directory
 ~/tmp/org-mode/~.
@@ -277,7 +277,7 @@ With [[/tmp/org-mode/lisp/ol.el::5]] we jump (with ~org-open-at-point~) to
 jump to the line ~5~ in the file ~/tmp/org-mode/lisp/ol.el~.
 
 Although this link is of type ~file~ with its search option equal to ~5~,
-the "jump" isn't done by [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] but by ~org-goto-line~ in the
+the "jump" isn't done by ~org-link-search~ but by ~org-goto-line~ in the
 function ~org-open-file~.
 
 ,* headline 2
@@ -293,10 +293,10 @@ I'm the <<target>>!
 ** Elisp API dealing with strings and regexps
 
 Remember that when we are working with Elisp we can obtain information
-about any symbols with the command ~describe-symbol~ bound by default to
+about any symbols with the command [[emacs:lisp/help-fns.el::(defun describe-symbol][describe-symbol]] bound by default to
 ~C-h o~.
 
-In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the variable ~case-fold-search~ is set ~t~ which means
+In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the variable [[file:~/work/tmp/emacs/src/buffer.c::DEFVAR_PER_BUFFER ("case-fold-search"][case-fold-search]] is set ~t~ which means
 that searches and matches should ignore case:
 
 #+BEGIN_SRC emacs-lisp
@@ -310,7 +310,7 @@ that searches and matches should ignore case:
 In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the search string ~s~ provided can contain newlines
 followed by any numbers of spaces or tabs.  Those patterns are
 replaced by one space.  This is done using the function
-~replace-regexp-in-string~ like this:
+[[emacs:lisp/subr.el::(defun replace-regexp-in-string][replace-regexp-in-string]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (let ((s "search  \n  \t\t option"))
@@ -325,7 +325,7 @@ The search option string ~s~ given to [[org-mode:lisp/ol.el::(defun org-link-sea
 2) with a hash ~#~ when we search a custom id (for instance
    in the link ~[[#custom-id-2]]~ used in the above example)
 
-The function ~string-to-char~ returns the first character of a string
+The function [[emacs:src/editfns.c::DEFUN ("string-to-char"][string-to-char]] returns the first character of a string
 and we can use like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -341,7 +341,7 @@ In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the searche
 given string ~s~ but against different regexps depending on the context
 built from ~s~.
 
-The function ~split-string~ is used to split one of the string into
+The function [[emacs:lisp/subr.el::(defun split-string (string &][split-string]] is used to split one of the string into
 substrings bounded by whitespace like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -349,25 +349,28 @@ substrings bounded by whitespace like this:
 #+END_SRC
 
 When the given string ~s~ starts with a star ~*~, the star is removed
-using the function ~substring~ like this:
+using the function [[emacs:src/fns.c::DEFUN ("substring"][substring]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (substring "*foo" 1) ; "foo"
 #+END_SRC
 
-The searches are done using the function ~re-search-forward~ that
+The searches are done using the function [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]] that
 searches in the current buffer for regular expression.  So, we have to
 be careful when we give it a string to search for, that string must be a
 regexp.
 
-We can ensure that the string we give to ~re-search-forward~ is a regexp
-using the function ~regexp-quote~ that returns a regexp string which
+We can ensure that the string we give to [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]] is a regexp
+using the function [[emacs:src/search.c::DEFUN ("regexp-quote"][regexp-quote]]
+
+
+that returns a regexp string which
 matches exactly the string we gave it and this is how [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]]
 does it.
 
 For instance, the characters ~.~, ~?~, ~+~ and ~*~ are "special" in regexps, so
 if we want to match them in a regexp we must escape them and we can do
-it using the function ~regexp-quote~ like this:
+it using the function [[emacs:src/search.c::DEFUN ("regexp-quote"][regexp-quote]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (regexp-quote "foo.bar") ; "foo\\.bar"
