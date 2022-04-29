@@ -25,6 +25,7 @@ git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 * Read the posts on Reddit
 
+- [2022-04-29 Fri] [[https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/][Link to a git commit from Org mode using Magit | THIS IS EMACS]]
 - [2022-04-27 Wed] [[https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/][FULL example of org-mode links: internal links and search options]]
 - [2022-04-22 Fri] [[https://www.reddit.com/r/emacs/comments/u9e9r3/programming_with_elisp_is_magic/][Programming with Elisp is magic]]
 - [2022-04-19 Tue] [[https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/][If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind]]
