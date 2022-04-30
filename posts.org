@@ -5939,7 +5939,7 @@ I've spent some time learning Elisp closures and lexical binding.
 Although the documentation is clear with simple examples, I needed to
 to play with other examples to get my bearings.
 
-As you might be interested, I share them with you :)
+As you might be interested, I will share them with you :)
 
 The first section contains the info nodes and help corresponding to
 the examples.
@@ -5954,12 +5954,12 @@ dolist][dolist]] and [[emacs:lisp/emacs-lisp/byte-run.el::(defmacro defun][defun
 
 Have a nice day,
 
-ps: In the documentation, we can read "Lexical binding is also more
+ps: In the documentation we see that "Lexical binding is also more
 compatible with concurrency, which was added to Emacs in version
 26.1.".
 
-Is someone know why is this?  And can you indicate me the
-files in the emacs source code where I can see this benefits?  I'm
+Does anyone know why this is? If so, can you indicate to me the
+files in the emacs source code where I can see these benefits?  I'm
 really curious... thank you.
 
 ** info and help
