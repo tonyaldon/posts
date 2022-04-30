@@ -5548,7 +5548,7 @@ WE ARE DONE :-)
 
 Hi Emacsers,
 
-recently I've been playing with ~org-element~ and ~org-export~.
+Recently I've been playing with ~org-element~ and ~org-export~.
 
 Specifically, I was interested in the mechanism of the org exporter
 system and its flexibility.
@@ -5566,7 +5566,7 @@ To do so, we build an org backend that:
 
 We call it ~onlybold~.
 
-Before, we start, if you are interested, I recommend you to read in
+Before we start, if you are interested, I recommend you to read in
 org-mode's source code the following files:
 
 - [[org-mode:lisp/ox.el]],
@@ -5611,13 +5611,13 @@ When org exports an org buffer, basically it does two things:
 1) parse the org buffer producing a tree (a nested elisp list)
    representing the org buffer and,
 2) recursively build a string by traversing the tree and choosing for
-   each node what to do with it by looking up for its associated
+   each node what to do with it by looking up its associated
    transcode function defined by the org backend.
 
-It means that *org* does the *hard work* for us "parsing" and
+This means that *org* does the *hard work* for us "parsing" and
 "traversing".
 
-To build ~onlybold~ org backend and any other org backends, in the
+To build our ~onlybold~ org backend and any other org backends, in the
 simplest case, we just have to provide the *transcode functions*
 (or simply *transcoders*).
 
@@ -5642,7 +5642,7 @@ Most transcoders take three arguments:
 2) a content strings corresponding to the children of the element
    already "transcoded",
 3) the communication channel that contains all the information the
-   export system needs to export correctly the document (the obvious
+   export system needs to correctly export the document (the obvious
    ones are the title, date and author of the document that can be
    defined inside the document using lines starting by ~#+TITLE:~,
    ~#+DATE:~ or ~#+AUTHOR~).
@@ -5678,20 +5678,19 @@ the buffer ~*onlybold*~ pops up with *nothing* in it.
 We might be disappointed, but we aren't.  This is totally normal.
 
 In a specific backend, when an element doesn't have a transcoder to
-handle it, the element is skipped.  (In the same vain, if a transcoder
+handle it, the element is skipped.  (In the same vein, if a transcoder
 return ~nil~ for an element, the element is also skipped).
 
 ** parsed tree, section elements and paragraph elements
 
-In our org buffer, the bold elements belong to paragraphs that belongs
-to a section as we can see by looking at the parsed tree in the buffer
+In our org buffer, the bold elements belong to paragraphs that belong
+to a section. We can see this by looking at the parsed tree in the buffer
 ~*Pp Eval Output*~ after running the following command (being in the org
 buffer):
 
 : M-x pp-eval-expression RET (org-element-parse-buffer)
 
-We get the following tree (where we cut off and replace by ~...~
-informations that are not related to the shape of the tree):
+We get the following tree ( ~...~ represents information that are not related to the shape of the tree):
 
 #+BEGIN_SRC emacs-lisp
 (org-data
@@ -5786,20 +5785,19 @@ This is better:
 
 ** only keep bold elements
 
-~plain-text~ elements are the leaves of the parsed tree, they are
-strings.  And to keep only ~bold~ elements, this is the right level to
-operate.
+~plain-text~ elements are the leaves of the parsed tree and they are strings. This
+is the right level to operate in order to keep only ~bold~ elements.
 
 So now, let's handle the ~plain-text~ elements and keep only ~bold~
 elements.
 
-There is a least two ways to do it:
+There is at least two ways to do it:
 
 1) using the filter system provided by the org export system (and so
-   provided a filter that applies to ~plain-text~ elements) or,
+   provide a filter that applies to ~plain-text~ elements) or,
 2) providing a specific transcoder for ~plain-text~ elements.
 
-We implement the later.
+We implement the latter.
 
 Let's write the transcoder ~onlybold-plain-text~ which checks if the
 *parent* of the ~plain-text~ element (the string) is a ~bold~ element.  If
@@ -5900,7 +5898,7 @@ of org backends
 
 ** acknowledgments
 
-I take the opportunity of this post to thank:
+I want to take the opportunity of this post to thank:
 
 1) Nicolas Goaziou who is the author and maintainer of
    [[org-mode:lisp/ox.el]], and [[org-mode:lisp/org-element.el]].
