@@ -16,6 +16,7 @@
 * [2022-04-29 Fri] Link to a git commit from Org mode using Magit | THIS IS EMACS
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/
 :COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
 :END:
 
