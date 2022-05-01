@@ -45,7 +45,7 @@ The key elements to doing so lie in:
 
 1) Org mode provides the built-in ~elisp~ type link that allows to
    evaluate any Elisp s-exps or to call any commands when we open this
-   type of link with ~org-open-at-point~ (bound to ~C-c C-o~ by default),
+   type of link with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default),
 2) and that the command ~magit-show-commit~ used to visit commits in
    magit buffers when we are on a commit line can also be used non
    interactively as a regular function where we have to provide it the
@@ -63,7 +63,7 @@ For instance this link:
 [[elisp:(+ 1 1)]]
 #+END_SRC
 
-when followed with ~org-open-at-point~ prints the following in the echo
+when followed with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] prints the following in the echo
 area:
 
 #+BEGIN_SRC text
@@ -76,10 +76,10 @@ And this link:
 [[elisp:tetris]]
 #+END_SRC
 
-when followed with ~org-open-at-point~ starts the built-in Tetris.
+when followed with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] starts the built-in Tetris.
 
-By default, the variable ~org-link-elisp-confirm-function~ is set to the
-function ~yes-or-no-p~ which means that when we open an ~elisp~ link we
+By default, the variable [[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] is set to the
+function [[emacs:src/fns.c::DEFUN ("yes-or-no-p"][yes-or-no-p]] which means that when we open an ~elisp~ link we
 are asked for confirmation before executing the ~elisp~ link.
 
 We can set this variable to ~nil~ if we never want to be asked for
@@ -87,16 +87,16 @@ confirmation.  But it might be dangerous (see the docstring of this
 variable for an example of a dangerous ~elisp~ link that can remove all
 our user home directory).
 
-Besides setting ~org-link-elisp-confirm-function~ to ~nil~ in order not to
+Besides setting [[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] to ~nil~ in order not to
 be asked confirmation everytime we open an ~elisp~ link we can
-use the variable ~org-link-elisp-skip-confirm-regexp~.
+use the variable [[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]].
 
 Indeed, any ~elisp~ link that matches the regexp
-~org-link-elisp-skip-confirm-regexp~ is executed without asking
+[[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]] is executed without asking
 confirmation.
 
 For instance, setting up the variable
-~org-link-elisp-skip-confirm-regexp~ to ~"tetris"~ lets us open the link
+[[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]] to ~"tetris"~ lets us open the link
 ~[[elisp:tetris]]~ without asking us confirmation.
 
 #+BEGIN_SRC emacs-lisp
@@ -110,7 +110,7 @@ We add the Magit layer to our ~elisp~ link.
 The scenario is the following.  We are "working" on the Org repository
 that we assume is cloned under the directory ~/tmp/org-mode/~.  At some
 point we've looked at the commit ~baffebbc3~ that fixes a bug in
-~org-get-heading~ and we want to keep in our note a link to that commit.
+[[org-mode:lisp/org.el::(defun org-get-heading (&optional][org-get-heading]] and we want to keep in our note a link to that commit.
 
 To do so we can use the following link:
 
@@ -118,7 +118,7 @@ To do so we can use the following link:
 [[elisp:(magit-show-commit "baffebbc3" nil nil "/tmp/org-mode/")]]
 #+END_SRC
 
-Now, if we open that link with ~org-open-at-point~, we jump to the
+Now, if we open that link with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]], we jump to the
 following buffer in ~magit-revision-mode~:
 
 #+BEGIN_SRC diff
@@ -161,10 +161,10 @@ examples, let's see how they are implemented.
 
 Except for the reserved link types ~coderef~, ~custom-id~, ~fuzzy~ and
 ~radio~ we can defined new link types or modify an existing link types
-using the function ~org-link-set-parameters~.
+using the function [[org-mode:lisp/ol.el::(defun org-link-set-parameters][org-link-set-parameters]].
 
 For instance the link type ~elisp~ is defined like this in the file
-~ol.el~:
+[[org-mode:lisp/ol.el]]
 
 #+BEGIN_SRC emacs-lisp
 (org-link-set-parameters "elisp" :follow #'org-link--open-elisp)
@@ -172,11 +172,11 @@ For instance the link type ~elisp~ is defined like this in the file
 
 Fine, but what does it mean to define a link type?
 
-It means that we add an entry to the alist ~org-link-parameters~ where
+It means that we add an entry to the alist [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] where
 we specify for a link type how we want the Org mode features related to
 links to behave regarding that type.
 
-With the default configuration the variable ~org-link-parameters~
+With the default configuration the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]
 looks like this (with some link types skipped):
 
 #+BEGIN_SRC emacs-lisp
@@ -193,38 +193,38 @@ looks like this (with some link types skipped):
  ("elisp" :follow org-link--open-elisp))
 #+END_SRC
 
-For instance, the variable ~org-link-parameters~
+For instance, the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]
 tells org-mode that when we open an ~elisp~ type link with
-~org-open-at-point~ (bound to ~C-c C-o~ by default) the function that
-finally opens the link is ~org-link--open-elisp~ (the one after the
-keyword ~:follow~ in the variable ~org-link-parameters~).
+[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default) the function that
+finally opens the link is [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] (the one after the
+keyword ~:follow~ in the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]).
 
 And for the ~info~ type links (links to info node) the variable
-~org-link-parameters~ tells org-mode:
+[[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] tells org-mode:
 
-1) to use the function ~org-info-open~ when we open ~info~ type links,
-2) to use the function ~org-info-export~ when we export open ~info~ type
+1) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-open (path][org-info-open]] when we open ~info~ type links,
+2) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-export (path][org-info-export]] when we export open ~info~ type
    links,
-3) to use the function ~org-info-store-link~ when we store ~info~ type
+3) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-store-link][org-info-store-link]] when we store ~info~ type
    links.
 
 If we want to write our own type link we can look at the docstring of
-~org-link-parameters~ to know what are the supported keys
+[[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] to know what are the supported keys
 (~:follow~, ~:export~, ~:store~, ~:activate-func~, ~:complete~,
 ~:display~, ~:face~, ~:help-echo~, ~:htmlize-link~, ~:keymap~, ~:mouse-face~)
 and what are their accepted values.
 
 Back to ~elisp~ type links.
 
-When we call ~org-open-at-point~ (bound to ~C-c C-o~ by default) without
+When we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default) without
 universal argument on the following ~elisp~ type link:
 
 #+BEGIN_SRC org
 [[elisp:(+ 1 1)]]
 #+END_SRC
 
-in its body, ~org-open-at-point~ parses the link at point and
-"delegates" the work to the function ~org-link-open~ passing it as
+in its body, [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] parses the link at point and
+"delegates" the work to the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] passing it as
 first argument the parsed link like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -240,19 +240,19 @@ first argument the parsed link like this:
  )
 #+END_SRC
 
-Then the function ~org-link-open~ locally binds the variables ~type~ and
+Then the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] locally binds the variables ~type~ and
 ~path~ respectively to ~"elisp"~ and ~"(+ 1 1)"~ getting those values out of
 the link ~(link (:type "elisp" :path "(+ 1 1)" ...))~ using the function
-~org-element-property~.
+[[org-mode:lisp/org-element.el::(defsubst org-element-property (property][org-element-property]].
 
 Then as ~type~ is not equal to any of the following types ~"file"~,
 ~"coderef"~, ~"custom-id"~, ~"fuzzy"~ and ~"radio"~ but equal to ~"elisp"~ the
-function ~org-link-open~ decides to use the dedicated function
-~org-link--open-elisp~ to open ~elisp~ type links.
+function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] decides to use the dedicated function
+[[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] to open ~elisp~ type links.
 
-This is done by locally binding ~f~ to ~org-link--open-elisp~ retrieving
-this value using the function ~org-link-get-parameter~ which is a thin
-wrapper around the variable ~org-link-parameters~ as we can see in the
+This is done by locally binding ~f~ to [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] retrieving
+this value using the function [[org-mode:lisp/ol.el::(defun org-link-get-parameter][org-link-get-parameter]] which is a thin
+wrapper around the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] as we can see in the
 following code snippet
 
 #+BEGIN_SRC emacs-lisp
@@ -261,14 +261,14 @@ following code snippet
   (plist-get (cdr (assoc type org-link-parameters)) key))
 #+END_SRC
 
-and as ~org-link--open-elisp~ is a function that accepts two arguments,
-~org-link-open~ finally returns with the following call:
+and as [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] is a function that accepts two arguments,
+[[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] finally returns with the following call:
 
 #+BEGIN_SRC emacs-lisp
 (funcall 'org-link--open-elisp "(+ 1 1)" nil)
 #+END_SRC
 
-Here are the parts of ~org-link-open~ we've just discussed:
+Here are the parts of [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] we've just discussed:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link-open (link &optional arg)
@@ -293,10 +293,10 @@ Here are the parts of ~org-link-open~ we've just discussed:
               (funcall (org-link-get-parameter type :follow) path)))))))))
 #+END_SRC
 
-Now we are left with the function ~org-link--open-elisp~.
+Now we are left with the function [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]].
 
 Assuming we answer ~yes~ to the question raised by calling
-~org-link-elisp-confirm-function~ in the condition of the ~if~ form, the
+[[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] in the condition of the ~if~ form, the
 THEN part of the ~if~ is evaluated.
 
 As the ~path~ equal to ~"(+ 1 1)"~ starts by a left parentheses ~(~, the
@@ -305,7 +305,7 @@ string ~"(+ 1 1)"~ is "transformed" into a lisp object by the function
 substituted in the second placeholder ~%s~ in the string of the
 ~message~ function.
 
-Here are the parts of ~org-link--open-elisp~ we've just discussed:
+Here are the parts of [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] we've just discussed:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link--open-elisp (path _)
@@ -319,7 +319,7 @@ Here are the parts of ~org-link--open-elisp~ we've just discussed:
 #+END_SRC
 
 And this is how the message ~(+ 1 1) => 2~ is printed in the echo area
-when we call ~org-open-at-point~ on top of the ~elisp~ type link ~[[elisp:(+
+when we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] on top of the ~elisp~ type link ~[[elisp:(+
 1 1)]]~.
 
 WE ARE DONE!!!
