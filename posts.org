@@ -30,7 +30,7 @@ We've just written a new command named ~my-new-command~ that we've added
 to our init file ~~/.emacs.d/init.el~ (or whatever init file your are
 using except org-mode file).
 
-To write our new command we had to look at the help of the macro ~pcase~
+To write our new command we had to look at the help of the macro [[emacs:lisp/emacs-lisp/pcase.el::(defmacro pcase (exp][pcase]]
 and the elisp info node "Current Buffer".
 
 Now let's say we want to keep the links to these help and info
@@ -41,8 +41,8 @@ Is is possible?  How do we do that?
 ** Org links everywhere
 
 One way to do that is to use the org-mode link syntax using the
-identifier ~info~ and ~elisp~ (describes in the info node ~M-x
-eval-expression RET (info "(org)Link Abbreviations")~) like this:
+identifier ~info~ and ~elisp~ (described in the info node [[info:org#Link
+Abbreviations]]) like this:
 
 #+BEGIN_SRC emacs-lisp
 ;; [[help:pcase]]
@@ -50,7 +50,7 @@ eval-expression RET (info "(org)Link Abbreviations")~) like this:
 (defun my-new-command () "..." ...)
 #+END_SRC
 
-Now we can use the command ~org-open-at-point-global~ to open those
+Now we can use the command [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] to open those
 links.
 
 For instance, running ~M-x org-open-at-point-global~ on top of the link
@@ -97,31 +97,31 @@ function for designating a current buffer is ‘set-buffer’.
 ...MORE HERE...
 #+END_SRC
 
-Thanks to ~org-open-at-point-global~ we have org-mode links everywhere!
+Thanks to [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] we have org-mode links everywhere!
 
 What do you think about that "feature"?
 
 Isn't it super cool!?
 
-** How does ~org-open-at-point-global~ work?
+** How does [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] work?
 
-To understand the mechanism of ~org-open-at-point-global~, let's see
-what happens when we call ~org-open-at-point-global~ on top of the link
+To understand the mechanism of [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]], let's see
+what happens when we call [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] on top of the link
 ~[[help:pcase]]~ in the previous ~emacs-lisp~ buffer?
 
-The function ~org-open-at-point-global~ checks if point is inside a
-match of the regexp ~org-link-any-re~ (regular expression matching any
-link) using the function ~org-in-regexp~.
+The function [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] checks if point is inside a
+match of the regexp [[org-mode:lisp/ol.el::(defvar org-link-any-re][org-link-any-re]] (regular expression matching any
+link) using the function [[org-mode:lisp/org-macs.el::(defun org-in-regexp (regexp][org-in-regexp]].
 
-As it is true (the regexp ~org-link-any-re~ is matched in the string
-~[[help:pcase]]~), the function ~org-open-at-point-global~ returns with
+As it is true (the regexp [[org-mode:lisp/ol.el::(defvar org-link-any-re][org-link-any-re]] is matched in the string
+~[[help:pcase]]~), the function [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] returns with
 the call:
 
 #+BEGIN_SRC emacs-lisp
 (org-link-open-from-string "[[help:pcase]]")
 #+END_SRC
 
-Here are the parts of ~org-open-at-point-global~ we've just discussed:
+Here are the parts of [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] we've just discussed:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-open-at-point-global ()
@@ -139,10 +139,10 @@ function on that thing.
 
 True!
 
-The magic happens in the function ~org-link-open-from-string~ where we
+The magic happens in the function [[org-mode:lisp/ol.el::(defun org-link-open-from-string][org-link-open-from-string]] where we
 use a temporary buffer in org-mode where we insert the string
 ~[[help:case]]~ and leverage the Org parser calling the function
-~org-element-link-parser~ at the beginning of the inserted link which
+[[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] at the beginning of the inserted link which
 parses the link and returns this org object link:
 
 #+BEGIN_SRC emacs-lisp
@@ -160,7 +160,7 @@ parses the link and returns this org object link:
   :post-blank 0))
 #+END_SRC
 
-which is passed to the function ~org-link-open~ (which returns) like
+which is passed to the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] (which returns) like
 this:
 
 #+BEGIN_SRC emacs-lisp
@@ -172,10 +172,10 @@ this:
          ...)))
 #+END_SRC
 
-And the function ~org-link-open~ "takes care" to open the help buffer
-describing the macro ~pcase~.
+And the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] "takes care" to open the help buffer
+describing the macro [[emacs:lisp/emacs-lisp/pcase.el::(defmacro pcase (exp][pcase]].
 
-Here is the definition of the function ~org-link-open-from-string~:
+Here is the definition of the function [[org-mode:lisp/ol.el::(defun org-link-open-from-string][org-link-open-from-string]]:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link-open-from-string (s &optional arg)
@@ -193,11 +193,11 @@ a \"file\" link."
     (link (org-link-open link arg))))
 #+END_SRC
 
-** ~org-open-at-point-global~ and link abbreviations
+** [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] and link abbreviations
 
-As we've seen in the post [[https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/][Did you know that Org links in property
+As we've seen in the post [[#/2022-04-09-org-links-in-property-drawers-are-not-links/][Did you know that Org links in property
 drawers are not links?]], in org-mode "links" matched by the regexp
-~org-link-any-re~ are not always treated as link by the Org parser.
+[[org-mode:lisp/ol.el::(defvar org-link-any-re][org-link-any-re]] are not always treated as link by the Org parser.
 
 For instance, the URL ~https://orgmode.org/worg/~ in the property drawer
 of the following org-mode buffer is not a link for the Org parser but
@@ -210,13 +210,13 @@ the ~:value~ of a ~node-property~ element:
 :END:
 #+END_SRC
 
-And so when we call the function ~org-open-at-point~ (~C-c C-o~ by
-default) on a "link" in a property drawer, ~org-open-at-point~ won't
-call directly the function ~org-link-open~ on the ~node-property~ element
+And so when we call the function [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (~C-c C-o~ by
+default) on a "link" in a property drawer, [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] won't
+call directly the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] on the ~node-property~ element
 which is not a link.
 
-The function ~org-open-at-point~ falls back by calling interactively the
-function ~org-open-at-point-global~ with the point in the property
+The function [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] falls back by calling interactively the
+function [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] with the point in the property
 drawer on top of the "link".
 
 It works fine for every links but for link abbreviations when the
@@ -232,12 +232,12 @@ abbreviation is set locally with ~#+LINK:~ like in this example:
 #+END_SRC
 
 This is normal if you look at implementation of
-~org-open-at-point-global~.
+[[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]].
 
-As we've seen above, the function ~org-open-at-point-global~ creates a
+As we've seen above, the function [[org-mode:lisp/org.el::(defun org-open-at-point-global][org-open-at-point-global]] creates a
 temporary org-mode buffer to parse the link.  So only the variable
-~org-link-abbrev-alist~ which is global is "taken into account", not the
-local variable ~org-link-abbrev-alist-local~ which value is ~nil~ in that
+[[org-mode:lisp/ol.el::(defcustom org-link-abbrev-alist][org-link-abbrev-alist]] which is global is "taken into account", not the
+local variable [[org-mode:lisp/ol.el::(defvar-local org-link-abbrev-alist-local][org-link-abbrev-alist-local]] which value is ~nil~ in that
 case.
 
 Ignacio Casso and	Ihor Radchenko discussed this case in the org-mode
@@ -251,9 +251,8 @@ https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00449.html
 
 If you are interested in link abbreviations you can read:
 
-- the info node ~M-x eval-expression RET (info "(org)Link
-  Abbreviations")~ and
-- the post [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations |
+- the info node [[info:org#Link Abbreviations]] and
+- the post [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations |
   ... org-open-at-point]].
 
 WE ARE DONE!!!
