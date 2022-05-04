@@ -2198,6 +2198,7 @@ WE ARE DONE!!!
 * [2022-04-09 Sat] Did you know that Org links in property drawers are not links?
 :PROPERTIES:
 :CUSTOM_ID: /2022-04-09-org-links-in-property-drawers-are-not-links/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/
 :END:
 
 Wait a minute!  Are you telling me that the URL
