@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-04-29 Fri 16:44>
+#+DATE: <2022-05-04 Wed 16:24>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,251 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-05-04 Wed] org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS
+:PROPERTIES:
+:CUSTOM_ID: /2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/
+:REDDIT_POST: FIXME
+:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:END:
+
+Hey Emacsers,
+
+What a great day to talk about EMACS :)
+
+Let's set the scene!
+
+We've just written a new command named ~my-new-command~ that we've added
+to our init file ~~/.emacs.d/init.el~ (or whatever init file your are
+using except org-mode file).
+
+To write our new command we had to look at the help of the macro ~pcase~
+and the elisp info node "Current Buffer".
+
+Now let's say we want to keep the links to these help and info
+buffers in comments near to the definition of our new command.
+
+Is is possible?  How do we do that?
+
+** Org links everywhere
+
+One way to do that is to use the org-mode link syntax using the
+identifier ~info~ and ~elisp~ (describes in the info node ~M-x
+eval-expression RET (info "(org)Link Abbreviations")~) like this:
+
+#+BEGIN_SRC emacs-lisp
+;; [[help:pcase]]
+;; [[info:elisp#Current Buffer]]
+(defun my-new-command () "..." ...)
+#+END_SRC
+
+Now we can use the command ~org-open-at-point-global~ to open those
+links.
+
+For instance, running ~M-x org-open-at-point-global~ on top of the link
+~[[help:pcase]]~ (in the previous ~emacs-lisp~ buffer) pops up the
+following help buffer:
+
+#+BEGIN_SRC text
+pcase is a Lisp macro.
+
+(pcase EXP &rest CASES)
+
+  Probably introduced at or before Emacs version 24.1.
+
+Evaluate EXP to get EXPVAL; try passing control to one of CASES.
+CASES is a list of elements of the form (PATTERN CODE...).
+For the first CASE whose PATTERN "matches" EXPVAL,
+evaluate its CODE..., and return the value of the last form.
+If no CASE has a PATTERN that matches, return nil.
+
+...MORE HERE...
+#+END_SRC
+
+For instance, running ~M-x org-open-at-point-global~ on top of the link
+~[[info:elisp#Current Buffer]]~ (in the previous ~emacs-lisp~ buffer) pops
+up the following info buffer:
+
+#+BEGIN_SRC text
+File: elisp.info,  Node: Current Buffer,  Next: Buffer Names,  Prev: Buffer Basics,  Up: Buffers
+
+28.2 The Current Buffer
+=======================
+
+There are, in general, many buffers in an Emacs session.  At any time,
+one of them is designated the “current buffer”—the buffer in which most
+editing takes place.  Most of the primitives for examining or changing
+text operate implicitly on the current buffer (*note Text::).
+
+   Normally, the buffer displayed in the selected window is the current
+buffer, but this is not always so: a Lisp program can temporarily
+designate any buffer as current in order to operate on its contents,
+without changing what is displayed on the screen.  The most basic
+function for designating a current buffer is ‘set-buffer’.
+
+...MORE HERE...
+#+END_SRC
+
+Thanks to ~org-open-at-point-global~ we have org-mode links everywhere!
+
+What do you think about that "feature"?
+
+Isn't it super cool!?
+
+** How does ~org-open-at-point-global~ work?
+
+To understand the mechanism of ~org-open-at-point-global~, let's see
+what happens when we call ~org-open-at-point-global~ on top of the link
+~[[help:pcase]]~ in the previous ~emacs-lisp~ buffer?
+
+The function ~org-open-at-point-global~ checks if point is inside a
+match of the regexp ~org-link-any-re~ (regular expression matching any
+link) using the function ~org-in-regexp~.
+
+As it is true (the regexp ~org-link-any-re~ is matched in the string
+~[[help:pcase]]~), the function ~org-open-at-point-global~ returns with
+the call:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open-from-string "[[help:pcase]]")
+#+END_SRC
+
+Here are the parts of ~org-open-at-point-global~ we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-open-at-point-global ()
+  "..."
+  (interactive)
+  (let (...)
+    (cond ((org-in-regexp org-link-any-re)
+           (org-link-open-from-string (match-string-no-properties 0)))
+          ...
+          (t (user-error "No link found")))))
+#+END_SRC
+
+So far, nothing impressive.  We match something at point and apply a
+function on that thing.
+
+True!
+
+The magic happens in the function ~org-link-open-from-string~ where we
+use a temporary buffer in org-mode where we insert the string
+~[[help:case]]~ and leverage the Org parser calling the function
+~org-element-link-parser~ at the beginning of the inserted link which
+parses the link and returns this org object link:
+
+#+BEGIN_SRC emacs-lisp
+(link
+ (:type "help"
+  :path "pcase"
+  :format bracket
+  :raw-link "help:pcase"
+  :application nil
+  :search-option nil
+  :begin 1
+  :end 15
+  :contents-begin nil
+  :contents-end nil
+  :post-blank 0))
+#+END_SRC
+
+which is passed to the function ~org-link-open~ (which returns) like
+this:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-open
+ '(link (:type "help"
+         :path "pcase"
+         :format bracket
+         :raw-link "help:pcase"
+         ...)))
+#+END_SRC
+
+And the function ~org-link-open~ "takes care" to open the help buffer
+describing the macro ~pcase~.
+
+Here is the definition of the function ~org-link-open-from-string~:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link-open-from-string (s &optional arg)
+  "Open a link in the string S, as if it was in Org mode.
+Optional argument is passed to `org-open-file' when S is
+a \"file\" link."
+  (interactive "sLink: \nP")
+  (pcase (with-temp-buffer
+           (let ((org-inhibit-startup nil))
+             (insert s)
+             (org-mode)
+             (goto-char (point-min))
+             (org-element-link-parser)))
+    (`nil (user-error "No valid link in %S" s))
+    (link (org-link-open link arg))))
+#+END_SRC
+
+** ~org-open-at-point-global~ and link abbreviations
+
+As we've seen in the post [[https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/][Did you know that Org links in property
+drawers are not links?]], in org-mode "links" matched by the regexp
+~org-link-any-re~ are not always treated as link by the Org parser.
+
+For instance, the URL ~https://orgmode.org/worg/~ in the property drawer
+of the following org-mode buffer is not a link for the Org parser but
+the ~:value~ of a ~node-property~ element:
+
+#+BEGIN_SRC org
+,* Heading
+:PROPERTIES:
+:MY_URL:   https://orgmode.org/worg/
+:END:
+#+END_SRC
+
+And so when we call the function ~org-open-at-point~ (~C-c C-o~ by
+default) on a "link" in a property drawer, ~org-open-at-point~ won't
+call directly the function ~org-link-open~ on the ~node-property~ element
+which is not a link.
+
+The function ~org-open-at-point~ falls back by calling interactively the
+function ~org-open-at-point-global~ with the point in the property
+drawer on top of the "link".
+
+It works fine for every links but for link abbreviations when the
+abbreviation is set locally with ~#+LINK:~ like in this example:
+
+#+BEGIN_SRC org
+,#+LINK: worg   https://orgmode.org/worg/
+
+,* Heading
+:PROPERTIES:
+:MY_URL: [[worg]]
+:END:
+#+END_SRC
+
+This is normal if you look at implementation of
+~org-open-at-point-global~.
+
+As we've seen above, the function ~org-open-at-point-global~ creates a
+temporary org-mode buffer to parse the link.  So only the variable
+~org-link-abbrev-alist~ which is global is "taken into account", not the
+local variable ~org-link-abbrev-alist-local~ which value is ~nil~ in that
+case.
+
+Ignacio Casso and	Ihor Radchenko discussed this case in the org-mode
+mailing list in the thread:
+
+https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00367.html
+
+And Ignacio Casso has a workaround for that case that uses advices:
+
+https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00449.html
+
+If you are interested in link abbreviations you can read:
+
+- the info node ~M-x eval-expression RET (info "(org)Link
+  Abbreviations")~ and
+- the post [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations |
+  ... org-open-at-point]].
+
+WE ARE DONE!!!
 
 * [2022-04-29 Fri] Link to a git commit from Org mode using Magit | THIS IS EMACS
 :PROPERTIES:
