@@ -366,7 +366,7 @@ My goal was to walk the path from pressing ~RET~ (if you have
 ~org-return-follows-link~ set to ~t~) or ~C-c C-o~ on top of the abbreviated
 org link
 
-: [[[[emacs:lisp/simple.el::(defun next-error (&optional]]]]
+: [[emacs:lisp/simple.el::(defun next-error (&optional]]
 
 to the file ~lisp/simple.el~ in the Emacs source code (cloned locally)
 with the point at the beginning of the function ~next-error~.
