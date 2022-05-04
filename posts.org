@@ -229,13 +229,13 @@ first argument the parsed link like this:
 
 #+BEGIN_SRC emacs-lisp
 (org-link-open
- (link
-  (:type "elisp"
-   :path "(+ 1 1)"
-   :format bracket
-   :raw-link "elisp:(+ 1 1)"
-   ...
-   :parent (paragraph ... :parent (section ... :parent (org-data ...)))))
+ '(link
+   (:type "elisp"
+    :path "(+ 1 1)"
+    :format bracket
+    :raw-link "elisp:(+ 1 1)"
+    ...
+    :parent (paragraph ... :parent (section ... :parent (org-data ...)))))
  nil ;; called without universal argument
  )
 #+END_SRC
@@ -2710,19 +2710,19 @@ That leads to this function call:
 
 #+BEGIN_SRC emacs-lisp
 (org-link-open
- (link
-  (:type "file"
-   :path "/tmp/emacs/lisp/simple.el"
-   :format bracket
-   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
-   :application nil
-   :search-option "(defun next-error (&optional"
-   :begin 1
-   :end 55
-   :contents-begin nil
-   :contents-end nil
-   :post-blank 0
-   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ '(link
+   (:type "file"
+    :path "/tmp/emacs/lisp/simple.el"
+    :format bracket
+    :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+    :application nil
+    :search-option "(defun next-error (&optional"
+    :begin 1
+    :end 55
+    :contents-begin nil
+    :contents-end nil
+    :post-blank 0
+    :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
  nil)
 #+END_SRC
 
@@ -2857,19 +2857,19 @@ a list that is then passed as first argument to the function
 
 #+BEGIN_SRC emacs-lisp
 (org-link-open
- (link
-  (:type "file"
-   :path "/tmp/emacs/lisp/simple.el"
-   :format bracket
-   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
-   :application nil
-   :search-option "(defun next-error (&optional"
-   :begin 1
-   :end 55
-   :contents-begin nil
-   :contents-end nil
-   :post-blank 0
-   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ '(link
+   (:type "file"
+    :path "/tmp/emacs/lisp/simple.el"
+    :format bracket
+    :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+    :application nil
+    :search-option "(defun next-error (&optional"
+    :begin 1
+    :end 55
+    :contents-begin nil
+    :contents-end nil
+    :post-blank 0
+    :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
  nil)
 #+END_SRC
 
@@ -3374,19 +3374,19 @@ function call (where ~nil~ is due to the way we called
 
 #+BEGIN_SRC emacs-lisp
 (org-link-open
- (link
-  (:type "file"
-   :path "/tmp/emacs/lisp/simple.el"
-   :format bracket
-   :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
-   :application nil
-   :search-option "(defun next-error (&optional"
-   :begin 1
-   :end 55
-   :contents-begin nil
-   :contents-end nil
-   :post-blank 0
-   :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
+ '(link
+   (:type "file"
+    :path "/tmp/emacs/lisp/simple.el"
+    :format bracket
+    :raw-link "/tmp/emacs/lisp/simple.el::(defun next-error (&optional"
+    :application nil
+    :search-option "(defun next-error (&optional"
+    :begin 1
+    :end 55
+    :contents-begin nil
+    :contents-end nil
+    :post-blank 0
+    :parent (paragraph (... :parent (section (... :parent (org-data (...))))))))
  nil)
 #+END_SRC
 
