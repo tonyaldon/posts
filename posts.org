@@ -5330,13 +5330,13 @@ WE ARE DONE!!!
 
 Have you ever wondered how org-mode toggles the visibility of headings?
 
-YES!!!  me either!
+YES!!!  Me too!
 
 Let's get into it ;)
 
 ** org-mode visibility of headings
 
-~org-mode~ is built on top of ~outline-mode~ that is responsible of the
+~org-mode~ is built on top of ~outline-mode~ which is responsible for the
 visibility changes of the headings.
 
 How does it work?
@@ -5346,14 +5346,14 @@ How does it work?
 
 1) To hide the body of a heading, ~outline-mode~ makes an overlay from
    the end of the line of the heading to the end of the body of the
-   heading, and set the property ~invisible~ of the overlay to be the
+   heading, and sets the property ~invisible~ of the overlay to be the
    symbol ~outline~.  Hence, the part of the buffer with this overlay
    is "replaced" (visually, not the content of the buffer) by
    ellipsis.  Why is this?  Because, when ~outline-mode~ is turned
    on, it adds the cons ~(outline . t)~ to the variable
-   ~buffer-invisibility-spec~ which became buffer local and is
+   ~buffer-invisibility-spec~ which becomes buffer local and is
    responsible for the invisibility of each buffer.
-2) To make visible the body of a heading, ~outline-mode~ removes any
+2) To make the body of a heading visible, ~outline-mode~ removes any
    overlays in the body of the heading that have its property
    ~invisible~ set to the symbol ~outline~.
 
@@ -5379,7 +5379,7 @@ get a good feel for their use.
 ** text properties
 
 In a buffer, each character point can have text properties attached to
-it that can be used to do many things (like controling the appearance
+it that can be used to do many things (like controlling the appearance
 of the character).
 
 For instance, in an ~emacs-lisp-mode~ buffer, with the following s-exp,
@@ -5403,7 +5403,7 @@ The character point "s" (point 2, i.e. the "s" at the second position
 in the buffer) has:
 
 1) the text property ~face~ equal to the face [[emacs:lisp/font-lock.el::(defface font-lock-keyword-face][font-lock-keyword-face]]
-   which is why it is display with a different foreground color
+   which is why it is displayed with a different foreground color
    (depending on your theme) than the text ~my-var~ for instance,
 2) the text property ~fontified~ equal to ~t~ which we don't describe
    here.
@@ -5443,7 +5443,7 @@ There are text properties here:
   fontified            t
 #+END_SRC
 
-Note that it might differs in your running emacs (different fonts,
+Note that your result may differ in your running emacs (different fonts,
 maybe information about overlays if you are using ~hl-line-mode~, ...).
 
 ** Why are we talking about text properties if the mechanism of ~outline-mode~ uses overlays?
@@ -5459,7 +5459,7 @@ Because:
    all overlays take priority over text properties.
    #+END_SRC
 
-2) buffer invisibility can also be achieve with text property (for
+2) buffer invisibility can also be achieve with text properties (for
    instance, this is what ~org-mode~ does to hide the brackets and the
    link part of links like this ~[[link][description]]~), and it is
    important to notice it.
@@ -5481,7 +5481,7 @@ In this section:
 2) we set the variable ~buffer-invisibility-spec~,
 3) we give different values to the ~invisible~ property of the overlays,
 4) we observe the appearance of the buffer,
-5) we repeat several times step 2) to 4).
+5) we repeat step 2) to 4) several times.
 6) we hope we get a good feeling of invisibility in Emacs.
 
 Also note that all the evaluations of the s-expressions are done in the
@@ -5564,7 +5564,7 @@ let you remove all the overlays in a range of the buffer that have a
 specific property set to some value (in our case the property ~invisible~
 set to ~t~ in the range 1 to 7 of the buffer).
 
-So evaluating the following s-exp
+So evaluating the following s-exp:
 
 #+BEGIN_SRC emacs-lisp
 (remove-overlays 1 7 'invisible t)
@@ -5575,7 +5575,7 @@ characters ~XXXXXX~ to reappear.
 
 *** ~buffer-invisibility-spec~ equal to ~nil~
 
-As we removed the overlay ~ov-x~, we redifined it as previously by
+As we removed the overlay ~ov-x~, we redefined it as previously by
 evaluating the following s-exp:
 
 #+BEGIN_SRC emacs-lisp
