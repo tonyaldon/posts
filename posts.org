@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-05-04 Wed 16:55>
+#+DATE: <2022-05-06 Fri 17:12>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -12,6 +12,391 @@
 
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
+
+* [2022-05-06 Fri] org-store-link... powerful and flexible | THIS IS EMACS
+:PROPERTIES:
+:CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
+:REDDIT_POST: FIXME
+:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:END:
+
+Hey org-mode fans,
+
+In [[https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/][this post]] we saw that we can open org-mode links everywhere, not only in
+org-mode buffers, thanks to the command ~org-open-at-point-global~.
+
+Specifically, we demonstrated it with:
+
+1) the link ~[[help:pcase]]~ which links to the help buffer describing
+   the macro ~pcase~ and,
+2) the link ~[[info:elisp#Current Buffer]]~ which to the elisp info node
+   "Current Buffer".
+
+We left aside two things:
+
+1) How can we store a link in the org syntax to the specific "place"
+   (in Emacs) I am visiting?
+2) When we've stored an org mode link with the command provided by
+   org-mode, how can we insert that link in our current buffer?
+
+The answers to those questions are:
+
+1) using the command ~org-store-link~ (everywhere) to store the link,
+2) using either the command ~org-insert-link~ if we want to insert the
+   link in an Org buffer or the command ~org-insert-link-global~ if we
+   want to insert the link in a any buffer.
+
+For the rest of this post we assume that we cloned the org-mode
+repository is under the directory ~/tmp/org-mode/~.
+
+Let's go!
+
+** ~org-store-link~ and ~org-link-keep-stored-after-insertion~
+
+The command ~org-store-link~ is "smart enough" to know what to do in
+many cases (~dired-mode~, visiting an ~org-mode~ file, visiting other type
+of files).
+
+For instance, if we are visiting the directory ~/tmp/org-mode/~ in
+~dired-mode~ with the point under the the file ~CONTRIBUTE~:
+
+#+BEGIN_SRC text
+/tmp/org-mode:
+doc
+etc
+.git
+lisp
+mk
+testing
+CONTRIBUTE
+COPYING
+.dir-locals.el
+.gitignore
+.gitmodules
+Makefile
+README
+README_ELPA
+request-assign-future.txt
+#+END_SRC
+
+calling ~M-x org-store-link~ stores the link
+~file:/tmp/org-mode/CONTRIBUTE~ in the variable ~org-stored-links~
+like this (assuming ~org-stored-links~ was ~nil~ before calling
+~org-store-link~)
+
+#+BEGIN_SRC emacs-lisp
+(("file:/tmp/org-mode/CONTRIBUTE" "file:/tmp/org-mode/CONTRIBUTE"))
+#+END_SRC
+
+Now, let's say we want to insert that link into an org-mode buffer.
+
+We call the function ~org-insert-link~ (bound to ~C-c C-l~ by default),
+and we select the stored link ~file:/tmp/org-mode/CONTRIBUTE~ wich
+insert the following in our org buffer:
+
+#+BEGIN_SRC org
+- [[file:/tmp/org-mode/CONTRIBUTE][file:/tmp/org-mode/CONTRIBUTE]]
+#+END_SRC
+
+Let's try to insert it again.  We call the command ~org-insert-link~
+but the link ~file:/tmp/org-mode/CONTRIBUTE~ is no longer stored.
+
+We can inspect the variable ~org-stored-links~ and see that its value is
+~nil~.  This is normal because by default the variable
+~org-link-keep-stored-after-insertion~ is set ~nil~ and so once
+a link that was in ~org-stored-links~ is inserted, it is removed from
+~org-stored-links~.
+
+If we prefer to keep the links stored even after inserting them,
+we can set ~org-link-keep-stored-after-insertion~ to ~t~ (default is ~nil~)
+like this:
+
+#+BEGIN_SRC emacs-lisp
+(setq org-link-keep-stored-after-insertion t)
+#+END_SRC
+
+** ~org-store-link~ and ~org-link-context-for-files~
+
+Let's continue with the default value.
+
+Another example.
+
+If we are visiting the file ~ol.el~ with the point on the line defining
+the variable ~org-link-context-for-files~:
+
+#+BEGIN_SRC emacs-lisp
+(defcustom org-link-context-for-files t
+  "Non-nil means file links from `org-store-link' contain context.
+...")
+#+END_SRC
+
+calling ~M-x org-store-link~ stores the link
+~"file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t"~
+with its description being ~nil~ in the
+variable ~org-stored-links~ like this
+
+#+BEGIN_SRC emacs-lisp
+((#("file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t" ...)
+  nil))
+#+END_SRC
+
+Now, in the same Org buffer as above, in another list item, we call
+the function ~org-insert-link~ (bound to ~C-c C-l~ by default):
+
+1) then we select the stored link
+   ~"file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t"~
+2) then we are asked in the minibuffer to provide a description for the
+   link and we provide the description ~org-link-context-for-files~
+3) finally the link is inserted as follow:
+
+#+BEGIN_SRC org
+- [[file:/tmp/org-mode/CONTRIBUTE][file:/tmp/org-mode/CONTRIBUTE]]
+- [[file:/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t][org-link-context-for-files]]
+#+END_SRC
+
+At the previous step ~1)~ we could have remove the search option
+(everything after the two colons ~::~) and the two colons ~::~ if we only
+wanted to link to the file.
+
+If we never want the search option (the context) when storing a link
+to a file, we can set the variable ~org-link-context-for-files~ to ~nil~
+(default value is ~t~) like this:
+
+#+BEGIN_SRC emacs-lisp
+(setq org-link-context-for-files nil)
+#+END_SRC
+
+Note that in that case when we insert the file, we are not asked to
+provide a description.
+
+** ~org-store-link~ in org-mode files
+
+If we use ~org-store-link~ in an org-mode file, the search option of the
+link to that file is picked "wisely" by the command depending of the
+position of the point (~M-x eval-expression RET (info "(org)Search
+Options")~).
+
+** built-in link types
+
+The support of ~org-store-link~ for the links we've described so far
+are hard coded in ~org-store-link~.
+
+Beside the hard coded support for storing link, org-mode provides a
+mechanism to add new link types via the function
+~org-link-set-parameters~ (we already talk about that subject in
+[[https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/][Link to a git commit from Org mode using Magit]]).
+
+And by providing a specific function for storing links depending on
+the Emacs context we can use the function ~org-store-link~ to store
+those new link types.
+
+Org provides various built-in link types with support for storing them.
+
+We can list them (if you have added other link types with store
+functions, they will be listed too) by evaluating the following s-exp
+(which is just a variation of the function ~org-store-link-functions~):
+
+#+BEGIN_SRC emacs-lisp
+(cl-loop for link in org-link-parameters
+         if (org-link-get-parameter (car link) :store)
+         collect (car link))
+;; ("eww" "rmail" "mhe" "irc" "info" "gnus" "docview" "bibtex" "bbdb" "w3m" "help")
+#+END_SRC
+
+** ~help~ link type and the mechanism of ~org-store-link~
+
+Now we focus on the ~help~ link type.
+
+It is define using the function ~org-link-set-parameters~ like this:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-set-parameters "help"
+                         :follow #'org-link--open-help
+                         :store #'org-link--store-help)
+#+END_SRC
+
+Specifically ~org-link--store-help~ is the function responsible to
+produce the links to help buffers when we call ~org-store-link~ in a help
+buffers.
+
+How does this work?
+
+Let's say we are visiting the following help buffer of the macro ~pcase~
+and we call ~M-x org-store-link~:
+
+#+BEGIN_SRC text
+pcase is a Lisp macro.
+
+(pcase EXP &rest CASES)
+
+  Probably introduced at or before Emacs version 24.1.
+
+Evaluate EXP to get EXPVAL; try passing control to one of CASES.
+
+...MORE HERE...
+#+END_SRC
+
+As we call the command ~org-store-link~ without 2 or 3 universal
+arguments (~C-u C-u~ nor ~C-u C-u C-u~), the command ~org-store-link~ does
+the following.
+
+First, ~org-store-link~ calls all the defined store functions
+(~(org-store-link-functions)~) and then
+
+1) if they all return ~nil~, try to store the links with the hard coded
+   support,
+2) if only one, which we call ~F~, returns a ~non-nil~ value, use
+   the ~:link~ value and ~:description~ value of the variable
+   ~org-store-link-plist~ (which has been set by the call to ~F~) to set
+   the local variable ~link~ and ~desc~,
+3) if more than one returns a ~non-nil~ value (that means that various
+   functions can handle/produce the link for the buffer (Emacs
+   context) we are visiting), ask us via the minibuffer to choose the
+   one we want to use and then use it to set the local variable ~link~
+   and ~desc~.
+
+As we are visiting the help buffer of the macro ~pcase~ (and we only use
+the built-in link type offer by org-mode) we are in the second case.
+
+Specifically, the function ~org-link--store-help~ is the only one that
+returned a ~non-nil~ value.
+
+So the values of the variable ~link~ and ~desc~ is produced by the
+function ~org-link--store-help~ by setting the variable
+~org-store-link-plist~.
+
+Finally, as we've never stored that link before, the function
+~org-store-link~ add it to the global variable ~org-stored-links~ (~(push
+(list link desc) org-stored-links)~).
+
+Here are the parts of ~org-store-link~ we've just discussed:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-store-link (arg &optional interactive?)
+  "..."
+  (interactive "P\np")
+  (org-load-modules-maybe)
+  (if (and (equal arg '(64)) (org-region-active-p))
+      ...
+    (setq org-store-link-plist nil)
+    (let (link cpltxt desc search custom-id agenda-link)
+      (cond
+       ((and (not (equal arg '(16)))
+             (let ((results-alist nil))
+               (dolist (f (org-store-link-functions))
+                 (when (funcall f)
+                   (push (cons f (copy-sequence org-store-link-plist))
+                         results-alist)))
+               (pcase results-alist
+                 (`nil nil)
+                 (`((,_ . ,_)) t)  ;single choice: nothing to do
+                 (`((,name . ,_) . ,_)
+                  (apply #'org-link-store-props
+                         (cdr (assoc-string
+                               (completing-read
+                                (format "Store link with (default %s): " name)
+                                (mapcar #'car results-alist)
+                                nil t nil nil (symbol-name name))
+                               results-alist)))
+                  t))))
+        (setq link (plist-get org-store-link-plist :link))
+        (setq desc (if (plist-member org-store-link-plist :description)
+                       (plist-get org-store-link-plist :description)
+                     link)))
+       ...
+       (t (setq link nil)))
+      ...
+      ;; Store and return the link
+      (if (not (and interactive? link))
+          ...
+        (if (member (list link desc) org-stored-links)
+            (message "This link has already been stored")
+          (push (list link desc) org-stored-links)
+          (message "Stored: %s" (or desc link))
+          ...)
+        (car org-stored-links)))))
+#+END_SRC
+
+Now we just have to look at the function ~org-link--store-help~ which
+returns a ~non-nil~ value only if we call it when we are in ~help-mode~
+buffer as we can see below:
+
+#+BEGIN_SRC emacs-lisp
+(defun org-link--store-help ()
+  "Store \"help\" type link."
+  (when (eq major-mode 'help-mode)
+    (let ((symbol
+           (save-excursion
+             (goto-char (point-min))
+             ;; In case the help is about the key-binding, store the
+             ;; function instead.
+             (search-forward "runs the command " (line-end-position) t)
+             (read (current-buffer)))))
+      (org-link-store-props :type "help"
+                            :link (format "help:%s" symbol)
+                            :description nil))))
+#+END_SRC
+
+What is important to note is the call to the function
+~org-link-store-props~ which set the variable ~org-store-link-plist~ (by
+side effect) which is then used in the body of ~org-store-link~.
+
+Specifically, calling ~org-link--store-help~ in the help buffer
+of the macro ~pcase~ set the variable ~org-store-link-plist~ to the
+following plist:
+
+#+BEGIN_SRC emacs-lisp
+(:type "help"
+ :link "help:pcase"
+ :description nil)
+#+END_SRC
+
+Finally to to store the link in the same Org buffer as above, in
+another list item, we call the function ~org-insert-link~ selecting the
+link to the ~pcase~ help buffer leaving blanck the description, and we
+get:
+
+#+BEGIN_SRC org
+- [[file:/tmp/org-mode/CONTRIBUTE][file:/tmp/org-mode/CONTRIBUTE]]
+- [[file:/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t][org-link-context-for-files]]
+- [[help:pcase]]
+#+END_SRC
+
+** Browse all the built-in link types that provide a store function
+
+If we want to look at the implementation of all the built-in link
+types that provide a store function, we can use the built-in command
+~rgrep~ in org-mode repository (in our case cloned under the directory
+~/tmp/org-mode/~) searching for the regexp ~:store~ which pops up the
+following ~grep~ buffer that we can navigate with the keys ~n~ and ~p~:
+
+#+BEGIN_SRC text
+-*- mode: grep; default-directory: "/tmp/org-mode/" -*-
+Grep started at Fri May  6 16:17:31
+
+find [...] -exec grep --color=auto -nH --null -e \:store \{\} +
+./lisp/ol.el:98:are, in this order, `:follow', `:export', and `:store', described
+./lisp/ol.el:121:`:store'
+./lisp/ol.el:1012:The functions are defined in the `:store' property of
+./lisp/ol.el:1033:	   do (setq store-func (org-link-get-parameter (car link) :store))
+./lisp/ol.el:1389:                         :store #'org-link--store-help)
+./lisp/ol-w3m.el:49:(org-link-set-parameters "w3m" :store #'org-w3m-store-link)
+./lisp/ol-eww.el:55:			 :store #'org-eww-store-link)
+./lisp/ol-irc.el:78:			 :store #'org-irc-store-link
+./lisp/ol-bibtex.el:487:			 :store #'org-bibtex-store-link)
+./lisp/ol-docview.el:56:			 :store #'org-docview-store-link)
+./lisp/ol-eshell.el:34:			 :store #'org-eshell-store-link)
+./lisp/ol-mhe.el:77:(org-link-set-parameters "mhe" :follow #'org-mhe-open :store #'org-mhe-store-link)
+./lisp/ol-rmail.el:48:			 :store #'org-rmail-store-link)
+./lisp/ol-bbdb.el:222:			 :store #'org-bbdb-store-link)
+./lisp/ol-info.el:46:			 :store #'org-info-store-link)
+./lisp/ol-man.el:32:			 :store #'org-man-store-link)
+./lisp/ol-gnus.el:84:			 :store #'org-gnus-store-link)
+
+Grep finished with 17 matches found at Fri May  6 16:17:31
+#+END_SRC
+
+WE ARE DONE!!!
 
 * [2022-05-04 Wed] org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS
 :PROPERTIES:
