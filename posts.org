@@ -16,7 +16,7 @@
 * [2022-05-06 Fri] org-store-link... powerful and flexible | THIS IS EMACS
 :PROPERTIES:
 :CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
-:REDDIT_POST: FIXME
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/
 :COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
 :END:
 
