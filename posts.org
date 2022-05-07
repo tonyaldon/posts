@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #+TITLE: Posts
 #+AUTHOR: Tony aldon
-#+DATE: <2022-05-06 Fri 17:12>
+#+DATE: <2022-05-07 Sat 08:25>
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
@@ -35,7 +35,7 @@ Specifically, we demonstrated it with:
 We left aside two things:
 
 1) How can we store a link in the org syntax to the specific "place"
-   (in Emacs) we am visiting?
+   (in Emacs) we are visiting?
 2) When we've stored an org mode link with the command provided by
    org-mode, how can we insert that link in our current buffer?
 
@@ -243,13 +243,13 @@ the following.
 First, ~org-store-link~ calls all the defined store functions
 (~(org-store-link-functions)~) and then
 
-1) if they all return ~nil~, try to store the links with the hard coded
+1) if they all return ~nil~, try to store the link with the hard coded
    support,
-2) if only one, which we call ~F~, returns a ~non-nil~ value, use
+2) if only one, which we call ~F~, returns a non-nil value, use
    the ~:link~ value and ~:description~ value of the variable
    ~org-store-link-plist~ (which has been set by the call to ~F~) to set
    the local variable ~link~ and ~desc~,
-3) if more than one returns a ~non-nil~ value (that means that various
+3) if more than one returns a non-nil value (that means that various
    functions can handle/produce the link for the buffer (Emacs
    context) we are visiting), ask us via the minibuffer to choose the
    one we want to use and then use it to set the local variable ~link~
