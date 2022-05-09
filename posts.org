@@ -5231,7 +5231,7 @@ Hey Emacsers,
 
 How are you doing?
 
-I'm getting excited about this post because when I understood how
+I'm excited about this post because when I understood how
 [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] works, it opened new horizons for me in the world of
 Elisp.
 
@@ -5251,7 +5251,7 @@ You can get emacs's source code by running the following command:
 
 [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is a minor mode that highlights the current line.
 
-If there is multiple windows in your frame using [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] you can
+If there are multiple windows in your frame using [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] you can
 control whether all windows have the line highlighted or only the
 ~selected-window~ with the option [[emacs:lisp/hl-line.el::(defcustom hl-line-sticky-flag][hl-line-sticky-flag]].
 
@@ -5264,13 +5264,13 @@ entire line in the current buffer.
 
 *** How does it work?
 
-[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] moves an overlay responsible to highlight the current
+[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] moves an overlay responsible for highlighting the current
 line after each command call.  This is done by adding a specific
 function to the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] when the mode [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is
 turned on.
 
 If you are already familiar with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] and Emacs overlays,
-you're done.
+you're good.
 
 But, if not, let's break things down together.
 
@@ -5321,7 +5321,7 @@ What exactly does [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-hig
 3) moves (places) this overlay on the current line (calling the
    function [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]]).
 
-Here the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] (where I removed some details):
+Here's the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] (I have removed some details):
 
 #+BEGIN_SRC emacs-lisp
 (defun hl-line-highlight ()
@@ -5338,7 +5338,7 @@ Here the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line
 
 The function [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]] uses the function ~make-overlay~ to
 make the overlay and uses the function [[emacs:src/buffer.c::DEFUN ("overlay-put"][overlay-put]] to set the ~priority~
-and ~face~ property of the new created overlay:
+and ~face~ property of the newly created overlay:
 
 #+BEGIN_SRC emacs-lisp
 (defun hl-line-make-overlay ()
@@ -5367,7 +5367,7 @@ We have left out some details (the functions [[emacs:lisp/hl-line.el::(defun hl-
 ~change-major-mode-hook~), because our goal was to focus on the
 mechanism and not all the options and implementation details.
 
-I hope this useful.
+I hope this was useful.
 
 *** ~global-hl-line-mode~
 
@@ -5457,12 +5457,12 @@ otherwise the error might happen repeatedly and make Emacs nonfunctional.
 #+END_SRC
 
 This tells us that it is safe to play with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] because if
-we add it a function that raises an error the function will be
+we add a function to it that raises an error the function will be
 unconditionally removed.
 
 So let's add to [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] a symbol that has no function
-definition (so raises the error ~void-function~ when called as a
-function).  So by evaluating the following s-exp (~eval-last-sexp~ bound
+definition (ie. raises the error ~void-function~ when called as a
+function). By evaluating the following s-exp (~eval-last-sexp~ bound
 to ~C-x C-e~):
 
 #+BEGIN_SRC emacs-lisp
@@ -5527,7 +5527,7 @@ expressions:
 (message ":::::::: print me ::::::::")
 #+END_SRC
 
-Then with the point after the last s-exp (last parenthesis), we do in
+Then, with the point after the last s-exp (last parenthesis), we do in
 order (without doing anything else, this is important for the messages
 we want to see printed):
 
@@ -5579,7 +5579,7 @@ of headings?]], we already played with overlays specifically the ~invisible~
 property of overlay.  We also know that overlays take priority over
 text properties.
 
-Here, we see:
+Below we will see:
 
 1) how to move overlays ([[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]]) and,
 2) which overlay wins when they overlap (~priority~ property).
@@ -5628,13 +5628,13 @@ the same way [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-m
 (move-overlay ov-x 7 10)
 #+END_SRC
 
-When more than one overlay overlap, Emacs decides for each property,
+When more than one overlay overlaps, Emacs decides for each property
 which overlay "wins" (see [[info:elisp#Overlay
 Properties][info:elisp#Overlay Properties]]) over the
 others by looking up at the overlay property ~priority~ which should be
-a positive integer or ~nil~, thought the higher value "wins".
+a positive integer or ~nil~.
 
-Let's see this on our example.
+Let's see this in our example.
 
 First, we set the overlay ~ov-x~ to have a ~priority~ equal to ~10~ and the
 overlay ~ov-y~ to have a priority equal to ~20~ by evaluating the
@@ -5657,7 +5657,7 @@ The buffer ~*overlays*~ shows the characters ~BAR~ with a background red
 that corresponds to the overlay ~ov-y~ which have a priority ~20~ superior
 to the priority ~10~ of the overlay ~ov-x~.
 
-Now let's make ~ov-x~ wins by raising its priority to ~30~:
+Now let's make ~ov-x~ win by raising its priority to ~30~:
 
 #+BEGIN_SRC emacs-lisp
 (overlay-put ov-x 'priority 30)
