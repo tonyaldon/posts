@@ -25,6 +25,7 @@ git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 * Read the posts on Reddit
 
+- [2022-05-11 Wed] [[https://www.reddit.com/r/emacs/comments/une2d8/orgmode_links_in_2022_implementation_packages/][org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS]]
 - [2022-05-06 Fri] [[https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/][org-store-link... powerful and flexible | THIS IS EMACS]]
 - [2022-05-04 Wed] [[https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/][org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS]]
 - [2022-04-29 Fri] [[https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/][Link to a git commit from Org mode using Magit | THIS IS EMACS]]

@@ -16,6 +16,7 @@
 * [2022-05-11 Wed] org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS :posts:
 :PROPERTIES:
 :CUSTOM_ID: /2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/
+:REDDIT_POST: https://www.reddit.com/r/emacs/comments/une2d8/orgmode_links_in_2022_implementation_packages/
 :COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
 :END:
 
