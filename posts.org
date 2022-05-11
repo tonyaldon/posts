@@ -13,6 +13,248 @@
 #+LINK: emacs      ./emacs/
 #+LINK: org-mode   ./org-mode/
 
+* [2022-05-11 Wed] org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS :posts:
+:PROPERTIES:
+:CUSTOM_ID: /2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/
+:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:END:
+
+Hey Emacsers,
+
+I hope you are doing well.
+
+In the last few weeks, we have dedicated 6 posts to org-mode links.
+
+Our interest was not only to show the specific features of
+org-mode links but also to see how they are implemented.
+
+In this post, the last one about org-mode links, we list ALL
+the videos, articles and packages related to org-mode links.
+
+It is unrealistic to think that it is possible to do so.  But, we can
+try.  And If you think about any video, article or package that
+should be part of that list, please do share it in the comment section
+below.
+
+Let's go!
+
+** Implementation
+
+In the post [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations | COME
+WITH ME on this JOURNEY into the heart of the command
+org-open-at-point]], we looked at the implementation of ~org-open-at-point~.
+
+To do so, we also looked at the functions: ~org-element-context~,
+~org-element--object-lex~, ~org-element-link-parser~,
+~org-link-expand-abbrev~, ~org-link-open~, ~org-link-open-as-file~ and
+~org-open-file~.
+
+In the post [[https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/][Did you know that Org links in property drawers are not
+links?]], we looked at the functions ~org-element-link-parser~,
+~org-link-make-regexps~, ~org-open-at-point~ and also the variable
+~org-link-any-re~.
+
+In the post [[https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/][FULL example of org-mode links: internal links and search
+options]], instead of "explaining" the implementation of the function
+~org-link-search~ we gave an full example that demonstrates its behavior
+and provided some Elisp examples of the functions and variables used by
+~org-link-search~: ~case-fold-search~, ~replace-regexp-in-string~,
+~string-to-char~, ~split-string~, ~substring~ and ~regexp-quote~.
+
+In the post [[https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/][Link to a git commit from Org mode using Magit | THIS IS
+EMACS]], we looked at the functions ~org-link-open~,
+~org-link-get-parameter~ and ~org-link--open-elisp~.
+
+In the post [[https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/][org-mode links everywhere, not only in org-mode buffers |
+THIS IS EMACS]], we looked at ~org-open-at-point-global~ and
+~org-link-open-from-string~.
+
+In the post [[https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/][org-store-link... powerful and flexible | THIS IS EMACS]],
+we looked at ~org-store-link~ and ~org-link--store-help~.
+
+** Videos
+*** Zaiste Programming
+
+In his series [[https://www.youtube.com/watch?v=rCMh7srOqvw&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&ab_channel=ZaisteProgramming][DoomCasts: Emacs Doom Screencasts]] Zaiste dedicates the
+episode 10, 11 and 12 to org-mode links.
+
+In [[https://www.youtube.com/watch?v=BRqjaN4-gGQ&ab_channel=ZaisteProgramming][Emacs Doom E10: Org Mode - Links, Hyperlinks and more]], the focus is
+on internal links to headline, file links, links to url, elisp link
+type (use for instance to open org agenda with ~org-agenda~), ~shell~ link
+type (to list files in a directory) and ~org-insert-link~.
+
+In [[https://www.youtube.com/watch?v=Febe4lUK5G4&ab_channel=ZaisteProgramming][Emacs Doom E11: Org Mode - Custom Link Types]] Zaist describes how to
+add a new link type using ~org-add-link-type~.  Note that
+~org-add-link-type~ is obsolete since org-mode ~9.0~ but still supported.
+
+Since ~9.0~ we use ~org-link-set-parameters~ to add the links:
+
+#+BEGIN_SRC emacs-lisp
+;; from the video
+(defun make-youtube-link (youtube_id)
+  (browse-url (concat "https://www.youtube.com/embed/" youtube_id)))
+
+(org-add-link-type "yt" #'make-youtube-link) ; obsolete since 9.0
+
+;; since 9.0
+(org-link-set-parameters "yt" :follow #'make-youtube-link)
+#+END_SRC
+
+This allows us to open the following link ~[[yt:Febe4lUK5G4]]~ in the
+browser with ~org-open-at-point~ (bound to ~C-c C-o~ by default).
+
+
+In [[https://www.youtube.com/watch?v=aU1EV8gzZb8&ab_channel=ZaisteProgramming][Emacs Doom E12: Org Mode - Linking to words & Bookmarks]] the focus
+is on using command ~org-store-link~ on an org-mode headline and the
+behavior of ~org-open-at-point~ when we modify the variable
+~org-link-search-must-match-exact-headline~.
+
+*** Rainer König
+
+In his series [[https://www.youtube.com/watch?v=sQS06Qjnkcc&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&ab_channel=RainerK%C3%B6nig][OrgMode tutorial]] Rainer König dedicates the episode
+~E05S01~ and ~E05S02~ to org-mode links.
+
+In [[https://www.youtube.com/watch?v=eoIfLS4zMa8&ab_channel=RainerK%C3%B6nig][OrgMode E05S01: Linking (internal)]] the focus is on ~org-insert-link~,
+link to named target (~#+NAME:~), link to headline with ~CUSTOM_ID~
+property, radio targets (enclosed by triple angular brackets like this
+~<<<radio target>>>~).
+
+At some point he says that we are responsible for the ~CUSTOM_ID~ to
+make them unique through out the document which is true.
+
+We take the opportunity to mention the command ~org-lint~ that checks
+the current Org buffer for syntax mistakes.  This command reports if
+there are duplicated ~CUSTOM_ID~ property.
+
+For instance, if we call the command ~org-lint~ in the following Org
+buffer (with two ~CUSTOM_ID~ with the value ~foo~):
+
+#+BEGIN_SRC org
+,* headline 1
+:PROPERTIES:
+:CUSTOM_ID: foo
+:END:
+,* headline 2
+:PROPERTIES:
+:CUSTOM_ID: foo
+:END:
+#+END_SRC
+
+the buffer ~*Org Lint*~ pops up with the following content:
+
+#+BEGIN_SRC text
+      3 nil   Duplicate CUSTOM_ID property "foo"
+      7 nil   Duplicate CUSTOM_ID property "foo"
+#+END_SRC
+
+In [[https://www.youtube.com/watch?v=0TS3pTNGFIA&ab_channel=RainerK%C3%B6nig][OrgMode E05S02: Linking (external)]] Rainer talks about links of type
+file, url, bbdb.  He shows how to use ~id~ links (~org-id-get-create~ and
+some custom functions).  He also demonstrates how ~id~ links does not
+break when we archive a subtree with the command
+~org-archive-subtree-default~ (bound to ~C-c C-x C-a~ by default).
+
+*** John Kitchin
+
+In [[https://www.youtube.com/watch?v=5haX95nk02E&ab_channel=JohnKitchin][New link features in org-mode v9.0]] John Kitchin demonstrates
+how to defines new link types using the function
+~org-link-set-parameters~:
+
+1) the ~:face~ property is used to make links green,
+2) the ~:display~ property is used to show "all" the link,
+3) the ~:help-echo~ is used to produce a dynamic tooltip for some links,
+4) the ~:follow~ property is used to define a function to open ~file~ type
+   link that let you choose the command to use to open a file with
+   completion using ~helm~,
+5) the ~:keymap~ property is used to define a keymap only active on some
+   links,
+6) the properties ~:complete~, ~:store~ and ~:activate-func~ are also
+   demonstrated.
+
+This video is completed with this article [[https://kitchingroup.cheme.cmu.edu/blog/2016/11/04/New-link-features-in-org-9/][New link features in org 9]].
+
+** Articles
+
+In [[https://kitchingroup.cheme.cmu.edu/blog/2016/11/04/New-link-features-in-org-9/][New link features in org 9]] John Kitchin demonstrates how to defines
+new link types using the function ~org-link-set-parameters~.  This
+article is completed with this videos [[https://www.youtube.com/watch?v=5haX95nk02E&ab_channel=JohnKitchin][New link features in org-mode
+v9.0]].
+
+Kaushal Modi wrote two articles about org-mode links:
+
+[[https://scripter.co/linking-and-exporting-org-info-links/][Linking and Exporting Org "info:" links]] with the following abstract:
+
+#+BEGIN_SRC text
+Journey of Org links from copying (storing) them, inserting them in
+Org documents and exporting them. The focus of this post is on the
+info: type Org links, but the same concept would apply to any Org link
+type.
+#+END_SRC
+
+and [[https://scripter.co/improving-ox-hugo-exported-org-info-links/][Improving ox-hugo exported Org "info:" links]] with the following
+abstract:
+
+#+BEGIN_SRC text
+In my previous post, I talked about how info: Org link export support
+got added to ox-hugo. This post is about making those exported links a
+tiny 🤏 bit better.
+#+END_SRC
+
+In [[https://www.eigenbahn.com/2021/11/14/custom-org-link-abbrevs][Custom Org-mode link abbrevs]] Eigenbahn "blends" link abbreviations
+and link types to have fast copy/paste experience with link
+abbreviations.  He uses ~org-link-set-parameters~ and advices the
+command ~org-yank~ to do so.
+
+In [[https://localauthor.github.io/posts/aw-select.html][Emacs: With ace-window and link-hint, open links exactly where you
+want them]] Grant Rosson describes, as said in the abstract:
+
+#+BEGIN_SRC text
+how the Emacs package link-hint can be combined with ace-window to
+allow you to select, on-the-fly, which window a link will open
+in—instead of letting fate, or custom, or Emacs decide for you.
+#+END_SRC
+
+** Packages
+
+The repository https://git.sr.ht/~bzg/org-contrib contains many
+add-ons to Org.
+
+Doing a recursive grep inside the repository we can find the following
+link types that we list here without any description:
+
+- ~mew~ in lisp/ol-mew.el,
+- ~vm~ and ~vm-imap~ in lisp/ol-vm.el,
+- ~mairix~ in lisp/org-mairix.el,
+- ~notmuch~, ~notmuch-search~ and ~notmuch-tree~ in lisp/ol-notmuch.el,
+- ~elisp-symbol~ in lisp/ol-elisp-symbol.el
+- ~x-together-item~, ~addressbook~, ~skim~, ~acrobat~, ~mac-outlook~,
+  ~mac-evernote~, ~x-devonthink-item~ and message in lisp/org-mac-link.el
+- ~gitbare~ and ~git~ in lisp/ol-git-link.el
+- ~molecule~ in lisp/ob-smiles.el,
+- ~wl~ in lisp/ol-wl.el
+- ~tel~ and ~org-contact~ in lisp/org-contacts.el
+- ~bookmark~ in lisp/ol-bookmark.el
+
+In the comments of the previous posts, the following packages have
+been proposed in comments:
+
+- https://github.com/magit/orgit: This package defines several Org
+  link types, which can be used to link to certain Magit buffers.
+- https://github.com/magit/orgit-forge/: This package defines the Org
+  link type orgit-topic, which can be used to link to Forge topic
+  buffers.  This is similar to the orgit package, which links to
+  various Magit buffers.
+
+I've used https://grep.app/ to search across public GitHub
+repository to look for link types.
+
+There is so many.
+
+Can you help me and add in the comment packages that you find helpful
+related to org-mode links.  I will add them later in the
+https://github.com/tonyaldon/posts.
+
+WE ARE DONE!!!
+
 * [2022-05-06 Fri] org-store-link... powerful and flexible | THIS IS EMACS
 :PROPERTIES:
 :CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
