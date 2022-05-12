@@ -41,7 +41,7 @@ Let's go!
 
 ** Implementation
 
-In the post [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][Search options in file links | link abbreviations | COME
+In the post [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME
 WITH ME on this JOURNEY into the heart of the command
 org-open-at-point]], we looked at the implementation of ~org-open-at-point~.
 
@@ -50,27 +50,27 @@ To do so, we also looked at the functions: ~org-element-context~,
 ~org-link-expand-abbrev~, ~org-link-open~, ~org-link-open-as-file~ and
 ~org-open-file~.
 
-In the post [[https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/][Did you know that Org links in property drawers are not
+In the post [[#/2022-04-09-org-links-in-property-drawers-are-not-links/][Did you know that Org links in property drawers are not
 links?]], we looked at the functions ~org-element-link-parser~,
 ~org-link-make-regexps~, ~org-open-at-point~ and also the variable
 ~org-link-any-re~.
 
-In the post [[https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/][FULL example of org-mode links: internal links and search
+In the post [[#/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/][FULL example of org-mode links: internal links and search
 options]], instead of "explaining" the implementation of the function
 ~org-link-search~ we gave an full example that demonstrates its behavior
 and provided some Elisp examples of the functions and variables used by
 ~org-link-search~: ~case-fold-search~, ~replace-regexp-in-string~,
 ~string-to-char~, ~split-string~, ~substring~ and ~regexp-quote~.
 
-In the post [[https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/][Link to a git commit from Org mode using Magit | THIS IS
+In the post [[#/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/][Link to a git commit from Org mode using Magit | THIS IS
 EMACS]], we looked at the functions ~org-link-open~,
 ~org-link-get-parameter~ and ~org-link--open-elisp~.
 
-In the post [[https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/][org-mode links everywhere, not only in org-mode buffers |
+In the post [[#/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/][org-mode links everywhere, not only in org-mode buffers |
 THIS IS EMACS]], we looked at ~org-open-at-point-global~ and
 ~org-link-open-from-string~.
 
-In the post [[https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/][org-store-link... powerful and flexible | THIS IS EMACS]],
+In the post [[#/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/][org-store-link... powerful and flexible | THIS IS EMACS]],
 we looked at ~org-store-link~ and ~org-link--store-help~.
 
 ** Videos
