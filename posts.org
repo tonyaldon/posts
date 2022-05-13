@@ -215,47 +215,479 @@ in—instead of letting fate, or custom, or Emacs decide for you.
 #+END_SRC
 
 ** Packages
+*** org-contrib
 
 The repository https://git.sr.ht/~bzg/org-contrib contains many
 add-ons to Org.
 
-Doing a recursive grep inside the repository we can find the following
-link types that we list here without any description:
+Doing a recursive grep inside the repository for the function
+~org-link-set-parameters~ we can find the following link types.
 
-- ~mew~ in lisp/ol-mew.el,
-- ~vm~ and ~vm-imap~ in lisp/ol-vm.el,
-- ~mairix~ in lisp/org-mairix.el,
-- ~notmuch~, ~notmuch-search~ and ~notmuch-tree~ in lisp/ol-notmuch.el,
-- ~elisp-symbol~ in lisp/ol-elisp-symbol.el
-- ~x-together-item~, ~addressbook~, ~skim~, ~acrobat~, ~mac-outlook~,
-  ~mac-evernote~, ~x-devonthink-item~ and message in lisp/org-mac-link.el
-- ~gitbare~ and ~git~ in lisp/ol-git-link.el
-- ~molecule~ in lisp/ob-smiles.el,
-- ~wl~ in lisp/ol-wl.el
-- ~tel~ and ~org-contact~ in lisp/org-contacts.el
-- ~bookmark~ in lisp/ol-bookmark.el
+**** ol-mew.el
 
-In the comments of the previous posts, the following packages have
-been proposed in comments:
+This file implements links to Mew messages from within Org-mode.
 
-- https://github.com/magit/orgit: This package defines several Org
-  link types, which can be used to link to certain Magit buffers.
-- https://github.com/magit/orgit-forge/: This package defines the Org
-  link type orgit-topic, which can be used to link to Forge topic
-  buffers.  This is similar to the orgit package, which links to
-  various Magit buffers.
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-mew.el#L152][mew]].
 
-I've used https://grep.app/ to search across public GitHub
-repository to look for link types.
+**** ol-vm.el
 
-There is so many.
+This file implements links to VM messages and folders from within
+Org-mode.
 
-Can you help me and add in the comment packages that you find helpful
-related to org-mode links.  I will add them later in the
-https://github.com/tonyaldon/posts.
+It defines the link types [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-vm.el#L59][vm]] and [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-vm.el#L60][vm-imap]].
 
-WE ARE DONE!!!
+**** org-mairix.el
 
+Support for hooking mairix search into Org for different MUAs.
+
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mairix.el#L85][mairix]].
+
+**** ol-notmuch.el
+
+Links to notmuch messages.
+
+It defines the link types [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L70][notmuch]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L103][notmuch-search]] and [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L129][notmuch-tree]].
+
+**** ol-elisp-symbol.el
+
+Links to Emacs-lisp symbols.
+
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-elisp-symbol.el#L81][elisp-symbol]].
+
+**** org-mac-link.el
+
+Insert org-mode links to items selected in various Mac apps.
+
+It defines the link types [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L498][x-together-item]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L557][addressbook]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L592][skim]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L651][acrobat]],
+[[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L701][mac-outlook]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L813][mac-evernote]], [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L874][x-devonthink-item]] and [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L922][message]].
+
+**** ol-git-link.el
+
+Links to specific file version.
+
+It defines the link types [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-git-link.el#L74][gitbare]] and [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-git-link.el#L97][git]].
+
+**** ob-smiles.el
+
+Org-mode Babel support for SMILES.
+
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ob-smiles.el#L56][molecule]].
+
+**** ol-wl.el
+
+Links to Wanderlust messages.
+
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-wl.el#L114][wl]].
+
+**** org-contacts.el
+
+This file contains the code for managing your contacts into Org-mode.
+
+It defines the link types [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-contacts.el#L1120][tel]] and [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-contacts.el#L1160][org-contact]].
+
+**** ol-bookmark.el
+
+Links to bookmarks.
+
+It defines the link type [[https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-bookmark.el#L52][bookmark]].
+
+*** On GitHub
+
+By doing a search for the function ~org-link-set-parameters~ (used to
+define new Org link types) using https://grep.app/ we can find "all"
+the org link types defined in GitHub public repositories.
+
+There are more than 150 of them.
+
+I tried some of them, read the source of others.
+
+One of these Org link types may meet your needs or you can
+read their implementations to get inspired to write your own.
+
+So here is the list of Org link types I found (the urls
+point to the definition on GitHub of these links pinned to the last
+revision while I was writing this post).
+
+**** calibredb.el
+
+https://github.com/chenyanming/calibredb.el:  Yet another [[https://calibre-ebook.com/][calibre]]
+client for emacs.
+
+~calibredb.el~ defines the link type [[https://github.com/chenyanming/calibredb.el/blob/232fa1cf3af08200af439d1cbb5a131f38286183/calibredb-org.el#L70][calibredb]].
+
+**** deft
+
+https://github.com/jrblevin/deft:  Deft is an Emacs mode for quickly
+browsing, filtering, and editing directories of plain text notes,
+inspired by Notational Velocity.
+
+~deft~ defines the link type [[https://github.com/jrblevin/deft/blob/28be94d89bff2e1c7edef7244d7c5ba0636b1296/deft.el#L1793][deft]].
+
+**** doomemacs
+
+https://github.com/doomemacs/doomemacs:  Doom is a configuration
+framework for [GNU Emacs] tailored for Emacs bankruptcy veterans who
+want less framework in their frameworks, a modicum of stability (and
+reproducibility) from their package manager, and the performance of a
+hand rolled config (or better).
+
+~doomemacs~ defines the link types [[https://github.com/doomemacs/doomemacs/blob/8a27eb99bec5a955833b6d23f431c5cc39e91f7f/modules/lang/org/config.el#L579][kbd]], [[https://github.com/doomemacs/doomemacs/blob/8a27eb99bec5a955833b6d23f431c5cc39e91f7f/modules/lang/org/config.el#L584][doom-package]] and [[https://github.com/doomemacs/doomemacs/blob/8a27eb99bec5a955833b6d23f431c5cc39e91f7f/modules/lang/org/config.el#L588][doom-module]].
+
+**** ebdb
+
+https://github.com/girzel/ebdb: EBDB is a contact
+management/addressbook package for Emacs.
+
+~ebdb~ defines the link type [[https://github.com/girzel/ebdb/blob/321caee9be5bc432dbef5ea4250b09dbaf1a0c2b/ebdb-org.el#L65][ebdb]].
+
+**** ebib
+
+https://github.com/joostkremers/ebib:  Ebib is a BibTeX database
+manager that runs in GNU Emacs.
+
+~ebib~ defines the link type [[https://github.com/joostkremers/ebib/blob/0e243a78f435038dda31953c5b48cbddf2a89e27/org-ebib.el#L76][ebib]].
+
+**** ejira
+
+https://github.com/nyyManni/ejira: JIRA integration to Emacs org-mode
+
+~ejira~ defines the link type [[https://github.com/nyyManni/ejira/blob/1dc2176ec49ec19516e68130552aae34cda4886c/ejira-core.el#L815][jirauser]].
+
+**** el-easydraw
+
+https://github.com/misohena/el-easydraw:  Emacs Easy Draw is a
+drawing tool that runs inside Emacs.
+
+~el-easydraw~ defines the link type [[https://github.com/misohena/el-easydraw/blob/701bfaaebca2a0f557de2bdfe65f4464c7837d12/edraw-org.el#L127][edraw]].
+
+**** elfeed
+
+https://github.com/skeeto/elfeed:  Elfeed is an extensible web feed
+reader for Emacs, supporting both Atom and RSS.
+
+~elfeed~ defines the link type [[https://github.com/skeeto/elfeed/blob/162d7d545ed41c27967d108c04aa31f5a61c8e16/elfeed-link.el#L75][elfeed]].
+
+**** elpher
+
+https://github.com/emacsmirror/elpher:  Elpher aims to provide a
+full-featured combination gopher and gemini client for GNU Emacs.
+
+~elpher~ defines the link types [[https://github.com/emacsmirror/elpher/blob/bf0dd36eb2f5b339c6b561dbe3ee9693565b484b/elpher.el#L2127][elpher]], [[https://github.com/emacsmirror/elpher/blob/bf0dd36eb2f5b339c6b561dbe3ee9693565b484b/elpher.el#L2133][gemini]], [[https://github.com/emacsmirror/elpher/blob/bf0dd36eb2f5b339c6b561dbe3ee9693565b484b/elpher.el#L2138][gopher]] and [[https://github.com/emacsmirror/elpher/blob/bf0dd36eb2f5b339c6b561dbe3ee9693565b484b/elpher.el#L2143][finger]].
+
+**** emacs-application-framework
+
+https://github.com/emacs-eaf/emacs-application-framework: The vision
+of the Emacs Application Framework (EAF) project is, while fully
+retaining the rich history, culture, and ecosystem of Emacs and Emacs
+Lisp, to open up completely new doors to the ecosystems of Python,
+Qt6, and even JavaScript.  EAF extends Emacs to the world of modern
+graphics, but still preserving the extensibility and customizability
+of Emacs.  It will be the key to ultimately Live in Emacs
+
+~emacs-application-framework~ defines the link types ~docview~, ~pdfview~
+and ~pdftools~ in the [[https://github.com/emacs-eaf/emacs-application-framework/blob/71f18a6ccda910a6b8da7bb21c1e24be5e05cde7/extension/eaf-org.el#L92][extension/eaf-org.el#L92]] and also [[https://github.com/emacs-eaf/emacs-application-framework/blob/71f18a6ccda910a6b8da7bb21c1e24be5e05cde7/extension/eaf-org.el#L181][eaf]].
+
+**** emacs-document
+
+https://github.com/lujun9972/emacs-document:  Translate emacs
+documents to Chinese for convenient reference.
+
+~emacs-document~ defines the link type [[https://github.com/lujun9972/emacs-document/blob/63b37f7cf8166065f3d162080dd74e7ac61ccc27/auto_publish.el#L68][video]].
+
+**** emacs-webkit
+
+https://github.com/akirakyle/emacs-webkit:  A successor to xwidget-webkit.
+
+~emacs-webkit~ defines the link type [[https://github.com/akirakyle/emacs-webkit/blob/96a4850676b74ffa55b52ff8e9824f7537df6a47/webkit.el#L542][webkit]].
+
+**** fanyi.el
+
+https://github.com/condy0919/fanyi.el:  fanyi.el is a simple yet
+powerful multi-dictionaries interface for Emacs.
+
+~fanyi.el~ defines the link type [[https://github.com/condy0919/fanyi.el/blob/b01cb24209d223ae0e7281c279daab87800ee7f4/ol-fanyi.el#L34][fanyi]].
+
+**** holy-books
+
+https://github.com/alhassy/holy-books:  An Emacs interface to the
+Quran and the Bible: Org-mode links, tooltips, and Lisp look-ups.
+
+~holy-books~ defines the link types [[https://github.com/alhassy/holy-books/blob/02c2956d36631d3d8c8b4bacdcf0a5cdd1f3136d/holy-books.el#L198][quran]], [[https://github.com/alhassy/holy-books/blob/02c2956d36631d3d8c8b4bacdcf0a5cdd1f3136d/holy-books.el#L237][Quran]], [[https://github.com/alhassy/holy-books/blob/02c2956d36631d3d8c8b4bacdcf0a5cdd1f3136d/holy-books.el#L368][bible]], [[https://github.com/alhassy/holy-books/blob/02c2956d36631d3d8c8b4bacdcf0a5cdd1f3136d/holy-books.el#L408][Bible]] and
+[[https://github.com/alhassy/holy-books/blob/02c2956d36631d3d8c8b4bacdcf0a5cdd1f3136d/holy-books.el#L81][basmala]].
+
+**** mu
+
+https://github.com/djcb/mu:  mu is a tool for dealing with e-mail messages stored in the
+Maildir-format.
+
+~mu~ defines the link type [[https://github.com/djcb/mu/blob/9062b9d67f99220c1543d5515f3efe36c7448a08/mu4e/mu4e-org.el#L143][mu4e]].
+
+**** mu4e-dashboard
+
+https://github.com/rougier/mu4e-dashboard:  mu4e dashboard provides a
+new =mu4e= org link type that allows to execute various mu4e queries
+when clicked.
+
+~mu4e-dashboard~ defines the link type [[https://github.com/rougier/mu4e-dashboard/blob/3e080af2b86d73bc3757c5e55a4676f33ce02b3b/mu4e-dashboard.el#L60][mu]].
+
+**** org-annotate
+
+https://github.com/girzel/org-annotate:   Provides a new link type
+for Org that allows you to create annotations on arbitrary chunks of
+text.
+
+~org-annotate~ defines the link type [[https://github.com/girzel/org-annotate/blob/0297290f1cb1d31b264632e3f4cb4013956b5b94/org-annotate.el#L60][note]].
+
+**** org-brain
+
+https://github.com/Kungsgeten/org-brain:  org-brain implements a
+variant of [[https://en.wikipedia.org/wiki/Concept_map][concept mapping]] in Emacs, using [[http://orgmode.org/][org-mode]].
+
+~org-brain~ defines the link types [[https://github.com/Kungsgeten/org-brain/blob/46ca9f766322cff31279ecdf02251ff24a0e9431/org-brain.el#L3373][brain]], [[https://github.com/Kungsgeten/org-brain/blob/46ca9f766322cff31279ecdf02251ff24a0e9431/org-brain.el#L3378][brain-child]], [[https://github.com/Kungsgeten/org-brain/blob/46ca9f766322cff31279ecdf02251ff24a0e9431/org-brain.el#L3382][brain-parent]],
+[[https://github.com/Kungsgeten/org-brain/blob/46ca9f766322cff31279ecdf02251ff24a0e9431/org-brain.el#L3386][brain-friend]] and [[https://github.com/Kungsgeten/org-brain/blob/46ca9f766322cff31279ecdf02251ff24a0e9431/org-brain.el#L3416][brainswitch]].
+
+**** org-jira
+
+https://github.com/ahungry/org-jira:  Use Jira in Emacs org-mode.
+
+~org-jira~ defines the link type [[https://github.com/ahungry/org-jira/blob/c0c0086419b4e68bb45bf609931916d6d8ae48a2/org-jira.el#L2382][jira]].
+
+**** org-krita
+
+https://github.com/lepisma/org-krita:  Minor mode for working with
+[[https://krita.org/en/][krita]] notes, sketches etc. in org mode.
+
+~org-krita~ defines the link type [[https://github.com/lepisma/org-krita/blob/7e334951b8de8f2f1c8cbe5068e7dfe6b9e9808f/org-krita.el#L38][krita]].
+
+**** org-music
+
+https://github.com/tecosaur/org-music:  This adds a new link type,
+=[[music:artist:song]]=.
+
+~org-music~ defines the link types [[https://github.com/tecosaur/org-music/blob/2257cf850cbdb103495c22932daecd405504084b/org-music.el#L379][music]] and [[https://github.com/tecosaur/org-music/blob/2257cf850cbdb103495c22932daecd405504084b/org-music.el#L384][Music]].
+
+**** org-pdftools
+
+https://github.com/fuxialexander/org-pdftools:  A custom org link
+type for pdf-tools.
+
+~org-pdftools~ defines the link type [[https://github.com/fuxialexander/org-pdftools/blob/967f48fb5038bba32915ee9da8dc4e8b10ba3376/org-pdftools.el#L391][pdf]].
+
+**** org-ql
+
+https://github.com/alphapapa/org-ql:  This package provides a query
+language for Org files.  It offers two syntax styles: Lisp-like sexps
+and search engine-like keywords.
+
+~org-ql~ defines the link type [[https://github.com/alphapapa/org-ql/blob/46f523d94a376b168176c75bbd0e3e0d00e61170/org-ql-view.el#L587][org-ql-search]].
+
+**** org-ref
+
+https://github.com/jkitchin/org-ref:  org-ref makes it easy to insert
+citations, cross-references, indexes and glossaries as
+hyper-functional links into org files.  The links are fontified so you
+can tell them apart from other links, and each link is clickable to
+access functions like opening a pdf, notes or url associated with the
+link.  Each link also can be exported to LaTeX to build a PDF.  For
+citations, export to other formats is supported by [[https://github.com/andras-simonyi/citeproc-el][citeproc]] for high
+quality export to HTML, markdown, plain text, or stand-alone
+(i.e. independent of a bibtex file) LaTeX.
+
+~org-ref~ defines the link types:
+
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/doi-utils.el#L1368][doi]] in ~doi-utils.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/nist-webbook.el#L32][nist-wb-name]] in ~nist-webbook.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-arxiv.el#L51][arxiv]] in ~org-ref-arxiv.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-bibliography-links.el#L207][bibliography]] [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-bibliography-links.el#L217][nobibliography]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-bibliography-links.el#L237][printbibliography]] and [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-bibliography-links.el#L304][bibliographystyle]]
+  in ~org-ref-bibliography-links.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-label-link.el#L36][label]] in ~org-ref-label-link.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-misc-links.el#L146][list-of-tables]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-misc-links.el#L160][index]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-misc-links.el#L230][printindex]] and [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-misc-links.el#L89][list-of-figures]] in
+  ~org-ref-misc-links.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-pubmed.el#L167][pmcid]] [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-pubmed.el#L185][nihmsid]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-pubmed.el#L220][pubmed-search]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-pubmed.el#L249][pubmed-clinical]] and [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-pubmed.el#L56][pmid]] in
+  ~org-ref-pubmed.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L369][ref]] [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L381][pageref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L394][nameref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L405][eqref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L416][autoref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L430][cref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L440][Cref]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L472][crefrange]] and
+  [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-ref-links.el#L481][Crefrange]] in ~org-ref-ref-links.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-sci-id.el#L32][orcid]] [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-sci-id.el#L42][researcherid]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-scopus.el#L162][eid]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-scopus.el#L176][scopus-search]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-scopus.el#L190][scopus-advanced-search]] and
+  [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-scopus.el#L204][scopusid]] in ~org-ref-sci-id.el~,
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-wos.el#L31][wos]], [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-wos.el#L44][wos-search]] in ~org-ref-wos.el~,
+- ~cite~, ~nocite~, ~citet~, ~citet*~, ~citep~, ~citep*~, ~citealt~, ~citealt*~,
+  ~citealp~, ~citealp*~, ~citenum~, ~citetext~, ~citeauthor~, ~citeauthor*~,
+  ~citeyear~, ~citeyearpar~, ~Citet~, ~Citep~, ~Citealt~, ~Citealp~, ~Citeauthor~,
+  ~Citet*~, ~Citep*~, ~Citealt*~, ~Citealp*~, ~Citeauthor*~ in
+  [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-citation-links.el#L780][org-ref-citation-links.el#L780]],
+- ~cites~, ~Cites~, ~parencites~, ~Parencites~, ~footcites~, ~footcitetexts~,
+  ~smartcites~, ~Smartcites~, ~textcites~, ~Textcites~, ~supercites~, ~autocites~,
+  ~Autocites~ in [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-citation-links.el#L791][org-ref-citation-links.el#L791]],
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-citation-links.el#L801][bibentry]] in ~org-ref-citation-links.el~,
+- ~gls~, ~glspl~, ~Gls~, ~Glspl~, ~glssymbol~, ~Glssymbol~, ~glsdesc~, ~Glsdesc~ in
+  [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-glossary.el#L331][org-ref-glossary.el#L331]],
+- [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-glossary.el#L343][glslink]] and [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-glossary.el#L384][printglossaries]] in ~org-ref-glossary.el~,
+- ~glslink~, ~printglossaries~, ~acrshort~, ~acrshortpl~, ~Acrshort~,
+  ~Acrshortpl~, ~ACRshort~, ~ACRshortpl~, ~acrlong~, ~acrlongpl~, ~Acrlong~,
+  ~Acrlongpl~, ~ACRlong~, ~ACRlongpl~, ~acrfull~, ~acrfullpl~, ~Acrfull~,
+  ~Acrfullpl~, ~ACRfull~ and ~ACRfullpl~ in [[https://github.com/jkitchin/org-ref/blob/0d2355d1eb4dcac1095a03d885788a12fe566610/org-ref-glossary.el#L588][org-ref-glossary.el#L588]].
+
+**** org-roam-server
+
+https://github.com/org-roam/org-roam-server:  Server for org-roam v1.
+
+~org-roam-server~ defines the link types: [[https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L508][server]], [[https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L509][file]] and [[https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L510][image]].
+
+**** org-roam
+
+https://github.com/org-roam/org-roam:  Org-roam is a plain-text
+knowledge management system.  It brings some of Roam's more powerful
+features into the Org-mode ecosystem.
+
+~org-roam~ defines the link type [[https://github.com/org-roam/org-roam/blob/455f139d3ee389eacaa2b61a42ade00fde6d899d/org-roam-id.el#L91][id]] and [[https://github.com/org-roam/org-roam/blob/455f139d3ee389eacaa2b61a42ade00fde6d899d/org-roam-node.el#L710][roam]].
+
+**** org-sketch
+
+https://github.com/yuchen-lea/org-sketch:  Xournal, Draw.io support
+for Org Mode.
+
+~org-sketch~ defines the link type [[https://github.com/yuchen-lea/org-sketch/blob/faa3988c41a367e6cf7478ab9629f80206232a9b/org-sketch.el#L405][xournal]] and [[https://github.com/yuchen-lea/org-sketch/blob/faa3988c41a367e6cf7478ab9629f80206232a9b/org-sketch.el#L409][drawio]].
+
+**** org-yt
+
+https://github.com/TobiasZawada/org-yt: Youtube links in org-mode.
+
+~org-yt~ defines the link type [[https://github.com/TobiasZawada/org-yt/blob/40cc1ac76d741055cbefa13860d9f070a7ade001/org-yt.el#L135][yt]].
+
+**** org2jekyll
+
+https://github.com/ardumont/org2jekyll:  Blogging with org-mode and
+jekyll without alien yaml headers.
+
+~org2jekyll~ defines the link type [[https://github.com/ardumont/org2jekyll/blob/32f6cfc7265cf24ebb5361264e8c1b61a07e74df/org2jekyll.el#L719][local]].
+
+**** orgit-forge
+
+https://github.com/magit/orgit-forge:  This package defines the Org
+link type orgit-topic, which can be used to link to Forge topic
+buffers.  This is similar to the orgit package, which links to various
+Magit buffers.
+
+~orgit-forge~ defines the link type [[https://github.com/magit/orgit-forge/blob/8baf1dee795f026d4555687022487fab89c9bcdf/orgit-forge.el#L58][orgit-topic]].
+
+**** orgit
+
+https://github.com/magit/orgit:  This package defines several Org
+link types, which can be used to link to certain Magit buffers.
+
+~orgit~ defines the link types [[https://github.com/magit/orgit/blob/b33b916915db5f91d2c9da4cb1a2457ccbb09332/orgit.el#L258][orgit]], [[https://github.com/magit/orgit/blob/b33b916915db5f91d2c9da4cb1a2457ccbb09332/orgit.el#L294][orgit-log]] and [[https://github.com/magit/orgit/blob/b33b916915db5f91d2c9da4cb1a2457ccbb09332/orgit.el#L358][orgit-rev]].
+
+**** orgqda
+
+https://github.com/andersjohansson/orgqda:  ~orgqda~ defines a minor
+mode and several commands for making coding, listing of codes, and
+collection of coded extracts possible in text written in org mode.
+
+~orgqda~ defines the link types [[https://github.com/andersjohansson/orgqda/blob/02b0daf0e18fad3c107d8880ebdc71bc17173921/orgqda-transcript.el#L385][oqdats]], [[https://github.com/andersjohansson/orgqda/blob/02b0daf0e18fad3c107d8880ebdc71bc17173921/orgqda.el#L1224][opbm]] and [[https://github.com/andersjohansson/orgqda/blob/02b0daf0e18fad3c107d8880ebdc71bc17173921/orgqda.el#L1521][otag]].
+
+**** orgstrap
+
+https://github.com/tgbugs/orgstrap:  orgstrap allows Org files to
+describe their own requirements and define their own functionality,
+making them self-contained standalone computational artifacts
+dependent only on Emacs or other implementations of the Org Babel
+protocol in the future.
+
+~orgstrap~ defines the link types [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1090][FOLD-HEADLINE]], [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1096][RUN]], [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1103][RUNPREV]], [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1110][RUNC]],
+[[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1118][TEXT-LARGER]], [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1123][TEXT-SMALLER]] and [[https://github.com/tgbugs/orgstrap/blob/bc981b957967be8d872c08be9ba7f2dbde5caf1d/ow.el#L1128][TEXT-RESET]].
+
+**** orly
+
+https://github.com/abo-abo/orly:  Additional Org-mode link types and
+completion for them.
+
+~orly~ defines the link types [[https://github.com/abo-abo/orly/blob/5d840bd9d1ffb0136150e3b3ddfddc1148be9546/orly-code.el#L200][code]], [[https://github.com/abo-abo/orly/blob/5d840bd9d1ffb0136150e3b3ddfddc1148be9546/orly.el#L55][el]], [[https://github.com/abo-abo/orly/blob/5d840bd9d1ffb0136150e3b3ddfddc1148be9546/orly.el#L56][man]], [[https://github.com/abo-abo/orly/blob/5d840bd9d1ffb0136150e3b3ddfddc1148be9546/orly.el#L57][pdf]] and [[https://github.com/abo-abo/orly/blob/5d840bd9d1ffb0136150e3b3ddfddc1148be9546/orly.el#L58][exe]].
+
+**** osm
+
+https://github.com/minad/osm:  Osm.el is a tile-based map viewer,
+with a responsive moveable and zoomable display.  The map can be
+controlled with the keyboard or with the mouse.  The viewer fetches
+the map tiles in parallel from tile servers via the =curl= program.  The
+package comes with a list of multiple preconfigured tile servers.  You
+can bookmark your favorite locations using regular Emacs bookmarks or
+create links from Org files to locations.  Furthermore the package
+provides commands to search for locations by name and to open and
+display GPX tracks.
+
+~osm~ defines the link type [[https://github.com/minad/osm/blob/471f21f0f8bffc078d5ccfd86610a83e5269c2a0/osm-ol.el#L33][osm]].
+
+**** ox-ipynb
+
+https://github.com/jkitchin/ox-ipynb:  This module allows you to
+export an org-file to an Ipython notebook.  Python and R notebooks are
+currently supported.  It is not currently possible to mix these
+languages.
+
+~ox-ipynb~ defines the link type [[https://github.com/jkitchin/ox-ipynb/blob/cdd2bd0f188e6515f2235946b7a2a06165c035db/ox-ipynb.el#L297][image]].
+
+**** paperless
+
+https://github.com/atgreen/paperless:  Emacs assisted PDF document filing.
+
+~paperless~ defines the link type [[https://github.com/atgreen/paperless/blob/2db39586a2914f78f345379511d0e8cea4c96b86/org-paperless.el#L36][paperless]].
+
+**** papis.el
+
+https://github.com/papis/papis.el:  The main motivation of this
+package is to make it easy to interact with org-mode and papis.
+
+~papis.el~ defines the link types [[https://github.com/papis/papis.el/blob/c56c31b3c6d96e80445d2781846df04d9998c194/papis.el#L217][papis+doi]] and [[https://github.com/papis/papis.el/blob/c56c31b3c6d96e80445d2781846df04d9998c194/papis.el#L241][papis]].
+
+**** scimax
+
+https://github.com/jkitchin/scimax:  Scimax is an Emacs starterkit
+for scientists and engineers.  It provides a comprehensive
+configuration of Emacs for scientific programming and publishing.
+
+~scimax~ defines the link types [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/kitchingroup/kitchingroup.el#L352][box]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/kitchingroup/scimax-nersc.el#L322][nersc]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-contacts.el#L261][contact]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-elfeed.el#L198][elfeed]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-inkscape.el#L163][inkscape]],
+[[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-link-thumbnails.el#L44][file]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-org.el#L494][pydoc]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-org.el#L520][attachfile]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-org.el#L530][altmetric]], [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/scimax-org.el#L557][man]] and [[https://github.com/jkitchin/scimax/blob/f38f9e7c5c4e1f4ec66dd215e918f4d204418879/subfiles/scimax-org-subfiles.el#L40][subfile]].
+
+**** sx.el
+
+https://github.com/vermiculus/sx.el:  SX is a full-featured Stack
+Exchange mode for GNU Emacs 24+.  Using the official API, it provides
+a versatile experience for the Stack Exchange network within Emacs
+itself.
+
+~sx.el~ defines the link type [[https://github.com/vermiculus/sx.el/blob/e9d1093c97507a6d7b4f4710ef65200dae725e5f/sx-interaction.el#L235][sx]].
+
+**** telega.el
+
+https://github.com/zevlg/telega.el:  telega.el is full featured unofficial client for
+https://telegram.org  platform for GNU Emacs.
+
+~telega.el~ defines the link type [[https://github.com/zevlg/telega.el/blob/29010616931f52e3a5aa9d155c14873c09c7306b/contrib/ol-telega.el#L101][telega]].
+
+**** treemacs
+
+https://github.com/Alexander-Miller/treemacs:  A tree layout file explorer for Emacs.
+
+~treemacs~ defines the link type [[https://github.com/Alexander-Miller/treemacs/blob/dca83bd42918b510173759df4cc8b3663d5d480d/src/elisp/treemacs-compatibility.el#L142][treemacs]].
+
+**** weblorg
+
+https://github.com/emacs-love/weblorg:  A Static HTML Generator
+entirely written in Emacs-Lisp.
+
+~weblorg~ defines the link types [[https://github.com/emacs-love/weblorg/blob/b2bb79ed2c532cad5b03455d8cae887ddb803db3/weblorg.el#L784][anchor]], [[https://github.com/emacs-love/weblorg/blob/b2bb79ed2c532cad5b03455d8cae887ddb803db3/weblorg.el#L788][url_for]] and [[https://github.com/emacs-love/weblorg/blob/b2bb79ed2c532cad5b03455d8cae887ddb803db3/weblorg.el#L792][url_for_img]].
+
+**** zotxt-emacs
+
+https://github.com/egh/zotxt-emacs:  zotxt-emacs works with
+https://github.com/egh/zotxt to provide Emacs integration
+with Zotero, allowing you to manage citation keys for pandoc markdown
+documents as well as org mode links to items in your Zotero
+collection.
+
+~zotxt-emacs~ defines the link type [[https://github.com/egh/zotxt-emacs/blob/0d5570ec5db79f0a665a29038e6239bdbcef29fc/org-zotxt.el#L198][zotero]].
+
+** WE ARE DONE!!!
 * [2022-05-06 Fri] org-store-link... powerful and flexible | THIS IS EMACS
 :PROPERTIES:
 :CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
