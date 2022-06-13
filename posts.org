@@ -5453,9 +5453,9 @@ command) and you have done the following:
 4) you have looked for explanations on the web,
 5) you even have read the source code of the command,
 
-but you still haven't figured it out after all the efforts.
+but you still haven't figured it out after all your efforts.
 
-I've been in that situation and I thought it would be easier if there
+I've been in this situation and I thought it would be easier if there
 were more examples.
 
 BUT THERE ARE MORE EXAMPLES.
@@ -5464,7 +5464,7 @@ We just have to change our lenses to see them.
 
 What if we looked at org-mode tests as examples of org-mode?
 
-BOOM we have our 5000 examples.
+BOOM. We have our 5000 examples.
 
 Before going any further, let's make it clear that we don't need to
 understand or know how to use [[emacs:lisp/emacs-lisp/ert.el][ert]] (the built-in package used for
@@ -5478,7 +5478,7 @@ In this post, we use the example of the command [[org-mode:lisp/org.el::(defun o
 item with the same depth at point)  to "demonstrate" that the tests
 are indeed examples.
 
-Let's assume, we are already familiar with [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]], we use it
+Let's assume we are already familiar with [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]], we use it
 every day, but sometimes we don't understand why it behaves the way it
 does.
 
@@ -5510,7 +5510,7 @@ investigation to find the truth.
 
 ** Help buffer
 
-Secondly, we can have more information about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
+Secondly, we can find more information about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
 by reading its docstring by running:
 
 : C-h f org-insert-heading RET
@@ -5677,7 +5677,7 @@ test-org/insert-heading][test-org/insert-heading]] [[org-mode:lisp/org.el::(defu
 shows that the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] is tested in the [[emacs:lisp/emacs-lisp/ert.el][ert]] test
 [[org-mode:testing/lisp/test-org.el::(ert-deftest
 test-org/insert-heading][test-org/insert-heading]] defined in the file
-[[org-mode:testing/lisp/test-org.el]] as follow (we reproduce only the
+[[org-mode:testing/lisp/test-org.el]] as follows (we reproduce only the
 first 4 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms - it contains 28 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms and 1 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]]
 form):
 
