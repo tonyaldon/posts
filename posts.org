@@ -4903,7 +4903,7 @@ I hope you'll enjoy it :)
 Org speed keys is not a minor mode but an org-mode feature that can be
 turned on by setting the variable [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] to ~t~.
 
-It allows when the cursor is at a the beginning of a heading to call
+When the cursor is at a the beginning of a heading it allows us to call
 a command by pressing a single "printing" key (keys that would
 normally insert a character in the buffer).
 
@@ -4913,7 +4913,7 @@ current heading if it's the last one in the buffer) if we use the
 default bindings provided by org-mode in the variable
 [[org-mode:lisp/org-keys.el::(defcustom org-speed-commands][org-speed-commands]].
 
-It is "almost" the same that pressing ~C-c C-n~ but in SHORTER.  Isn't it
+It is "almost" the same as pressing ~C-c C-n~ but SHORTER.  Isn't it
 super cool???
 
 If you've never tried it, go for it.
@@ -4975,9 +4975,9 @@ from org-mode 9.6 as we can read in the source code [[org-mode:lisp/org-keys.el]
 ** How does org-mode implement Org Speed keys?
 *** Remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]]
 
-When org-mode is turned on, among other initialization tasks it remaps
+When org-mode is turned on, among other initialization tasks, it remaps
 the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]]
-in the keymap [[org-mode:lisp/org-keys.el::(defvar org-mode-map][org-mode-map]] as we can see in the file [[org-mode:lisp/org-keys.el]]:
+in the keymap [[org-mode:lisp/org-keys.el::(defvar org-mode-map][org-mode-map]], as we can see in the file [[org-mode:lisp/org-keys.el]]:
 
 #+BEGIN_SRC emacs-lisp
 (org-remap org-mode-map
@@ -5010,7 +5010,7 @@ As a consequence, in org-mode, when we press a printing key (that
 would by default insert a character in the buffer), let say we press ~n~,
 the "command loop editor" does several things:
 
-1) it performs a key lookup for ~n~ in the current active maps and find
+1) it performs a key lookup for ~n~ in the current active maps and finds
    that ~n~ is bound to [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] (due to the default binding
    in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] which is the global map by default), then,
 2) it checks if the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] has a remapping in the
@@ -5020,7 +5020,7 @@ the "command loop editor" does several things:
    [[org-mode:lisp/org-keys.el::(defvar org-mode-map][org-mode-map]]) and instead of calling [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]],
    it calls [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]].
 
-Now, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] has the complete power over
+Now, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] has complete power over
 the actions to perform.  Nothing forces it to insert the character ~n~
 in the buffer.
 
@@ -5068,7 +5068,7 @@ have set [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use
    ~org-speed-command~,
 4) if ~org-speed-command~ is either a command, a function or a non empty
    list, ~org-speed-command~ is called or evaluated (and
-   [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] returns "maybe" witout inserting ~n~ in the
+   [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] returns "maybe" without inserting ~n~ in the
    buffer).  If ~org-speed-command~ is neither a command, a function nor
    a non empty list, the command [[org-mode:lisp/org.el::(defun org-self-insert-command][org-self-insert-command]] is called
    with the variable [[org-mode:lisp/org-keys.el::(defcustom org-use-speed-commands][org-use-speed-commands]] locally set to ~nil~ which
@@ -5164,7 +5164,7 @@ version of [[org-mode:lisp/org-keys.el::(defun org-speed-command-activate][org-s
     (cdr (assoc keys org-speed-commands))))
 #+END_SRC
 
-So, when we presse the key ~n~ (in org-mode):
+So, when we pressed the key ~n~ (in org-mode):
 org-babel-next-src-block
 1) if we are at the beginning of a heading, the cursor is
    moved "safely" to the next visible heading,
@@ -5182,8 +5182,8 @@ Let's talk a bit about the command [[emacs:src/cmds.c::DEFUN ("self-insert-comma
 ** [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]]
 *** Bindings of printing characters to [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]]
 
-In this section, our goal is to see what are the printing characters
-that are bound to the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
+In this section, our goal is to see what printing characters
+are bound to the command [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
 
 In the info node [[info:elisp#Controlling Active Maps]], we can read the
 following:
@@ -5248,8 +5248,8 @@ limits (excluding the ms-dos case):
 1) from ~#o040~ to ~#o0177~,
 2) from ~#o0240~ to ~#o0400~.
 
-If it is not clear what are the printing characters that are bound to
-[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] we can "list" them like
+If it is not clear which printing characters are bound to
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the keymap [[emacs:lisp/subr.el::(defvar global-map][global-map]] then we can "list" them like
 this:
 
 #+BEGIN_SRC emacs-lisp
@@ -5272,8 +5272,8 @@ In some cases (like in [[emacs:lisp/info.el::(define-derived-mode Info-mode][Inf
 all printing keys to be undefined before remapping some of them to
 specific commands.
 
-This is done by remapping in the local keymap the command
-[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to the function [[emacs:lisp/subr.el::(defun undefined][undefined]].
+This is done by remapping the command
+[[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the local keymap to the function [[emacs:lisp/subr.el::(defun undefined][undefined]].
 
 Note that remapping [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] to ~nil~ in the local keymaps
 won't override [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] in the global map as we can read in
@@ -5361,9 +5361,9 @@ bitch_at_user (void)
 }
 #+END_SRC
 
-Why talking about this function?
+Why am I talking about this function?
 
-Because its name is AMAZING and because I encounter it when I was
+Because its name is AMAZING and because I encountered it when I was
 reading the source code of [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]].
 
 Indeed, the function [[emacs:src/dispnew.c::bitch_at_user (void)][bitch_at_user]] is called in the body of
