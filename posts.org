@@ -22,7 +22,7 @@
 :ONE: one-default-home
 :CUSTOM_ID: /
 :END:
-* Questions and Answers
+* TODO Questions and Answers
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /questions-and-answers/
@@ -331,6 +331,7 @@ grep -r '(should' | wc -l
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-02-11-closures-and-lexical-binding/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/
+:COMMIT_EMACS: b8b2dd17c57b73357cae229e010138fd2352a46f
 :END:
 
 Hi Emacsers,
@@ -345,13 +346,11 @@ As you might be interested, I will share them with you :)
 The first section contains the info nodes and help corresponding to
 the examples.
 
-The second section shows 10 "basic" examples using [[emacs:src/lread.c::  DEFVAR_LISP ("lexical-binding"][lexical-binding]],
-[[emacs:lisp/subr.el::(defmacro
-lambda][lambda]], [[emacs:lisp/emacs-lisp/byte-run.el::(defmacro defun][defun]], [[emacs:src/eval.c::DEFUN ("let"][let]], [[emacs:lisp/obsolete/cl.el::(defmacro lexical-let][lexical-let]], [[emacs:src/eval.c::DEFUN ("setq"][setq]] and [[emacs:src/eval.c::DEFUN ("defvar"][defvar]].
+The second section shows 10 "basic" examples using [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/lread.c:5367][lexical-binding]],
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/subr.el:109][lambda]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/byte-run.el:280][defun]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/eval.c:990][let]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/obsolete/cl.el:356][lexical-let]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/eval.c:494][setq]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/eval.c:802][defvar]].
 
-And the third section shows a more advanced example using [[emacs:lisp/subr.el::(defmacro lambda][lambda]], [[emacs:src/eval.c::DEFUN ("let"][let]],
-[[emacs:lisp/subr.el::(defmacro
-dolist][dolist]] and [[emacs:lisp/emacs-lisp/byte-run.el::(defmacro defun][defun]].
+And the third section shows a more advanced example using [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/subr.el:109][lambda]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/eval.c:990][let]],
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/subr.el:273][dolist]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/byte-run.el:280][defun]].
 
 Have a nice day,
 
@@ -541,11 +540,12 @@ prints out the following into the message buffer:
  :env-of-f nil)
 #+END_SRC
 
-* You want to write a custom org backend?  Let's write onlybold backend together to get you started
+* TODO You want to write a custom org backend?  Let's write onlybold backend together to get you started
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-02-20-onlybold-org-backend/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Hi Emacsers,
@@ -926,11 +926,12 @@ closer to you.
 
 Emacs is pure joy and it is thanks to you.
 
-* Have you ever wondered how org-mode toggles the visibility of headings?
+* TODO Have you ever wondered how org-mode toggles the visibility of headings?
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-02-26-org-mode-visibility-of-headings/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Have you ever wondered how org-mode toggles the visibility of headings?
@@ -1397,6 +1398,7 @@ WE ARE DONE :-)
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-03-05-i-bet-you-use-hl-line-mode/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/t7doal/i_bet_you_use_hllinemode_do_you_know_how_it_works/
+:COMMIT_EMACS: b8b2dd17c57b73357cae229e010138fd2352a46f
 :END:
 
 Hey Emacsers,
@@ -1404,31 +1406,31 @@ Hey Emacsers,
 How are you doing?
 
 I'm excited about this post because when I understood how
-[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] works, it opened new horizons for me in the world of
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] works, it opened new horizons for me in the world of
 Elisp.
 
 I hope you will feel the same way after:
 
 1) reading this post or,
-2) by directly reading the source code of [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] that can be
-   found in the file [[emacs:lisp/hl-line.el]] (only 205 LOC skipping
+2) by directly reading the source code of [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] that can be
+   found in the file [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:1][hl-line.el]] (only 205 LOC skipping
    comments and empty lines).
 
 You can get emacs's source code by running the following command:
 
 : git clone git://git.sv.gnu.org/emacs.git
 
-** ~hl-line-mode~
-*** What is ~hl-line-mode~?
+** hl-line-mode
+*** What is hl-line-mode?
 
-[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is a minor mode that highlights the current line.
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] is a minor mode that highlights the current line.
 
-If there are multiple windows in your frame using [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] you can
+If there are multiple windows in your frame using [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:131][hl-line-mode]] you can
 control whether all windows have the line highlighted or only the
-~selected-window~ with the option [[emacs:lisp/hl-line.el::(defcustom hl-line-sticky-flag][hl-line-sticky-flag]].
+~selected-window~ with the option [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:95][hl-line-sticky-flag]].
 
 If you prefer not to highlight the whole line but only a range around
-the point this is also possible with [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]].
+the point this is also possible with [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:116][hl-line-range-function]].
 
 In this post, we are not interested in these options, but only in the
 mechanism and the default behavior that highlights the
@@ -1436,17 +1438,17 @@ entire line in the current buffer.
 
 *** How does it work?
 
-[[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] moves an overlay responsible for highlighting the current
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:131][hl-line-mode]] moves an overlay responsible for highlighting the current
 line after each command call.  This is done by adding a specific
-function to the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] when the mode [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] is
+function to the hook [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] when the mode [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:131][hl-line-mode]] is
 turned on.
 
-If you are already familiar with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] and Emacs overlays,
+If you are already familiar with [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] and Emacs overlays,
 you're good.
 
 But, if not, let's break things down together.
 
-One things to remember about Emacs ([[info:elisp#Command Loop][info:elisp#Command Loop]]) is:
+One things to remember about Emacs ([[info:elisp#Command Loop]]) is:
 
 #+BEGIN_SRC text
 When you run Emacs, it enters the “editor command loop” almost
@@ -1455,19 +1457,19 @@ and displays the results.
 #+END_SRC
 
 Specifically, each time we call a command (inserting a character also
-calls a command, [[emacs:src/cmds.c::DEFUN ("self-insert-command",][self-insert-command]] by default), the "editor
+calls a command, [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/cmds.c:263][self-insert-command]] by default), the "editor
 command loop":
 
-1) runs the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] before executing the command,
-2) runs the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] after executing the command.
+1) runs the hook [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]] before executing the command,
+2) runs the hook [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] after executing the command.
 
 (run the hook ~X~ means: call all the functions in the list ~X~).
 
 So we can trigger actions after each command call by adding
-functions in the list [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+functions in the list [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]].
 
-This is what [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] does.  When turned on, the mode adds the
-function [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] to the list [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] as follow:
+This is what [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:131][hl-line-mode]] does.  When turned on, the mode adds the
+function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:162][hl-line-highlight]] to the list [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] as follow:
 
 #+BEGIN_SRC emacs-lisp
 (add-hook 'post-command-hook #'hl-line-highlight nil t)
@@ -1476,24 +1478,24 @@ function [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] 
 Note the ~t~ at the end of the previous s-exp that makes the hook
 buffer-local.
 
-So, in a buffer that has [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] turned on, each time we call a
+So, in a buffer that has [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:131][hl-line-mode]] turned on, each time we call a
 command (basically, "each time we do something"):
 
 1) the command is executed and,
-2) [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] is called.
+2) [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:162][hl-line-highlight]] is called.
 
-What exactly does [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] do?
+What exactly does [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:162][hl-line-highlight]] do?
 
-[[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]]:
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:162][hl-line-highlight]]:
 
 1) creates an overlay at point with the ~face~ property equal to
-   [[emacs:lisp/hl-line.el::(defcustom hl-line-face][hl-line-face]] (calling the function [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]]) if it
+   [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:82][hl-line-face]] (calling the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:156][hl-line-make-overlay]]) if it
    doesn't exist yet,
-2) assigns this overlay to the variable [[emacs:lisp/hl-line.el::(defvar-local hl-line-overlay][hl-line-overlay]] and,
+2) assigns this overlay to the variable [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:60][hl-line-overlay]] and,
 3) moves (places) this overlay on the current line (calling the
-   function [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]]).
+   function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:269][hl-line-move]]).
 
-Here's the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-line-highlight]] (I have removed some details):
+Here's the a snippet of [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:162][hl-line-highlight]] (I have removed some details):
 
 #+BEGIN_SRC emacs-lisp
 (defun hl-line-highlight ()
@@ -1508,8 +1510,8 @@ Here's the a snippet of [[emacs:lisp/hl-line.el::(defun hl-line-highlight][hl-li
     (hl-line-unhighlight)))
 #+END_SRC
 
-The function [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]] uses the function ~make-overlay~ to
-make the overlay and uses the function [[emacs:src/buffer.c::DEFUN ("overlay-put"][overlay-put]] to set the ~priority~
+The function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:156][hl-line-make-overlay]] uses the function ~make-overlay~ to
+make the overlay and uses the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:4428][overlay-put]] to set the ~priority~
 and ~face~ property of the newly created overlay:
 
 #+BEGIN_SRC emacs-lisp
@@ -1520,10 +1522,10 @@ and ~face~ property of the newly created overlay:
     ol))
 #+END_SRC
 
-As we left aside the range function [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]] (which is
+As we left aside the range function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:116][hl-line-range-function]] (which is
 set to ~nil~ by default), we can see below a simplified implementation
-of [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]], that we call ~hl-line-move-NO-RANGE-FUNCTION~ that uses
-the function [[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]] to move the limits of the overlay and set
+of [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:269][hl-line-move]], that we call ~hl-line-move-NO-RANGE-FUNCTION~ that uses
+the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:4020][move-overlay]] to move the limits of the overlay and set
 them to be the beginning of the current line and beginning of the next
 line:
 
@@ -1534,31 +1536,31 @@ line:
     (move-overlay overlay beg end)))
 #+END_SRC
 
-We have left out some details (the functions [[emacs:lisp/hl-line.el::(defun hl-line-unhighlight][hl-line-unhighlight]]
-[[emacs:lisp/hl-line.el::(defun hl-line-maybe-unhighlight][hl-line-maybe-unhighlight]] and the use of the hook
+We have left out some details (the functions [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:174][hl-line-unhighlight]]
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:180][hl-line-maybe-unhighlight]] and the use of the hook
 ~change-major-mode-hook~), because our goal was to focus on the
 mechanism and not all the options and implementation details.
 
 I hope this was useful.
 
-*** ~global-hl-line-mode~
+*** global-hl-line-mode
 
-[[emacs:lisp/hl-line.el::(define-minor-mode global-hl-line-mode][global-hl-line-mode]] is a global minor mode that offers line
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:197][global-hl-line-mode]] is a global minor mode that offers line
 highlighting in all buffers.
 
-The mechanism is "almost" the same as [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] and both
-share the functions [[emacs:lisp/hl-line.el::(defun hl-line-make-overlay][hl-line-make-overlay]] and [[emacs:lisp/hl-line.el::(defun hl-line-move][hl-line-move]], the
-variables [[emacs:lisp/hl-line.el::(defvar hl-line-overlay-priority][hl-line-overlay-priority]], [[emacs:lisp/hl-line.el::(defvar hl-line-range-function][hl-line-range-function]] and they
-use the same "face" [[emacs:lisp/hl-line.el::(defcustom hl-line-face][hl-line-face]].
+The mechanism is "almost" the same as [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] and both
+share the functions [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:156][hl-line-make-overlay]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:269][hl-line-move]], the
+variables [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:128][hl-line-overlay-priority]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:116][hl-line-range-function]] and they
+use the same "face" [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:82][hl-line-face]].
 
-So, if you understand how [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] works, you already almost
-understand how [[emacs:lisp/hl-line.el::(define-minor-mode global-hl-line-mode][global-hl-line-mode]] works.
+So, if you understand how [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] works, you already almost
+understand how [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:197][global-hl-line-mode]] works.
 
 In the next parts of this post, we build examples using
-[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] and overlays separately to try to get a good
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] and overlays separately to try to get a good
 overview of their use.
 
-** Playing with ~pre-command-hook~ and ~post-command-hook~
+** Playing with pre-command-hook and post-command-hook
 
 In this section everything happens in the buffer ~*test hooks*~.
 
@@ -1574,11 +1576,11 @@ eval-expression~):
 #+END_SRC
 
 We've already seen that by adding functions to the hooks (lists)
-[[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] we can trigger actions before
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] we can trigger actions before
 or after any command call.
 
 The first things we can do is to inspect the variable
-[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] by running:
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] by running:
 
 : M-x describe-variable RET post-command-hook RET
 
@@ -1628,11 +1630,11 @@ the function in which the error occurred is unconditionally removed, since
 otherwise the error might happen repeatedly and make Emacs nonfunctional.
 #+END_SRC
 
-This tells us that it is safe to play with [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] because if
+This tells us that it is safe to play with [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] because if
 we add a function to it that raises an error the function will be
 unconditionally removed.
 
-So let's add to [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] a symbol that has no function
+So let's add to [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] a symbol that has no function
 definition (ie. raises the error ~void-function~ when called as a
 function). By evaluating the following s-exp (~eval-last-sexp~ bound
 to ~C-x C-e~):
@@ -1647,31 +1649,31 @@ we see in the echo area:
 Error in post-command-hook (test-void-function): (void-function test-void-function)
 #+END_SRC
 
-And if we inspect the variable [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] (as we did
+And if we inspect the variable [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] (as we did
 previously), we see that ~test-void-function~ symbol isn't in the hook.
 
 What happened?
 
 1) we called ~eval-last-sexp~,
-2) then the "editor command loop" ran the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]],
+2) then the "editor command loop" ran the hook [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]],
 3) then the expression ~(add-hook 'post-command-hook 'test-void-function)~
    has been evaluated, which added ~test-void-function~ symbol to
-   [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]],
-4) then the "editor command loop" ran the hook [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]], and
+   [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]],
+4) then the "editor command loop" ran the hook [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]], and
    when it try to call the function ~test-void-function~, it raised the
    error ~void-function~ and remove ~test-void-function~ from the hook.
 
 Now that we are confident that playing with the hook
-[[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] won't break our running Emacs, let's build the main
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] won't break our running Emacs, let's build the main
 example of this section.
 
 We write 2 functions ~test-hook-pre~ and ~test-hook-post~
 that print out respectively the name of the command that is about to
 run and the name of the command that just ran.
 
-To do that we use the emacs variable [[emacs:src/keyboard.c::    DEFVAR_LISP ("this-command"][this-command]] (that holds the
-command now being executed) and adds ~test-hook-pre~ to [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]]
-and ~test-hook-post~ to [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+To do that we use the emacs variable [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:11995][this-command]] (that holds the
+command now being executed) and adds ~test-hook-pre~ to [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]]
+and ~test-hook-post~ to [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]].
 
 Note that the info nodes related to this examples are:
 
@@ -1732,7 +1734,7 @@ Are you annoyed by the noise you have in your echo area?
 Me too.
 
 Let's remove the functions ~test-hook-pre~ and ~test-hook-post~
-respectively from the hooks [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]] by
+respectively from the hooks [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]] by
 evaluating the following s-exps.  This should "clean up" our echo
 area.
 
@@ -1741,7 +1743,7 @@ area.
 (remove-hook 'post-command-hook 'test-hook-post)
 #+END_SRC
 
-We are done with the hooks [[emacs:src/keyboard.c::  DEFVAR_LISP ("pre-command-hook"][pre-command-hook]] and [[emacs:src/keyboard.c::  DEFVAR_LISP ("post-command-hook"][post-command-hook]].
+We are done with the hooks [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12181][pre-command-hook]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/keyboard.c:12190][post-command-hook]].
 Let's play with overlays.
 
 ** Moving overlays and priorities
@@ -1753,7 +1755,7 @@ text properties.
 
 Below we will see:
 
-1) how to move overlays ([[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]]) and,
+1) how to move overlays ([[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:4020][move-overlay]]) and,
 2) which overlay wins when they overlap (~priority~ property).
 
 Note that all the evaluations of the s-expressions are done in the
@@ -1793,16 +1795,15 @@ Now we have ~FOO~ with a background green and ~BAZ~ with a background
 red.
 
 Let's move the overlay ~ov-x~ (the green) on top of the characters ~BAR~
-the same way [[emacs:lisp/hl-line.el::(define-minor-mode hl-line-mode][hl-line-mode]] does.  To do so we use the function
-[[emacs:src/buffer.c::DEFUN ("move-overlay"][move-overlay]] as follow:
+the same way [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/hl-line.el:132][hl-line-mode]] does.  To do so we use the function
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:4020][move-overlay]] as follow:
 
 #+BEGIN_SRC emacs-lisp
 (move-overlay ov-x 7 10)
 #+END_SRC
 
 When more than one overlay overlaps, Emacs decides for each property
-which overlay "wins" (see [[info:elisp#Overlay
-Properties][info:elisp#Overlay Properties]]) over the
+which overlay "wins" (see [[info:elisp#Overlay Properties]]) over the
 others by looking up at the overlay property ~priority~ which should be
 a positive integer or ~nil~.
 
@@ -1882,11 +1883,12 @@ To finish this post, we remove the overlays like this:
 
 WE ARE DONE!!!
 
-* Did you know that org-mode's source code contains more than 5000 examples?
+* TODO Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-03-11-org-mode-source-code-5000-examples/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Hey org-mode lovers,
@@ -2346,11 +2348,12 @@ part of THE ORG-MODE TRUTH lives.
 WE ARE DONE!
 
 ** [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]]
-* Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
+* TODO Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-03-22-org-speed-keys-and-self-insert-command/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Hey Emacsers,
@@ -2903,11 +2906,12 @@ a non-nil value for the inserted character.  At the end, it runs
 WE ARE DONE!!!
 
 ** [[#/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command][Q&A]]
-* Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
+* TODO Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-04-search-options-link-abbreviations-and-org-open-at-point/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Hey you, unconditional Emacser, fanatic Org user, fearless Elisp
@@ -4227,11 +4231,12 @@ Here are the parts of [[org-mode:lisp/org.el::(defun org-open-file (path][org-op
 WE ARE DONE!!!
 
 ** [[#/questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point][Q&A]]
-* Did you know that Org links in property drawers are not links?
+* TODO Did you know that Org links in property drawers are not links?
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-09-org-links-in-property-drawers-are-not-links/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/
+:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
 Wait a minute!  Are you telling me that the URL
@@ -4524,7 +4529,7 @@ read this post: [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at
 
 WE ARE DONE!!!
 
-* Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
+* TODO Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-13-cath-throw-pattern-in-emacs-source-code/
@@ -4878,7 +4883,7 @@ org-refresh-category-properties][org-refresh-category-properties]] but going bac
 
 WE ARE DONE!!!
 
-* Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
+* TODO Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-15-ripgrep-emacs-rg-el/
@@ -5182,7 +5187,7 @@ under the directory ~/tmp/emacs/~):
 
 WE ARE DONE!!!
 
-* If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
+* TODO If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/
@@ -5547,7 +5552,7 @@ that produces the same result:
 
 WE ARE DONE!!!
 
-* Programming with Elisp is magic
+* TODO Programming with Elisp is magic
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-22-programming-with-elisp-is-magic/
@@ -5751,7 +5756,7 @@ function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-e
 
 WE ARE DONE!!!
 
-* FULL example of org-mode links: internal links and search options
+* TODO FULL example of org-mode links: internal links and search options
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/
@@ -6133,7 +6138,7 @@ https://orgmode.org/worg/org-mailing-list.html.
 
 Thank you Ihor Radchenko.
 
-* Link to a git commit from Org mode using Magit | THIS IS EMACS
+* TODO Link to a git commit from Org mode using Magit | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/
@@ -6468,7 +6473,7 @@ you may be interested in these examples:
 (type-of (eval (read "\"bar\""))) ; string
 #+END_SRC
 
-* org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS
+* TODO org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/
@@ -6713,7 +6718,7 @@ If you are interested in link abbreviations you can read:
 
 WE ARE DONE!!!
 
-* org-store-link... powerful and flexible | THIS IS EMACS
+* TODO org-store-link... powerful and flexible | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
@@ -7102,7 +7107,7 @@ Grep finished with 17 matches found at Fri May  6 16:17:31
 
 WE ARE DONE!!!
 
-* org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS
+* TODO org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/
