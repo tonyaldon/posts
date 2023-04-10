@@ -61,3 +61,10 @@ See `org-rev-open'."
 
 (org-link-set-parameters "info"
 			                   :export #'posts-one-ox-link-info)
+
+(defun posts-one-ox-link-help (link description type info)
+  "Export builtin org help links. "
+  (jack-html `(:span ,link)))
+
+(org-link-set-parameters "help"
+			                   :export #'posts-one-ox-link-help)
