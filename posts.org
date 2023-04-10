@@ -4529,12 +4529,12 @@ read this post: [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at
 
 WE ARE DONE!!!
 
-* TODO Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
+* Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-13-cath-throw-pattern-in-emacs-source-code/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/
-:COMMIT_EMACS: cca47ae555bfddf87b4871988555738c335f8457
+:COMMIT_EMACS: de7901abbc21114721057c907cc52455e228f826
 :END:
 
 Hey Elispers,
@@ -4542,10 +4542,10 @@ Hey Elispers,
 Do you want to expand your Elisp toolbox?
 
 In this post we look at the ~catch/throw~ pattern offered by Elisp that
-allows to do nonlocal exits with the function [[emacs:src/eval.c::DEFUN ("throw"][throw]] that can be caught
-by the [[emacs:src/eval.c::DEFUN ("catch"][catch]] special form.
+allows to do nonlocal exits with the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] that can be caught
+by the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] special form.
 
-For instance, in the following snippet, in a [[emacs:src/eval.c::DEFUN ("catch"][catch]] block:
+For instance, in the following snippet, in a [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block:
 
 1) we define a local list ~l~,
 2) then we loop forever (~(while t ...)~),
@@ -4553,10 +4553,10 @@ For instance, in the following snippet, in a [[emacs:src/eval.c::DEFUN ("catch"]
 4) then:
    - if this number is not equal to ~1~, we add it to the list ~l~ and we
      repeat,
-   - and if it is equal to ~1~, the [[emacs:src/eval.c::DEFUN ("throw"][throw]] statement transfers the
-     control to the enclosing [[emacs:src/eval.c::DEFUN ("catch"][catch]] with the tag ~:one~ (we leave out
+   - and if it is equal to ~1~, the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] statement transfers the
+     control to the enclosing [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] with the tag ~:one~ (we leave out
      the ~while~ loop and also the ~let~ block) which returns immediately
-     the builded list ~l~ (last argument of the [[emacs:src/eval.c::DEFUN ("throw"][throw]] statement).
+     the builded list ~l~ (last argument of the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] statement).
 
 #+BEGIN_SRC emacs-lisp
 (catch :one
@@ -4588,7 +4588,7 @@ Let's go!
 
 ** The catch/throw pattern: handmade examples
 
-In the info node about [[emacs:src/eval.c::DEFUN ("catch"][catch]] and [[emacs:src/eval.c::DEFUN ("throw"][throw]] ([[info:elisp#Catch and Throw]]),
+In the info node about [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] and [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] ([[info:elisp#Catch and Throw]]),
 we can read:
 
 #+BEGIN_SRC text
@@ -4599,7 +4599,7 @@ normal program execution: it performs a nonlocal exit on request.
 ‘throw’ is used inside a ‘catch’, and jumps back to that ‘catch’.
 #+END_SRC
 
-So with [[emacs:src/eval.c::DEFUN ("throw"][throw]] inside [[emacs:src/eval.c::DEFUN ("catch"][catch]] we can modify the flow of control.
+So with [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] inside [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] we can modify the flow of control.
 
 Let's see how with the following examples.
 
@@ -4607,10 +4607,10 @@ We don't provide any explanation hoping that the evaluations in
 comments show how the flow of control has been modified.
 
 Note that if you read this post inside Emacs with org-mode, you can
-hit ~C-c '~ ([[org-mode:lisp/org.el::(defun org-edit-special (&optional arg][org-edit-special]] by default) in the source block to
+hit ~C-c '~ ([[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/org.el:17559][org-edit-special]] by default) in the source block to
 open a dedicated ~emacs-lisp~ buffer where you can modify and evaluate
 the examples the way you want as much as you need to be confident
-about [[emacs:src/eval.c::DEFUN ("catch"][catch]] and [[emacs:src/eval.c::DEFUN ("throw"][throw]].
+about [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] and [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]].
 
 #+BEGIN_SRC emacs-lisp
 (catch :foo
@@ -4671,28 +4671,28 @@ about [[emacs:src/eval.c::DEFUN ("catch"][catch]] and [[emacs:src/eval.c::DEFUN 
 
 ** The catch/throw pattern: real world examples
 
-There are more than 1000 [[emacs:src/eval.c::DEFUN ("catch"][catch]] blocks in Emacs source code.
+There are more than 1000 [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] blocks in Emacs source code.
 
 Let's pick some of them that seems to represent in some way the
-"common" usage of [[emacs:src/eval.c::DEFUN ("catch"][catch]] blocks.
+"common" usage of [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] blocks.
 
-Almost all those [[emacs:src/eval.c::DEFUN ("catch"][catch]] blocks follow the same structure:
+Almost all those [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] blocks follow the same structure:
 
-1) enter in a [[emacs:src/eval.c::DEFUN ("catch"][catch]] block,
+1) enter in a [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block,
 2) loop (either by iterating on a structure or by "traversing" a
    buffer),
-3) for each iteration test something and decide if iterate or [[emacs:src/eval.c::DEFUN ("throw"][throw]],
-4) if thrown in the loop, leave the [[emacs:src/eval.c::DEFUN ("catch"][catch]] block and return the value
-   passed to the [[emacs:src/eval.c::DEFUN ("throw"][throw]] statement, if ended the loop normally, evaluate
-   the last parts of the [[emacs:src/eval.c::DEFUN ("catch"][catch]] block and return the last one.
+3) for each iteration test something and decide if iterate or [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]],
+4) if thrown in the loop, leave the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block and return the value
+   passed to the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] statement, if ended the loop normally, evaluate
+   the last parts of the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block and return the last one.
 
-*** With [[emacs:lisp/subr.el::(defmacro dolist][dolist]]
+*** With dolist
 
 Sometimes, we want to loop over a list and if some "conditions" are
 verified for an item, we want to return without looping over the rest
 of the list.
 
-This can be done in a [[emacs:src/eval.c::DEFUN ("catch"][catch]] block using [[emacs:lisp/subr.el::(defmacro dolist][dolist]] with a structure
+This can be done in a [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block using [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/subr.el:273][dolist]] with a structure
 similar to this one:
 
 #+BEGIN_SRC emacs-lisp
@@ -4705,7 +4705,7 @@ similar to this one:
 #+END_SRC
 
 We encounter this pattern in the function
-[[emacs:lisp/emacs-lock.el::(defun emacs-lock--exit-locked-buffer][emacs-lock--exit-locked-buffer]] that returns the first exit-locked
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/emacs-lock.el:130][emacs-lock--exit-locked-buffer]]  that returns the first exit-locked
 buffer found in the list of all live buffers ~(buffer-list)~:
 
 #+BEGIN_SRC emacs-lisp
@@ -4721,13 +4721,14 @@ buffer found in the list of all live buffers ~(buffer-list)~:
       nil)))
 #+END_SRC
 
-We also encounter this pattern in the function [[emacs:lisp/frame.el::(defun handle-delete-frame][handle-delete-frame]]
+We also encounter this pattern in the function
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/frame.el:115][handle-delete-frame]]
 that handles delete-frame events from the X server.  This function
 looks for a "valid frame" (among other stuff being different from the
 frame where the X event occured) in the list of frames returned by
 ~(frame-list)~ in order to decide if it is safe to delete the frame
-where the X event occured with [[emacs:src/frame.c::DEFUN ("delete-frame"][delete-frame]] or if it is better to call
-the function [[emacs:lisp/files.el::defun save-buffers-kill-emacs][save-buffers-kill-emacs]]:
+where the X event occured with [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/frame.c:2375][delete-frame]] or if it is better to call
+the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/files.el:7688][save-buffers-kill-emacs]]:
 
 #+BEGIN_SRC emacs-lisp
 (defun handle-delete-frame (event)
@@ -4748,12 +4749,12 @@ the function [[emacs:lisp/files.el::defun save-buffers-kill-emacs][save-buffers-
       (save-buffers-kill-emacs))))
 #+END_SRC
 
-Note that [[emacs:lisp/frame.el::(defun handle-delete-frame][handle-delete-frame]] is bound to the event ~delete-frame~ in
-the keymap [[emacs:src/keyboard.c::DEFVAR_LISP ("special-event-map"][special-event-map]] ([[help:special-event-map]]).
+Note that [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/frame.el:115][handle-delete-frame]] is bound to the event ~delete-frame~ in
+the keymap [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/keyboard.c:12257][special-event-map]] ([[help:special-event-map]]).
 
-Now, let's have a look on the function [[emacs:lisp/net/newst-reader.el::(defun newsticker--icon-read][newsticker--icon-read]].  This
-function is defined in the file [[emacs:lisp/net/newst-reader.el]] part of
-the package [[emacs:lisp/net/newsticker.el]] which is from its description
+Now, let's have a look on the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/net/newst-reader.el:286][newsticker--icon-read]].  This
+function is defined in the file [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/net/newst-reader.el:1][lisp/net/newsticker.el]] part of
+the package [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/net/newst-reader.el:1][lisp/net/newsticker.el]] which is from its description
 section:
 
 #+BEGIN_SRC text
@@ -4761,17 +4762,17 @@ section:
 #+END_SRC
 
 We did not choose this function for the service it provides to the
-package [[emacs:lisp/net/newsticker.el]] but because it is an interesting
+package [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/net/newst-reader.el:1][lisp/net/newsticker.el]] but because it is an interesting
 example dealing with two types of "controlled" nonlocal exits:
 
-1) a nonlocal exit generated by [[emacs:src/eval.c::DEFUN ("throw"][throw]] and handled by [[emacs:src/eval.c::DEFUN ("catch"][catch]] and,
+1) a nonlocal exit generated by [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] and handled by [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] and,
 2) a nonlocal exit due to an error that can occur in a function
-   (specifically [[emacs:lisp/image.el::(defun create-image][create-image]]) and handled by [[emacs:src/eval.c::DEFUN ("condition-case"][condition-case]] .
+   (specifically [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/image.el:462][create-image]]) and handled by [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1281][condition-case]] .
 
 This function can be seen as a direct application of the material in
 the info node ([[info:elisp#Nonlocal Exits]]).
 
-The function [[emacs:lisp/net/newst-reader.el::(defun newsticker--icon-read][newsticker--icon-read]] takes an icon name as input, try to
+The function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/net/newst-reader.el:286][newsticker--icon-read]] takes an icon name as input, try to
 create and return an Emacs image for that icon looking for the image
 from the disk in the user newsticker directory, and if it can't
 (because it doesn't exist or it fails at creating the corresponding
@@ -4804,13 +4805,13 @@ Return the image."
 Leaving out the details of this function, we can extract a simplified
 scheme, that says:
 
-1) in a [[emacs:src/eval.c::DEFUN ("catch"][catch]] block, if the directory ~dir~ doesn't exist, return a
+1) in a [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] block, if the directory ~dir~ doesn't exist, return a
    default image, if it exists loop over all the files in the
    directory ~dir~,
 2) in the loop, for each file try to create an image using that file, if
    it fails, log the error in the message buffer, if it succeeds,
-   throw to the [[emacs:src/eval.c::DEFUN ("catch"][catch]] for the tag ~icon~ and return the created image
-   from the [[emacs:src/eval.c::DEFUN ("catch"][catch]]:
+   throw to the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]] for the tag ~icon~ and return the created image
+   from the [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1146][catch]]:
 
 #+BEGIN_SRC emacs-lisp
 (catch 'icon
@@ -4822,18 +4823,18 @@ scheme, that says:
   (find-image ...))
 #+END_SRC
 
-*** With [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]]
+*** With re-search-forward
 
 In Org related packages, a technique used to find something in the
 buffer is to:
 
 1) search in the buffer some part that match some regexp (with
-   [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]]),
+   [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:2250][re-search-forward]]),
 2) when we find that part, extract the information available at point
-   (specifically we get it with [[org-mode:lisp/org-element.el::(defun org-element-at-point][org-element-at-point]]),
+   (specifically we get it with [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/org-element.el:5983][org-element-at-point]]),
 3) check some conditions on the element we've parsed,
 4) depending on the result of the previous check, we continue the
-   search in the buffer or we [[emacs:src/eval.c::DEFUN ("throw"][throw]] and return some result.
+   search in the buffer or we [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/eval.c:1245][throw]] and return some result.
 
 This technique can be done with some code similar to this snippet:
 
@@ -4848,10 +4849,10 @@ This technique can be done with some code similar to this snippet:
 #+END_SRC
 
 We encounter this pattern in the following functions
-[[org-mode:lisp/org.el::(defun org-log-beginning][org-log-beginning]], [[org-mode:lisp/ob-ref.el::(defun org-babel-ref-resolve][org-babel-ref-resolve]] and [[org-mode:lisp/org-colview.el::(defun org-columns-get-format (&optional][org-columns-get-format]].
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/org.el:10893][org-log-beginning]], [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/ob-ref.el:120][org-babel-ref-resolve]] and [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/org-colview.el:799][org-columns-get-format]].
 
-We reproduce below the source code of [[emacs:lisp/org/ob-core.el::(defun org-babel-find-named-result][org-babel-find-named-result]]
-which also uses that technique but enclosed in a [[emacs:src/editfns.c::DEFUN ("save-excursion"][save-excursion]] that
+We reproduce below the source code of [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/ob-core.el:1862][org-babel-find-named-result]]
+which also uses that technique but enclosed in a [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/editfns.c:833][save-excursion]] that
 saves the point and current buffer, executes what's in the body and
 restores those things:
 
@@ -4876,10 +4877,8 @@ buffer or nil if no such result exists."
 #+END_SRC
 
 The same technique is also used in the function
-[[emacs:lisp/org/org.el::(defun
-org-refresh-category-properties][org-refresh-category-properties]] but going backward using the function
-[[emacs:src/search.c::DEFUN
-("re-search-backward"][re-search-backward]] instead of [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]].
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/org/org.el:8608][org-refresh-category-properties]] but going backward using the function
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:2234][re-search-backward]] instead of [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:2250][re-search-forward]].
 
 WE ARE DONE!!!
 
