@@ -22,20 +22,152 @@
 :ONE: one-default-home
 :CUSTOM_ID: /
 :END:
-* TODO Questions and Answers
+* Questions and Answers
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /questions-and-answers/
 :END:
-** [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
+** Did you know that org-mode's source code contains more than 5000 examples?
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples
+:END:
+
+Back to [[#/2022-03-11-org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]]
+
+*** How do you count 5000 examples?
+
+Any ~should~, ~should-not~ and ~should-error~ used in a ~ert~ test in the
+~testing~ directory of ~org-mode~ repository is counted as an example.
+
+So now, to count all the examples, we have to count all those form and
+this can be done by searching recursively in the ~testing~ directory for
+the string ~(should~.
+
+This can be done using ~grep~ to match recursively the string ~(should~ in
+~testing~ directory and counting the number of line with ~wc~ utility:
+
+#+BEGIN_SRC bash
+# org-mode at commit cbe3f2d69
+cd org-mode/testing/
+grep -r '(should' | wc -l
+#+END_SRC
+
+#+RESULTS:
+: 5235
+
+** Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
+:PROPERTIES:
+:CUSTOM_ID: /questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command
+:END:
+
+Back to [[#/2022-03-22-org-speed-keys-and-self-insert-command/][Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command]]
+
+*** How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?
+**** Quick answer
+
+1) If we are in evil normal state ~<N>~, Org speed keys won't work
+   (because most of the printing keys are used for something else,
+   specifically they are bound in ~evil-normal-state-map~),
+2) if we are in evil insert state ~<I>~ or in evil emacs state ~<E>~, Org
+   speed keys works (because the printing keys are not bound by
+   ~evil-mode~ in ~evil-insert-state-map~ nor in ~evil-emacs-state-map~).
+
+**** Answer with more details
+
+Org speed keys are not better than ~evil-mode~ nor the other way, they
+are really differents.
+
+***** Org speed keys
+
+Org speed keys are a kind of a "hack" that hijack the "inserting emacs
+process".
+
+It can be seen as: when we try to insert a character, do not use
+the standard command for inserting, use another one that checks for the
+position of the cursor in the buffer, if it is at a specific location,
+performs a lookup for the command to call, if we find one, call it, if
+none, insert the character.  It is all about one command
+~self-insert-command~ and one remapping ~self-insert-command~ to
+~org-self-insert-command~.
+
+***** evil-mode
+
+~evil-mode~ manipulates the hierarchy of all the keymaps that are
+active, making the current evil "state" map to win over the others.
+
+We can check this by inspecting the list of the current active
+keymaps with the function ~current-active-maps~.  If the same key
+sequence is bound several times to different commands in the list
+returned by ~current-active-maps~, the first binding in the list wins
+over the others.
+
+For instance, when we are in evil normal state ~<N>~, the bindings in
+the keymap ~evil-normal-state-map~ takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by ~current-active-maps~.
+
+Assuming we are in evil normal state ~<N>~, to check this previous
+assertion, we can run:
+
+: M-x pp-eval-expression RET (current-active-maps)
+
+Now, if we switch to the evil insert state ~<I>~, the bindings in
+the keymap ~evil-insert-state-map~ takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by ~current-active-maps~.
+
+Assuming we are in evil normal state ~<I>~, to check this previous
+assertion, we can run:
+
+: M-x pp-eval-expression RET (current-active-maps)
+
+Now, what's interesting, is that evil insert state ~<I>~ doesn't bind the
+printing keys nor remap the command ~self-insert-command~.  So, when
+we are in evil insert state ~<I>~, and we press the key ~n~ for
+instance, the "command loop editor", when perfoming the key lookup in
+the current active maps, won't find the binding coming from the
+keymaps ~evil-insert-state-map~ but the binding coming form the current
+global map which resolves (by default) to the command
+~self-insert-command~.   And, if we've remapped ~self-insert-command~ to
+~org-self-insert-command~, (which is the case in org-mode with
+~org-use-speed-commands~ set to ~t~), the "command loop editor" will call
+~org-self-insert-command~.
+
+*** Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?
+
+I think that the benefit of this approach (remapping
+~self-insert-command~ to ~org-self-insert-command~) over having a minor
+mode layering its keymap onto standard ~org-mode~ is that we don't have
+to switch between keymaps or minor modes to get the feature.
+
+Let's say we define a minor mode ~X-mode~ with the keymap ~X-mode-map~
+that binds the key ~n~ to ~org-next-visible-heading~.
+
+Now, when ~X-mode~ is turned on, ~X-mode-map~ "wins" over ~org-mode-map~ and
+typing ~n~ will get us (from anywhere in the buffer) to the next
+heading.
+
+Now, what should we do to insert the character ~n~ in the buffer?  We
+should turn off ~X-mode~ to remove the binding from ~X-mode-map~.
+
+With the remapping method we don't have to switch between minor modes
+before moving to the next heading by typing ~n~.  The only restriction
+is to be at the beginning of a heading.  There is always a trade off.
+
+I don't know if it is a good reason but this the only one that I see.
+
+** Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
 :CUSTOM_ID: /questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point
 :END:
-*** Is there a way to make clickable noweb references ~<<link>>~ in source blocks in order to jump to its block definition?
+
+Back to [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point]]
+
+*** Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?
 
 What we want to accomplish here is to jump to the definition of a
 noweb block, let's say ~my-noweb~, by calling a command (maybe
-[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]]) when the point is on a reference ~<<my-noweb>>~ of
+~org-open-at-point~) when the point is on a reference ~<<my-noweb>>~ of
 that block, for instance in an org buffer with the following content:
 
 #+BEGIN_SRC org
@@ -55,7 +187,7 @@ that block, for instance in an org buffer with the following content:
 
 This can be done in at least two ways.
 
-**** Using the built-in command ~org-babel-goto-named-src-block~
+**** Using the built-in command org-babel-goto-named-src-block
 
 First, we can use the built-in command ~org-babel-goto-named-src-block~
 (bound to ~C-c C-v g~ by default).
@@ -67,7 +199,7 @@ the reference ~<<my-noweb>>~:
 2) we pick the noweb ref ~my-noweb~, press ~RET~,
 3) we jump to the source block named ~my-noweb~.
 
-**** Using the hook ~org-open-at-point-functions~
+**** Using the hook org-open-at-point-functions
 
 Second possibility, we can define a command that jump to a noweb
 block definition when we call it with the point on top of a noweb
@@ -78,7 +210,7 @@ want) we can add this command to the variable
 ~org-open-at-point-functions~.
 
 And, now in a source block with the point on top of a noweb reference,
-we can call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (~C-c C-o~ by default) which will call
+we can call ~org-open-at-point~ (~C-c C-o~ by default) which will call
 this new command and jump to the noweb block definition at point
 (instead of running ~org-babel-open-src-block-result~).
 
@@ -201,130 +333,6 @@ src_emacs-lisp{<point><<my-noweb>>}"
      (forward-line)
      (looking-at "\(setq"))))
 #+END_SRC
-
-** [[#/2022-03-22-org-speed-keys-and-self-insert-command/][Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command]]
-:PROPERTIES:
-:CUSTOM_ID: /questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command
-:END:
-*** How are speed keys different from/better than ~evil-mode~?  Does speed keys can be use along with ~evil-mode~?
-**** Quick answer
-
-1) If we are in evil normal state ~<N>~, Org speed keys won't work
-   (because most of the printing keys are used for something else,
-   specifically they are bound in ~evil-normal-state-map~),
-2) if we are in evil insert state ~<I>~ or in evil emacs state ~<E>~, Org
-   speed keys works (because the printing keys are not bound by
-   ~evil-mode~ in ~evil-insert-state-map~ nor in ~evil-emacs-state-map~).
-
-**** Answer with more details
-
-Org speed keys are not better than ~evil-mode~ nor the other way, they
-are really differents.
-
-***** Org speed keys
-
-Org speed keys are a kind of a "hack" that hijack the "inserting emacs
-process".
-
-It can be seen as: when we try to insert a character, do not use
-the standard command for inserting, use another one that checks for the
-position of the cursor in the buffer, if it is at a specific location,
-performs a lookup for the command to call, if we find one, call it, if
-none, insert the character.  It is all about one command
-~self-insert-command~ and one remapping ~self-insert-command~ to
-~org-self-insert-command~.
-
-***** ~evil-mode~
-
-~evil-mode~ manipulates the hierarchy of all the keymaps that are
-active, making the current evil "state" map to win over the others.
-
-We can check this by inspecting the list of the current active
-keymaps with the function ~current-active-maps~.  If the same key
-sequence is bound several times to different commands in the list
-returned by ~current-active-maps~, the first binding in the list wins
-over the others.
-
-For instance, when we are in evil normal state ~<N>~, the bindings in
-the keymap ~evil-normal-state-map~ takes precedence (over almost all)
-the other binding in the current active maps, and will appear at the
-beginning of the list returned by ~current-active-maps~.
-
-Assuming we are in evil normal state ~<N>~, to check this previous
-assertion, we can run:
-
-: M-x pp-eval-expression RET (current-active-maps)
-
-Now, if we switch to the evil insert state ~<I>~, the bindings in
-the keymap ~evil-insert-state-map~ takes precedence (over almost all)
-the other binding in the current active maps, and will appear at the
-beginning of the list returned by ~current-active-maps~.
-
-Assuming we are in evil normal state ~<I>~, to check this previous
-assertion, we can run:
-
-: M-x pp-eval-expression RET (current-active-maps)
-
-Now, what's interesting, is that evil insert state ~<I>~ doesn't bind the
-printing keys nor remap the command ~self-insert-command~.  So, when
-we are in evil insert state ~<I>~, and we press the key ~n~ for
-instance, the "command loop editor", when perfoming the key lookup in
-the current active maps, won't find the binding coming from the
-keymaps ~evil-insert-state-map~ but the binding coming form the current
-global map which resolves (by default) to the command
-~self-insert-command~.   And, if we've remapped ~self-insert-command~ to
-~org-self-insert-command~, (which is the case in org-mode with
-~org-use-speed-commands~ set to ~t~), the "command loop editor" will call
-~org-self-insert-command~.
-
-*** Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?
-
-I think that the benefit of this approach (remapping
-~self-insert-command~ to ~org-self-insert-command~) over having a minor
-mode layering its keymap onto standard ~org-mode~ is that we don't have
-to switch between keymaps or minor modes to get the feature.
-
-Let's say we define a minor mode ~X-mode~ with the keymap ~X-mode-map~
-that binds the key ~n~ to ~org-next-visible-heading~.
-
-Now, when ~X-mode~ is turned on, ~X-mode-map~ "wins" over ~org-mode-map~ and
-typing ~n~ will get us (from anywhere in the buffer) to the next
-heading.
-
-Now, what should we do to insert the character ~n~ in the buffer?  We
-should turn off ~X-mode~ to remove the binding from ~X-mode-map~.
-
-With the remapping method we don't have to switch between minor modes
-before moving to the next heading by typing ~n~.  The only restriction
-is to be at the beginning of a heading.  There is always a trade off.
-
-I don't know if it is a good reason but this the only one that I see.
-
-** [[#/2022-03-11-org-mode-source-code-5000-examples/][Did you know that org-mode's source code contains more than 5000 examples?]]
-:PROPERTIES:
-:CUSTOM_ID: /questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples
-:END:
-*** How do you count 5000 examples?
-
-Any ~should~, ~should-not~ and ~should-error~ used in a ~ert~ test in the
-repository [[org-mode:testing]] is counted as an example.
-
-So now, to count all the examples, we have to count all those form and
-this can be done by searching recursively in the [[org-mode:testing]] for
-the string ~(should~.
-
-This can be done using ~grep~ to match recursively the string ~(should~ in
-the directory [[org-mode:testing]] and counting the number of line with ~wc~
-utility:
-
-#+BEGIN_SRC bash
-# org-mode at commit cbe3f2d69
-cd org-mode/testing/
-grep -r '(should' | wc -l
-#+END_SRC
-
-#+RESULTS:
-: 5235
 
 * Some examples on closures and lexical-binding
 :PROPERTIES:
@@ -1888,6 +1896,7 @@ WE ARE DONE!!!
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-03-11-org-mode-source-code-5000-examples/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/
+:COMMIT_EMACS: b8b2dd17c57b73357cae229e010138fd2352a46f
 :COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
 :END:
 
@@ -2121,11 +2130,11 @@ So, what can we do?
 Maybe we can look at the test of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]].
 
 ** The Tests (aka. "The Examples")
-*** [[org-mode:testing/lisp/test-org.el::(ert-deftest test-org/insert-heading][test-org/insert-heading]]
+*** test-org/insert-heading
 
 In the directory [[org-mode:testing]], doing a search for
-[[org-mode:testing/lisp/test-org.el::(ert-deftest
-test-org/insert-heading][test-org/insert-heading]] [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] using ~grep~ (or ~ripgrep~)
+[[org-mode:lisp/org.el::(defun
+org-insert-heading][org-insert-heading]] using ~grep~ (or ~ripgrep~)
 shows that the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] is tested in the [[emacs:lisp/emacs-lisp/ert.el][ert]] test
 [[org-mode:testing/lisp/test-org.el::(ert-deftest
 test-org/insert-heading][test-org/insert-heading]] defined in the file
@@ -2206,7 +2215,7 @@ could be translated like this:
 7) if they are equal, return ~t~, if not, return the error
    ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
 
-*** [[emacs:lisp/emacs-lisp/ert.el][ert]] and [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]
+*** ert and org-test-with-temp-text
 
 To evaluate the preceding form we need to have [[emacs:lisp/emacs-lisp/ert.el][ert]] loaded (for the
 macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]) which can be achieve by evaluating the following form:
@@ -2237,7 +2246,7 @@ evaluating its definition:
        ,@body)))
 #+END_SRC
 
-*** [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]]
+*** should, should-not, should-error
 
 Our examples only use the macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] but if we want to read more
 tests it is useful to know the macros [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]] and [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]] that
@@ -2347,7 +2356,10 @@ part of THE ORG-MODE TRUTH lives.
 
 WE ARE DONE!
 
-** [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]]
+** Q&A
+
+Check [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]]
+
 * TODO Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
 :ONE: one-default-doc
