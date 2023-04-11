@@ -119,20 +119,18 @@ See `org-rev-open'."
          (:div/sidebar ,pages-list)
          (:article
           (:div/title (:h1 ,title))
-          (:div/meta-info
-           (:div ,date)
-           "/"
-           (:div "Tony Aldon")
-           "/"
-           (:div (:a (@ :href ,reddit-post) "comment on reddit"))
-           ,(cond
-             ((and commit-emacs commit-org-mode)
-              (list "/" `(:div "emacs revision: " ,(substring commit-emacs 0 12))
-                    "/" `(:div "org-mode revision: " ,(substring commit-org-mode 0 12))))
-             (commit-emacs
-              (list "/" `(:div "emacs revision: " ,(substring commit-emacs 0 12))))
-             (commit-org-mode
-              (list "/" `(:div "org-mode revision: " ,(substring commit-org-mode 0 12))))))
+          ,(when (not (string-match-p "questions-and-answers" path))
+             `(:div/meta-info
+               (:div ,date) "/" (:div "Tony Aldon") "/"
+               (:div (:a (@ :href ,reddit-post) "comment on reddit"))
+               ,(cond
+                 ((and commit-emacs commit-org-mode)
+                  (list "/" `(:div "emacs revision: " ,(substring commit-emacs 0 12))
+                        "/" `(:div "org-mode revision: " ,(substring commit-org-mode 0 12))))
+                 (commit-emacs
+                  (list "/" `(:div "emacs revision: " ,(substring commit-emacs 0 12))))
+                 (commit-org-mode
+                  (list "/" `(:div "org-mode revision: " ,(substring commit-org-mode 0 12)))))))
           ,toc
           ,content
           ,nav)))
