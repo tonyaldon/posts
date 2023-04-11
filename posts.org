@@ -5202,12 +5202,12 @@ under the directory ~/tmp/emacs/~):
 
 WE ARE DONE!!!
 
-* TODO If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
+* If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/
-:COMMIT_ORG_MODE: 685d78f63cbe210448508b23c0b47d7be70aedfb
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey Emacsers,
@@ -5277,7 +5277,7 @@ that prints:
 
 Now that we are clear about the initial state, we can continue.
 
-** Call ~wgrep-change-to-wgrep-mode~, make changes and abort changes with ~wgrep-abort-changes~
+** Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes
 
 Let's search for the regexp ~org-link-expand-abbrev~ (that exactly matches
 the string ~org-link-expand-abbrev~) in ~org-mode~ directory using ~rg.el~:
@@ -5289,8 +5289,7 @@ the string ~org-link-expand-abbrev~) in ~org-mode~ directory using ~rg.el~:
 
 We get the following buffer named ~*rg*~ (in the mode ~rg-mode~) that
 shows that we've matched ~org-link-expand-abbrev~ twice, once in the
-file [[org-mode:lisp/ol.el]] and once in the file
-[[org-mode:lisp/org-element.el]]:
+file [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el][lisp/ol.el]] and once in the file [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el][lisp/org-element.el]]:
 
 #+BEGIN_SRC text
 -*- mode: rg; default-directory: "/tmp/org-mode/" -*-
@@ -5387,9 +5386,9 @@ Note that when we are editing the buffer ~*rg*~, until we explicitly
 run a command (like ~wgrep-abort-changes~) of ~wgrep~ package, nothing is
 reflected in the file system (neither in the buffers that are visiting
 files that could be modified by ~wgrep~, for instance in our case
-[[org-mode:lisp/ol.el]] and [[org-mode:lisp/org-element.el]]).
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el][lisp/ol.el]] and [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el][lisp/org-element.el]]).
 
-** Changes applied to the file system: ~wgrep-finish-edit~ and ~wgrep-save-all-buffers~
+** Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers
 
 Now, let's modify again the ~*rg*~ buffer, the same way as before
 (starting by pressing ~e~ (bound to ~wgrep-change-to-wgrep-mode~) to make
@@ -5427,8 +5426,8 @@ account those changes, we can do two things:
 
 1) navigate between the matched lines that we've changed pressing ~n~ or
    ~p~.  We see the changes reflected in the buffers ~ol.el~ (visiting
-   the file [[org-mode:lisp/ol.el]]) and ~org-element.el~ (visiting the file
-   [[org-mode:lisp/org-element.el]]).  We also observe that those
+   the file [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el][lisp/ol.el]]) and ~org-element.el~ (visiting the file
+   [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el][lisp/org-element.el]]).  We also observe that those
    modifications are not saved in the buffers.  And if we change our
    mind again and we no longer want those changes to be applied, in
    each buffer we can "manually" undo those changes.
@@ -5462,8 +5461,7 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 #+END_SRC
 
-So the files [[org-mode:lisp/ol.el]] and [[org-mode:lisp/org-element.el]] have
-been modified.
+So the files [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el][lisp/ol.el]] and [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el][lisp/org-element.el]] have been modified.
 
 To be sure that those modifications correspond to our renaming, we
 can run the following command that prints the ~git~ difference between
@@ -5519,7 +5517,7 @@ And we can verify that we're back to our original state by running the
 following commands ~git status~ and ~git rev-parse --short HEAD~ as we did
 at the beginning of this post.
 
-** Make the changes automatic with ~wgrep-auto-save-buffer~
+** Make the changes automatic with wgrep-auto-save-buffer
 
 As written in the documentation of ~wgrep~, if we want to save the
 buffers automatically when we call ~wgrep-finish-edit~ (and so apply
@@ -5530,7 +5528,7 @@ the changes in the file system), we can set the variable
 (setq wgrep-auto-save-buffer t)
 #+END_SRC
 
-** We could have used ~sed~ to do it non interactively
+** We could have used sed to do it non interactively
 
 Renaming a function like we did before with ~rg.el~ and ~wgrep~ could also
 be done using the cli ~sed~ (that can search some regexp in files
@@ -5567,12 +5565,12 @@ that produces the same result:
 
 WE ARE DONE!!!
 
-* TODO Programming with Elisp is magic
+* Programming with Elisp is magic
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-22-programming-with-elisp-is-magic/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/u9e9r3/programming_with_elisp_is_magic/
-:COMMIT_ORG_MODE: bee31004bcf49bbdf353b41d3ee4e6b0c02cc415
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 BOOM!!! Let's get to the point!!!
@@ -5589,7 +5587,7 @@ What's magic when programming Elisp code is that at any time:
 In almost no time, misconceptions about what a program does (or why
 a program fails) can be spot that way.
 
-Those who have already read the post about [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][link abbrevations and
+Those who have already read the post about [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][link abbrevations and
 org-open-at-point]] might be familiar with the above description.
 
 Indeed, today's post is literally a section extracted from this
@@ -5617,22 +5615,22 @@ I hope you find it useful.
 Here is the context.
 
 When we introduced the section "Programming with Elisp is magic" in
-the post about [[https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/][link abbrevations and org-open-at-point]], we were
+the post about [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][link abbrevations and org-open-at-point]], we were
 studying some implementation details of the function
-[[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] that parses an Org link at point, if any.
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:3249][org-element-link-parser]] that parses an Org link at point, if any.
 
 For instance, in the following org buffer (if you have never used
 "link abbreviations", I encourage you to read the info node
 [[info:org#Link Abbreviations]]:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 ,#+LINK: emacs /tmp/emacs/
 
 [[emacs:lisp/simple.el::(defun next-error (&optional]]
 #+END_SRC
 
 with the point at the beginning of the link, calling the function
-[[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] returns the org object (a list):
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:3249][org-element-link-parser]] returns the org object (a list):
 
 #+BEGIN_SRC emacs-lisp
 (link
@@ -5652,7 +5650,7 @@ with the point at the beginning of the link, calling the function
 We were particularly interested in the computation of the values of
 the properties ~:path~ and ~:search-option~.
 
-The function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] is 128 lines long, uses many
+The function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:3249][org-element-link-parser]] is 128 lines long, uses many
 regexp to do its jobs, mutates several times the local let binded
 variable ~path~ that is returned as the value of the property ~:path~ (the
 one we are interested in).
@@ -5674,7 +5672,7 @@ Fast feedback, this is the magic of programming with Elisp.
 So here we are.
 
 Let's say we want to be sure that the following snippet in the
-function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]] does what it seems to do:
+function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:3249][org-element-link-parser]] does what it seems to do:
 
 #+BEGIN_SRC emacs-lisp
 (when (string-match "::\\(.*\\)\\'" path)
@@ -5767,16 +5765,17 @@ Now putting everything together we can write the following example:
 #+END_SRC
 
 And maybe we've removed some misconceptions about this part of the
-function [[org-mode:lisp/org-element.el::(defun org-element-link-parser (][org-element-link-parser]].
+function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:3249][org-element-link-parser]].
 
 WE ARE DONE!!!
 
-* TODO FULL example of org-mode links: internal links and search options
+* FULL example of org-mode links: internal links and search options
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/
-:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:COMMIT_EMACS: de7901abbc21114721057c907cc52455e228f826
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey Emacser,
@@ -5785,7 +5784,7 @@ I hope you are doing well :)
 
 In [[#/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/][this post (2022-04-04)]] we talked about search options in file
 links, link abbreviations and the implementation of the command
-[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]].
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]].
 
 My goal was to walk the path from pressing ~RET~ (if you have
 ~org-return-follows-link~ set to ~t~) or ~C-c C-o~ on top of the abbreviated
@@ -5811,11 +5810,11 @@ org-open-at-point
 #+END_SRC
 
 As the post has become bigger than I expected, I decided not to
-talk about the last call to the function [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], despite my
+talk about the last call to the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]], despite my
 desire to do so.
 
 Some time later, I decided to give it a chance.  I looked
-[[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] in the eyes and I saw that I won't be able to give a
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]] in the eyes and I saw that I won't be able to give a
 clear explanation without talking a least in one post about
 the catch/throw pattern in Elisp.  So, I postponed it and wrote the
 post [[#/2022-04-13-cath-throw-pattern-in-emacs-source-code/][A tour of the catch/throw pattern in the Emacs source code (2022-04-13)]]
@@ -5833,21 +5832,21 @@ So let's try another approach that may give you some "tools" to examine
 its implementation if you are interested.
 
 First, we look at a "full" example that features org links that, in
-the end, use [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] to make the jump when we call
-[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] on them.
+the end, use [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]] to make the jump when we call
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] on them.
 
 Next, we give some practical examples demonstrating part of the Elisp
 API dealing with strings and regexps functions that are used in
-[[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]].
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]].
 
 With that done, just between us, let's say we are done with
-[[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] function and we've completed the walk inside
-[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] function :)
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]] function and we've completed the walk inside
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] function :)
 
 ** Full example of org links that use org-link-search when followed
 
 The following example features org links that, in the end, use
-[[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] to make the jump when we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] on
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]] to make the jump when we call [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] on
 them.
 
 Notes on the example:
@@ -5870,17 +5869,17 @@ have several options to take advantage of it:
 
 For convenience and to make the following example almost
 selfcontained, we use for instance the link ~[[#custom-id-2]]~ that is of
-type ~custom-id~ instead of demonstrating the use of [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]]
+type ~custom-id~ instead of demonstrating the use of [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]]
 with a link like this ~[[/path-to-file.org::#custom-id-2]]~ which is of type
 ~file~ with the search option component equal to ~#custom-id-2~.
 
 But it doesn't matter much because, in the end, both are treated
-the same way by the same function [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], and the exact last
+the same way by the same function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]], and the exact last
 call in both cases is ~(org-link-search "#custom-id-2")~.
 
 In the example, the links are presented in the same order as they are
-treated in the ~cond~ special form in the body of [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]].  If
-you finally decide to look at the implementation of [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]],
+treated in the ~cond~ special form in the body of [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]].  If
+you finally decide to look at the implementation of [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]],
 you'll be able to follow the "flow" in the implementation following
 the "flow" of the example or vice-versa, maybe side by side using two
 different buffers (by the way this is how I built the example, side by
@@ -5895,7 +5894,7 @@ Lastly, the info node related to this example are the following:
 
 Here is the example:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 ,* headline 1
 
 With [[#custom-id-2]] link we jump (with ~org-open-at-point~) in this
@@ -6052,10 +6051,10 @@ I'm the <<target>>!
 ** Elisp API dealing with strings and regexps
 
 Remember that when we are working with Elisp we can obtain information
-about any symbols with the command [[emacs:lisp/help-fns.el::(defun describe-symbol][describe-symbol]] bound by default to
+about any symbols with the command [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/help-fns.el:1582][describe-symbol]] bound by default to
 ~C-h o~.
 
-In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the variable [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("case-fold-search"][case-fold-search]] is set ~t~ which means
+In [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]], the variable [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/buffer.c:5674][case-fold-search]] is set ~t~ which means
 that searches and matches should ignore case:
 
 #+BEGIN_SRC emacs-lisp
@@ -6066,10 +6065,10 @@ that searches and matches should ignore case:
   (string-match "FOO" "foo")) ; nil
 #+END_SRC
 
-In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the search string ~s~ provided can contain newlines
+In [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]], the search string ~s~ provided can contain newlines
 followed by any numbers of spaces or tabs.  Those patterns are
 replaced by one space.  This is done using the function
-[[emacs:lisp/subr.el::(defun replace-regexp-in-string][replace-regexp-in-string]] like this:
+[[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/subr.el:4979][replace-regexp-in-string]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (let ((s "search  \n  \t\t option"))
@@ -6077,14 +6076,14 @@ replaced by one space.  This is done using the function
 ;; "search   option"
 #+END_SRC
 
-The search option string ~s~ given to [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]] can start:
+The search option string ~s~ given to [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]] can start:
 
 1) with a star ~*~ when we search specifically a headline (for instance
    in the link ~[[* headline 3]]~ used in the above example) or,
 2) with a hash ~#~ when we search a custom id (for instance
    in the link ~[[#custom-id-2]]~ used in the above example)
 
-The function [[emacs:src/editfns.c::DEFUN ("string-to-char"][string-to-char]] returns the first character of a string
+The function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/editfns.c:167][string-to-char]] returns the first character of a string
 and we can use like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -6096,11 +6095,11 @@ and we can use like this:
 (eq (string-to-char "#custom-id-2") ?#) ; t
 #+END_SRC
 
-In [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]], the searches are not done directly against its
+In [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]], the searches are not done directly against its
 given string ~s~ but against different regexps depending on the context
 built from ~s~.
 
-The function [[emacs:lisp/subr.el::(defun split-string (string &][split-string]] is used to split one of the string into
+The function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:lisp/subr.el:4832][split-string]] is used to split one of the string into
 substrings bounded by whitespace like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -6108,28 +6107,28 @@ substrings bounded by whitespace like this:
 #+END_SRC
 
 When the given string ~s~ starts with a star ~*~, the star is removed
-using the function [[emacs:src/fns.c::DEFUN ("substring"][substring]] like this:
+using the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/fns.c:1434][substring]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (substring "*foo" 1) ; "foo"
 #+END_SRC
 
-The searches are done using the function [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]] that
+The searches are done using the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:2250][re-search-forward]] that
 searches in the current buffer for regular expression.  So, we have to
 be careful when we give it a string to search for, that string must be a
 regexp.
 
-We can ensure that the string we give to [[emacs:src/search.c::DEFUN ("re-search-forward"][re-search-forward]] is a regexp
-using the function [[emacs:src/search.c::DEFUN ("regexp-quote"][regexp-quote]]
+We can ensure that the string we give to [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:2250][re-search-forward]] is a regexp
+using the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:3133][regexp-quote]]
 
 
 that returns a regexp string which
-matches exactly the string we gave it and this is how [[org-mode:lisp/ol.el::(defun org-link-search][org-link-search]]
+matches exactly the string we gave it and this is how [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1106][org-link-search]]
 does it.
 
 For instance, the characters ~.~, ~?~, ~+~ and ~*~ are "special" in regexps, so
 if we want to match them in a regexp we must escape them and we can do
-it using the function [[emacs:src/search.c::DEFUN ("regexp-quote"][regexp-quote]] like this:
+it using the function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/search.c:3133][regexp-quote]] like this:
 
 #+BEGIN_SRC emacs-lisp
 (regexp-quote "foo.bar") ; "foo\\.bar"
@@ -6153,12 +6152,12 @@ https://orgmode.org/worg/org-mailing-list.html.
 
 Thank you Ihor Radchenko.
 
-* TODO Link to a git commit from Org mode using Magit | THIS IS EMACS
+* Link to a git commit from Org mode using Magit | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/
-:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey Org mode lovers,
@@ -6186,7 +6185,7 @@ The key elements to doing so lie in:
 
 1) Org mode provides the built-in ~elisp~ type link that allows to
    evaluate any Elisp s-exps or to call any commands when we open this
-   type of link with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default),
+   type of link with [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] (bound to ~C-c C-o~ by default),
 2) and that the command ~magit-show-commit~ used to visit commits in
    magit buffers when we are on a commit line can also be used non
    interactively as a regular function where we have to provide it the
@@ -6200,11 +6199,11 @@ followed by either an Elisp form in parentheses or an Elisp command.
 
 For instance this link:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 [[elisp:(+ 1 1)]]
 #+END_SRC
 
-when followed with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] prints the following in the echo
+when followed with [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] prints the following in the echo
 area:
 
 #+BEGIN_SRC text
@@ -6213,14 +6212,14 @@ area:
 
 And this link:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 [[elisp:tetris]]
 #+END_SRC
 
-when followed with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] starts the built-in Tetris.
+when followed with [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] starts the built-in Tetris.
 
-By default, the variable [[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] is set to the
-function [[emacs:src/fns.c::DEFUN ("yes-or-no-p"][yes-or-no-p]] which means that when we open an ~elisp~ link we
+By default, the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:394][org-link-elisp-confirm-function]] is set to the
+function [[rev:de7901abbc21114721057c907cc52455e228f826:emacs:src/fns.c:2953][yes-or-no-p]] which means that when we open an ~elisp~ link we
 are asked for confirmation before executing the ~elisp~ link.
 
 We can set this variable to ~nil~ if we never want to be asked for
@@ -6228,16 +6227,16 @@ confirmation.  But it might be dangerous (see the docstring of this
 variable for an example of a dangerous ~elisp~ link that can remove all
 our user home directory).
 
-Besides setting [[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] to ~nil~ in order not to
+Besides setting [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:394][org-link-elisp-confirm-function]] to ~nil~ in order not to
 be asked confirmation everytime we open an ~elisp~ link we can
-use the variable [[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]].
+use the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:411][org-link-elisp-skip-confirm-regexp]].
 
 Indeed, any ~elisp~ link that matches the regexp
-[[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]] is executed without asking
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:411][org-link-elisp-skip-confirm-regexp]] is executed without asking
 confirmation.
 
 For instance, setting up the variable
-[[org-mode:lisp/ol.el::(defcustom org-link-elisp-skip-confirm-regexp][org-link-elisp-skip-confirm-regexp]] to ~"tetris"~ lets us open the link
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:411][org-link-elisp-skip-confirm-regexp]] to ~"tetris"~ lets us open the link
 ~[[elisp:tetris]]~ without asking us confirmation.
 
 #+BEGIN_SRC emacs-lisp
@@ -6251,15 +6250,15 @@ We add the Magit layer to our ~elisp~ link.
 The scenario is the following.  We are "working" on the Org repository
 that we assume is cloned under the directory ~/tmp/org-mode/~.  At some
 point we've looked at the commit ~baffebbc3~ that fixes a bug in
-[[org-mode:lisp/org.el::(defun org-get-heading (&optional][org-get-heading]] and we want to keep in our note a link to that commit.
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:7104][org-get-heading]] and we want to keep in our note a link to that commit.
 
 To do so we can use the following link:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 [[elisp:(magit-show-commit "baffebbc3" nil nil "/tmp/org-mode/")]]
 #+END_SRC
 
-Now, if we open that link with [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]], we jump to the
+Now, if we open that link with [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]], we jump to the
 following buffer in ~magit-revision-mode~:
 
 #+BEGIN_SRC diff
@@ -6302,10 +6301,10 @@ examples, let's see how they are implemented.
 
 Except for the reserved link types ~coderef~, ~custom-id~, ~fuzzy~ and
 ~radio~ we can defined new link types or modify an existing link types
-using the function [[org-mode:lisp/ol.el::(defun org-link-set-parameters][org-link-set-parameters]].
+using the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:778][org-link-set-parameters]].
 
 For instance the link type ~elisp~ is defined like this in the file
-[[org-mode:lisp/ol.el]]
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el][lisp/ol.el]]
 
 #+BEGIN_SRC emacs-lisp
 (org-link-set-parameters "elisp" :follow #'org-link--open-elisp)
@@ -6313,11 +6312,11 @@ For instance the link type ~elisp~ is defined like this in the file
 
 Fine, but what does it mean to define a link type?
 
-It means that we add an entry to the alist [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] where
+It means that we add an entry to the alist [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]] where
 we specify for a link type how we want the Org mode features related to
 links to behave regarding that type.
 
-With the default configuration the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]
+With the default configuration the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]]
 looks like this (with some link types skipped):
 
 #+BEGIN_SRC emacs-lisp
@@ -6334,38 +6333,38 @@ looks like this (with some link types skipped):
  ("elisp" :follow org-link--open-elisp))
 #+END_SRC
 
-For instance, the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]
+For instance, the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]]
 tells org-mode that when we open an ~elisp~ type link with
-[[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default) the function that
-finally opens the link is [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] (the one after the
-keyword ~:follow~ in the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]]).
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] (bound to ~C-c C-o~ by default) the function that
+finally opens the link is [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]] (the one after the
+keyword ~:follow~ in the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]]).
 
 And for the ~info~ type links (links to info node) the variable
-[[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] tells org-mode:
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]] tells org-mode:
 
-1) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-open (path][org-info-open]] when we open ~info~ type links,
-2) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-export (path][org-info-export]] when we export open ~info~ type
+1) to use the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol-info.el:62][org-info-open]] when we open ~info~ type links,
+2) to use the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol-info.el:129][org-info-export]] when we export open ~info~ type
    links,
-3) to use the function [[org-mode:lisp/ol-info.el::(defun org-info-store-link][org-info-store-link]] when we store ~info~ type
+3) to use the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol-info.el:49][org-info-store-link]] when we store ~info~ type
    links.
 
 If we want to write our own type link we can look at the docstring of
-[[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] to know what are the supported keys
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]] to know what are the supported keys
 (~:follow~, ~:export~, ~:store~, ~:activate-func~, ~:complete~,
 ~:display~, ~:face~, ~:help-echo~, ~:htmlize-link~, ~:keymap~, ~:mouse-face~)
 and what are their accepted values.
 
 Back to ~elisp~ type links.
 
-When we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] (bound to ~C-c C-o~ by default) without
+When we call [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] (bound to ~C-c C-o~ by default) without
 universal argument on the following ~elisp~ type link:
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 [[elisp:(+ 1 1)]]
 #+END_SRC
 
-in its body, [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] parses the link at point and
-"delegates" the work to the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] passing it as
+in its body, [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] parses the link at point and
+"delegates" the work to the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1035][org-link-open]] passing it as
 first argument the parsed link like this:
 
 #+BEGIN_SRC emacs-lisp
@@ -6381,19 +6380,19 @@ first argument the parsed link like this:
  )
 #+END_SRC
 
-Then the function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] locally binds the variables ~type~ and
+Then the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1035][org-link-open]] locally binds the variables ~type~ and
 ~path~ respectively to ~"elisp"~ and ~"(+ 1 1)"~ getting those values out of
 the link ~(link (:type "elisp" :path "(+ 1 1)" ...))~ using the function
-[[org-mode:lisp/org-element.el::(defsubst org-element-property (property][org-element-property]].
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org-element.el:470][org-element-property]].
 
 Then as ~type~ is not equal to any of the following types ~"file"~,
 ~"coderef"~, ~"custom-id"~, ~"fuzzy"~ and ~"radio"~ but equal to ~"elisp"~ the
-function [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] decides to use the dedicated function
-[[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] to open ~elisp~ type links.
+function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1035][org-link-open]] decides to use the dedicated function
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]] to open ~elisp~ type links.
 
-This is done by locally binding ~f~ to [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] retrieving
-this value using the function [[org-mode:lisp/ol.el::(defun org-link-get-parameter][org-link-get-parameter]] which is a thin
-wrapper around the variable [[org-mode:lisp/ol.el::(defcustom org-link-parameters][org-link-parameters]] as we can see in the
+This is done by locally binding ~f~ to [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]] retrieving
+this value using the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:771][org-link-get-parameter]] which is a thin
+wrapper around the variable [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:89][org-link-parameters]] as we can see in the
 following code snippet
 
 #+BEGIN_SRC emacs-lisp
@@ -6402,14 +6401,14 @@ following code snippet
   (plist-get (cdr (assoc type org-link-parameters)) key))
 #+END_SRC
 
-and as [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] is a function that accepts two arguments,
-[[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] finally returns with the following call:
+and as [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]] is a function that accepts two arguments,
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1035][org-link-open]] finally returns with the following call:
 
 #+BEGIN_SRC emacs-lisp
 (funcall 'org-link--open-elisp "(+ 1 1)" nil)
 #+END_SRC
 
-Here are the parts of [[org-mode:lisp/ol.el::(defun org-link-open (link][org-link-open]] we've just discussed:
+Here are the parts of [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1035][org-link-open]] we've just discussed:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link-open (link &optional arg)
@@ -6434,10 +6433,10 @@ Here are the parts of [[org-mode:lisp/ol.el::(defun org-link-open (link][org-lin
               (funcall (org-link-get-parameter type :follow) path)))))))))
 #+END_SRC
 
-Now we are left with the function [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]].
+Now we are left with the function [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]].
 
 Assuming we answer ~yes~ to the question raised by calling
-[[org-mode:lisp/ol.el::(defcustom org-link-elisp-confirm-function 'yes-or-no-p][org-link-elisp-confirm-function]] in the condition of the ~if~ form, the
+[[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:394][org-link-elisp-confirm-function]] in the condition of the ~if~ form, the
 THEN part of the ~if~ is evaluated.
 
 As the ~path~ equal to ~"(+ 1 1)"~ starts by a left parentheses ~(~, the
@@ -6446,7 +6445,7 @@ string ~"(+ 1 1)"~ is "transformed" into a lisp object by the function
 substituted in the second placeholder ~%s~ in the string of the
 ~message~ function.
 
-Here are the parts of [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-link--open-elisp]] we've just discussed:
+Here are the parts of [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ol.el:1318][org-link--open-elisp]] we've just discussed:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-link--open-elisp (path _)
@@ -6460,7 +6459,7 @@ Here are the parts of [[org-mode:lisp/ol.el::(defun org-link--open-elisp][org-li
 #+END_SRC
 
 And this is how the message ~(+ 1 1) => 2~ is printed in the echo area
-when we call [[org-mode:lisp/org.el::(defun org-open-at-point (&optional arg][org-open-at-point]] on top of the ~elisp~ type link ~[[elisp:(+
+when we call [[rev:af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/org.el:8932][org-open-at-point]] on top of the ~elisp~ type link ~[[elisp:(+
 1 1)]]~.
 
 WE ARE DONE!!!
@@ -6493,7 +6492,8 @@ you may be interested in these examples:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/
-:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:COMMIT_EMACS: de7901abbc21114721057c907cc52455e228f826
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey Emacsers,
@@ -6738,7 +6738,7 @@ WE ARE DONE!!!
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/
-:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey org-mode fans,
@@ -7127,7 +7127,7 @@ WE ARE DONE!!!
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/une2d8/orgmode_links_in_2022_implementation_packages/
-:COMMIT_ORG_MODE: 407104459b86a40e03f5f1f323d28ad935721ef3
+:COMMIT_ORG_MODE: af6f1298b6f613678ba5ccf9592412872743fe54
 :END:
 
 Hey Emacsers,
