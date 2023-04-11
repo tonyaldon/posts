@@ -579,11 +579,11 @@ We call it ~onlybold~.
 Before we start, if you are interested, I recommend you to read in
 org-mode's source code the following files:
 
-- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el][lisp/ox.el]],
-- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-html.el][lisp/ox-html.el]],
-- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-md.el][lisp/ox-md.el]],
-- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-org.el][lisp/ox-org.el]],
-- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:testing/lisp/test-ox.el][lisp/test-ox.el]] (AMAZING).
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox.el][lisp/ox.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox-html.el][lisp/ox-html.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox-md.el][lisp/ox-md.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox-org.el][lisp/ox-org.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/lisp/test-ox.el][lisp/test-ox.el]] (AMAZING).
 
 You can get org-mode's source code by running the following command:
 
@@ -633,7 +633,7 @@ simplest case, we just have to provide the *transcode functions*
 
 ** transcoders, org-export-define-backend and org-export-to-buffer
 
-The function [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el:1126][org-export-define-backend]] takes as arguments:
+The function [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox.el:1126][org-export-define-backend]] takes as arguments:
 
 1) the backend's name we want to define and
 2) an alist of transcoders.
@@ -911,7 +911,7 @@ of org backends
 I want to take the opportunity of this post to thank:
 
 1) Nicolas Goaziou who is the author and maintainer of
-   [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el:1126][org-export-define-backend]], and [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/org-element.el:5989][org-element-at-point]].
+   [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/ox.el:1126][org-export-define-backend]], and [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org-element.el:5989][org-element-at-point]].
 2) All the people who work and contribute to org-mode (built-in and
    external packages),
 3) All the people who work and contribute to Emacs (built-in and
@@ -1891,7 +1891,7 @@ To finish this post, we remove the overlays like this:
 
 WE ARE DONE!!!
 
-* TODO Did you know that org-mode's source code contains more than 5000 examples?
+* Did you know that org-mode's source code contains more than 5000 examples?
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-03-11-org-mode-source-code-5000-examples/
@@ -1928,22 +1928,22 @@ What if we looked at org-mode tests as examples of org-mode?
 BOOM. We have our 5000 examples.
 
 Before going any further, let's make it clear that we don't need to
-understand or know how to use [[emacs:lisp/emacs-lisp/ert.el][ert]] (the built-in package used for
+understand or know how to use [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] (the built-in package used for
 testing) to benefit from org-mode testing.
 
-And this post is not about [[emacs:lisp/emacs-lisp/ert.el][ert]] testing but about the information
+And this post is not about [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] testing but about the information
 that we can get from the org-mode test suite.
 
-In this post, we use the example of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
+In this post, we use the example of the command [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]]
 (bound by default to ~M-<RET>~, that allows to insert a new heading or
 item with the same depth at point)  to "demonstrate" that the tests
 are indeed examples.
 
-Let's assume we are already familiar with [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]], we use it
+Let's assume we are already familiar with [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]], we use it
 every day, but sometimes we don't understand why it behaves the way it
 does.
 
-What can we do to find out the truth about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]?
+What can we do to find out the truth about [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]]?
 
 ** Org manual
 
@@ -1971,7 +1971,7 @@ investigation to find the truth.
 
 ** Help buffer
 
-Secondly, we can find more information about [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]
+Secondly, we can find more information about [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]]
 by reading its docstring by running:
 
 : C-h f org-insert-heading RET
@@ -2025,8 +2025,8 @@ our investigation to find the truth.
 
 The truth resides in the source code!  Isn't that right?
 
-Ok, let's take a look at the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] defined in the
-file [[org-mode:lisp/org.el]] as follow:
+Ok, let's take a look at the command [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] defined in the
+file [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el][lisp/org.el]] as follow:
 
 #+BEGIN_SRC emacs-lisp
 (defun org-insert-heading (&optional arg invisible-ok top)
@@ -2116,7 +2116,7 @@ implementations of ~org-mode~ and ~emacs/elisp~ than we want to spend time
 on.
 
 Indeed, if we want to understand the implementation of
-[[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] we have to understand:
+[[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] we have to understand:
 
 1) (org API) ~org--blank-before-heading-p~, ~org-current-level~,
    ~org-with-limited-levels~, ~outline-next-heading~, ~org-back-to-heading~,
@@ -2127,20 +2127,16 @@ Indeed, if we want to understand the implementation of
 
 So, what can we do?
 
-Maybe we can look at the test of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]].
+Maybe we can look at the test of the command [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]].
 
 ** The Tests (aka. "The Examples")
 *** test-org/insert-heading
 
-In the directory [[org-mode:testing]], doing a search for
-[[org-mode:lisp/org.el::(defun
-org-insert-heading][org-insert-heading]] using ~grep~ (or ~ripgrep~)
-shows that the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] is tested in the [[emacs:lisp/emacs-lisp/ert.el][ert]] test
-[[org-mode:testing/lisp/test-org.el::(ert-deftest
-test-org/insert-heading][test-org/insert-heading]] defined in the file
-[[org-mode:testing/lisp/test-org.el]] as follows (we reproduce only the
-first 4 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms - it contains 28 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms and 1 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]]
-form):
+In ~testing~ directory, doing a search for [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] using ~grep~
+(or ~ripgrep~) shows that the command [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] is tested in
+the [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] test [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/lisp/test-org.el:1518][test-org/insert-heading]] defined in the file
+[[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/lisp/test-org.el][testing/lisp/test-org.el]] as follows (we reproduce only the first 4
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] forms - it contains 28 [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] forms and 1 [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:368][should-not]] form):
 
 #+BEGIN_SRC emacs-lisp
 (ert-deftest test-org/insert-heading ()
@@ -2175,26 +2171,26 @@ form):
   )
 #+END_SRC
 
-What can we observe from those 4 [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms?
+What can we observe from those 4 [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] forms?
 
 1) they have the same "shape", so we can deduce that if we understand
    how the first one works, we will understand the others,
 2) they use only a few symbols (much less than in the source code of
-   [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]]):
-   - [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] from [[emacs:lisp/emacs-lisp/ert.el][ert]] package,
+   [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]]):
+   - [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] from [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] package,
    - ~equal~, ~let~ and ~buffer-string~ from Emacs/Elisp,
-   - [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] specific to Org test suite and
-   - [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] and [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]], the command and
+   - [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]] specific to Org test suite and
+   - [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] and [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:1739][org-M-RET-may-split-line]], the command and
      the variable we are testing.
 
-Now let's describe these [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms in words as best we can.
+Now let's describe these [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] forms in words as best we can.
 
-After doing this, perhaps we will think of these [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] forms as small
-examples, each describing a behavior of the command [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]].
+After doing this, perhaps we will think of these [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] forms as small
+examples, each describing a behavior of the command [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]].
 
 *** Example 1
 
-The first [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+The first [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] form:
 
 #+BEGIN_SRC emacs-lisp
 (should
@@ -2206,26 +2202,26 @@ The first [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
 
 could be translated like this:
 
-1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+1) in a temporary buffer in org-mode ([[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]]),
 2) keep the buffer empty (~""~),
 3) keep the point at the beginning,
-4) call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]],
+4) call [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]],
 5) return the string from the temporary buffer (~buffer-string~),
 6) compare this string to the string ~"* "~ (~equal~),
 7) if they are equal, return ~t~, if not, return the error
-   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+   ~ert-test-failed~ ([[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]]).
 
 *** ert and org-test-with-temp-text
 
-To evaluate the preceding form we need to have [[emacs:lisp/emacs-lisp/ert.el][ert]] loaded (for the
-macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]) which can be achieve by evaluating the following form:
+To evaluate the preceding form we need to have [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] loaded (for the
+macro [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]]) which can be achieve by evaluating the following form:
 
 #+BEGIN_SRC emacs-lisp
 (require 'ert)
 #+END_SRC
 
-and we need the macro [[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]] (defined in the file
-[[org-mode:testing/org-test.el]]) to be defined which can be done by
+and we need the macro [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]] (defined in the file
+[[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el][testing/org-test.el]]) to be defined which can be done by
 evaluating its definition:
 
 #+BEGIN_SRC emacs-lisp
@@ -2248,12 +2244,12 @@ evaluating its definition:
 
 *** should, should-not, should-error
 
-Our examples only use the macro [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] but if we want to read more
-tests it is useful to know the macros [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]] and [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]] that
-[[emacs:lisp/emacs-lisp/ert.el][ert]] package provides.
+Our examples only use the macro [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] but if we want to read more
+tests it is useful to know the macros [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:368][should-not]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:407][should-error]] that
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el][ert.el]] package provides.
 
 In the following Elisp snippet, we give some examples of the use of
-[[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]], [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-not][should-not]] and [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should-error][should-error]]:
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:368][should-not]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:407][should-error]]:
 
 #+BEGIN_SRC emacs-lisp
 (should 3)   ; 3
@@ -2272,7 +2268,7 @@ In the following Elisp snippet, we give some examples of the use of
 
 *** Example 2
 
-The second [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+The second [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] form:
 
 #+BEGIN_SRC emacs-lisp
 (should
@@ -2284,17 +2280,17 @@ The second [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
 
 could be translated like this:
 
-1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+1) in a temporary buffer in org-mode ([[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]]),
 2) add the string ~P~ and place the point before ~P~ (~"<point>P"~),
-3) call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]],
+3) call [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]],
 4) return the string from the temporary buffer (~buffer-string~),
 5) compare this string to the string ~"* P"~ (~equal~),
 6) if they are equal, return ~t~, if not, return the error
-   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+   ~ert-test-failed~ ([[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]]).
 
 *** Example 3
 
-The third [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+The third [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] form:
 
 #+BEGIN_SRC emacs-lisp
 (should
@@ -2307,21 +2303,21 @@ The third [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
 
 could be translated like this:
 
-1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+1) in a temporary buffer in org-mode ([[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]]),
 2) add the string ~Paragraph~ and place the point between the character ~a~
    and ~g~ (~"Para<point>graph"~),
-3) locally set the variable [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]] to the alist
-   ~'((default . t))~ and call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] with this binding
+3) locally set the variable [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:1739][org-M-RET-may-split-line]] to the alist
+   ~'((default . t))~ and call [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] with this binding
    (~(let ...)~),
 5) return the string from the temporary buffer (~buffer-string~),
 6) compare this string to the string ~"Para\n* graph"~ (~equal~ and note
    that ~\n~ is the newline),
 7) if they are equal, return ~t~, if not, return the error
-   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+   ~ert-test-failed~ ([[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]]).
 
 *** Example 4
 
-The fourth [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
+The fourth [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]] form:
 
 #+BEGIN_SRC emacs-lisp
 (should
@@ -2334,17 +2330,17 @@ The fourth [[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]] form:
 
 could be translated like this:
 
-1) in a temporary buffer in org-mode ([[org-mode:testing/org-test.el::(defmacro org-test-with-temp-text][org-test-with-temp-text]]),
+1) in a temporary buffer in org-mode ([[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:testing/org-test.el:185][org-test-with-temp-text]]),
 2) add the string ~Paragraph~ and place the point between the character ~a~
    and ~g~ (~"Para<point>graph"~),
-3) locally set the variable [[org-mode:lisp/org.el::(defcustom org-M-RET-may-split-line][org-M-RET-may-split-line]] to the alist
-   ~'((default . nil))~ and call [[org-mode:lisp/org.el::(defun org-insert-heading][org-insert-heading]] with this binding
+3) locally set the variable [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:1739][org-M-RET-may-split-line]] to the alist
+   ~'((default . nil))~ and call [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:org-mode:lisp/org.el:6988][org-insert-heading]] with this binding
    (~(let ...)~),
 5) return the string from the temporary buffer (~buffer-string~),
 6) compare this string to the string ~"Paragraph\n* "~ (~equal~ and note
    that ~\n~ is the newline),
 7) if they are equal, return ~t~, if not, return the error
-   ~ert-test-failed~ ([[emacs:lisp/emacs-lisp/ert.el::(cl-defmacro should][should]]).
+   ~ert-test-failed~ ([[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/emacs-lisp/ert.el:358][should]]).
 
 ** Where the truth lives
 
@@ -2358,7 +2354,7 @@ WE ARE DONE!
 
 ** Q&A
 
-Check [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]]
+Check [[#/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples][Q&A]].
 
 * TODO Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command
 :PROPERTIES:
@@ -2917,7 +2913,10 @@ a non-nil value for the inserted character.  At the end, it runs
 
 WE ARE DONE!!!
 
-** [[#/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command][Q&A]]
+** Q&A
+
+Check [[#/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command][Q&A]].
+
 * TODO Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point
 :PROPERTIES:
 :ONE: one-default-doc
@@ -4242,7 +4241,10 @@ Here are the parts of [[org-mode:lisp/org.el::(defun org-open-file (path][org-op
 
 WE ARE DONE!!!
 
-** [[#/questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point][Q&A]]
+** Q&a
+
+Check [[#/questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point][Q&A]].
+
 * TODO Did you know that Org links in property drawers are not links?
 :PROPERTIES:
 :ONE: one-default-doc
