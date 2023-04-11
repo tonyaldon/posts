@@ -1,0 +1,604 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Did you know that org-mode's source code contains more than 5000 examples?</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Did you know that org-mode's source code contains more than 5000 examples?</h1></div><div id="meta-info"><div>2022-03-11</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/tblodh/did_you_know_that_orgmodes_source_code_contains/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div>/<div>org-mode revision: 96d91bea658c</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-87ef51169c">Org manual</a></li>
+<li><a href="#one-399ccef3d6">Help buffer</a></li>
+<li><a href="#one-609df624a">The source code</a></li>
+<li><a href="#one-80c0c4dfad">The Tests (aka. "The Examples")</a>
+<ul>
+<li><a href="#one-cfd11283d3">test-org/insert-heading</a></li>
+<li><a href="#one-6d40e42cb6">Example 1</a></li>
+<li><a href="#one-93ac1c7ab2">ert and org-test-with-temp-text</a></li>
+<li><a href="#one-d985e0cdb8">should, should-not, should-error</a></li>
+<li><a href="#one-f03819db6a">Example 2</a></li>
+<li><a href="#one-bf87ed950f">Example 3</a></li>
+<li><a href="#one-3d23e581b5">Example 4</a></li>
+</ul>
+</li>
+<li><a href="#one-a68037a274">Where the truth lives</a></li>
+<li><a href="#one-6cb87c326d">Q&A</a></li>
+</ul>
+</div></div></div><div><p>Hey org-mode lovers,
+</p>
+
+<p>Have you ever been in the following situation?
+</p>
+
+<p>You have tried to understand a specific aspect of org-mode (say a
+command) and you have done the following:
+</p>
+
+<ol><li><p>you have played with the command (writing your own examples),
+</p>
+</li>
+<li><p>you have read all the parts in the manual dealing with this
+command,
+</p>
+</li>
+<li><p>you have read the docstring of the command,
+</p>
+</li>
+<li><p>you have looked for explanations on the web,
+</p>
+</li>
+<li><p>you even have read the source code of the command,
+</p>
+</li>
+</ol>
+
+<p>but you still haven&apos;t figured it out after all your efforts.
+</p>
+
+<p>I&apos;ve been in this situation and I thought it would be easier if there
+were more examples.
+</p>
+
+<p>BUT THERE ARE MORE EXAMPLES.
+</p>
+
+<p>We just have to change our lenses to see them.
+</p>
+
+<p>What if we looked at org-mode tests as examples of org-mode?
+</p>
+
+<p>BOOM. We have our 5000 examples.
+</p>
+
+<p>Before going any further, let&apos;s make it clear that we don&apos;t need to
+understand or know how to use <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> (the built-in package used for
+testing) to benefit from org-mode testing.
+</p>
+
+<p>And this post is not about <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> testing but about the information
+that we can get from the org-mode test suite.
+</p>
+
+<p>In this post, we use the example of the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>
+(bound by default to <code class="one-hl one-hl-inline">M-&lt;RET&gt;</code>, that allows to insert a new heading or
+item with the same depth at point)  to &quot;demonstrate&quot; that the tests
+are indeed examples.
+</p>
+
+<p>Let&apos;s assume we are already familiar with <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>, we use it
+every day, but sometimes we don&apos;t understand why it behaves the way it
+does.
+</p>
+
+<p>What can we do to find out the truth about <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>?
+</p>
+</div>
+
+<div><h2 id="one-87ef51169c">Org manual</h2><div><p>First of all, we can take a look in the manual of org.
+</p>
+
+<p>In the info node <span>org#Plain Lists</span> we can read:
+</p>
+
+<pre><code class="one-hl one-hl-block">&#8216;M-&lt;RET&gt;&#8217; (&#8216;org-insert-heading&#8217;)
+     Insert new item at current level.  With a prefix argument, force a
+     new heading (see Structure Editing).  If this command is
+     used in the middle of an item, that item is _split_ in two, and the
+     second part becomes the new item(5).  If this command is executed
+     _before item&#8217;s body_, the new item is created _before_ the current
+     one.
+
+...
+
+   (5) If you do not want the item to be split, customize the variable
+&#8216;org-M-RET-may-split-line&#8217;.</code></pre>
+
+<p>That might be enough, but let&apos;s say it isn&apos;t, and we continue our
+investigation to find the truth.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-399ccef3d6">Help buffer</h2><div><p>Secondly, we can find more information about <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>
+by reading its docstring by running:
+</p>
+
+<pre><code class="one-hl one-hl-block">C-h f org-insert-heading RET</code></pre>
+
+
+<p>which pops up this help buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">org-insert-heading is an interactive compiled Lisp function.
+
+(org-insert-heading &amp;optional ARG INVISIBLE-OK TOP)
+
+Insert a new heading or an item with the same depth at point.
+
+If point is at the beginning of a heading, insert a new heading
+or a new headline above the current one.  When at the beginning
+of a regular line of text, turn it into a heading.
+
+If point is in the middle of a line, split it and create a new
+headline with the text in the current line after point (see
+&#8216;org-M-RET-may-split-line&#8217; on how to modify this behavior).  As
+a special case, on a headline, splitting can only happen on the
+title itself.  E.g., this excludes breaking stars or tags.
+
+With a &#8216;C-u&#8217; prefix, set &#8216;org-insert-heading-respect-content&#8217; to
+a non-nil value for the duration of the command.  This forces the
+insertion of a heading after the current subtree, independently
+on the location of point.
+
+With a &#8216;C-u C-u&#8217; prefix, insert the heading at the end of the tree
+above the current heading.  For example, if point is within a
+2nd-level heading, then it will insert a 2nd-level heading at
+the end of the 1st-level parent subtree.
+
+When INVISIBLE-OK is set, stop at invisible headlines when going
+back.  This is important for non-interactive uses of the
+command.
+
+When optional argument TOP is non-nil, insert a level 1 heading,
+unconditionally.</code></pre>
+
+<p>Now we not only know what the command does but also how to call it.
+</p>
+
+<p>There is also some information about its non-interactive use.
+</p>
+
+<p>Reading the Org manual and its docstring may have given us the
+information we wanted, but let&apos;s say we want to know more and continue
+our investigation to find the truth.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-609df624a">The source code</h2><div><p>The truth resides in the source code!  Isn&apos;t that right?
+</p>
+
+<p>Ok, let&apos;s take a look at the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> defined in the
+file <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el">lisp/org.el</a> as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-insert-heading</span> (<span class="one-hl-type">&amp;optional</span> arg invisible-ok top)
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">HERE WAS THE DOCSTRING
+</span>  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"P"</span>)
+  (<span class="one-hl-keyword">let*</span> ((blank? (org--blank-before-heading-p (equal arg '(16))))
+         (level (org-current-level))
+         (stars (make-string (<span class="one-hl-keyword">if</span> (<span class="one-hl-keyword">and</span> level (not top)) level 1) ?*)))
+    (<span class="one-hl-keyword">cond</span>
+     ((<span class="one-hl-keyword">or</span> org-insert-heading-respect-content
+          (member arg '((4) (16)))
+          (<span class="one-hl-keyword">and</span> (not invisible-ok)
+               (invisible-p (max (1- (point)) (point-min)))))
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Position point at the location of insertion.  Make sure we
+</span>      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">end up on a visible headline if INVISIBLE-OK is nil.
+</span>      (<span class="one-hl-keyword">org-with-limited-levels</span>
+       (<span class="one-hl-keyword">if</span> (not level) (outline-next-heading) <span class="one-hl-comment-delimiter">;</span><span class="one-hl-comment">before first headline
+</span>         (org-back-to-heading invisible-ok)
+         (<span class="one-hl-keyword">when</span> (equal arg '(16)) (org-up-heading-safe))
+         (org-end-of-subtree)))
+      (<span class="one-hl-keyword">unless</span> (bolp) (insert <span class="one-hl-string">"\n"</span>))
+      (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">and</span> blank? (<span class="one-hl-keyword">save-excursion</span>
+                          (backward-char)
+                          (org-before-first-heading-p)))
+        (insert <span class="one-hl-string">"\n"</span>)
+        (backward-char))
+      (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">and</span> (not level) (not (eobp)) (not (bobp)))
+        (<span class="one-hl-keyword">when</span> (org-at-heading-p) (insert <span class="one-hl-string">"\n"</span>))
+        (backward-char))
+      (<span class="one-hl-keyword">unless</span> (<span class="one-hl-keyword">and</span> blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (<span class="one-hl-keyword">if</span> blank? 1 0)))
+      (insert stars <span class="one-hl-string">" "</span>)
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">When INVISIBLE-OK is non-nil, ensure newly created headline
+</span>      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">is visible.
+</span>      (<span class="one-hl-keyword">unless</span> invisible-ok
+        (<span class="one-hl-keyword">pcase</span> (get-char-property-and-overlay (point) 'invisible)
+          (`(outline . ,o)
+           (move-overlay o (overlay-start o) (line-end-position 0)))
+          (_ nil))))
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">At a headline...
+</span>     ((org-at-heading-p)
+      (<span class="one-hl-keyword">cond</span> ((bolp)
+             (<span class="one-hl-keyword">when</span> blank? (<span class="one-hl-keyword">save-excursion</span> (insert <span class="one-hl-string">"\n"</span>)))
+             (<span class="one-hl-keyword">save-excursion</span> (insert stars <span class="one-hl-string">" \n"</span>))
+             (<span class="one-hl-keyword">unless</span> (<span class="one-hl-keyword">and</span> blank? (org-previous-line-empty-p))
+               (org-N-empty-lines-before-current (<span class="one-hl-keyword">if</span> blank? 1 0)))
+             (end-of-line))
+            ((<span class="one-hl-keyword">and</span> (org-get-alist-option org-M-RET-may-split-line 'headline)
+                  (org-match-line org-complex-heading-regexp)
+                  (org-pos-in-match-range (point) 4))
+             <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Grab the text that should moved to the new headline.
+</span>             <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Preserve tags.
+</span>             (<span class="one-hl-keyword">let</span> ((split (delete-and-extract-region (point) (match-end 4))))
+               (<span class="one-hl-keyword">if</span> (looking-at <span class="one-hl-string">"[ \t]*$"</span>) (replace-match <span class="one-hl-string">""</span>)
+                 (org-align-tags))
+               (end-of-line)
+               (<span class="one-hl-keyword">when</span> blank? (insert <span class="one-hl-string">"\n"</span>))
+               (insert <span class="one-hl-string">"\n"</span> stars <span class="one-hl-string">" "</span>)
+               (<span class="one-hl-keyword">when</span> (org-string-nw-p split) (insert split))))
+            (t
+             (end-of-line)
+             (<span class="one-hl-keyword">when</span> blank? (insert <span class="one-hl-string">"\n"</span>))
+             (insert <span class="one-hl-string">"\n"</span> stars <span class="one-hl-string">" "</span>))))
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">On regular text, turn line into a headline or split, if
+</span>     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">appropriate.
+</span>     ((bolp)
+      (insert stars <span class="one-hl-string">" "</span>)
+      (<span class="one-hl-keyword">unless</span> (<span class="one-hl-keyword">and</span> blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (<span class="one-hl-keyword">if</span> blank? 1 0))))
+     (t
+      (<span class="one-hl-keyword">unless</span> (org-get-alist-option org-M-RET-may-split-line 'headline)
+        (end-of-line))
+      (insert <span class="one-hl-string">"\n"</span> stars <span class="one-hl-string">" "</span>)
+      (<span class="one-hl-keyword">unless</span> (<span class="one-hl-keyword">and</span> blank? (org-previous-line-empty-p))
+        (org-N-empty-lines-before-current (<span class="one-hl-keyword">if</span> blank? 1 0))))))
+  (run-hooks 'org-insert-heading-hook))</code></pre>
+
+<p>You can get org-mode&apos;s source code by running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git clone https://git.savannah.gnu.org/git/emacs/org-mode.git</code></pre>
+
+
+<p>Ok...
+</p>
+
+<p>The source code helps, but now we need to know a lot more about the
+implementations of <code class="one-hl one-hl-inline">org-mode</code> and <code class="one-hl one-hl-inline">emacs/elisp</code> than we want to spend time
+on.
+</p>
+
+<p>Indeed, if we want to understand the implementation of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> we have to understand:
+</p>
+
+<ol><li><p>(org API) <code class="one-hl one-hl-inline">org--blank-before-heading-p</code>, <code class="one-hl one-hl-inline">org-current-level</code>,
+<code class="one-hl one-hl-inline">org-with-limited-levels</code>, <code class="one-hl one-hl-inline">outline-next-heading</code>, <code class="one-hl one-hl-inline">org-back-to-heading</code>,
+<code class="one-hl one-hl-inline">org-up-heading-safe</code>, <code class="one-hl one-hl-inline">org-end-of-subtree</code>,
+<code class="one-hl one-hl-inline">org-before-first-heading-p</code>, <code class="one-hl one-hl-inline">org-N-empty-lines-before-current</code>, etc.,
+</p>
+</li>
+<li><p>(emacs/elisp API) <code class="one-hl one-hl-inline">make-string</code>, <code class="one-hl one-hl-inline">member</code>, <code class="one-hl one-hl-inline">invisible-p</code>, <code class="one-hl one-hl-inline">bolp</code>,
+<code class="one-hl one-hl-inline">save-excursion</code>, <code class="one-hl one-hl-inline">eobp</code>, <code class="one-hl one-hl-inline">bobp</code>, <code class="one-hl one-hl-inline">pcase</code>, <code class="one-hl one-hl-inline">get-char-property-and-overlay</code>, etc.
+</p>
+</li>
+</ol>
+
+<p>So, what can we do?
+</p>
+
+<p>Maybe we can look at the test of the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-80c0c4dfad">The Tests (aka. "The Examples")</h2><div><h3 id="one-cfd11283d3">test-org/insert-heading</h3><div><p>In <code class="one-hl one-hl-inline">testing</code> directory, doing a search for <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> using <code class="one-hl one-hl-inline">grep</code>
+(or <code class="one-hl one-hl-inline">ripgrep</code>) shows that the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> is tested in
+the <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> test <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/lisp/test-org.el#L1518">test-org/insert-heading</a> defined in the file
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/lisp/test-org.el">testing/lisp/test-org.el</a> as follows (we reproduce only the first 4
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> forms - it contains 28 <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> forms and 1 <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L368">should-not</a> form):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">ert-deftest</span> <span class="one-hl-function-name">test-org/insert-heading</span> ()
+  <span class="one-hl-doc">"Test `</span><span class="one-hl-doc"><span class="one-hl-constant">org-insert-heading</span></span><span class="one-hl-doc">' specifications."</span>
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">In an empty buffer, insert a new headline.
+</span>  (should
+   (equal <span class="one-hl-string">"* "</span>
+          (org-test-with-temp-text <span class="one-hl-string">""</span>
+            (org-insert-heading)
+            (buffer-string))))
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">At the beginning of a line, turn it into a headline.
+</span>  (should
+   (equal <span class="one-hl-string">"* P"</span>
+          (org-test-with-temp-text <span class="one-hl-string">"&lt;point&gt;P"</span>
+            (org-insert-heading)
+            (buffer-string))))
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">In the middle of a line, split the line if allowed, otherwise,
+</span>  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">insert the headline at its end.
+</span>  (should
+   (equal <span class="one-hl-string">"Para\n* graph"</span>
+          (org-test-with-temp-text <span class="one-hl-string">"Para&lt;point&gt;graph"</span>
+            (<span class="one-hl-keyword">let</span> ((org-M-RET-may-split-line '((default . t))))
+              (org-insert-heading))
+            (buffer-string))))
+  (should
+   (equal <span class="one-hl-string">"Paragraph\n* "</span>
+          (org-test-with-temp-text <span class="one-hl-string">"Para&lt;point&gt;graph"</span>
+            (<span class="one-hl-keyword">let</span> ((org-M-RET-may-split-line '((default . nil))))
+              (org-insert-heading))
+            (buffer-string))))
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  )</code></pre>
+
+<p>What can we observe from those 4 <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> forms?
+</p>
+
+<ol><li><p>they have the same &quot;shape&quot;, so we can deduce that if we understand
+how the first one works, we will understand the others,
+</p>
+</li>
+<li><p>they use only a few symbols (much less than in the source code of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>):
+</p>
+<ul><li><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> from <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> package,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">equal</code>, <code class="one-hl one-hl-inline">let</code> and <code class="one-hl one-hl-inline">buffer-string</code> from Emacs/Elisp,
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a> specific to Org test suite and
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> and <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1739">org-M-RET-may-split-line</a>, the command and
+the variable we are testing.
+</p>
+</li>
+</ul>
+</li>
+</ol>
+
+<p>Now let&apos;s describe these <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> forms in words as best we can.
+</p>
+
+<p>After doing this, perhaps we will think of these <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> forms as small
+examples, each describing a behavior of the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-6d40e42cb6">Example 1</h3><div><p>The first <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(should
+   (equal <span class="one-hl-string">"* "</span>
+          (org-test-with-temp-text <span class="one-hl-string">""</span>
+            (org-insert-heading)
+            (buffer-string))))</code></pre>
+
+<p>could be translated like this:
+</p>
+
+<ol><li><p>in a temporary buffer in org-mode (<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a>),
+</p>
+</li>
+<li><p>keep the buffer empty (<code class="one-hl one-hl-inline">&quot;&quot;</code>),
+</p>
+</li>
+<li><p>keep the point at the beginning,
+</p>
+</li>
+<li><p>call <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>,
+</p>
+</li>
+<li><p>return the string from the temporary buffer (<code class="one-hl one-hl-inline">buffer-string</code>),
+</p>
+</li>
+<li><p>compare this string to the string <code class="one-hl one-hl-inline">&quot;* &quot;</code> (<code class="one-hl one-hl-inline">equal</code>),
+</p>
+</li>
+<li><p>if they are equal, return <code class="one-hl one-hl-inline">t</code>, if not, return the error
+<code class="one-hl one-hl-inline">ert-test-failed</code> (<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h3 id="one-93ac1c7ab2">ert and org-test-with-temp-text</h3><div><p>To evaluate the preceding form we need to have <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> loaded (for the
+macro <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>) which can be achieve by evaluating the following form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">require</span> '<span class="one-hl-constant">ert</span>)</code></pre>
+
+<p>and we need the macro <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a> (defined in the file
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el">testing/org-test.el</a>) to be defined which can be done by
+evaluating its definition:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defmacro</span> <span class="one-hl-function-name">org-test-with-temp-text</span> (text <span class="one-hl-type">&amp;rest</span> body)
+  (<span class="one-hl-keyword">declare</span> (indent 1))
+  `(<span class="one-hl-keyword">let</span> ((inside-text (<span class="one-hl-keyword">if</span> (stringp ,text) ,text (eval ,text)))
+         (org-mode-hook nil))
+     (<span class="one-hl-keyword">with-temp-buffer</span>
+       (org-mode)
+       (<span class="one-hl-keyword">let</span> ((point (string-match <span class="one-hl-string">"&lt;point&gt;"</span> inside-text)))
+         (<span class="one-hl-keyword">if</span> point
+             (<span class="one-hl-keyword">progn</span>
+               (insert (replace-match <span class="one-hl-string">""</span> nil nil inside-text))
+               (goto-char (1+ (match-beginning 0))))
+           (insert inside-text)
+           (goto-char (point-min))))
+       (font-lock-ensure (point-min) (point-max))
+       ,@body)))</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-d985e0cdb8">should, should-not, should-error</h3><div><p>Our examples only use the macro <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> but if we want to read more
+tests it is useful to know the macros <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L368">should-not</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L407">should-error</a> that
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el">ert.el</a> package provides.
+</p>
+
+<p>In the following Elisp snippet, we give some examples of the use of
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L368">should-not</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L407">should-error</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(should 3)   <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">3
+</span>(should t)   <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">t
+</span>(should nil)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Debugger entered--Lisp error: (ert-test-failed ((should nil) :form nil :value nil))
+</span>
+(should-not nil) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">nil
+</span>(should-not t)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Debugger entered--Lisp error: (ert-test-failed ((should-not t) :form t :value t))
+</span>
+(should-error (= <span class="one-hl-string">"1"</span> 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(wrong-type-argument number-or-marker-p "1")
+</span>(should-error t)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Debugger entered--Lisp error: (ert-test-failed ((should-error t) :form t :value t :fail-reason "did not signal an error"))</span></code></pre>
+</div>
+</div>
+
+<div><h3 id="one-f03819db6a">Example 2</h3><div><p>The second <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(should
+ (equal <span class="one-hl-string">"* P"</span>
+        (org-test-with-temp-text <span class="one-hl-string">"&lt;point&gt;P"</span>
+          (org-insert-heading)
+          (buffer-string))))</code></pre>
+
+<p>could be translated like this:
+</p>
+
+<ol><li><p>in a temporary buffer in org-mode (<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a>),
+</p>
+</li>
+<li><p>add the string <code class="one-hl one-hl-inline">P</code> and place the point before <code class="one-hl one-hl-inline">P</code> (<code class="one-hl one-hl-inline">&quot;&lt;point&gt;P&quot;</code>),
+</p>
+</li>
+<li><p>call <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a>,
+</p>
+</li>
+<li><p>return the string from the temporary buffer (<code class="one-hl one-hl-inline">buffer-string</code>),
+</p>
+</li>
+<li><p>compare this string to the string <code class="one-hl one-hl-inline">&quot;* P&quot;</code> (<code class="one-hl one-hl-inline">equal</code>),
+</p>
+</li>
+<li><p>if they are equal, return <code class="one-hl one-hl-inline">t</code>, if not, return the error
+<code class="one-hl one-hl-inline">ert-test-failed</code> (<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h3 id="one-bf87ed950f">Example 3</h3><div><p>The third <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(should
+ (equal <span class="one-hl-string">"Para\n* graph"</span>
+        (org-test-with-temp-text <span class="one-hl-string">"Para&lt;point&gt;graph"</span>
+          (<span class="one-hl-keyword">let</span> ((org-M-RET-may-split-line '((default . t))))
+            (org-insert-heading))
+          (buffer-string))))</code></pre>
+
+<p>could be translated like this:
+</p>
+
+<ol><li><p>in a temporary buffer in org-mode (<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a>),
+</p>
+</li>
+<li><p>add the string <code class="one-hl one-hl-inline">Paragraph</code> and place the point between the character <code class="one-hl one-hl-inline">a</code>
+and <code class="one-hl one-hl-inline">g</code> (<code class="one-hl one-hl-inline">&quot;Para&lt;point&gt;graph&quot;</code>),
+</p>
+</li>
+<li><p>locally set the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1739">org-M-RET-may-split-line</a> to the alist
+<code class="one-hl one-hl-inline">&apos;((default . t))</code> and call <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> with this binding
+(<code class="one-hl one-hl-inline">(let ...)</code>),
+</p>
+</li>
+<li><p>return the string from the temporary buffer (<code class="one-hl one-hl-inline">buffer-string</code>),
+</p>
+</li>
+<li><p>compare this string to the string <code class="one-hl one-hl-inline">&quot;Para\n* graph&quot;</code> (<code class="one-hl one-hl-inline">equal</code> and note
+that <code class="one-hl one-hl-inline">\n</code> is the newline),
+</p>
+</li>
+<li><p>if they are equal, return <code class="one-hl one-hl-inline">t</code>, if not, return the error
+<code class="one-hl one-hl-inline">ert-test-failed</code> (<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h3 id="one-3d23e581b5">Example 4</h3><div><p>The fourth <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a> form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(should
+ (equal <span class="one-hl-string">"Paragraph\n* "</span>
+        (org-test-with-temp-text <span class="one-hl-string">"Para&lt;point&gt;graph"</span>
+          (<span class="one-hl-keyword">let</span> ((org-M-RET-may-split-line '((default . nil))))
+            (org-insert-heading))
+          (buffer-string))))</code></pre>
+
+<p>could be translated like this:
+</p>
+
+<ol><li><p>in a temporary buffer in org-mode (<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a>),
+</p>
+</li>
+<li><p>add the string <code class="one-hl one-hl-inline">Paragraph</code> and place the point between the character <code class="one-hl one-hl-inline">a</code>
+and <code class="one-hl one-hl-inline">g</code> (<code class="one-hl one-hl-inline">&quot;Para&lt;point&gt;graph&quot;</code>),
+</p>
+</li>
+<li><p>locally set the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1739">org-M-RET-may-split-line</a> to the alist
+<code class="one-hl one-hl-inline">&apos;((default . nil))</code> and call <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L6988">org-insert-heading</a> with this binding
+(<code class="one-hl one-hl-inline">(let ...)</code>),
+</p>
+</li>
+<li><p>return the string from the temporary buffer (<code class="one-hl one-hl-inline">buffer-string</code>),
+</p>
+</li>
+<li><p>compare this string to the string <code class="one-hl one-hl-inline">&quot;Paragraph\n* &quot;</code> (<code class="one-hl one-hl-inline">equal</code> and note
+that <code class="one-hl one-hl-inline">\n</code> is the newline),
+</p>
+</li>
+<li><p>if they are equal, return <code class="one-hl one-hl-inline">t</code>, if not, return the error
+<code class="one-hl one-hl-inline">ert-test-failed</code> (<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/ert.el#L358">should</a>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-a68037a274">Where the truth lives</h2><div><p>By now you should be convinced (that&apos;s what I hope) that the org-mode
+test suite is a gold mine for us (org-mode users) and that is where
+part of THE ORG-MODE TRUTH lives.
+</p>
+
+<p>... More than 5000 examples ...
+</p>
+
+<p>WE ARE DONE!
+</p>
+</div>
+</div>
+
+<div><h2 id="one-6cb87c326d">Q&A</h2><div><p>Check <a href="/questions-and-answers/#2022-03-11-org-mode-source-code-5000-examples">Q&amp;A</a>.
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">PREV</a><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">RANDOM</a><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

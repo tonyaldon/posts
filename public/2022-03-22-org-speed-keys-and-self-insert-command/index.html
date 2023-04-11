@@ -1,0 +1,671 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</h1></div><div id="meta-info"><div>2022-03-22</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div>/<div>org-mode revision: 96d91bea658c</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-a1bed0e12">Org Speed Keys</a></li>
+<li><a href="#one-52cc5c2577">How does org-mode implement Org Speed keys?</a>
+<ul>
+<li><a href="#one-5f8f4d1232">Remapping self-insert-command</a></li>
+<li><a href="#one-309b0435f1">If it is magic, this is org-self-insert-command</a></li>
+<li><a href="#one-765f460160">org-self-insert-command implementation</a></li>
+<li><a href="#one-8271c808a8">org-speed-command-activate</a></li>
+</ul>
+</li>
+<li><a href="#one-393812d4ca">self-insert-command</a>
+<ul>
+<li><a href="#one-32edd9d1b">Bindings of printing characters to self-insert-command in the keymap global-map</a></li>
+<li><a href="#one-f674f3fbd3">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</a></li>
+<li><a href="#one-4925db5dcc">Best function name ever: bitch_at_user</a></li>
+</ul>
+</li>
+<li><a href="#one-a797cdedd">Q&A</a></li>
+</ul>
+</div></div></div><div><p>Hey Emacsers,
+</p>
+
+<p>How are you doing?
+</p>
+
+<p>This post is &quot;pretty&quot; special to me because I can still remember and
+feel:
+</p>
+
+<ol><li><p>the first time I discovered Org Speed Keys and,
+</p>
+</li>
+<li><p>the first time I took a look at its implementation.
+</p>
+</li>
+</ol>
+
+<p>It was two AHA moments, one in my Emacs journey and the other in my
+Elisp journey.
+</p>
+
+<p>I hope you&apos;ll enjoy it :)
+</p>
+</div>
+
+<div><h2 id="one-a1bed0e12">Org Speed Keys</h2><div><p>Org speed keys is not a minor mode but an org-mode feature that can be
+turned on by setting the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> to <code class="one-hl one-hl-inline">t</code>.
+</p>
+
+<p>It allows when the cursor is at a the beginning of a heading to call
+a command by pressing a single &quot;printing&quot; key (keys that would
+normally insert a character in the buffer).
+</p>
+
+<p>For instance, if we are at the beginning of a heading, and we press
+<code class="one-hl one-hl-inline">n</code>, the cursor moves to the next visible heading (or stays at the
+current heading if it&apos;s the last one in the buffer) if we use the
+default bindings provided by org-mode in the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L711">org-speed-commands</a>.
+</p>
+
+<p>It is &quot;almost&quot; the same that pressing <code class="one-hl one-hl-inline">C-c C-n</code> but in SHORTER.  Isn&apos;t it
+super cool???
+</p>
+
+<p>If you&apos;ve never tried it, go for it.
+</p>
+
+<p>Just run:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x eval-expression RET (setq org-use-speed-commands t)</code></pre>
+
+
+<p>Open one of your org documents then with the cursor at at the very
+beginning of a heading press <code class="one-hl one-hl-inline">n</code> or <code class="one-hl one-hl-inline">p</code> repeatedly.
+</p>
+
+<p>We can see org speed command bindings, by typing <code class="one-hl one-hl-inline">?</code> (which call
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el">lisp/org-keys.el</a>) with the cursor at the very beginning of a
+heading.  This pops up the following help buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">Speed commands
+==============
+
+Outline Navigation
+------------------
+n   (org-speed-move-safe 'org-next-visible-heading)
+p   (org-speed-move-safe 'org-previous-visible-heading)
+f   (org-speed-move-safe 'org-forward-heading-same-level)
+b   (org-speed-move-safe 'org-backward-heading-same-level)
+F   org-next-block
+B   org-previous-block
+u   (org-speed-move-safe 'outline-up-heading)
+j   org-goto
+g   (org-refile '(4))
+
+Outline Visibility
+------------------
+c   org-cycle
+C   org-shifttab
+    org-display-outline-path
+s   org-toggle-narrow-to-subtree
+k   org-cut-subtree
+=   org-columns
+
+... THERE ARE MORE ...
+
+?   org-speed-command-help</code></pre>
+
+<p>If we want to use our own bindings, we can modify:
+</p>
+
+<ul><li><p>the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L711">org-speed-commands</a> since org-mode 9.5,
+</p>
+</li>
+<li><p>the variable <code class="one-hl one-hl-inline">org-speed-commands-user</code> for previous versions.
+</p>
+</li>
+</ul>
+
+<p>Note: the variable <code class="one-hl one-hl-inline">org-speed-commands-user</code> has been made obsolete
+since org-mode 9.5 but it is still supported and should be removed
+from org-mode 9.6 as we can read in the source code <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el">lisp/org-keys.el</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">;; FIXME: don't check `org-speed-commands-user' past 9.6</code></pre>
+</div>
+</div>
+
+<div><h2 id="one-52cc5c2577">How does org-mode implement Org Speed keys?</h2><div><h3 id="one-5f8f4d1232">Remapping self-insert-command</h3><div><p>When org-mode is turned on, among other initialization tasks it remaps
+the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> to the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>
+in the keymap <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L223">org-mode-map</a> as we can see in the file <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el">lisp/org-keys.el</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-remap org-mode-map
+           'self-insert-command    'org-self-insert-command
+           'delete-char            'org-delete-char
+           'delete-backward-char   'org-delete-backward-char
+           'kill-line              'org-kill-line
+           'open-line              'org-open-line
+           'yank                   'org-yank
+           'comment-dwim           'org-comment-dwim
+           'move-beginning-of-line 'org-beginning-of-line
+           'move-end-of-line       'org-end-of-line
+           'forward-paragraph      'org-forward-paragraph
+           'backward-paragraph     'org-backward-paragraph
+           'backward-sentence      'org-backward-sentence
+           'forward-sentence       'org-forward-sentence
+           'fill-paragraph         'org-fill-paragraph
+           'delete-indentation     'org-delete-indentation
+           'transpose-words        'org-transpose-words)</code></pre>
+
+<p>In the case of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>, the preceding remapping can be
+written like this (this is what <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L322">org-remap</a> does):
+</p>
+
+<pre><code class="one-hl one-hl-block">(define-key org-mode-map [remap self-insert-command] 'org-self-insert-command)</code></pre>
+
+<p>As a consequence, in org-mode, when we press a printing key (that
+would by default insert a character in the buffer), let say we press <code class="one-hl one-hl-inline">n</code>,
+the &quot;command loop editor&quot; does several things:
+</p>
+
+<ol><li><p>it performs a key lookup for <code class="one-hl one-hl-inline">n</code> in the current active maps and find
+that <code class="one-hl one-hl-inline">n</code> is bound to <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> (due to the default binding
+in the keymap <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a> which is the global map by default), then,
+</p>
+</li>
+<li><p>it checks if the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> has a remapping in the
+current active maps (with the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keymap.c#L1158">command-remapping</a>),
+</p>
+</li>
+<li><p>it finds that <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> is remapped to
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> (due to the remapping in the keymap
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L223">org-mode-map</a>) and instead of calling <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>,
+it calls <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>.
+</p>
+</li>
+</ol>
+
+<p>Now, the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> has the complete power over
+the actions to perform.  Nothing forces it to insert the character <code class="one-hl one-hl-inline">n</code>
+in the buffer.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-309b0435f1">If it is magic, this is org-self-insert-command</h3><div><p>Before talking about how <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> performs speed keys,
+let me ask you some questions:
+</p>
+
+<ul><li><p>Have you ever noticed that when you modify the title of a headline
+the tags are automatically re-aligned?  Guess what?  This is
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> in action (calling <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16840">org-fix-tags-on-the-fly</a>
+just after inserting a character).
+</p>
+</li>
+<li><p>Have you ever noticed that inserting less characters in a table field
+than its width doesn&apos;t move the right bar of the field?  This is
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> in action.
+</p>
+</li>
+<li><p>Did you know that in a table, if you type printing keys just after
+moving with <code class="one-hl one-hl-inline">TAB</code>, <code class="one-hl one-hl-inline">S-TAB</code>, <code class="one-hl one-hl-inline">RET</code>, the table field is made blank before
+inserting the characters (with <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-table.el#L244">org-table-auto-blank-field</a> set to <code class="one-hl one-hl-inline">t</code>)?
+This is also <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>
+(see <a href="https://www.youtube.com/watch?v=w4wxGOijyZs">Inside Emacs #6 (part 5) Why is it so fast to edit tables with org-table?</a>).
+</p>
+</li>
+</ul>
+</div>
+</div>
+
+<div><h3 id="one-765f460160">org-self-insert-command implementation</h3><div><p>Let&apos;s get back to our example.  We&apos;ve pressed the &quot;printing&quot; key <code class="one-hl one-hl-inline">n</code> and
+&quot;the command loop editor&quot; has called <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>.
+</p>
+
+<p>The command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> does the following (assuming we
+have set <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> to <code class="one-hl one-hl-inline">t</code>):
+</p>
+
+<ol><li><p>locally set the variable <code class="one-hl one-hl-inline">kv</code> to the vector <code class="one-hl one-hl-inline">[?n]</code> corresponding to the
+key sequence that invoked the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> (the
+&quot;printing&quot; key <code class="one-hl one-hl-inline">n</code> we&apos;ve pressed),
+</p>
+</li>
+<li><p>run the hook <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L692">org-speed-command-hook</a> &quot;until success&quot; with the
+argument <code class="one-hl one-hl-inline">&quot;n&quot;</code> (a string, corresponding to the evaluation of
+<code class="one-hl one-hl-inline">(make-string 1 (aref [?n] 0))</code> knowing that <code class="one-hl one-hl-inline">kv</code> is <code class="one-hl one-hl-inline">[?n]</code>).
+Considering that the hook <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L692">org-speed-command-hook</a> is equal to the
+list <code class="one-hl one-hl-inline">(org-speed-command-activate org-babel-speed-command-activate)</code>
+by default, the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/eval.c#L2715">run-hook-with-args-until-success</a> evaluate
+successively the forms:
+</p>
+<ol><li><p><code class="one-hl one-hl-inline">(org-speed-command-activate &quot;n&quot;)</code>,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">(org-babel-speed-command-activate &quot;n&quot;)</code>,
+</p>
+</li>
+</ol>
+<p>stopping at the first one that returns non-nil, and return that
+value, or return <code class="one-hl one-hl-inline">nil</code> if both evaluate to <code class="one-hl one-hl-inline">nil</code>.
+</p>
+</li>
+<li><p>Then, this returned value becomes the value of the variable
+<code class="one-hl one-hl-inline">org-speed-command</code>,
+</p>
+</li>
+<li><p>if <code class="one-hl one-hl-inline">org-speed-command</code> is either a command, a function or a non empty
+list, <code class="one-hl one-hl-inline">org-speed-command</code> is called or evaluated (and
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> returns &quot;maybe&quot; witout inserting <code class="one-hl one-hl-inline">n</code> in the
+buffer).  If <code class="one-hl one-hl-inline">org-speed-command</code> is neither a command, a function nor
+a non empty list, the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> is called
+with the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> locally set to <code class="one-hl one-hl-inline">nil</code> which
+leads to skip the first clause of the special form <code class="one-hl one-hl-inline">cond</code> in the body
+of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>, and <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> among other
+&quot;actions&quot; will insert the character <code class="one-hl one-hl-inline">n</code> in the buffer.
+</p>
+</li>
+</ol>
+
+<p>Below you can see the parts of the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>
+related to the speed keys feature that we have just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-self-insert-command</span> (N)
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"p"</span>)
+  (<span class="one-hl-keyword">cond</span>
+   ((<span class="one-hl-keyword">and</span> org-use-speed-commands
+         (<span class="one-hl-keyword">let</span> ((kv (this-command-keys-vector)))
+           (<span class="one-hl-keyword">setq</span> org-speed-command
+                 (run-hook-with-args-until-success
+                  'org-speed-command-hook
+                  (make-string 1 (aref kv (1- (length kv))))))))
+    (<span class="one-hl-keyword">cond</span>
+     ((commandp org-speed-command)
+      (<span class="one-hl-keyword">setq</span> this-command org-speed-command)
+      (call-interactively org-speed-command))
+     ((functionp org-speed-command)
+      (funcall org-speed-command))
+     ((<span class="one-hl-keyword">and</span> org-speed-command (listp org-speed-command))
+      (eval org-speed-command))
+     (t (<span class="one-hl-keyword">let</span> (org-use-speed-commands)
+          (call-interactively 'org-self-insert-command)))))
+   ((<span class="one-hl-keyword">and</span>
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>     (org-at-table-p)
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">....
+</span>     )
+    (self-insert-command N)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    )
+   (t
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    (self-insert-command N)
+    (org-fix-tags-on-the-fly)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    )))</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-8271c808a8">org-speed-command-activate</h3><div><p>We still have one function to cover: <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a>
+(knowing that <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L912">org-babel-speed-command-activate</a> does &quot;almost the same
+thing&quot; but for the cursor at the beginning of source blocks).
+</p>
+
+<p>Indeed, continuing with our example, if evaluating
+<code class="one-hl one-hl-inline">(org-speed-command-activate &quot;n&quot;)</code> returns a command  (a function or a
+non empty list) this command will be called instead of inserting the
+character <code class="one-hl one-hl-inline">&quot;n&quot;</code>.
+</p>
+
+<p>In the simple case, when <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> is set to <code class="one-hl one-hl-inline">t</code> (it could
+also be a function), <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a> checks:
+</p>
+
+<ol><li><p>if the point (the cursor) is at the beginning of line <code class="one-hl one-hl-inline">(bolp)</code> and,
+</p>
+</li>
+<li><p>if this line is a heading <code class="one-hl one-hl-inline">(looking-at org-outline-regexp)</code>.
+</p>
+</li>
+</ol>
+
+<p>If true, <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a> looks for the key <code class="one-hl one-hl-inline">&quot;n&quot;</code> in the alist
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L711">org-speed-commands</a> defined by default like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defcustom</span> <span class="one-hl-variable-name">org-speed-commands</span>
+  '((<span class="one-hl-string">"Outline Navigation"</span>)
+    (<span class="one-hl-string">"n"</span> . (org-speed-move-safe 'org-next-visible-heading))
+    (<span class="one-hl-string">"p"</span> . (org-speed-move-safe 'org-previous-visible-heading))
+    (<span class="one-hl-string">"f"</span> . (org-speed-move-safe 'org-forward-heading-same-level))
+    (<span class="one-hl-string">"b"</span> . (org-speed-move-safe 'org-backward-heading-same-level))
+    (<span class="one-hl-string">"F"</span> . org-next-block)
+    (<span class="one-hl-string">"B"</span> . org-previous-block)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    ))</code></pre>
+
+<p>and returns the s-exp associated with the key <code class="one-hl one-hl-inline">&quot;n&quot;</code> which is by default:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-speed-move-safe 'org-next-visible-heading)</code></pre>
+
+
+<p>As we left aside the case where <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> is a function
+and we anticipate the org-mode version 9.6, we can write a simplified
+version of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a>, that we call
+<code class="one-hl one-hl-inline">org-speed-command-activate-SIMPLE</code>, like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-speed-command-activate-SIMPLE</span> (keys)
+  (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">and</span> (bolp) (looking-at org-outline-regexp))
+    (cdr (assoc keys org-speed-commands))))</code></pre>
+
+<p>So, when we presse the key <code class="one-hl one-hl-inline">n</code> (in org-mode):
+org-babel-next-src-block
+</p>
+<ol><li><p>if we are at the beginning of a heading, the cursor is
+moved &quot;safely&quot; to the next visible heading,
+</p>
+</li>
+<li><p>if we are at the beginning of a source block (due to
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L912">org-babel-speed-command-activate</a> in the hook
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L692">org-speed-command-hook</a>), the cursor is moved to the next source
+block,
+</p>
+</li>
+<li><p>and if we were anywhere else, the character <code class="one-hl one-hl-inline">n</code> is inserted in the
+buffer.
+</p>
+</li>
+</ol>
+
+<p>We are done with the mechanism of Org Speed Keys.
+</p>
+
+<p>Let&apos;s talk a bit about the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-393812d4ca">self-insert-command</h2><div><h3 id="one-32edd9d1b">Bindings of printing characters to self-insert-command in the keymap global-map</h3><div><p>In this section, our goal is to see what are the printing characters
+that are bound to the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>.
+</p>
+
+<p>In the info node <span>elisp#Controlling Active Maps</span>, we can read the
+following:
+</p>
+
+<pre><code class="one-hl one-hl-block">-- Variable: global-map
+    This variable contains the default global keymap that maps Emacs
+    keyboard input to commands.  The global keymap is normally this
+    keymap.  The default global keymap is a full keymap that binds
+    &#8216;self-insert-command&#8217; to all of the printing characters.</code></pre>
+
+<p>Indeed, the variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a> is defined in the file <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">lisp/subr.el</a>
+and is set to be the global keymap (using <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keymap.c#L1726">use-global-map</a>) as we can
+see:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defvar</span> <span class="one-hl-variable-name">global-map</span>
+  (<span class="one-hl-keyword">let</span> ((map (make-keymap)))
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    (define-key map <span class="one-hl-string">"\C-i"</span> #'self-insert-command)
+    (<span class="one-hl-keyword">let*</span> ((vec1 (make-vector 1 nil))
+           (f (<span class="one-hl-keyword">lambda</span> (from to)
+                (<span class="one-hl-keyword">while</span> (&lt; from to)
+                  (aset vec1 0 from)
+                  (define-key map vec1 #'self-insert-command)
+                  (<span class="one-hl-keyword">setq</span> from (1+ from))))))
+      (funcall f #o040 #o0177)
+      (<span class="one-hl-keyword">when</span> (eq system-type 'ms-dos)      <span class="one-hl-comment-delimiter">;</span><span class="one-hl-comment">FIXME: Why?
+</span>        (funcall f #o0200 #o0240))
+      (funcall f #o0240 #o0400))
+
+    (define-key map <span class="one-hl-string">"\C-a"</span> #'beginning-of-line)
+    (define-key map <span class="one-hl-string">"\C-b"</span> #'backward-char)
+    (define-key map <span class="one-hl-string">"\C-e"</span> #'end-of-line)
+    (define-key map <span class="one-hl-string">"\C-f"</span> #'forward-char)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    map)
+  <span class="one-hl-doc">"..."</span>
+  )
+(use-global-map global-map)</code></pre>
+
+<p>Many bindings in the keymap <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a> are added in other files.  For
+instance the key sequences <code class="one-hl one-hl-inline">C-g</code>, <code class="one-hl one-hl-inline">C-u</code>, <code class="one-hl one-hl-inline">C-k</code>, <code class="one-hl one-hl-inline">C-w</code> and <code class="one-hl one-hl-inline">C-y</code> are added to
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a> in the file <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/bindings.el">bindings.el</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(define-key global-map <span class="one-hl-string">"\C-g"</span> 'keyboard-quit)
+(define-key global-map <span class="one-hl-string">"\C-u"</span> 'universal-argument)
+(define-key global-map <span class="one-hl-string">"\C-k"</span> 'kill-line)
+(define-key global-map <span class="one-hl-string">"\C-w"</span> 'kill-region)
+(define-key global-map <span class="one-hl-string">"\C-y"</span> 'yank)</code></pre>
+
+<p>Now, let&apos;s focus in the <code class="one-hl one-hl-inline">let*</code> binding in the definition of the keymap
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a>.  In this <code class="one-hl one-hl-inline">let*</code> binding, we define a function <code class="one-hl one-hl-inline">f</code> that binds in
+the local keymap <code class="one-hl one-hl-inline">map</code> all the characters (represented as integer)
+between <code class="one-hl one-hl-inline">from</code> to <code class="one-hl one-hl-inline">to</code> (excluded), and we apply it to the following
+limits (excluding the ms-dos case):
+</p>
+
+<ol><li><p>from <code class="one-hl one-hl-inline">#o040</code> to <code class="one-hl one-hl-inline">#o0177</code>,
+</p>
+</li>
+<li><p>from <code class="one-hl one-hl-inline">#o0240</code> to <code class="one-hl one-hl-inline">#o0400</code>.
+</p>
+</li>
+</ol>
+
+<p>If it is not clear what are the printing characters that are bound to
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> in the keymap <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L1364">global-map</a> we can &quot;list&quot; them like
+this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">with-temp-buffer</span>
+  (<span class="one-hl-keyword">dotimes</span> (i (- #o0177 #o040))
+    (insert (+ #o040 i)))
+  (buffer-string))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">" !\"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+</span>
+(<span class="one-hl-keyword">with-temp-buffer</span>
+  (<span class="one-hl-keyword">dotimes</span> (i (- #o0400 #o0240))
+    (insert (+ #o0240 i)))
+  (buffer-string))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"&#160;&#161;&#162;&#163;&#164;&#165;&#166;&#167;&#168;&#169;&#170;&#171;&#172;&#173;&#174;&#175;&#176;&#177;&#178;&#179;&#180;&#181;&#182;&#183;&#184;&#185;&#186;&#187;&#188;&#189;&#190;&#191;&#192;&#193;&#194;&#195;&#196;&#197;&#198;&#199;&#200;&#201;&#202;&#203;&#204;&#205;&#206;&#207;&#208;&#209;&#210;&#211;&#212;&#213;&#214;&#215;&#216;&#217;&#218;&#219;&#220;&#221;&#222;&#223;&#224;&#225;&#226;&#227;&#228;&#229;&#230;&#231;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#240;&#241;&#242;&#243;&#244;&#245;&#246;&#247;&#248;&#249;&#250;&#251;&#252;&#253;&#254;&#255;"</span></code></pre>
+</div>
+</div>
+
+<div><h3 id="one-f674f3fbd3">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</h3><div><p>In some cases (like in <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/info.el#L4378">Info-mode</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/help-mode.el#L380">help-mode</a>) we want to override
+all printing keys to be undefined before remapping some of them to
+specific commands.
+</p>
+
+<p>This is done by remapping in the local keymap the command
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> to the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L942">undefined</a>.
+</p>
+
+<p>Note that remapping <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> to <code class="one-hl one-hl-inline">nil</code> in the local keymaps
+won&apos;t override <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> in the global map as we can read in
+the info node <span>elisp#Key Lookup</span>:
+</p>
+
+<pre><code class="one-hl one-hl-block">The symbol &#8216;undefined&#8217; is worth special mention: it means to treat
+the key as undefined.  Strictly speaking, the key is defined, and
+its binding is the command &#8216;undefined&#8217;; but that command does the
+same thing that is done automatically for an undefined key: it
+rings the bell (by calling &#8216;ding&#8217;) but does not signal an error.
+
+&#8216;undefined&#8217; is used in local keymaps to override a global key
+binding and make the key undefined locally.  A local binding of
+&#8216;nil&#8217; would fail to do this because it would not override the
+global binding.</code></pre>
+
+<p>In the case of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/info.el#L4378">Info-mode</a> this is done by calling the function
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L961">suppress-keymap</a> (which overrides all printing keys to be undefined,
+maps <code class="one-hl one-hl-inline">-</code> to the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/simple.el#L4924">negative-argument</a> and the numbers 0,1,..., 9 to
+the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/simple.el#L4934">digit-argument</a>), when defining the keymap <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/info.el#L4021">Info-mode-map</a> as
+follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defvar</span> <span class="one-hl-variable-name">Info-mode-map</span>
+  (<span class="one-hl-keyword">let</span> ((map (make-keymap)))
+    (suppress-keymap map)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    (define-key map <span class="one-hl-string">"1"</span> 'Info-nth-menu-item)
+    (define-key map <span class="one-hl-string">"2"</span> 'Info-nth-menu-item)
+    <span class="one-hl-comment-delimiter">;;</span><span class="one-hl-comment">...
+</span>    (define-key map <span class="one-hl-string">"n"</span> 'Info-next)
+    (define-key map <span class="one-hl-string">"p"</span> 'Info-prev)
+    (define-key map <span class="one-hl-string">"q"</span> 'quit-window)
+    <span class="one-hl-comment-delimiter">;;</span><span class="one-hl-comment">...
+</span>    map)
+  <span class="one-hl-doc">"..."</span>)</code></pre>
+
+<p>In the case of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/help-mode.el#L380">help-mode</a> this is done by setting the parent keymap of
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/help-mode.el#L34">help-mode-map</a> to be a composed keymap of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/button.el#L73">button-buffer-map</a> and the
+parent map <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/simple.el#L532">special-mode-map</a> (which overrides all printing keys to be
+undefined, maps <code class="one-hl one-hl-inline">-</code> to the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/simple.el#L4924">negative-argument</a> and the numbers
+0,1,..., 9 to the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/simple.el#L4934">digit-argument</a>), as we can see below:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defvar</span> <span class="one-hl-variable-name">help-mode-map</span>
+  (<span class="one-hl-keyword">let</span> ((map (make-sparse-keymap)))
+    (set-keymap-parent map (make-composed-keymap button-buffer-map
+                                                 special-mode-map))
+    (define-key map <span class="one-hl-string">"n"</span> 'help-goto-next-page)
+    (define-key map <span class="one-hl-string">"p"</span> 'help-goto-previous-page)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    map)
+  <span class="one-hl-doc">"..."</span>
+  )</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-4925db5dcc">Best function name ever: bitch_at_user</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c#L6029">bitch_at_user</a>!!!
+</p>
+
+<p>What a beautiful name for a function!
+</p>
+
+<p>This is a <code class="one-hl one-hl-inline">C</code> function we can find in Emacs source code.  If I&apos;m not
+wrong it is called in the body of 3 functions.  Mainly, this function
+when called will ring the bell.  This function is defined in the file
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c">src/dispnew.c</a> as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-type">void</span>
+<span class="one-hl-function-name">bitch_at_user</span> (<span class="one-hl-type">void</span>)
+{
+  <span class="one-hl-keyword">if</span> (noninteractive)
+    putchar (07);
+  <span class="one-hl-keyword">else</span> <span class="one-hl-keyword">if</span> (<span class="one-hl-negation-char">!</span>INTERACTIVE)  <span class="one-hl-comment-delimiter">/* </span><span class="one-hl-comment">Stop executing a keyboard macro.</span><span class="one-hl-comment-delimiter">  */</span>
+    {
+      <span class="one-hl-keyword">const</span> <span class="one-hl-type">char</span> *<span class="one-hl-variable-name">msg</span>
+        = <span class="one-hl-string">"Keyboard macro terminated by a command ringing the bell"</span>;
+      Fsignal (Quser_error, list1 (build_string (msg)));
+    }
+  <span class="one-hl-keyword">else</span>
+    ring_bell (XFRAME (selected_frame));
+}</code></pre>
+
+<p>Why talking about this function?
+</p>
+
+<p>Because its name is AMAZING and because I encounter it when I was
+reading the source code of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>.
+</p>
+
+<p>Indeed, the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c#L6029">bitch_at_user</a> is called in the body of
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> when the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> is invoked by
+a key sequence that is not a printing key.
+</p>
+
+<p>For instance, we can trigger it by binding for the key sequence <code class="one-hl one-hl-inline">C-&lt;f1&gt;</code>
+(pick any key sequence you are not using) to <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> like
+this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(global-set-key (kbd <span class="one-hl-string">"C-&lt;f1&gt;"</span>) 'self-insert-command)</code></pre>
+
+<p>And now, if we press <code class="one-hl one-hl-inline">C-&lt;f1&gt;</code>, we trigger the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c#L6029">bitch_at_user</a> and:
+</p>
+
+<ol><li><p>we see <code class="one-hl one-hl-inline">Wrong type argument: characterp, C-f1</code> in the echo area and,
+</p>
+</li>
+<li><p>depending on the &quot;setting of the bell&quot; (see <span>elisp#Beeping</span>) a)
+nothing more happens, b) we hear the bell ringing, or c) we see the
+screen flashing.
+</p>
+</li>
+</ol>
+
+<p>AS NO SENTENCE CAN BEAT THE SOURCE CODE, here is the source code of
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> defined in the file <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c">src/cmds.c</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">DEFUN (<span class="one-hl-string">"self-insert-command"</span>, Fself_insert_command, Sself_insert_command, 1, 2,
+       <span class="one-hl-string">"(list (prefix-numeric-value current-prefix-arg) last-command-event)"</span>,
+       doc: <span class="one-hl-comment-delimiter">/* </span><span class="one-hl-comment">Insert the character you type.
+Whichever character C you type to run this command is inserted.
+The numeric prefix argument N says how many times to repeat the insertion.
+Before insertion, `expand-abbrev' is executed if the inserted character does
+not have word syntax and the previous character in the buffer does.
+After insertion, `internal-auto-fill' is called if
+`auto-fill-function' is non-nil and if the `auto-fill-chars' table has
+a non-nil value for the inserted character.  At the end, it runs
+`post-self-insert-hook'.</span><span class="one-hl-comment-delimiter">  */</span>)
+  (<span class="one-hl-type">Lisp_Object</span> <span class="one-hl-variable-name">n</span>, <span class="one-hl-type">Lisp_Object</span> <span class="one-hl-variable-name">c</span>)
+{
+  CHECK_FIXNUM (n);
+
+  <span class="one-hl-comment-delimiter">/* </span><span class="one-hl-comment">Backward compatibility.</span><span class="one-hl-comment-delimiter">  */</span>
+  <span class="one-hl-keyword">if</span> (NILP (c))
+    c = last_command_event;
+
+  <span class="one-hl-keyword">if</span> (XFIXNUM (n) &lt; 0)
+    error (<span class="one-hl-string">"Negative repetition argument %"</span>pI<span class="one-hl-string">"d"</span>, XFIXNUM (n));
+
+  <span class="one-hl-keyword">if</span> (XFIXNAT (n) &lt; 2)
+    call0 (Qundo_auto_amalgamate);
+
+  <span class="one-hl-comment-delimiter">/* </span><span class="one-hl-comment">Barf if the key that invoked this was not a character.</span><span class="one-hl-comment-delimiter">  */</span>
+  <span class="one-hl-keyword">if</span> (<span class="one-hl-negation-char">!</span>CHARACTERP (c))
+    bitch_at_user ();
+  <span class="one-hl-keyword">else</span> {
+    <span class="one-hl-type">int</span> <span class="one-hl-variable-name">character</span> = translate_char (Vtranslation_table_for_input,
+                                    XFIXNUM (c));
+    <span class="one-hl-type">int</span> <span class="one-hl-variable-name">val</span> = internal_self_insert (character, XFIXNAT (n));
+    <span class="one-hl-keyword">if</span> (val == 2)
+      Fset (Qundo_auto__this_command_amalgamating, Qnil);
+    frame_make_pointer_invisible (SELECTED_FRAME ());
+  }
+
+  <span class="one-hl-keyword">return</span> Qnil;
+}</code></pre>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-a797cdedd">Q&A</h2><div><p>Check <a href="/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command">Q&amp;A</a>.
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-03-11-org-mode-source-code-5000-examples/">PREV</a><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">RANDOM</a><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

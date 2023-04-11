@@ -1,0 +1,250 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Some examples on closures and lexical-binding</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Some examples on closures and lexical-binding</h1></div><div id="meta-info"><div>2022-02-11</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-cca77b7d12">info and help</a></li>
+<li><a href="#one-db885b517f">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</a></li>
+<li><a href="#one-dd6c111b63">advanced example using lambda, let, dolist, defun</a></li>
+</ul>
+</div></div></div><div><p>Hi Emacsers,
+</p>
+
+<p>I&apos;ve spent some time learning Elisp closures and lexical binding.
+</p>
+
+<p>Although the documentation is clear with simple examples, I needed to
+to play with other examples to get my bearings.
+</p>
+
+<p>As you might be interested, I will share them with you :)
+</p>
+
+<p>The first section contains the info nodes and help corresponding to
+the examples.
+</p>
+
+<p>The second section shows 10 &quot;basic&quot; examples using <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/lread.c#L5367">lexical-binding</a>,
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L109">lambda</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/byte-run.el#L280">defun</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/eval.c#L990">let</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/obsolete/cl.el#L356">lexical-let</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/eval.c#L494">setq</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/eval.c#L802">defvar</a>.
+</p>
+
+<p>And the third section shows a more advanced example using <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L109">lambda</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/eval.c#L990">let</a>,
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L273">dolist</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/emacs-lisp/byte-run.el#L280">defun</a>.
+</p>
+
+<p>Have a nice day,
+</p>
+
+<p>ps: In the documentation we see that &quot;Lexical binding is also more
+compatible with concurrency, which was added to Emacs in version
+26.1.&quot;.
+</p>
+
+<p>Does anyone know why this is? If so, can you indicate to me the
+files in the emacs source code where I can see these benefits?  I&apos;m
+really curious... thank you.
+</p>
+</div>
+
+<div><h2 id="one-cca77b7d12">info and help</h2><div><p>Info nodes:
+</p>
+
+<ul><li><p><code class="one-hl one-hl-inline">M-x eval-expression RET (info &quot;(elisp)Variable Scoping&quot;)</code>
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">M-x eval-expression RET (info &quot;(elisp)Closures&quot;)</code>
+</p>
+</li>
+</ul>
+
+<p>help:
+</p>
+
+<ul><li><p><code class="one-hl one-hl-inline">C-h v lexical-binding</code>
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-h f defvar</code>
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-h f lambda</code>
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-h f lexical-let</code>
+</p>
+</li>
+</ul>
+</div>
+</div>
+
+<div><h2 id="one-db885b517f">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</h2><div><ul><li><p>example 1
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
+(<span class="one-hl-keyword">lambda</span> (x) (* x x)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(lambda (x) (* x x))</span></code></pre>
+</li>
+
+<li><p>example 2
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">lambda</span> (x) (* x x)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(closure (t) (x) (* x x))</span></code></pre>
+</li>
+
+<li><p>example 3
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
+(<span class="one-hl-keyword">let</span> ((x 1)) (<span class="one-hl-keyword">lambda</span> (y) (+ x y)))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">(lambda (y) (+ x y))</span></code></pre>
+</li>
+
+<li><p>example 4
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">let</span> ((x 1)) (<span class="one-hl-keyword">lambda</span> (y) (+ x y)))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">(closure ((x . 1) t) (y) (+ x y))</span></code></pre>
+</li>
+
+<li><p>example 5
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">let</span> ((n 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">n+</span> (y) (+ n y)))
+(n+ 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2
+</span>(<span class="one-hl-keyword">let</span> ((n -10)) (n+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2</span></code></pre>
+</li>
+
+<li><p>example 6
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
+(<span class="one-hl-keyword">let</span> ((n 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">n+</span> (y) (+ n y)))
+(should-error (n+ 1) <span class="one-hl-ta-colon-keyword">:type</span> 'void-variable) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(void-variable n)
+</span>(<span class="one-hl-keyword">let</span> ((n -10)) (n+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">-9</span></code></pre>
+</li>
+
+<li><p>example 7
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Note that `</span><span class="one-hl-comment"><span class="one-hl-constant">lexical-let</span></span><span class="one-hl-comment">' is defined in `</span><span class="one-hl-comment"><span class="one-hl-constant">lisp/obsolete/cl.el</span></span><span class="one-hl-comment">'
+</span>(lexical-let ((n 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">n+</span> (y) (+ n y)))
+(n+ 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2
+</span>(<span class="one-hl-keyword">let</span> ((n -10)) (n+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2</span></code></pre>
+</li>
+
+<li><p>example 8
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">setq</span> xx 10)
+(<span class="one-hl-keyword">let</span> ((xx 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">xx+</span> (y) (+ xx y)))
+(xx+ 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2
+</span>(<span class="one-hl-keyword">let</span> ((x -10)) (xx+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">2</span></code></pre>
+</li>
+
+<li><p>example 9
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">defvar</span> <span class="one-hl-variable-name">xxx</span> 10)
+(<span class="one-hl-keyword">let</span> ((xxx 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">xxx+</span> (y) (+ xxx y)))
+(xxx+ 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">11
+</span>(<span class="one-hl-keyword">let</span> ((xxx -10)) (xxx+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">-9</span></code></pre>
+</li>
+
+<li><p>example 10
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+(<span class="one-hl-keyword">let</span> ((xxxx 1)) (<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">xxxx+</span> (y) (+ y xxxx)))
+(<span class="one-hl-keyword">defvar</span> <span class="one-hl-variable-name">xxxx</span> 10)
+(xxxx+ 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">11
+</span>(<span class="one-hl-keyword">let</span> ((xxxx -10)) (xxxx+ 1)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">-9</span></code></pre>
+</li>
+</ul>
+</div>
+</div>
+
+<div><h2 id="one-dd6c111b63">advanced example using lambda, let, dolist, defun</h2><div><p>Evaluating the following forms with lexical binding:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
+
+(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">call-f</span> (f x)
+  `(<span class="one-hl-ta-colon-keyword">:x-in-call-f</span> ,x
+    <span class="one-hl-ta-colon-keyword">:result-of-f</span> ,(funcall f x)
+    <span class="one-hl-ta-colon-keyword">:type-of-f</span> ,(car f)
+    <span class="one-hl-ta-colon-keyword">:env-of-f</span>  ,(<span class="one-hl-keyword">and</span> (eq (car f) 'closure) (cadr f))))
+
+(<span class="one-hl-keyword">dolist</span> (x '(1 2 3))
+  (<span class="one-hl-keyword">let</span> ((f (<span class="one-hl-keyword">lambda</span> (y) `(<span class="one-hl-ta-colon-keyword">:x-in-f</span> ,x <span class="one-hl-ta-colon-keyword">:y</span> ,y))))
+    (message <span class="one-hl-string">"%S"</span> (append `(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> ,x) (call-f f -1)))))</code></pre>
+
+<p>prints out the following into the message buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 1
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> 1 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> closure
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> ((--dolist-tail-- 1 2 3) t))
+(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 2
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> 2 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> closure
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> ((--dolist-tail-- 2 3) t))
+(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 3
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> 3 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> closure
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> ((--dolist-tail-- 3) t))</code></pre>
+
+<p>Evaluating the following forms with dynamic binding:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
+
+(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">call-f</span> (f x)
+  `(<span class="one-hl-ta-colon-keyword">:x-in-call-f</span> ,x
+    <span class="one-hl-ta-colon-keyword">:result-of-f</span> ,(funcall f x)
+    <span class="one-hl-ta-colon-keyword">:type-of-f</span> ,(car f)
+    <span class="one-hl-ta-colon-keyword">:env-of-f</span>  ,(<span class="one-hl-keyword">and</span> (eq (car f) 'closure) (cadr f))))
+
+(<span class="one-hl-keyword">dolist</span> (x '(1 2 3))
+  (<span class="one-hl-keyword">let</span> ((f (<span class="one-hl-keyword">lambda</span> (y) `(<span class="one-hl-ta-colon-keyword">:x-in-f</span> ,x <span class="one-hl-ta-colon-keyword">:y</span> ,y))))
+    (message <span class="one-hl-string">"%S"</span> (append `(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> ,x) (call-f f -1)))))</code></pre>
+
+<p>prints out the following into the message buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 1
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> -1 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> lambda
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> nil)
+(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 2
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> -1 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> lambda
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> nil)
+(<span class="one-hl-ta-colon-keyword">:x-in-dolist</span> 3
+ <span class="one-hl-ta-colon-keyword">:x-in-call-f</span> -1
+ <span class="one-hl-ta-colon-keyword">:result-of-f</span> (<span class="one-hl-ta-colon-keyword">:x-in-f</span> -1 <span class="one-hl-ta-colon-keyword">:y</span> -1)
+ <span class="one-hl-ta-colon-keyword">:type-of-f</span> lambda
+ <span class="one-hl-ta-colon-keyword">:env-of-f</span> nil)</code></pre>
+</div>
+</div>
+<div id="nav"><a href="/questions-and-answers/">PREV</a><a href="/2022-03-11-org-mode-source-code-5000-examples/">RANDOM</a><a href="/2022-02-20-onlybold-org-backend/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

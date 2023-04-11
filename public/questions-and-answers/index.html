@@ -1,0 +1,383 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Questions and Answers</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Questions and Answers</h1></div><div id="meta-info"><div>questions-</div>/<div>Tony Aldon</div>/<div><a>comment on reddit</a></div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#2022-03-11-org-mode-source-code-5000-examples">Did you know that org-mode's source code contains more than 5000 examples?</a>
+<ul>
+<li><a href="#one-c542463d88">How do you count 5000 examples?</a></li>
+</ul>
+</li>
+<li><a href="#2022-03-22-org-speed-keys-and-self-insert-command">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a>
+<ul>
+<li><a href="#one-9b52cbc890">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</a>
+<ul>
+<li><a href="#one-13a385bde8">Quick answer</a></li>
+<li><a href="#one-fb9eafe12c">Answer with more details</a>
+<ul>
+<li><a href="#one-a710572e58">Org speed keys</a></li>
+<li><a href="#one-24f1c9cd5e">evil-mode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#one-7bda694c40">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</a></li>
+</ul>
+</li>
+<li><a href="#2022-04-04-search-options-link-abbreviations-and-org-open-at-point">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a>
+<ul>
+<li><a href="#one-14a01cb0cf">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</a>
+<ul>
+<li><a href="#one-756aca9e48">Using the built-in command org-babel-goto-named-src-block</a></li>
+<li><a href="#one-6699251ea">Using the hook org-open-at-point-functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></div></div><div></div>
+<div><h2 id="2022-03-11-org-mode-source-code-5000-examples">Did you know that org-mode's source code contains more than 5000 examples?</h2><div><p>Back to <a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode&apos;s source code contains more than 5000 examples?</a>
+</p>
+</div>
+
+<div><h3 id="one-c542463d88">How do you count 5000 examples?</h3><div><p>Any <code class="one-hl one-hl-inline">should</code>, <code class="one-hl one-hl-inline">should-not</code> and <code class="one-hl one-hl-inline">should-error</code> used in a <code class="one-hl one-hl-inline">ert</code> test in the
+<code class="one-hl one-hl-inline">testing</code> directory of <code class="one-hl one-hl-inline">org-mode</code> repository is counted as an example.
+</p>
+
+<p>So now, to count all the examples, we have to count all those form and
+this can be done by searching recursively in the <code class="one-hl one-hl-inline">testing</code> directory for
+the string <code class="one-hl one-hl-inline">(should</code>.
+</p>
+
+<p>This can be done using <code class="one-hl one-hl-inline">grep</code> to match recursively the string <code class="one-hl one-hl-inline">(should</code> in
+<code class="one-hl one-hl-inline">testing</code> directory and counting the number of line with <code class="one-hl one-hl-inline">wc</code> utility:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-comment-delimiter"># </span><span class="one-hl-comment">org-mode at commit cbe3f2d69
+</span><span class="one-hl-builtin">cd</span> org-mode/testing/
+grep -r <span class="one-hl-string">'(should'</span> | wc -l</code></pre>
+
+<pre><code class="one-hl one-hl-results">5235</code></pre>
+</div>
+</div>
+</div>
+
+<div><h2 id="2022-03-22-org-speed-keys-and-self-insert-command">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</h2><div><p>Back to <a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode&apos;s feature! And a good OPPORTUNITY to talk about self-insert-command</a>
+</p>
+</div>
+
+<div><h3 id="one-9b52cbc890">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</h3><div><h4 id="one-13a385bde8">Quick answer</h4><div><ol><li><p>If we are in evil normal state <code class="one-hl one-hl-inline">&lt;N&gt;</code>, Org speed keys won&apos;t work
+(because most of the printing keys are used for something else,
+specifically they are bound in <code class="one-hl one-hl-inline">evil-normal-state-map</code>),
+</p>
+</li>
+<li><p>if we are in evil insert state <code class="one-hl one-hl-inline">&lt;I&gt;</code> or in evil emacs state <code class="one-hl one-hl-inline">&lt;E&gt;</code>, Org
+speed keys works (because the printing keys are not bound by
+<code class="one-hl one-hl-inline">evil-mode</code> in <code class="one-hl one-hl-inline">evil-insert-state-map</code> nor in <code class="one-hl one-hl-inline">evil-emacs-state-map</code>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h4 id="one-fb9eafe12c">Answer with more details</h4><div><p>Org speed keys are not better than <code class="one-hl one-hl-inline">evil-mode</code> nor the other way, they
+are really differents.
+</p>
+</div>
+
+<div><h5 id="one-a710572e58">Org speed keys</h5><div><p>Org speed keys are a kind of a &quot;hack&quot; that hijack the &quot;inserting emacs
+process&quot;.
+</p>
+
+<p>It can be seen as: when we try to insert a character, do not use
+the standard command for inserting, use another one that checks for the
+position of the cursor in the buffer, if it is at a specific location,
+performs a lookup for the command to call, if we find one, call it, if
+none, insert the character.  It is all about one command
+<code class="one-hl one-hl-inline">self-insert-command</code> and one remapping <code class="one-hl one-hl-inline">self-insert-command</code> to
+<code class="one-hl one-hl-inline">org-self-insert-command</code>.
+</p>
+</div>
+</div>
+
+<div><h5 id="one-24f1c9cd5e">evil-mode</h5><div><p><code class="one-hl one-hl-inline">evil-mode</code> manipulates the hierarchy of all the keymaps that are
+active, making the current evil &quot;state&quot; map to win over the others.
+</p>
+
+<p>We can check this by inspecting the list of the current active
+keymaps with the function <code class="one-hl one-hl-inline">current-active-maps</code>.  If the same key
+sequence is bound several times to different commands in the list
+returned by <code class="one-hl one-hl-inline">current-active-maps</code>, the first binding in the list wins
+over the others.
+</p>
+
+<p>For instance, when we are in evil normal state <code class="one-hl one-hl-inline">&lt;N&gt;</code>, the bindings in
+the keymap <code class="one-hl one-hl-inline">evil-normal-state-map</code> takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by <code class="one-hl one-hl-inline">current-active-maps</code>.
+</p>
+
+<p>Assuming we are in evil normal state <code class="one-hl one-hl-inline">&lt;N&gt;</code>, to check this previous
+assertion, we can run:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x pp-eval-expression RET (current-active-maps)</code></pre>
+
+
+<p>Now, if we switch to the evil insert state <code class="one-hl one-hl-inline">&lt;I&gt;</code>, the bindings in
+the keymap <code class="one-hl one-hl-inline">evil-insert-state-map</code> takes precedence (over almost all)
+the other binding in the current active maps, and will appear at the
+beginning of the list returned by <code class="one-hl one-hl-inline">current-active-maps</code>.
+</p>
+
+<p>Assuming we are in evil normal state <code class="one-hl one-hl-inline">&lt;I&gt;</code>, to check this previous
+assertion, we can run:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x pp-eval-expression RET (current-active-maps)</code></pre>
+
+
+<p>Now, what&apos;s interesting, is that evil insert state <code class="one-hl one-hl-inline">&lt;I&gt;</code> doesn&apos;t bind the
+printing keys nor remap the command <code class="one-hl one-hl-inline">self-insert-command</code>.  So, when
+we are in evil insert state <code class="one-hl one-hl-inline">&lt;I&gt;</code>, and we press the key <code class="one-hl one-hl-inline">n</code> for
+instance, the &quot;command loop editor&quot;, when perfoming the key lookup in
+the current active maps, won&apos;t find the binding coming from the
+keymaps <code class="one-hl one-hl-inline">evil-insert-state-map</code> but the binding coming form the current
+global map which resolves (by default) to the command
+<code class="one-hl one-hl-inline">self-insert-command</code>.   And, if we&apos;ve remapped <code class="one-hl one-hl-inline">self-insert-command</code> to
+<code class="one-hl one-hl-inline">org-self-insert-command</code>, (which is the case in org-mode with
+<code class="one-hl one-hl-inline">org-use-speed-commands</code> set to <code class="one-hl one-hl-inline">t</code>), the &quot;command loop editor&quot; will call
+<code class="one-hl one-hl-inline">org-self-insert-command</code>.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div><h3 id="one-7bda694c40">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</h3><div><p>I think that the benefit of this approach (remapping
+<code class="one-hl one-hl-inline">self-insert-command</code> to <code class="one-hl one-hl-inline">org-self-insert-command</code>) over having a minor
+mode layering its keymap onto standard <code class="one-hl one-hl-inline">org-mode</code> is that we don&apos;t have
+to switch between keymaps or minor modes to get the feature.
+</p>
+
+<p>Let&apos;s say we define a minor mode <code class="one-hl one-hl-inline">X-mode</code> with the keymap <code class="one-hl one-hl-inline">X-mode-map</code>
+that binds the key <code class="one-hl one-hl-inline">n</code> to <code class="one-hl one-hl-inline">org-next-visible-heading</code>.
+</p>
+
+<p>Now, when <code class="one-hl one-hl-inline">X-mode</code> is turned on, <code class="one-hl one-hl-inline">X-mode-map</code> &quot;wins&quot; over <code class="one-hl one-hl-inline">org-mode-map</code> and
+typing <code class="one-hl one-hl-inline">n</code> will get us (from anywhere in the buffer) to the next
+heading.
+</p>
+
+<p>Now, what should we do to insert the character <code class="one-hl one-hl-inline">n</code> in the buffer?  We
+should turn off <code class="one-hl one-hl-inline">X-mode</code> to remove the binding from <code class="one-hl one-hl-inline">X-mode-map</code>.
+</p>
+
+<p>With the remapping method we don&apos;t have to switch between minor modes
+before moving to the next heading by typing <code class="one-hl one-hl-inline">n</code>.  The only restriction
+is to be at the beginning of a heading.  There is always a trade off.
+</p>
+
+<p>I don&apos;t know if it is a good reason but this the only one that I see.
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="2022-04-04-search-options-link-abbreviations-and-org-open-at-point">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</h2><div><p>Back to <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a>
+</p>
+</div>
+
+<div><h3 id="one-14a01cb0cf">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</h3><div><p>What we want to accomplish here is to jump to the definition of a
+noweb block, let&apos;s say <code class="one-hl one-hl-inline">my-noweb</code>, by calling a command (maybe
+<code class="one-hl one-hl-inline">org-open-at-point</code>) when the point is on a reference <code class="one-hl one-hl-inline">&lt;&lt;my-noweb&gt;&gt;</code> of
+that block, for instance in an org buffer with the following content:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-org-meta-line">#+NAME: my-noweb</span>
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> sentence '(foo bar baz))
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp :noweb yes :results value verbatim
+</span><span class="one-hl-org-block">&lt;&lt;my-noweb&gt;&gt;
+(reverse sentence)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+<span class="one-hl-org-meta-line">#+RESULTS:</span>
+<span class="one-hl-org-code">: (baz bar foo)</span></code></pre>
+
+<p>This can be done in at least two ways.
+</p>
+</div>
+
+<div><h4 id="one-756aca9e48">Using the built-in command org-babel-goto-named-src-block</h4><div><p>First, we can use the built-in command <code class="one-hl one-hl-inline">org-babel-goto-named-src-block</code>
+(bound to <code class="one-hl one-hl-inline">C-c C-v g</code> by default).
+</p>
+
+<p>After calling <code class="one-hl one-hl-inline">org-babel-goto-named-src-block</code> with the point on top of
+the reference <code class="one-hl one-hl-inline">&lt;&lt;my-noweb&gt;&gt;</code>:
+</p>
+
+<ol><li><p>we&apos;re asked in the minibuffer to choose a name,
+</p>
+</li>
+<li><p>we pick the noweb ref <code class="one-hl one-hl-inline">my-noweb</code>, press <code class="one-hl one-hl-inline">RET</code>,
+</p>
+</li>
+<li><p>we jump to the source block named <code class="one-hl one-hl-inline">my-noweb</code>.
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h4 id="one-6699251ea">Using the hook org-open-at-point-functions</h4><div><p>Second possibility, we can define a command that jump to a noweb
+block definition when we call it with the point on top of a noweb
+reference without prompting anything in the minibuffer.
+</p>
+
+<p>Then we can call it directly or better (if it&apos;s the behavior we
+want) we can add this command to the variable
+<code class="one-hl one-hl-inline">org-open-at-point-functions</code>.
+</p>
+
+<p>And, now in a source block with the point on top of a noweb reference,
+we can call <code class="one-hl one-hl-inline">org-open-at-point</code> (<code class="one-hl one-hl-inline">C-c C-o</code> by default) which will call
+this new command and jump to the noweb block definition at point
+(instead of running <code class="one-hl one-hl-inline">org-babel-open-src-block-result</code>).
+</p>
+
+<p>Here an implementation of such a command that we call <code class="one-hl one-hl-inline">org-goto-noweb</code>.
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">require</span> '<span class="one-hl-constant">org</span>)
+
+(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-noweb-ref-p</span> ()
+  <span class="one-hl-doc">"Return the noweb reference at point if any.
+If not return `</span><span class="one-hl-doc"><span class="one-hl-constant">nil</span></span><span class="one-hl-doc">'."</span>
+  (<span class="one-hl-keyword">interactive</span>)
+  (<span class="one-hl-keyword">let*</span> ((context (org-element-context))
+         (type (org-element-type context))
+         (noweb-ref
+          (<span class="one-hl-keyword">and</span> (memq type '(inline-src-block src-block))
+               (org-in-regexp (org-babel-noweb-wrap)))))
+    (<span class="one-hl-keyword">when</span> noweb-ref
+      (buffer-substring
+       (+ (car noweb-ref) (length org-babel-noweb-wrap-start))
+       (- (cdr noweb-ref) (length org-babel-noweb-wrap-end))))))
+
+(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-goto-noweb</span> ()
+  <span class="one-hl-doc">"Go to the noweb ref at point."</span>
+  (<span class="one-hl-keyword">interactive</span>)
+  (<span class="one-hl-keyword">when-let</span> ((ref (org-noweb-ref-p)))
+    (<span class="one-hl-keyword">let</span> ((point (org-babel-find-named-block ref)))
+      (<span class="one-hl-keyword">if</span> point
+          <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Taken from `</span><span class="one-hl-comment"><span class="one-hl-constant">org-open-at-point</span></span><span class="one-hl-comment">'.
+</span>          (<span class="one-hl-keyword">progn</span>
+            (org-mark-ring-push)
+            (goto-char point)
+            (org-show-context)
+            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">return non-nil, in order to use it in
+</span>            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">the variable `</span><span class="one-hl-comment"><span class="one-hl-constant">org-open-at-point-functions</span></span><span class="one-hl-comment">'
+</span>            'noweb-found)
+        (message <span class="one-hl-string">"source-code block `</span><span class="one-hl-string"><span class="one-hl-constant">%s</span></span><span class="one-hl-string">' not found in this buffer"</span> ref)))))
+
+(add-to-list 'org-open-at-point-functions #'org-goto-noweb)</code></pre>
+
+<p>And here the <code class="one-hl one-hl-inline">ert</code> test for the command <code class="one-hl one-hl-inline">org-goto-noweb</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">from org-mode: testing/org-test.el
+</span>(<span class="one-hl-keyword">defmacro</span> <span class="one-hl-function-name">org-test-with-temp-text</span> (text <span class="one-hl-type">&amp;rest</span> body)
+  <span class="one-hl-doc">"Run body in a temporary buffer with Org mode as the active
+mode holding TEXT.  If the string \"&lt;point&gt;\" appears in TEXT
+then remove it and place the point there before running BODY,
+otherwise place the point at the beginning of the inserted text."</span>
+  (<span class="one-hl-keyword">declare</span> (indent 1))
+  `(<span class="one-hl-keyword">let</span> ((inside-text (<span class="one-hl-keyword">if</span> (stringp ,text) ,text (eval ,text)))
+         (org-mode-hook nil))
+     (<span class="one-hl-keyword">with-temp-buffer</span>
+       (org-mode)
+       (<span class="one-hl-keyword">let</span> ((point (string-match <span class="one-hl-string">"&lt;point&gt;"</span> inside-text)))
+         (<span class="one-hl-keyword">if</span> point
+             (<span class="one-hl-keyword">progn</span>
+               (insert (replace-match <span class="one-hl-string">""</span> nil nil inside-text))
+               (goto-char (1+ (match-beginning 0))))
+           (insert inside-text)
+           (goto-char (point-min))))
+       (font-lock-ensure (point-min) (point-max))
+       ,@body)))
+
+(<span class="one-hl-keyword">ert-deftest</span> <span class="one-hl-function-name">org-goto-noweb-test</span> ()
+  (should
+   (org-test-with-temp-text
+       <span class="one-hl-string">"#+BEGIN_SRC emacs-lisp :noweb yes
+&lt;point&gt;&lt;&lt;my-noweb&gt;&gt;
+(reverse sentence)
+#+END_SRC"</span>
+     (org-noweb-ref-p)))
+  (should-not
+   (org-test-with-temp-text
+       <span class="one-hl-string">"#+BEGIN_SRC emacs-lisp :noweb yes
+&lt;&lt;my-noweb&gt;&gt;
+(reverse sentence)
+#+END_SRC"</span>
+     (org-noweb-ref-p)))
+
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">source blocks
+</span>  (should
+   (org-test-with-temp-text
+       <span class="one-hl-string">"#+NAME: my-noweb
+#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+&lt;point&gt;&lt;&lt;my-noweb&gt;&gt;
+(reverse sentence)
+#+END_SRC"</span>
+     (org-goto-noweb)
+     (forward-line)
+     (looking-at <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-warning">\</span></span><span class="one-hl-string">(setq"</span>)))
+  (should-not
+   (org-test-with-temp-text
+       <span class="one-hl-string">"#+NAME: my-noweb
+#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :noweb yes
+&lt;&lt;my-noweb&gt;&gt;
+(reverse sentence)
+#+END_SRC"</span>
+     (org-goto-noweb)))
+
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">inline source blocks
+</span>  (should
+   (org-test-with-temp-text
+       <span class="one-hl-string">"#+NAME: my-noweb
+#+BEGIN_SRC emacs-lisp
+(setq sentence '(foo bar baz))
+#+END_SRC
+
+src_emacs-lisp{&lt;point&gt;&lt;&lt;my-noweb&gt;&gt;}"</span>
+     (org-goto-noweb)
+     (forward-line)
+     (looking-at <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-warning">\</span></span><span class="one-hl-string">(setq"</span>))))</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="nav"><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">RANDOM</a><a href="/2022-02-11-closures-and-lexical-binding/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

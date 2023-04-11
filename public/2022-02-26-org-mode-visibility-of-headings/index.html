@@ -1,0 +1,551 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Have you ever wondered how org-mode toggles the visibility of headings?</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Have you ever wondered how org-mode toggles the visibility of headings?</h1></div><div id="meta-info"><div>2022-02-26</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-9d9198b811">org-mode visibility of headings</a></li>
+<li><a href="#one-1294c567f4">text properties</a></li>
+<li><a href="#one-97fa8ccdb3">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</a></li>
+<li><a href="#one-a9c1e969a2">overlays, invisible overlay property, buffer-invisibility-spec</a>
+<ul>
+<li><a href="#one-639e552988">buffer-invisibility-spec equal to t</a></li>
+<li><a href="#one-16929e46db">buffer-invisibility-spec equal to nil</a></li>
+<li><a href="#one-7cc03a5355">buffer-invisibility-spec equal to ((foo) t)</a></li>
+</ul>
+</li>
+<li><a href="#one-68be95b562">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</a>
+<ul>
+<li><a href="#one-83e24a9c53">default ellipsis</a></li>
+<li><a href="#one-ee24f248c0">custom ellipsis modifying the display table</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div><div><p>Have you ever wondered how org-mode toggles the visibility of headings?
+</p>
+
+<p>YES!!!  Me too!
+</p>
+
+<p>Let&apos;s get into it ;)
+</p>
+</div>
+
+<div><h2 id="one-9d9198b811">org-mode visibility of headings</h2><div><p><code class="one-hl one-hl-inline">org-mode</code> is built on top of <code class="one-hl one-hl-inline">outline-mode</code> which is responsible for the
+visibility changes of the headings.
+</p>
+
+<p>How does it work?
+</p>
+
+<p><code class="one-hl one-hl-inline">outline-mode</code> uses overlays, specifically the overlay property
+<code class="one-hl one-hl-inline">invisible</code> to toggle the visibility of the headings:
+</p>
+
+<ol><li><p>To hide the body of a heading, <code class="one-hl one-hl-inline">outline-mode</code> makes an overlay from
+the end of the line of the heading to the end of the body of the
+heading, and sets the property <code class="one-hl one-hl-inline">invisible</code> of the overlay to be the
+symbol <code class="one-hl one-hl-inline">outline</code>.  Hence, the part of the buffer with this overlay
+is &quot;replaced&quot; (visually, not the content of the buffer) by
+ellipsis.  Why is this?  Because, when <code class="one-hl one-hl-inline">outline-mode</code> is turned
+on, it adds the cons <code class="one-hl one-hl-inline">(outline . t)</code> to the variable
+<code class="one-hl one-hl-inline">buffer-invisibility-spec</code> which becomes buffer local and is
+responsible for the invisibility of each buffer.
+</p>
+</li>
+<li><p>To make the body of a heading visible, <code class="one-hl one-hl-inline">outline-mode</code> removes any
+overlays in the body of the heading that have its property
+<code class="one-hl one-hl-inline">invisible</code> set to the symbol <code class="one-hl one-hl-inline">outline</code>.
+</p>
+</li>
+</ol>
+
+<p>To see exactly how this is achieved you can refer to the functions
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/outline.el#L796">outline-flag-region</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/outline.el#L861">outline-hide-entry</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/outline.el#L871">outline-show-entry</a> defined
+in the file <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/outline.el">lisp/outline.el</a> and also the definition of the mode
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/outline.el#L301">outline-mode</a> in the same file.
+</p>
+
+<p>You can get emacs&apos;s source code by running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git clone git://git.sv.gnu.org/emacs.git</code></pre>
+
+
+<p>OK!
+</p>
+
+<p>The mechanism of <code class="one-hl one-hl-inline">outline-mode</code> uses overlays, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L6249">buffer-invisibility-spec</a>
+and ellipsis.
+</p>
+
+<p>But how do those &quot;emacs/elisp features&quot; play together?
+</p>
+
+<p>In the next parts of this post, we build examples using them to try to
+get a good feel for their use.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-1294c567f4">text properties</h2><div><p>In a buffer, each character point can have text properties attached to
+it that can be used to do many things (like controlling the appearance
+of the character).
+</p>
+
+<p>For instance, in an <code class="one-hl one-hl-inline">emacs-lisp-mode</code> buffer, with the following s-exp,
+and the cursor (the point) after the first parenthesis:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> my-var nil)</code></pre>
+
+<p>if we run:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x eval-expression RET (text-properties-at (point))</code></pre>
+
+
+<p>we get:
+</p>
+
+<pre><code class="one-hl one-hl-block">(face font-lock-keyword-face fontified t)</code></pre>
+
+<p>The character point &quot;s&quot; (point 2, i.e. the &quot;s&quot; at the second position
+in the buffer) has:
+</p>
+
+<ol><li><p>the text property <code class="one-hl one-hl-inline">face</code> equal to the face <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/font-lock.el#L2021">font-lock-keyword-face</a>
+which is why it is displayed with a different foreground color
+(depending on your theme) than the text <code class="one-hl one-hl-inline">my-var</code> for instance,
+</p>
+</li>
+<li><p>the text property <code class="one-hl one-hl-inline">fontified</code> equal to <code class="one-hl one-hl-inline">t</code> which we don&apos;t describe
+here.
+</p>
+</li>
+</ol>
+
+<p>We can read more about the special text properties in the manual
+(<span>elisp#Special Properties</span>).
+</p>
+
+<p>If we want more information (not only the text properties) about the
+character point &quot;s&quot; (point 2), we can run (still with with the cursor
+after the first parenthesis):
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x describe-char</code></pre>
+
+
+<p>which pops up the following help buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">             position: 2 of 18 (6%), column: 1
+            character: s (displayed as s) (codepoint 115, #o163, #x73)
+              charset: ascii (ASCII (ISO646 IRV))
+code point in charset: 0x73
+               script: latin
+               syntax: w  which means: word
+             category: .:Base, L:Left-to-right (strong), a:ASCII, l:Latin, r:Roman
+             to input: type "C-x 8 RET 73" or "C-x 8 RET LATIN SMALL LETTER S"
+          buffer code: #x73
+            file code: #x73 (encoded by coding system prefer-utf-8-unix)
+              display: by this font (glyph code)
+    ftcrhb:-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (#x56)
+
+Character code properties: customize what to show
+  name: LATIN SMALL LETTER S
+  general-category: Ll (Letter, Lowercase)
+  decomposition: (115) ('s')
+
+There are text properties here:
+  face                 font-lock-keyword-face
+  fontified            t</code></pre>
+
+<p>Note that your result may differ in your running emacs (different fonts,
+maybe information about overlays if you are using <code class="one-hl one-hl-inline">hl-line-mode</code>, ...).
+</p>
+</div>
+</div>
+
+<div><h2 id="one-97fa8ccdb3">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</h2><div><p>Because:
+</p>
+
+<ol><li><p>Both text properties and overlays can &quot;alter/control&quot; the
+appearance of the buffer&apos;s text on the screen and so we have to
+know something important that is (from the manual
+<span>elisp#Overlay Properties</span>):
+</p>
+
+<pre><code class="one-hl one-hl-block">all overlays take priority over text properties.</code></pre>
+</li>
+
+<li><p>buffer invisibility can also be achieve with text properties (for
+instance, this is what <code class="one-hl one-hl-inline">org-mode</code> does to hide the brackets and the
+link part of links like this <code class="one-hl one-hl-inline">[[link][description]]</code>), and it is
+important to notice it.
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h2 id="one-a9c1e969a2">overlays, invisible overlay property, buffer-invisibility-spec</h2><div><p>We can make a part of a buffer invisible using:
+</p>
+
+<ol><li><p>the <code class="one-hl one-hl-inline">invisible</code> text property (of that part),
+</p>
+</li>
+<li><p>the <code class="one-hl one-hl-inline">invisible</code> overlay property (&quot;on top of that part&quot;).
+</p>
+</li>
+</ol>
+
+<p>The &quot;admitted&quot; values of the <code class="one-hl one-hl-inline">invisible</code> overlay property (or text
+property) and the invisibility effect expected depend on the value of
+the variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L6249">buffer-invisibility-spec</a>.
+</p>
+
+<p>In this section:
+</p>
+
+<ol><li><p>we define overlays,
+</p>
+</li>
+<li><p>we set the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code>,
+</p>
+</li>
+<li><p>we give different values to the <code class="one-hl one-hl-inline">invisible</code> property of the overlays,
+</p>
+</li>
+<li><p>we observe the appearance of the buffer,
+</p>
+</li>
+<li><p>we repeat step 2) to 4) several times.
+</p>
+</li>
+<li><p>we hope we get a good feeling of invisibility in Emacs.
+</p>
+</li>
+</ol>
+
+<p>Also note that all the evaluations of the s-expressions are done in the
+minibuffer with <code class="one-hl one-hl-inline">M-x eval-expression</code> and the point in the buffer we
+operate on, that we call <code class="one-hl one-hl-inline">*invisible*</code>.
+</p>
+
+<p>Let&apos;s switch to the new &quot;fresh&quot; buffer <code class="one-hl one-hl-inline">*invisible*</code> in <code class="one-hl one-hl-inline">fundamental-mode</code>
+by evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(switch-to-buffer (get-buffer-create <span class="one-hl-string">"*invisible*"</span>))</code></pre>
+
+<p>Let&apos;s insert the characters <code class="one-hl one-hl-inline">XXXXXX</code> at the beginning of the buffer
+<code class="one-hl one-hl-inline">*invisible*</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">XXXXXX</code></pre>
+</div>
+
+<div><h3 id="one-639e552988">buffer-invisibility-spec equal to t</h3><div><p>Now if we evaluate the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code>, we should
+get <code class="one-hl one-hl-inline">t</code> (the default) in the echo area.
+</p>
+
+<p>If not, we set this variable to <code class="one-hl one-hl-inline">t</code> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> buffer-invisibility-spec t)</code></pre>
+
+<p>Now, we make an overlay &quot;on top&quot; of <code class="one-hl one-hl-inline">XXXXXX</code> (from point 1 to point 7 in
+the buffer) that we assign to the variable <code class="one-hl one-hl-inline">ov-x</code> using <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L3902">make-overlay</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> ov-x (make-overlay 1 7))</code></pre>
+
+<p>and we see the following in the echo area:
+</p>
+
+<pre><code class="one-hl one-hl-block">#&lt;overlay from 1 to 7 in *invisible*&gt;</code></pre>
+
+<p>Now, by setting the property <code class="one-hl one-hl-inline">invisible</code> of the overlay <code class="one-hl one-hl-inline">ov-x</code> to <code class="one-hl one-hl-inline">t</code> using
+the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L4428">overlay-put</a> like this
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible t)</code></pre>
+
+<p>we make the characters <code class="one-hl one-hl-inline">XXXXXX</code> disappear.
+</p>
+
+<p>This is due to the value of <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> equal to <code class="one-hl one-hl-inline">t</code> (the
+default) which means that text is invisible if it has a non-nil
+<code class="one-hl one-hl-inline">invisible</code> (text or overlay) property.
+</p>
+
+<p>Now, evaluating the following s-exp sets <code class="one-hl one-hl-inline">invisible</code> property of
+the overlay <code class="one-hl one-hl-inline">ov-x</code> to <code class="one-hl one-hl-inline">nil</code>
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible nil)</code></pre>
+
+<p>makes the characters <code class="one-hl one-hl-inline">XXXXXX</code> to reappear in the buffer <code class="one-hl one-hl-inline">*invisible*</code>.
+</p>
+
+<p>We also could have removed the overlay <code class="one-hl one-hl-inline">ov-x</code> to make the characters
+<code class="one-hl one-hl-inline">XXXXXX</code> to reappear.  Let&apos;s see how.
+</p>
+
+<p>First, as previously, we set the <code class="one-hl one-hl-inline">invisible</code> property of the overlay
+<code class="one-hl one-hl-inline">ov-x</code> to <code class="one-hl one-hl-inline">t</code> to make the characters <code class="one-hl one-hl-inline">XXXXXX</code> to disappear:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible t)</code></pre>
+
+<p>Then, instead of setting back the <code class="one-hl one-hl-inline">invisible</code> overlay property to <code class="one-hl one-hl-inline">nil</code> of
+<code class="one-hl one-hl-inline">ov-x</code> we remove it.  To do so, we use the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L3527">remove-overlays</a> that
+let you remove all the overlays in a range of the buffer that have a
+specific property set to some value (in our case the property <code class="one-hl one-hl-inline">invisible</code>
+set to <code class="one-hl one-hl-inline">t</code> in the range 1 to 7 of the buffer).
+</p>
+
+<p>So evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(remove-overlays 1 7 'invisible t)</code></pre>
+
+<p>removes the overlay <code class="one-hl one-hl-inline">ov-x</code> in the buffer <code class="one-hl one-hl-inline">*invisible*</code> and make the
+characters <code class="one-hl one-hl-inline">XXXXXX</code> to reappear.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-16929e46db">buffer-invisibility-spec equal to nil</h3><div><p>As we removed the overlay <code class="one-hl one-hl-inline">ov-x</code>, we redefined it as previously by
+evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> ov-x (make-overlay 1 7))</code></pre>
+
+<p>Let&apos;s set <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> to <code class="one-hl one-hl-inline">nil</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> buffer-invisibility-spec nil)</code></pre>
+
+<p>Then, by evaluating the following s-exp, we expect the characters
+<code class="one-hl one-hl-inline">XXXXXX</code> to disappear:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible t)</code></pre>
+
+<p>BUT they don&apos;t.
+</p>
+
+<p>This is normal, as we&apos;ve just set <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> to <code class="one-hl one-hl-inline">nil</code>,
+we&apos;ve &quot;disabled&quot; the invisibility feature in the buffer <code class="one-hl one-hl-inline">*invisible*</code>.
+</p>
+
+<p>Now, we restore the <code class="one-hl one-hl-inline">invisible</code> property of the overlay <code class="one-hl one-hl-inline">ov-x</code> so as not to
+interfere with the next example by evaluating:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible nil)</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-7cc03a5355">buffer-invisibility-spec equal to ((foo) t)</h3><div><p>Let&apos;s add the characters <code class="one-hl one-hl-inline">YYYYYY</code> after the characters <code class="one-hl one-hl-inline">XXXXXX</code> with
+3 dashes <code class="one-hl one-hl-inline">---</code> in between such that the buffer <code class="one-hl one-hl-inline">*invisible*</code> is now:
+</p>
+
+<pre><code class="one-hl one-hl-block">XXXXXX---YYYYYY</code></pre>
+
+<p>Now, we make an overlay &quot;on top&quot; of <code class="one-hl one-hl-inline">YYYYYY</code> (from point 10 to point 16
+in the buffer) that we assign to the variable <code class="one-hl one-hl-inline">ov-y</code> using <code class="one-hl one-hl-inline">make-overlay</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> ov-y (make-overlay 10 16))</code></pre>
+
+<p>We set back <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> to <code class="one-hl one-hl-inline">t</code> (the default):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> buffer-invisibility-spec t)</code></pre>
+
+<p>Then we add the list <code class="one-hl one-hl-inline">(foo)</code> to the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code>
+using the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/subr.el#L5285">add-to-invisibility-spec</a> as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(add-to-invisibility-spec '(foo))</code></pre>
+
+<p>Now, the value of <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> is <code class="one-hl one-hl-inline">((foo) t)</code>.
+</p>
+
+<p>This implies that, now to make a part of the buffer invisible, the
+<code class="one-hl one-hl-inline">invisible</code> property must be <code class="one-hl one-hl-inline">foo</code> or <code class="one-hl one-hl-inline">t</code>.  Before, it could have been any
+value that is non-nil.
+</p>
+
+<p>This way we can toggle the visibility of some parts of the buffer
+while other parts remain invisible (see <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/org/ol.el#L1447">org-toggle-link-display</a> for
+instance).
+</p>
+
+<p>Let&apos;s make <code class="one-hl one-hl-inline">XXXXXX</code> disappear &quot;permanently&quot; by setting the <code class="one-hl one-hl-inline">invisible</code>
+property of <code class="one-hl one-hl-inline">ov-x</code> to <code class="one-hl one-hl-inline">t</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'invisible t)</code></pre>
+
+<p>The characters <code class="one-hl one-hl-inline">XXXXXX</code> disappear and the buffer <code class="one-hl one-hl-inline">*invisible*</code> is now:
+</p>
+
+<pre><code class="one-hl one-hl-block">---YYYYYY</code></pre>
+
+<p>Now, we set the <code class="one-hl one-hl-inline">invisible</code> property of <code class="one-hl one-hl-inline">ov-y</code> to be equal to <code class="one-hl one-hl-inline">foo</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-y 'invisible 'foo)</code></pre>
+
+<p>The characters <code class="one-hl one-hl-inline">YYYYYY</code> disappear and the buffer <code class="one-hl one-hl-inline">*invisible*</code> is now:
+</p>
+
+<pre><code class="one-hl one-hl-block">---</code></pre>
+
+<p>Now, what we can do is to make <code class="one-hl one-hl-inline">YYYYYY</code> appears again by removing <code class="one-hl one-hl-inline">(foo)</code>
+from the invisibility spec <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> while the
+characters <code class="one-hl one-hl-inline">XXXXXX</code> stay invisible:
+</p>
+
+<pre><code class="one-hl one-hl-block">(remove-from-invisibility-spec '(foo))</code></pre>
+
+<p>Now, the buffer <code class="one-hl one-hl-inline">*invisible*</code> is:
+</p>
+
+<pre><code class="one-hl one-hl-block">---YYYYYY</code></pre>
+
+<p>Note that:
+</p>
+
+<ol><li><p>the overlay <code class="one-hl one-hl-inline">ov-x</code> still has its property <code class="one-hl one-hl-inline">invisible</code> equal to <code class="one-hl one-hl-inline">t</code> and,
+</p>
+</li>
+<li><p>the overlay <code class="one-hl one-hl-inline">ov-y</code> still has its property <code class="one-hl one-hl-inline">invisible</code> equal to <code class="one-hl one-hl-inline">foo</code>.
+</p>
+</li>
+</ol>
+
+<p>You can verify it by evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-get ov-x 'invisible) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">t
+</span>(overlay-get ov-y 'invisible) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">foo</span></code></pre>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-68be95b562">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</h2><div><h3 id="one-83e24a9c53">default ellipsis</h3><div><p>If the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> as a list contains a cons
+<code class="one-hl one-hl-inline">(foo . t)</code>, every continuous part of the buffer with the <code class="one-hl one-hl-inline">invisible</code>
+property set to <code class="one-hl one-hl-inline">foo</code> is replaced by ellipsis which are by default <code class="one-hl one-hl-inline">...</code>.
+</p>
+
+<p>The buffer <code class="one-hl one-hl-inline">*invisible*</code> still contains the characters <code class="one-hl one-hl-inline">XXXXXX---YYYYYY</code>,
+but maybe not all the characters are visible.  So let&apos;s put our buffer
+in an appropriate state for this section.
+</p>
+
+<p>We removes all the overlays in the buffer (which makes all the content
+of the buffer visible again).  We redifined the <code class="one-hl one-hl-inline">ov-x</code> and <code class="one-hl one-hl-inline">ov-y</code> as
+previously (same part of the buffer (1 to 7) and (10 to 16)).  And we
+set <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> to be <code class="one-hl one-hl-inline">((foo . t) t)</code>.  We can do this by
+evaluating the following expression (in the minibuffer with point in
+the buffer <code class="one-hl one-hl-inline">*invisible*</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">progn</span>
+  (remove-overlays)
+  (<span class="one-hl-keyword">setq</span> ov-x (make-overlay 1 7))
+  (<span class="one-hl-keyword">setq</span> ov-y (make-overlay 10 16))
+  (<span class="one-hl-keyword">setq</span> buffer-invisibility-spec t)
+  (add-to-invisibility-spec '(foo . t)))</code></pre>
+
+<p>The buffer <code class="one-hl one-hl-inline">*invisible*</code> is now:
+</p>
+
+<pre><code class="one-hl one-hl-block">XXXXXX---YYYYYY</code></pre>
+
+<p>By evaluating the following s-exp, we set the <code class="one-hl one-hl-inline">invisible</code> property
+of the overlay <code class="one-hl one-hl-inline">ov-y</code> to <code class="one-hl one-hl-inline">foo</code>
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-y 'invisible 'foo)</code></pre>
+
+<p>and this replaces (visually not the content of the buffer) the
+characters <code class="one-hl one-hl-inline">YYYYYY</code> by the default ellipsis <code class="one-hl one-hl-inline">...</code> and the buffer
+<code class="one-hl one-hl-inline">*invisible*</code> looks like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">XXXXXX---...</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-ee24f248c0">custom ellipsis modifying the display table</h3><div><p>We assume with the buffer <code class="one-hl one-hl-inline">*invisible*</code> is in the same state as in the
+previous section.
+</p>
+
+<p>Our goal in this section is to modify the default ellipsis <code class="one-hl one-hl-inline">...</code>.
+</p>
+
+<p>To do so we:
+</p>
+
+<ol><li><p>create a display table with the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/disp-table.el#L34">make-display-table</a>,
+</p>
+</li>
+<li><p>we set its special slot 4 (responsible of the display of the
+ellipsis) which must be a vector of glyph using the function
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/disp-table.el#L63">set-display-table-slot</a>,
+</p>
+</li>
+<li><p>we set the variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L5909">buffer-display-table</a> of the buffer <code class="one-hl one-hl-inline">*invisible*</code>
+to be this new display table,
+</p>
+</li>
+<li><p>we observe the appearance of the buffer <code class="one-hl one-hl-inline">*invisible*</code>.
+</p>
+</li>
+</ol>
+
+<p>So by evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((tbl (make-display-table))
+      (glyph-vector
+       (vector (make-glyph-code ?\ 'font-lock-warning-face)
+               (make-glyph-code ?\; 'font-lock-warning-face)
+               (make-glyph-code ?- 'font-lock-warning-face)
+               (make-glyph-code ?\) 'font-lock-warning-face))))
+  (set-display-table-slot tbl 4 glyph-vector)
+  (<span class="one-hl-keyword">setq</span> buffer-display-table tbl))</code></pre>
+
+<p>the buffer <code class="one-hl one-hl-inline">*invisible*</code> should looks like this (if the <code class="one-hl one-hl-inline">invisible</code>
+property of the overlay <code class="one-hl one-hl-inline">ov-y</code> is still equal to <code class="one-hl one-hl-inline">foo</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">XXXXXX--- ;-)</code></pre>
+
+<p>You can read more about character display and display table in the
+manual (<span>elisp#Character Display</span>).
+</p>
+
+<p>WE ARE DONE :-)
+</p>
+</div>
+</div>
+</div>
+<div id="nav"><a href="/2022-02-20-onlybold-org-backend/">PREV</a><a href="/2022-02-20-onlybold-org-backend/">RANDOM</a><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

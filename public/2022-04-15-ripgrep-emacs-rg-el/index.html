@@ -1,0 +1,357 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</h1></div><div id="meta-info"><div>2022-04-15</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/u4c5rc/ripgrep_is_fantastic_emacs_is_fantastic_boom_you/">comment on reddit</a></div>/<div>emacs revision: 504779f744cc</div></div><div><p>Hey Emacsers,
+</p>
+
+<p>Do you know <code class="one-hl one-hl-inline">rg.el</code>?
+</p>
+
+<p><a href="https://github.com/dajva/rg.el">rg.el</a> is an Emacs UI for the cli <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>.
+</p>
+
+<p>What does that mean?
+</p>
+
+<p>Well...
+</p>
+
+<p>Let&apos;s say we want to learn how to write Elisp macros because it seems
+to fit with the problem we are facing.  We&apos;ve already read the info
+node about macros (<code class="one-hl one-hl-inline">M-x eval-expression RET (info &quot;(elisp)Macros&quot;)</code>)
+that contains many examples but we want more examples.
+</p>
+
+<p>We know that macros are defined with the macro <code class="one-hl one-hl-inline">defmacro</code>, so why don&apos;t
+we search for calls of <code class="one-hl one-hl-inline">defmacro</code> in Emacs source code to get usage
+examples of it?
+</p>
+
+<p>In the directory where we&apos;ve cloned Emacs source code we can run the
+following command line (in a terminal) that searches directories for
+the regexp <code class="one-hl one-hl-inline">\(defmacro</code> that are of type <code class="one-hl one-hl-inline">elisp</code>, while respecting
+gitignore using <code class="one-hl one-hl-inline">ripgrep</code> (the binary <code class="one-hl one-hl-inline">rg</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">rg <span class="one-hl-string">'\(defmacro'</span> -t elisp</code></pre>
+
+<p>This prints the following in the standard output:
+</p>
+
+<pre><code class="one-hl one-hl-block">admin/cus-test.el
+304:(defmacro cus-test-load-1 (&amp;rest body)
+
+lisp/align.el
+1260:(defmacro align--set-marker (marker-var pos &amp;optional type)
+
+lisp/custom.el
+231:(defmacro defcustom (symbol standard doc &amp;rest args)
+389:(defmacro defface (face spec doc &amp;rest args)
+492:(defmacro defgroup (symbol members doc &amp;rest args)
+1139:(defmacro deftheme (theme &amp;optional doc)
+
+... MORE HITS HERE</code></pre>
+
+<p>Now, you do whatever you want with those matches in the terminal.  You
+can browse the ouptut looking for some information, chose a match, the
+open the corresponding file and go to the appropriate line.
+</p>
+
+<p>Everything in the terminal...
+</p>
+
+<p>OR, you can use <code class="one-hl one-hl-inline">rg.el</code> and use its command <code class="one-hl one-hl-inline">rg</code> like this:
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">M-x rg</code>,
+</p>
+</li>
+<li><p>write the regexp: <code class="one-hl one-hl-inline">\(defmacro</code>,
+</p>
+</li>
+<li><p>select the directory where Emacs source code is,
+</p>
+</li>
+<li><p>choose <code class="one-hl one-hl-inline">elisp</code> as type file,
+</p>
+</li>
+</ol>
+
+<p>and you get the following buffer named <code class="one-hl one-hl-inline">*rg*</code> (in the mode <code class="one-hl one-hl-inline">rg-mode</code>) with
+exactly the same matches as before with the command line:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 16:56:04
+
+/usr/bin/rg [...]
+
+File: admin/cus-test.el
+ 304  (defmacro cus-test-load-1 (&amp;rest body)
+
+File: lisp/align.el
+1260  (defmacro align--set-marker (marker-var pos &amp;optional type)
+
+File: lisp/custom.el
+ 231  (defmacro defcustom (symbol standard doc &amp;rest args)
+ 389  (defmacro defface (face spec doc &amp;rest args)
+ 492  (defmacro defgroup (symbol members doc &amp;rest args)
+1139  (defmacro deftheme (theme &amp;optional doc)
+
+... MORE HITS HERE</code></pre>
+
+<p>The difference is that now you can press (the bindings are defined in
+<code class="one-hl one-hl-inline">rg-mode-map</code>):
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">n</code> (bound <code class="one-hl one-hl-inline">next-error-no-select</code>) to move to the next line with a
+match, show that file in other buffer and highlight the match,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">p</code> (bound <code class="one-hl one-hl-inline">previous-error-no-select</code>) move to the previous line with a
+match, show that file in other buffer and highlight the match.
+</p>
+</li>
+</ol>
+
+<p>isn&apos;t FANTASTIC?
+</p>
+
+<p>Assuming that we&apos;ve look at some macro definitions, and we&apos;ve seen
+that the file <code class="one-hl one-hl-inline">lisp/subr.el</code> defines many of the macros that we have
+already used in our own code like <code class="one-hl one-hl-inline">push</code>, <code class="one-hl one-hl-inline">pop</code> and <code class="one-hl one-hl-inline">when</code>.  Maybe to reduce
+the numbers of macro to look at (<code class="one-hl one-hl-inline">1505</code> calls to <code class="one-hl one-hl-inline">defmacro</code> - commit
+<code class="one-hl one-hl-inline">504779f744ccc33c2177dafa34e21d83f6c640a0</code>) we can consider only those
+defined in the file <code class="one-hl one-hl-inline">lisp/subr.el</code>.
+</p>
+
+<p>This can be done by modifying a little bit the previous command line
+like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">rg <span class="one-hl-string">'\(defmacro'</span> lisp/subr.el</code></pre>
+
+<p>But, now that we are using <code class="one-hl one-hl-inline">rg.el</code> (INSIDE EMACS) we no longer want to
+use directly the terminal for that task.
+</p>
+
+<p>So, we go back to the buffer <code class="one-hl one-hl-inline">*rg*</code> and we press <code class="one-hl one-hl-inline">f</code> (bound to
+<code class="one-hl one-hl-inline">rg-rerun-change-files</code>) and we write <code class="one-hl one-hl-inline">subr.el</code> (the last part of the file
+name), then we press <code class="one-hl one-hl-inline">RET</code> to rerun <code class="one-hl one-hl-inline">rg</code> with the same regexp as before
+(<code class="one-hl one-hl-inline">\(defmacro</code>), but this time, only matches in the file <code class="one-hl one-hl-inline">lisp/subr.el</code> are
+presented in the buffer <code class="one-hl one-hl-inline">*rg*</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 17:29:43
+
+/usr/bin/rg [...]
+
+File: lisp/subr.el
+  32  (defmacro declare-function (_fn _file &amp;rest _args)
+  74  (defmacro noreturn (form)
+  81  (defmacro 1value (form)
+  88  (defmacro def-edebug-spec (symbol spec)
+ 110  (defmacro lambda (&amp;rest cdr)
+ 136  (defmacro prog2 (form1 form2 &amp;rest body)
+ 143  (defmacro setq-default (&amp;rest args)
+ 163  (defmacro setq-local (&amp;rest pairs)
+ 193  (defmacro defvar-local (var val &amp;optional docstring)
+ 210  (defmacro push (newelt place)
+ 225  (defmacro pop (place)
+ 243  (defmacro when (cond &amp;rest body)
+
+... MORE HITS HERE</code></pre>
+
+<p>Now we&apos;ve reduce our study of writing macros to 52 &quot;classic&quot; macros.
+Still as before, we can use <code class="one-hl one-hl-inline">n</code> and <code class="one-hl one-hl-inline">p</code> to look at those macro definition
+from <code class="one-hl one-hl-inline">*rg*</code> buffer, the definition poping up in another buffer.  For me,
+this is insane.  I love it.
+</p>
+
+<p>But 52 is still an important number.  We want to look at some macro
+definitions to be able to write our own macro.  We need it.  Let&apos;s
+almost right now.
+</p>
+
+<p>Well...
+</p>
+
+<p>Let&apos;s reduce that number.  We observe that the file <code class="one-hl one-hl-inline">lisp/subr.el</code>
+defines also the macro <code class="one-hl one-hl-inline">with-current-buffer</code> and <code class="one-hl one-hl-inline">with-temp-buffer</code> (used
+everywhere).
+</p>
+
+<p>So, we decide to only look at the macro prefixed by <code class="one-hl one-hl-inline">with-</code> defined in
+the file <code class="one-hl one-hl-inline">lisp/subr.el</code>.
+</p>
+
+<p>We can do it in the terminal running this command:
+</p>
+
+<pre><code class="one-hl one-hl-block">rg <span class="one-hl-string">'\(defmacro with'</span> lisp/subr.el</code></pre>
+
+<p>but we prefer doing it with <code class="one-hl one-hl-inline">rg.el</code>.  So we go back to the buffer <code class="one-hl one-hl-inline">*rg*</code>,
+and now we press <code class="one-hl one-hl-inline">r</code> (bound to <code class="one-hl one-hl-inline">rg-rerun-change-regexp</code>).  This offers in
+the minibuffer to modify the current regexp <code class="one-hl one-hl-inline">\(defmacro</code>.  We modify it
+to be <code class="one-hl one-hl-inline">\(defmacro with</code>, we hit return, and we get the following 20
+matches:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/emacs/" -*-
+rg started at Fri Apr 15 17:49:57
+
+/usr/bin/rg [...]
+
+File: lisp/subr.el
+2092  (defmacro with-wrapper-hook (hook args &amp;rest body)
+3448  (defmacro with-undo-amalgamate (&amp;rest body)
+4188  (defmacro with-current-buffer (buffer-or-name &amp;rest body)
+4228  (defmacro with-selected-window (window &amp;rest body)
+4253  (defmacro with-selected-frame (frame &amp;rest body)
+4331  (defmacro with-output-to-temp-buffer (bufname &amp;rest body)
+4387  (defmacro with-temp-file (file &amp;rest body)
+4407  (defmacro with-temp-message (message &amp;rest body)
+4430  (defmacro with-temp-buffer (&amp;rest body)
+4445  (defmacro with-silent-modifications (&amp;rest body)
+4469  (defmacro with-output-to-string (&amp;rest body)
+4481  (defmacro with-local-quit (&amp;rest body)
+4549  (defmacro with-demoted-errors (format &amp;rest body)
+4712  (defmacro with-case-table (table &amp;rest body)
+4726  (defmacro with-file-modes (modes &amp;rest body)
+4738  (defmacro with-existing-directory (&amp;rest body)
+5297  (defmacro with-eval-after-load (file &amp;rest body)
+5417  (defmacro with-syntax-table (table &amp;rest body)
+6384  (defmacro with-mutex (mutex &amp;rest body)
+6570  (defmacro with-delayed-message (args &amp;rest body)</code></pre>
+
+<p>We can now look at those definition trying to understand how macros
+are defined and how we can find ideas to solve our problem (either by
+writing our macro our deciding that a simple function might be
+enough...)
+</p>
+
+<p>While we are looking at those macro prefixed by <code class="one-hl one-hl-inline">with-</code>, we remember
+that we&apos;ve seen another macro in another file that was matched in the
+previous search and so visible in the &quot;previous&quot; contents of <code class="one-hl one-hl-inline">*rg*</code>
+buffer, and we want to look for it.
+</p>
+
+<p>Do we have to redo everything (<code class="one-hl one-hl-inline">M-x rg</code>, ....)?
+</p>
+
+<p>Absolutely not!
+</p>
+
+<p>Still in the buffer <code class="one-hl one-hl-inline">*rg*</code> we can just visit backward and forward the
+previous searches using <code class="one-hl one-hl-inline">C-c &lt;</code> (bound to <code class="one-hl one-hl-inline">rg-forward-history</code>) and <code class="one-hl one-hl-inline">C-c &gt;</code>
+(bound to <code class="one-hl one-hl-inline">rg-back-history</code>).
+</p>
+
+<p>Another mega cool feature of <code class="one-hl one-hl-inline">ripgrep</code> is the flag <code class="one-hl one-hl-inline">--context</code> (<code class="one-hl one-hl-inline">-C</code> in
+short) that allows to include a number of lines before and after each
+matches.
+</p>
+
+<p>For instance, if we want to add 2 lines before and after the matches
+of the regexp <code class="one-hl one-hl-inline">\(defmacro with</code> in the file <code class="one-hl one-hl-inline">lisp/subr.el</code>, in the
+terminal we can run the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">rg --context 2 <span class="one-hl-string">'\(defmacro with'</span> lisp/subr.el</code></pre>
+
+<p>We can also do this with <code class="one-hl one-hl-inline">rg.el</code>.  Let&apos;s go back to the buffer <code class="one-hl one-hl-inline">*rg*</code>
+(with the search that matches <code class="one-hl one-hl-inline">\(defmacro with</code> in the file
+<code class="one-hl one-hl-inline">lisp/subr.el</code>). Now we do the following:
+</p>
+
+<ol><li><p>we press <code class="one-hl one-hl-inline">m</code> (bound to <code class="one-hl one-hl-inline">rg-menu</code>) that pops up a menu,
+</p>
+</li>
+<li><p>we press <code class="one-hl one-hl-inline">-C</code>,
+</p>
+</li>
+<li><p>then in the minibuffer we see <code class="one-hl one-hl-inline">--context=</code>, we write <code class="one-hl one-hl-inline">2</code> and press <code class="one-hl one-hl-inline">RET</code>,
+</p>
+</li>
+<li><p>then we press <code class="one-hl one-hl-inline">g</code> (bound to <code class="one-hl one-hl-inline">rg-recompile</code>),
+</p>
+</li>
+</ol>
+
+<p>and this &quot;reruns&quot; the search adding the context around matches like
+this:
+</p>
+
+<pre><code class="one-hl one-hl-block">File: lisp/subr.el
+2090-
+2091-
+2092  (defmacro with-wrapper-hook (hook args &amp;rest body)
+2093-  "Run BODY, using wrapper functions from HOOK with additional ARGS.
+2094-HOOK is an abnormal hook.  Each hook function in HOOK \"wraps\"
+--
+3446-    (cancel-change-group ,handle))))))
+3447-
+3448  (defmacro with-undo-amalgamate (&amp;rest body)
+3449-  "Like `progn' but perform BODY with amalgamated undo barriers.
+3450-
+--
+4186-  `(internal--track-mouse (lambda () ,@body)))
+4187-
+4188  (defmacro with-current-buffer (buffer-or-name &amp;rest body)
+4189-  "Execute the forms in BODY with BUFFER-OR-NAME temporarily current.
+4190-BUFFER-OR-NAME must be a buffer or the name of an existing buffer.
+--
+4226-  (get-buffer-create (generate-new-buffer-name name) inhibit-buffer-hooks))
+4227-
+4228  (defmacro with-selected-window (window &amp;rest body)
+4229-  "Execute the forms in BODY with WINDOW as the selected window.
+4230-The value returned is the value of the last form in BODY.
+--
+
+... MORE HITS HERE</code></pre>
+
+<p>When I think that life is amazing and then I look at all the work
+that has already been done everywhere, I think wowwww, this is really
+amazing.
+</p>
+
+<p>I want to thank you all for all the great programs that lives with
+us thanks to your imagination and your work.
+</p>
+
+<p><code class="one-hl one-hl-inline">ripgrep</code> is fantastic.  <code class="one-hl one-hl-inline">Emacs</code> is fantastic.  BOOM you get the fantastic
+<code class="one-hl one-hl-inline">rg.el</code>.
+</p>
+
+<p>What can we add to this paradise?
+</p>
+
+<p>We can add org-mode to the party.
+</p>
+
+<p>Yes, if you try to open the following org link (in a org-mode buffer),
+Emacs will ask you to confirm if you want to execute this elisp form,
+and by answering yes the result of an <code class="one-hl one-hl-inline">rg</code> search will pops up in <code class="one-hl one-hl-inline">*rg*</code>
+buffer like we did previously (assuming Emacs source code is clone
+under the directory <code class="one-hl one-hl-inline">/tmp/emacs/</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">[[elisp:(rg-run "\\(defmacro with" "subr.el" "/tmp/emacs/" nil nil '("--context=2"))]]</code></pre>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+
+<div id="nav"><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">PREV</a><a href="/questions-and-answers/">RANDOM</a><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

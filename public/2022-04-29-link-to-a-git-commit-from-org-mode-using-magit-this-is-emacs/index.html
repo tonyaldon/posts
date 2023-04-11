@@ -1,0 +1,380 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Link to a git commit from Org mode using Magit | THIS IS EMACS</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Link to a git commit from Org mode using Magit | THIS IS EMACS</h1></div><div id="meta-info"><div>2022-04-29</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/uenjjs/link_to_a_git_commit_from_org_mode_using_magit/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div><p>Hey Org mode lovers,
+</p>
+
+<p>In the article <a href="https://en.wikipedia.org/wiki/Hyperlink">Hyperlink (wikipedia)</a> we can read that a hyperlink &quot;is
+a reference to data that the user can follow by clicking&quot;.
+</p>
+
+<p>Do you believe me if I tell you that with Org mode the data we refer
+to in a link can be a buffer in <code class="one-hl one-hl-inline">magit-revision-mode</code> (from <a href="https://github.com/magit/magit">magit</a>
+package) showing us a specific commit of some git repository?
+</p>
+
+<p>For a non-Emacs user, it&apos;s not that you can or can&apos;t believe it, it&apos;s
+just that this sentence doesn&apos;t make sense.
+</p>
+
+<p>But for me (a regular Emacs user like you), when I read that sentence
+I think:
+</p>
+
+<ol><li><p>Really!  Emacs, Org, Magit, Buffer, Link!  Integration.
+Non-context switching.  Maybe a bit of lisp.  Extensible.  Yes it
+makes sense.
+</p>
+</li>
+<li><p>AFTER ALL THIS IS EMACS!
+</p>
+</li>
+<li><p>Show me how to do it!
+</p>
+</li>
+</ol>
+
+<p>The key elements to doing so lie in:
+</p>
+
+<ol><li><p>Org mode provides the built-in <code class="one-hl one-hl-inline">elisp</code> type link that allows to
+evaluate any Elisp s-exps or to call any commands when we open this
+type of link with <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> (bound to <code class="one-hl one-hl-inline">C-c C-o</code> by default),
+</p>
+</li>
+<li><p>and that the command <code class="one-hl one-hl-inline">magit-show-commit</code> used to visit commits in
+magit buffers when we are on a commit line can also be used non
+interactively as a regular function where we have to provide it the
+commit hash and the repository (&quot;module&quot;).
+</p>
+</li>
+</ol>
+
+<p>First we look at the syntax of <code class="one-hl one-hl-inline">elisp</code> type links.
+</p>
+
+<p>A bracket link is a valid <code class="one-hl one-hl-inline">elisp</code> type link if it starts with the
+identifier (the type) <code class="one-hl one-hl-inline">elisp</code>, then is followed by a colon <code class="one-hl one-hl-inline">:</code> and then
+followed by either an Elisp form in parentheses or an Elisp command.
+</p>
+
+<p>For instance this link:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[elisp:(+ 1 1)]]</code></pre>
+
+<p>when followed with <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> prints the following in the echo
+area:
+</p>
+
+<pre><code class="one-hl one-hl-block">(+ 1 1) =&gt; 2</code></pre>
+
+<p>And this link:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[elisp:tetris]]</code></pre>
+
+<p>when followed with <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> starts the built-in Tetris.
+</p>
+
+<p>By default, the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L394">org-link-elisp-confirm-function</a> is set to the
+function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/fns.c#L2953">yes-or-no-p</a> which means that when we open an <code class="one-hl one-hl-inline">elisp</code> link we
+are asked for confirmation before executing the <code class="one-hl one-hl-inline">elisp</code> link.
+</p>
+
+<p>We can set this variable to <code class="one-hl one-hl-inline">nil</code> if we never want to be asked for
+confirmation.  But it might be dangerous (see the docstring of this
+variable for an example of a dangerous <code class="one-hl one-hl-inline">elisp</code> link that can remove all
+our user home directory).
+</p>
+
+<p>Besides setting <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L394">org-link-elisp-confirm-function</a> to <code class="one-hl one-hl-inline">nil</code> in order not to
+be asked confirmation everytime we open an <code class="one-hl one-hl-inline">elisp</code> link we can
+use the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L411">org-link-elisp-skip-confirm-regexp</a>.
+</p>
+
+<p>Indeed, any <code class="one-hl one-hl-inline">elisp</code> link that matches the regexp
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L411">org-link-elisp-skip-confirm-regexp</a> is executed without asking
+confirmation.
+</p>
+
+<p>For instance, setting up the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L411">org-link-elisp-skip-confirm-regexp</a> to <code class="one-hl one-hl-inline">&quot;tetris&quot;</code> lets us open the link
+<code class="one-hl one-hl-inline">[[elisp:tetris]]</code> without asking us confirmation.
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> org-link-elisp-skip-confirm-regexp <span class="one-hl-string">"tetris"</span>)</code></pre>
+
+<p>Now things are getting spicy :)
+</p>
+
+<p>We add the Magit layer to our <code class="one-hl one-hl-inline">elisp</code> link.
+</p>
+
+<p>The scenario is the following.  We are &quot;working&quot; on the Org repository
+that we assume is cloned under the directory <code class="one-hl one-hl-inline">/tmp/org-mode/</code>.  At some
+point we&apos;ve looked at the commit <code class="one-hl one-hl-inline">baffebbc3</code> that fixes a bug in
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L7104">org-get-heading</a> and we want to keep in our note a link to that commit.
+</p>
+
+<p>To do so we can use the following link:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[elisp:(magit-show-commit "baffebbc3" nil nil "/tmp/org-mode/")]]</code></pre>
+
+<p>Now, if we open that link with <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a>, we jump to the
+following buffer in <code class="one-hl one-hl-inline">magit-revision-mode</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-diff-context">baffebbc33e600ec7abfe5e54b60ea6753d4f272
+Author:     XXX <a href="mailto:XXX%40XXX.com">&lt;XXX@XXX.com&gt;</a>
+AuthorDate: Fri Apr 30 14:09:05 2021 +0200
+Commit:     YYY <a href="mailto:YYY%40YYY.com">&lt;YYY@YYY.com&gt;</a>
+CommitDate: Mon Apr 25 19:40:05 2022 +0800
+
+Parent:     240a14988 Fix typo: delete-duplicates &#8594; delete-dups
+Contained:  main
+Follows:    release_9.5.3 (433)
+
+Fix bug in org-get-heading
+
+Fixes #26, where fontification could make the matching and extraction of heading
+components fail.
+
+modified   lisp/org.el
+</span><span class="one-hl-diff-hunk-header">@@ -6167,8 +6167,9 @@</span><span class="one-hl-diff-function"> Return nil before first heading."</span>
+<span class="one-hl-diff-context">       (let ((case-fold-search nil))
+  (looking-at org-complex-heading-regexp)
+         ;; When using `org-fold-core--optimise-for-huge-buffers',
+</span><span class="one-hl-diff-indicator-removed">-</span><span class="one-hl-diff-removed">        ;; returned text </span><span class="one-hl-diff-removed"><span class="one-hl-diff-refine-removed">may</span></span><span class="one-hl-diff-removed"> be invisible.  Clear it up.
+</span><span class="one-hl-diff-indicator-removed">-</span><span class="one-hl-diff-removed">        (org-fold-core-remove-optimisation (match-beginning 0) (match-end 0))
+</span><span class="one-hl-diff-indicator-added">+</span><span class="one-hl-diff-added">        ;; returned text </span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">will</span></span><span class="one-hl-diff-added"> be invisible.  Clear it up.
+</span><span class="one-hl-diff-indicator-added">+</span><span class="one-hl-diff-added">        (</span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">save-match-data
+</span></span><span class="one-hl-diff-indicator-added"><span class="one-hl-diff-refine-added">+</span></span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">          (</span></span><span class="one-hl-diff-added">org-fold-core-remove-optimisation (match-beginning 0) (match-end 0</span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">)</span></span><span class="one-hl-diff-added">))
+</span><span class="one-hl-diff-context">         (let ((todo (and (not no-todo) (match-string 2)))
+        (priority (and (not no-priority) (match-string 3)))
+</span>        (headline (pcase (match-string 4)</code></pre>
+
+<p>TAKING NOTE WITH EMACS/ORG-MODE IS F***ING CRAZY.
+</p>
+
+<p>DO YOU AGREE???
+</p>
+
+<p>Now that we&apos;ve seen how to use <code class="one-hl one-hl-inline">elisp</code> type links with practical
+examples, let&apos;s see how they are implemented.
+</p>
+
+<p>Except for the reserved link types <code class="one-hl one-hl-inline">coderef</code>, <code class="one-hl one-hl-inline">custom-id</code>, <code class="one-hl one-hl-inline">fuzzy</code> and
+<code class="one-hl one-hl-inline">radio</code> we can defined new link types or modify an existing link types
+using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L778">org-link-set-parameters</a>.
+</p>
+
+<p>For instance the link type <code class="one-hl one-hl-inline">elisp</code> is defined like this in the file
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el">lisp/ol.el</a>
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-set-parameters <span class="one-hl-string">"elisp"</span> <span class="one-hl-ta-colon-keyword">:follow</span> #'org-link--open-elisp)</code></pre>
+
+<p>Fine, but what does it mean to define a link type?
+</p>
+
+<p>It means that we add an entry to the alist <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a> where
+we specify for a link type how we want the Org mode features related to
+links to behave regarding that type.
+</p>
+
+<p>With the default configuration the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a>
+looks like this (with some link types skipped):
+</p>
+
+<pre><code class="one-hl one-hl-block">((<span class="one-hl-string">"eww"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-eww-open <span class="one-hl-ta-colon-keyword">:store</span> org-eww-store-link)
+ ...
+ (<span class="one-hl-string">"info"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-info-open <span class="one-hl-ta-colon-keyword">:export</span> org-info-export <span class="one-hl-ta-colon-keyword">:store</span> org-info-store-link)
+ ...
+ (<span class="one-hl-string">"id"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-id-open)
+ ...
+ (<span class="one-hl-string">"shell"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-link--open-shell)
+ ...
+ (<span class="one-hl-string">"help"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-link--open-help <span class="one-hl-ta-colon-keyword">:store</span> org-link--store-help)
+ (<span class="one-hl-string">"file"</span> <span class="one-hl-ta-colon-keyword">:complete</span> org-link-complete-file)
+ (<span class="one-hl-string">"elisp"</span> <span class="one-hl-ta-colon-keyword">:follow</span> org-link--open-elisp))</code></pre>
+
+<p>For instance, the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a>
+tells org-mode that when we open an <code class="one-hl one-hl-inline">elisp</code> type link with
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> (bound to <code class="one-hl one-hl-inline">C-c C-o</code> by default) the function that
+finally opens the link is <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a> (the one after the
+keyword <code class="one-hl one-hl-inline">:follow</code> in the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a>).
+</p>
+
+<p>And for the <code class="one-hl one-hl-inline">info</code> type links (links to info node) the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a> tells org-mode:
+</p>
+
+<ol><li><p>to use the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol-info.el#L62">org-info-open</a> when we open <code class="one-hl one-hl-inline">info</code> type links,
+</p>
+</li>
+<li><p>to use the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol-info.el#L129">org-info-export</a> when we export open <code class="one-hl one-hl-inline">info</code> type
+links,
+</p>
+</li>
+<li><p>to use the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol-info.el#L49">org-info-store-link</a> when we store <code class="one-hl one-hl-inline">info</code> type
+links.
+</p>
+</li>
+</ol>
+
+<p>If we want to write our own type link we can look at the docstring of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a> to know what are the supported keys
+(<code class="one-hl one-hl-inline">:follow</code>, <code class="one-hl one-hl-inline">:export</code>, <code class="one-hl one-hl-inline">:store</code>, <code class="one-hl one-hl-inline">:activate-func</code>, <code class="one-hl one-hl-inline">:complete</code>,
+<code class="one-hl one-hl-inline">:display</code>, <code class="one-hl one-hl-inline">:face</code>, <code class="one-hl one-hl-inline">:help-echo</code>, <code class="one-hl one-hl-inline">:htmlize-link</code>, <code class="one-hl one-hl-inline">:keymap</code>, <code class="one-hl one-hl-inline">:mouse-face</code>)
+and what are their accepted values.
+</p>
+
+<p>Back to <code class="one-hl one-hl-inline">elisp</code> type links.
+</p>
+
+<p>When we call <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> (bound to <code class="one-hl one-hl-inline">C-c C-o</code> by default) without
+universal argument on the following <code class="one-hl one-hl-inline">elisp</code> type link:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[elisp:(+ 1 1)]]</code></pre>
+
+<p>in its body, <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> parses the link at point and
+&quot;delegates&quot; the work to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> passing it as
+first argument the parsed link like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open
+ '(link
+   (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"elisp"</span>
+    <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"(+ 1 1)"</span>
+    <span class="one-hl-ta-colon-keyword">:format</span> bracket
+    <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"elisp:(+ 1 1)"</span>
+    ...
+    <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph ... <span class="one-hl-ta-colon-keyword">:parent</span> (section ... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data ...)))))
+ nil <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">called without universal argument
+</span> )</code></pre>
+
+<p>Then the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> locally binds the variables <code class="one-hl one-hl-inline">type</code> and
+<code class="one-hl one-hl-inline">path</code> respectively to <code class="one-hl one-hl-inline">&quot;elisp&quot;</code> and <code class="one-hl one-hl-inline">&quot;(+ 1 1)&quot;</code> getting those values out of
+the link <code class="one-hl one-hl-inline">(link (:type &quot;elisp&quot; :path &quot;(+ 1 1)&quot; ...))</code> using the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L470">org-element-property</a>.
+</p>
+
+<p>Then as <code class="one-hl one-hl-inline">type</code> is not equal to any of the following types <code class="one-hl one-hl-inline">&quot;file&quot;</code>,
+<code class="one-hl one-hl-inline">&quot;coderef&quot;</code>, <code class="one-hl one-hl-inline">&quot;custom-id&quot;</code>, <code class="one-hl one-hl-inline">&quot;fuzzy&quot;</code> and <code class="one-hl one-hl-inline">&quot;radio&quot;</code> but equal to <code class="one-hl one-hl-inline">&quot;elisp&quot;</code> the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> decides to use the dedicated function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a> to open <code class="one-hl one-hl-inline">elisp</code> type links.
+</p>
+
+<p>This is done by locally binding <code class="one-hl one-hl-inline">f</code> to <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a> retrieving
+this value using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L771">org-link-get-parameter</a> which is a thin
+wrapper around the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L89">org-link-parameters</a> as we can see in the
+following code snippet
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-get-parameter</span> (type key)
+  <span class="one-hl-doc">"..."</span>
+  (plist-get (cdr (assoc type org-link-parameters)) key))</code></pre>
+
+<p>and as <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a> is a function that accepts two arguments,
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> finally returns with the following call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(funcall 'org-link--open-elisp <span class="one-hl-string">"(+ 1 1)"</span> nil)</code></pre>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-open</span> (link <span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">let</span> ((type (org-element-property <span class="one-hl-ta-colon-keyword">:type</span> link))
+        (path (org-element-property <span class="one-hl-ta-colon-keyword">:path</span> link)))
+    (<span class="one-hl-keyword">pcase</span> type
+      (<span class="one-hl-string">"file"</span>
+       ...)
+      ((<span class="one-hl-keyword">or</span> <span class="one-hl-string">"coderef"</span> <span class="one-hl-string">"custom-id"</span> <span class="one-hl-string">"fuzzy"</span> <span class="one-hl-string">"radio"</span>)
+       ...)
+      (_
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Look for a dedicated "follow" function in custom links.
+</span>       (<span class="one-hl-keyword">let</span> ((f (org-link-get-parameter type <span class="one-hl-ta-colon-keyword">:follow</span>)))
+         (<span class="one-hl-keyword">when</span> (functionp f)
+           <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Function defined in `</span><span class="one-hl-comment"><span class="one-hl-constant">:follow</span></span><span class="one-hl-comment">' parameter may use a single
+</span>           <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">argument, as it was mandatory before Org 9.4.  This is
+</span>           <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">deprecated, but support it for now.
+</span>           (<span class="one-hl-keyword">condition-case</span> nil
+               (funcall (org-link-get-parameter type <span class="one-hl-ta-colon-keyword">:follow</span>) path arg)
+             (wrong-number-of-arguments
+              (funcall (org-link-get-parameter type <span class="one-hl-ta-colon-keyword">:follow</span>) path)))))))))</code></pre>
+
+<p>Now we are left with the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a>.
+</p>
+
+<p>Assuming we answer <code class="one-hl one-hl-inline">yes</code> to the question raised by calling
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L394">org-link-elisp-confirm-function</a> in the condition of the <code class="one-hl one-hl-inline">if</code> form, the
+THEN part of the <code class="one-hl one-hl-inline">if</code> is evaluated.
+</p>
+
+<p>As the <code class="one-hl one-hl-inline">path</code> equal to <code class="one-hl one-hl-inline">&quot;(+ 1 1)&quot;</code> starts by a left parentheses <code class="one-hl one-hl-inline">(</code>, the
+string <code class="one-hl one-hl-inline">&quot;(+ 1 1)&quot;</code> is &quot;transformed&quot; into a lisp object by the function
+<code class="one-hl one-hl-inline">read</code>, then is evaluted by the function <code class="one-hl one-hl-inline">eval</code>, and its result is
+substituted in the second placeholder <code class="one-hl one-hl-inline">%s</code> in the string of the
+<code class="one-hl one-hl-inline">message</code> function.
+</p>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1318">org-link--open-elisp</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link--open-elisp</span> (path _)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">if</span> (...)
+      (message <span class="one-hl-string">"%s =&gt; %s"</span> path
+               (<span class="one-hl-keyword">if</span> (eq ?\( (string-to-char path))
+                   (eval (read path))
+                 (call-interactively (read path))))
+    (<span class="one-hl-warning">user-error</span> <span class="one-hl-string">"Abort"</span>)))</code></pre>
+
+<p>And this is how the message <code class="one-hl one-hl-inline">(+ 1 1) =&gt; 2</code> is printed in the echo area
+when we call <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> on top of the <code class="one-hl one-hl-inline">elisp</code> type link <code class="one-hl one-hl-inline">[[elisp:(+
+1 1)]]</code>.
+</p>
+
+<p>WE ARE DONE!!!
+</p>
+
+<p>If this is the first time you have seen the <code class="one-hl one-hl-inline">read</code> and <code class="one-hl one-hl-inline">eval</code> functions,
+you may be interested in these examples:
+</p>
+
+<pre><code class="one-hl one-hl-block">(read <span class="one-hl-string">"(+ 1 2)"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(+ 1 2)
+</span>(type-of (read <span class="one-hl-string">"(+ 1 2)"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">cons
+</span>(functionp (read <span class="one-hl-string">"(+ 1 2)"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">nil
+</span>(type-of (eval (read <span class="one-hl-string">"(+ 1 2)"</span>))) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">integer
+</span>
+(read <span class="one-hl-string">"(lambda () (+ 1 2))"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">(lambda nil (+ 1 2))
+</span>(type-of (read <span class="one-hl-string">"(lambda () (+ 1 2))"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">cons
+</span>(functionp (read <span class="one-hl-string">"(lambda () (+ 1 2))"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">t
+</span>(type-of (eval (read <span class="one-hl-string">"(lambda () (+ 1 2))"</span>))) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">cons
+</span>
+(read <span class="one-hl-string">"foo"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">foo
+</span>(type-of (read <span class="one-hl-string">"foo"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">symbol
+</span>(type-of (eval (read <span class="one-hl-string">"foo"</span>))) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">error: (void-variable foo)
+</span>
+(read <span class="one-hl-string">"\"bar\""</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"bar"
+</span>(type-of (read <span class="one-hl-string">"\"bar\""</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">string
+</span>(type-of (eval (read <span class="one-hl-string">"\"bar\""</span>))) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">string</span></code></pre>
+</div>
+
+<div id="nav"><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">PREV</a><a href="/2022-04-22-programming-with-elisp-is-magic/">RANDOM</a><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

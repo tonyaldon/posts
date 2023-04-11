@@ -1,0 +1,358 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Did you know that Org links in property drawers are not links?</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Did you know that Org links in property drawers are not links?</h1></div><div id="meta-info"><div>2022-04-09</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/tznia8/did_you_know_that_org_links_in_property_drawers/">comment on reddit</a></div>/<div>org-mode revision: 96d91bea658c</div></div><div><p>Wait a minute!  Are you telling me that the URL
+<code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> used as property value in a property drawer
+is not a link?
+</p>
+
+<p>Yes!
+</p>
+
+<p>Even if clicking the URL opens it in my browser.
+</p>
+
+<p>Yes!
+</p>
+
+<p>Even if the URL is displayed like any other links in the buffer (using
+the face <code class="one-hl one-hl-inline">org-link</code>).
+</p>
+
+<p>Yes!
+</p>
+
+<p>But, if the URL <code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> is used in a paragraph, it
+is a link.
+</p>
+
+<p>Yes!
+</p>
+
+<p>WHY?
+</p>
+
+<p>Because, while in both cases, in a property drawer and in a paragraph,
+the URL <code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> is matched by the regexp
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L517">org-link-any-re</a>:
+</p>
+
+<ol><li><p>in a property drawer (specifically in a <code class="one-hl one-hl-inline">node-property</code>), the URL
+<code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> is not parsed as a <code class="one-hl one-hl-inline">link</code> object by
+the Org parser (but only as the <code class="one-hl one-hl-inline">:value</code> of the <code class="one-hl one-hl-inline">node-property</code> object
+containg it) and,
+</p>
+</li>
+<li><p>in a paragraph, the URL <code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> is parsed as a
+<code class="one-hl one-hl-inline">link</code> object by the Org parser.
+</p>
+</li>
+</ol>
+
+<p>THIS IS THE ORG PARSER THAT DICTATES THE RULES :)
+</p>
+
+<p>END!!!
+</p>
+
+<p>Maybe not.
+</p>
+
+<p>Let&apos;s build some examples to get an idea of this difference and what it
+implies.
+</p>
+
+<p>To falicilate our discussion let&apos;s call:
+</p>
+
+<ol><li><p>R-LINKS the parts of an org-mode buffer that match the regexp
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L517">org-link-any-re</a>,
+</p>
+</li>
+<li><p>P-LINKS the parts of an org-mode buffer that are parsed as <code class="one-hl one-hl-inline">link</code>
+objects by the Org parser.
+</p>
+</li>
+</ol>
+
+<p>In an org-mode buffer, the parts that match the regexp
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L517">org-link-any-re</a>, the R-LINKS, are all:
+</p>
+
+<ol><li><p>&quot;activated&quot;, meaning they have there text properties set by the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L5171">org-activate-links</a> (triggered by <code class="one-hl one-hl-inline">jit-lock</code> mechanism),
+</p>
+</li>
+<li><p>and depending on the place of the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L5171">org-activate-links</a> in
+the let binded list <code class="one-hl one-hl-inline">org-font-lock-extra-keywords</code> in the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L5663">org-set-font-lock-defaults</a> (used to set font lock defaults for the
+current buffer), the face of those parts is either the face
+<code class="one-hl one-hl-inline">org-link</code>, another face or <code class="one-hl one-hl-inline">org-link</code>&apos;s face merged with another
+face.
+</p>
+</li>
+</ol>
+
+<p>For instance, we can look at the text properties of the URL
+<code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> used in different places (comment, property
+drawer and paragraph) in the following org-mode buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block"># Worg's URL in a comment: https://orgmode.org/worg/
+
+* Heading
+:PROPERTIES:
+:MY_URL: https://orgmode.org/worg/
+:END:
+
+The same URL to Worg in a paragraph: https://orgmode.org/worg/.</code></pre>
+
+<p>by evaluating (with <code class="one-hl one-hl-inline">pp-eval-expression</code>) the form
+</p>
+
+<pre><code class="one-hl one-hl-block">(text-properties-at (point))</code></pre>
+
+
+<p>with the point on top of each URL.
+</p>
+
+<p>We obtains the 3 following lists:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">URL in comment
+</span>(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face font-lock-comment-face
+ org-category <span class="one-hl-string">"links"</span>
+ font-lock-fontified t
+ help-echo <span class="one-hl-string">"LINK: https://orgmode.org/worg/"</span>
+ fontified t
+ htmlize-link (<span class="one-hl-ta-colon-keyword">:uri</span> <span class="one-hl-string">"https://orgmode.org/worg/"</span>))
+
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">URL in a property drawer
+</span>(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face org-link
+ org-category <span class="one-hl-string">"links"</span>
+ help-echo <span class="one-hl-string">"LINK: https://orgmode.org/worg/"</span>
+ fontified t
+ htmlize-link (<span class="one-hl-ta-colon-keyword">:uri</span> <span class="one-hl-string">"https://orgmode.org/worg/"</span>)
+ rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link))
+
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">URL in a paragraph
+</span>(font-lock-multiline t
+ keymap (keymap
+         (follow-link . mouse-face)
+         (mouse-3 . org-find-file-at-mouse)
+         (mouse-2 . org-open-at-mouse))
+ mouse-face highlight
+ face org-link
+ org-category <span class="one-hl-string">"links"</span>
+ help-echo <span class="one-hl-string">"LINK: https://orgmode.org/worg/"</span>
+ fontified t
+ htmlize-link (<span class="one-hl-ta-colon-keyword">:uri</span> <span class="one-hl-string">"https://orgmode.org/worg/"</span>)
+ rear-nonsticky (mouse-face highlight keymap invisible intangible help-echo org-linked-text htmlize-link))</code></pre>
+
+<p>We observe that:
+</p>
+
+<ol><li><p>those 3 URLs can be open with <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8683">org-open-at-mouse</a> by clicking
+(with <code class="one-hl one-hl-inline">mouse-2</code>) them (due to the text property <code class="one-hl one-hl-inline">keymap</code>),
+</p>
+</li>
+<li><p>when we over the mouse on them (the 3), we see the help echo
+showing <code class="one-hl one-hl-inline">LINK: https://orgmode.org/worg/</code>,
+</p>
+</li>
+<li><p>the face (with Emacs default settings) of the URL in the comment is
+<code class="one-hl one-hl-inline">font-lock-comment-face</code>, and the face of the URL in the property
+drawer and in the paragraph have the same value, the face
+<code class="one-hl one-hl-inline">org-link</code>.
+</p>
+</li>
+</ol>
+
+<p>Now, if we parse (with the Org parser) the same previous org-mode
+buffer by evaluating (with <code class="one-hl one-hl-inline">pp-eval-expression</code>) the form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-element-parse-buffer)</code></pre>
+
+
+<p>we obtain the following structure (some parts are skipped):
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-data
+ (...)
+ (section
+  (...)
+  (comment
+   (...
+    <span class="one-hl-ta-colon-keyword">:value</span> <span class="one-hl-string">"Worg's URL in a comment: https://orgmode.org/worg/"</span>
+    ...)))
+ (headline
+  (...)
+  (section
+   (...)
+   (property-drawer
+    (...)
+    (node-property
+     (<span class="one-hl-ta-colon-keyword">:key</span> <span class="one-hl-string">"MY_URL"</span>
+      <span class="one-hl-ta-colon-keyword">:value</span> <span class="one-hl-string">"https://orgmode.org/worg/"</span>
+      ...)))
+   (paragraph
+    (...)
+    #(<span class="one-hl-string">"The same URL to Worg in a paragraph: "</span> 0 37 (<span class="one-hl-ta-colon-keyword">:parent</span> #3))
+    (link
+     (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"https"</span>
+      <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"//orgmode.org/worg/"</span>
+      <span class="one-hl-ta-colon-keyword">:format</span> plain
+      <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"https://orgmode.org/worg/"</span>
+      <span class="one-hl-ta-colon-keyword">:application</span> nil
+      <span class="one-hl-ta-colon-keyword">:search-option</span> nil
+      ...))
+    #(<span class="one-hl-string">".\n"</span> 0 2 (<span class="one-hl-ta-colon-keyword">:parent</span> #3))))))</code></pre>
+
+<p>We observe that the only URL that is parsed as a <code class="one-hl one-hl-inline">link</code> object is the
+URL inside the paragraph.  The others are values of the property
+<code class="one-hl one-hl-inline">:value</code> of a <code class="one-hl one-hl-inline">comment</code> element for the first one and a <code class="one-hl one-hl-inline">node-property</code>
+element for the second one.
+</p>
+
+<p>So, some R-LINKS are not P-LINKS.
+</p>
+
+<p>Now, if we look at the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a>
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-element-link-parser</span> ()
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">no-object</span>
+    (<span class="one-hl-keyword">let</span> (...)
+      (<span class="one-hl-keyword">cond</span>
+       ((<span class="one-hl-keyword">and</span> org-target-link-regexp
+             (<span class="one-hl-keyword">save-excursion</span> (<span class="one-hl-keyword">or</span> (bolp) (backward-char))
+                             (looking-at org-target-link-regexp)))
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+       ((looking-at org-link-bracket-re)
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+       ((looking-at org-link-plain-re)
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+       ((looking-at org-link-angle-re)
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+       (t (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">no-object</span> nil)))
+      (list 'link (list ...)))))</code></pre>
+
+<p>which is responsible to parse <code class="one-hl one-hl-inline">link</code> objects, and we look at the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L790">org-link-make-regexps</a> which is responsible to set the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L517">org-link-any-re</a> (among other link related variables):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-make-regexps</span> ()
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">let</span> (...)
+    (<span class="one-hl-keyword">setq</span>
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>     org-link-any-re (concat <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">"</span> org-link-bracket-re <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">|</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">"</span>
+                             org-link-angle-re <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">|</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">"</span>
+                             org-link-plain-re <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">"</span>))))</code></pre>
+
+<p>we see that, except for radio target links (<code class="one-hl one-hl-inline">&lt;&lt;...&gt;&gt;</code>), P-LINKS are
+also R-LINKS.
+</p>
+
+<p>So someone who implements a command that operates on &quot;links&quot; must
+decide:
+</p>
+
+<ol><li><p>whether the command is aimed at P-LINKS only (which is the case of
+the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1397">org-next-link</a> bound by default to <code class="one-hl one-hl-inline">C-c C-x C-n</code>),
+</p>
+</li>
+<li><p>or at all R-LINKS more broadly (which is the case of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> bound by default to <code class="one-hl one-hl-inline">C-c C-o</code>).
+</p>
+</li>
+</ol>
+
+<p>We can check this by calling once the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1397">org-next-link</a> with the
+point at the beginning of the previous org-mode buffer.  We see that
+the point moves to the third URL in the buffer, the only one that is a
+P-LINK.
+</p>
+
+<p>And if we call the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> with the point on each
+URL, we see that the URL <code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> is open 3 times in
+our browser.  This is because the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> provides
+support for R-LINKS that are not P-LINKS.
+</p>
+
+<p>We can see this by looking at the source:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-open-at-point</span> (<span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"P"</span>)
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  (<span class="one-hl-keyword">unless</span> (run-hook-with-args-until-success 'org-open-at-point-functions)
+    (<span class="one-hl-keyword">let*</span> ((context
+            (org-element-lineage
+             (org-element-context)
+             '(citation citation-reference clock comment comment-block
+                        footnote-definition footnote-reference headline
+                        inline-src-block inlinetask keyword link node-property
+                        planning src-block timestamp)
+             t))
+           (type (org-element-type context))
+           ...)
+      (<span class="one-hl-keyword">cond</span>
+       ((not type) (<span class="one-hl-warning">user-error</span> <span class="one-hl-string">"No link found"</span>))
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">No valid link at point.  For convenience, look if something
+</span>       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">looks like a link under point in some specific places.
+</span>       ((memq type '(comment comment-block node-property keyword))
+        (call-interactively #'org-open-at-point-global))
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       ((eq type 'link) (org-link-open context arg))
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       (t (<span class="one-hl-warning">user-error</span> <span class="one-hl-string">"No link found"</span>)))))
+  (run-hook-with-args 'org-follow-link-hook))</code></pre>
+
+<p>Specifically, the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>, for the R-LINKS that are
+part of one of the following org elements <code class="one-hl one-hl-inline">comment</code>, <code class="one-hl one-hl-inline">comment-block</code>,
+<code class="one-hl one-hl-inline">node-property</code>, <code class="one-hl one-hl-inline">keyword</code>, delegate the action to the command
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8906">org-open-at-point-global</a>.
+</p>
+
+
+<p>If you want to know more about the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> you can
+read this post: <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a>
+</p>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+
+<div id="nav"><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">PREV</a><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">RANDOM</a><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

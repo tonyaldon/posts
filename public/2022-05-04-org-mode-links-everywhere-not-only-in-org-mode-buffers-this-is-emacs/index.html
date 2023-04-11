@@ -1,0 +1,279 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</h1></div><div id="meta-info"><div>2022-05-04</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/ui8eiq/orgmode_links_everywhere_not_only_in_orgmode/">comment on reddit</a></div>/<div>emacs revision: de7901abbc21</div>/<div>org-mode revision: af6f1298b6f6</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-e47dda4473">Org links everywhere</a></li>
+<li><a href="#one-4ed71d95ff">How does org-open-at-point-global work?</a></li>
+<li><a href="#one-a0a7fda35d">org-open-at-point-global and link abbreviations</a></li>
+</ul>
+</div></div></div><div><p>Hey Emacsers,
+</p>
+
+<p>What a great day to talk about EMACS :)
+</p>
+
+<p>Let&apos;s set the scene!
+</p>
+
+<p>We&apos;ve just written a new command named <code class="one-hl one-hl-inline">my-new-command</code> that we&apos;ve added
+to our init file <code class="one-hl one-hl-inline">~/.emacs.d/init.el</code> (or whatever init file your are
+using except org-mode file).
+</p>
+
+<p>To write our new command we had to look at the help of the macro <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/emacs-lisp/pcase.el#L93">pcase</a>
+and the elisp info node &quot;Current Buffer&quot;.
+</p>
+
+<p>Now let&apos;s say we want to keep the links to these help and info
+buffers in comments near to the definition of our new command.
+</p>
+
+<p>Is is possible?  How do we do that?
+</p>
+</div>
+
+<div><h2 id="one-e47dda4473">Org links everywhere</h2><div><p>One way to do that is to use the org-mode link syntax using the
+identifier <code class="one-hl one-hl-inline">info</code> and <code class="one-hl one-hl-inline">elisp</code> (described in the info node <span>org#Link Abbreviations</span>) like this:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">[[help:pcase]]
+</span><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">[[info:elisp#Current Buffer]]
+</span>(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">my-new-command</span> () <span class="one-hl-doc">"..."</span> ...)</code></pre>
+
+<p>Now we can use the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> to open those
+links.
+</p>
+
+<p>For instance, running <code class="one-hl one-hl-inline">M-x org-open-at-point-global</code> on top of the link
+<code class="one-hl one-hl-inline">[[help:pcase]]</code> (in the previous <code class="one-hl one-hl-inline">emacs-lisp</code> buffer) pops up the
+following help buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">pcase is a Lisp macro.
+
+(pcase EXP &amp;rest CASES)
+
+  Probably introduced at or before Emacs version 24.1.
+
+Evaluate EXP to get EXPVAL; try passing control to one of CASES.
+CASES is a list of elements of the form (PATTERN CODE...).
+For the first CASE whose PATTERN "matches" EXPVAL,
+evaluate its CODE..., and return the value of the last form.
+If no CASE has a PATTERN that matches, return nil.
+
+...MORE HERE...</code></pre>
+
+<p>For instance, running <code class="one-hl one-hl-inline">M-x org-open-at-point-global</code> on top of the link
+<code class="one-hl one-hl-inline">[[info:elisp#Current Buffer]]</code> (in the previous <code class="one-hl one-hl-inline">emacs-lisp</code> buffer) pops
+up the following info buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">File: elisp.info,  Node: Current Buffer,  Next: Buffer Names,  Prev: Buffer Basics,  Up: Buffers
+
+28.2 The Current Buffer
+=======================
+
+There are, in general, many buffers in an Emacs session.  At any time,
+one of them is designated the &#8220;current buffer&#8221;&#8212;the buffer in which most
+editing takes place.  Most of the primitives for examining or changing
+text operate implicitly on the current buffer (*note Text::).
+
+   Normally, the buffer displayed in the selected window is the current
+buffer, but this is not always so: a Lisp program can temporarily
+designate any buffer as current in order to operate on its contents,
+without changing what is displayed on the screen.  The most basic
+function for designating a current buffer is &#8216;set-buffer&#8217;.
+
+...MORE HERE...</code></pre>
+
+<p>Thanks to <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> we have org-mode links everywhere!
+</p>
+
+<p>What do you think about that &quot;feature&quot;?
+</p>
+
+<p>Isn&apos;t it super cool!?
+</p>
+</div>
+</div>
+
+<div><h2 id="one-4ed71d95ff">How does org-open-at-point-global work?</h2><div><p>To understand the mechanism of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a>, let&apos;s see
+what happens when we call <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> on top of the link
+<code class="one-hl one-hl-inline">[[help:pcase]]</code> in the previous <code class="one-hl one-hl-inline">emacs-lisp</code> buffer?
+</p>
+
+<p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> checks if point is inside a
+match of the regexp <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L517">org-link-any-re</a> (regular expression matching any
+link) using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-macs.el#L785">org-in-regexp</a>.
+</p>
+
+<p>As it is true (the regexp <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L517">org-link-any-re</a> is matched in the string
+<code class="one-hl one-hl-inline">[[help:pcase]]</code>), the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> returns with
+the call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open-from-string <span class="one-hl-string">"[[help:pcase]]"</span>)</code></pre>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-open-at-point-global</span> ()
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">interactive</span>)
+  (<span class="one-hl-keyword">let</span> (...)
+    (<span class="one-hl-keyword">cond</span> ((org-in-regexp org-link-any-re)
+           (org-link-open-from-string (match-string-no-properties 0)))
+          ...
+          (t (<span class="one-hl-warning">user-error</span> <span class="one-hl-string">"No link found"</span>)))))</code></pre>
+
+<p>So far, nothing impressive.  We match something at point and apply a
+function on that thing.
+</p>
+
+<p>True!
+</p>
+
+<p>The magic happens in the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1092">org-link-open-from-string</a> where we
+use a temporary buffer in org-mode where we insert the string
+<code class="one-hl one-hl-inline">[[help:case]]</code> and leverage the Org parser calling the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a> at the beginning of the inserted link which
+parses the link and returns this org object link:
+</p>
+
+<pre><code class="one-hl one-hl-block">(link
+ (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"help"</span>
+  <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"pcase"</span>
+  <span class="one-hl-ta-colon-keyword">:format</span> bracket
+  <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"help:pcase"</span>
+  <span class="one-hl-ta-colon-keyword">:application</span> nil
+  <span class="one-hl-ta-colon-keyword">:search-option</span> nil
+  <span class="one-hl-ta-colon-keyword">:begin</span> 1
+  <span class="one-hl-ta-colon-keyword">:end</span> 15
+  <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+  <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+  <span class="one-hl-ta-colon-keyword">:post-blank</span> 0))</code></pre>
+
+<p>which is passed to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> (which returns) like
+this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open
+ '(link (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"help"</span>
+         <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"pcase"</span>
+         <span class="one-hl-ta-colon-keyword">:format</span> bracket
+         <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"help:pcase"</span>
+         ...)))</code></pre>
+
+<p>And the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> &quot;takes care&quot; to open the help buffer
+describing the macro <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/emacs-lisp/pcase.el#L93">pcase</a>.
+</p>
+
+<p>Here is the definition of the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1092">org-link-open-from-string</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-open-from-string</span> (s <span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"Open a link in the string S, as if it was in Org mode.
+Optional argument is passed to `</span><span class="one-hl-doc"><span class="one-hl-constant">org-open-file</span></span><span class="one-hl-doc">' when S is
+a \"file\" link."</span>
+  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"sLink: \nP"</span>)
+  (<span class="one-hl-keyword">pcase</span> (<span class="one-hl-keyword">with-temp-buffer</span>
+           (<span class="one-hl-keyword">let</span> ((org-inhibit-startup nil))
+             (insert s)
+             (org-mode)
+             (goto-char (point-min))
+             (org-element-link-parser)))
+    (`nil (<span class="one-hl-warning">user-error</span> <span class="one-hl-string">"No valid link in %S"</span> s))
+    (link (org-link-open link arg))))</code></pre>
+</div>
+</div>
+
+<div><h2 id="one-a0a7fda35d">org-open-at-point-global and link abbreviations</h2><div><p>As we&apos;ve seen in the post <a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property
+drawers are not links?</a>, in org-mode &quot;links&quot; matched by the regexp
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L517">org-link-any-re</a> are not always treated as link by the Org parser.
+</p>
+
+<p>For instance, the URL <code class="one-hl one-hl-inline">https://orgmode.org/worg/</code> in the property drawer
+of the following org-mode buffer is not a link for the Org parser but
+the <code class="one-hl one-hl-inline">:value</code> of a <code class="one-hl one-hl-inline">node-property</code> element:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-org-level-1">* Heading</span>
+<span class="one-hl-org-drawer">:PROPERTIES:</span>
+<span class="one-hl-org-special-keyword">:MY_URL:</span>   <span class="one-hl-org-property-value"><span class="one-hl-org-link"><a href="https://orgmode.org/worg/">https://orgmode.org/worg</a><a href="https://orgmode.org/worg/">/</a></span></span>
+<span class="one-hl-org-drawer">:END:</span></code></pre>
+
+<p>And so when we call the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> (<code class="one-hl one-hl-inline">C-c C-o</code> by
+default) on a &quot;link&quot; in a property drawer, <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> won&apos;t
+call directly the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1035">org-link-open</a> on the <code class="one-hl one-hl-inline">node-property</code> element
+which is not a link.
+</p>
+
+<p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> falls back by calling interactively the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> with the point in the property
+drawer on top of the &quot;link&quot;.
+</p>
+
+<p>It works fine for every links but for link abbreviations when the
+abbreviation is set locally with <code class="one-hl one-hl-inline">#+LINK:</code> like in this example:
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-org-meta-line">#+LINK: worg   <a href="https://orgmode.org/worg/">https://orgmode.org/worg/</a></span>
+
+<span class="one-hl-org-level-1">* Heading</span>
+<span class="one-hl-org-drawer">:PROPERTIES:</span>
+<span class="one-hl-org-special-keyword">:MY_URL:</span> <span class="one-hl-org-property-value"><span class="one-hl-org-link"><a href="worg">worg</a></span></span>
+<span class="one-hl-org-drawer">:END:</span></code></pre>
+
+<p>This is normal if you look at implementation of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a>.
+</p>
+
+<p>As we&apos;ve seen above, the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a> creates a
+temporary org-mode buffer to parse the link.  So only the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L230">org-link-abbrev-alist</a> which is global is &quot;taken into account&quot;, not the
+local variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> which value is <code class="one-hl one-hl-inline">nil</code> in that
+case.
+</p>
+
+<p>Ignacio Casso and	Ihor Radchenko discussed this case in the org-mode
+mailing list in the thread:
+</p>
+
+<p><a href="https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00367.html">https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00367.html</a>
+</p>
+
+<p>And Ignacio Casso has a workaround for that case that uses advices:
+</p>
+
+<p><a href="https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00449.html">https://lists.gnu.org/archive/html/emacs-orgmode/2022-04/msg00449.html</a>
+</p>
+
+<p>If you are interested in link abbreviations you can read:
+</p>
+
+<ul><li><p>the info node <span>org#Link Abbreviations</span> and
+</p>
+</li>
+<li><p>the post <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations |
+... org-open-at-point</a>.
+</p>
+</li>
+</ul>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">PREV</a><a href="/2022-04-22-programming-with-elisp-is-magic/">RANDOM</a><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

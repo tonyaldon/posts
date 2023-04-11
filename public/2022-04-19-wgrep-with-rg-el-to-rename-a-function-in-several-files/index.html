@@ -1,0 +1,430 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</h1></div><div id="meta-info"><div>2022-04-19</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-90eb526e17">Initial state</a></li>
+<li><a href="#one-a12427b32f">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</a></li>
+<li><a href="#one-74108b7f6c">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</a></li>
+<li><a href="#one-7f51e11409">Make the changes automatic with wgrep-auto-save-buffer</a></li>
+<li><a href="#one-39fe73f81b">We could have used sed to do it non interactively</a></li>
+</ul>
+</div></div></div><div><p>Hey Emacsers,
+</p>
+
+<p>Have you ever needed to rename a function that appears in several files?
+</p>
+
+<p>Let&apos;s see how we can do this with Emacs.
+</p>
+
+<p>In the post <a href="/2022-04-15-ripgrep-emacs-rg-el/">the fantastic rg.el</a>, we&apos;ve seen that <code class="one-hl one-hl-inline">rg.el</code> is a nice Emacs
+interface to the cli <code class="one-hl one-hl-inline">ripgrep</code> which lets us do searches for regexp in
+files interactively with <code class="one-hl one-hl-inline">rg</code> command, get the results in a dedicated
+buffer <code class="one-hl one-hl-inline">*rg*</code> (by default), browse those matches, modify the searches
+parameters and modify the matched regexps, all from within the
+dedicated buffer <code class="one-hl one-hl-inline">*rg*</code>.
+</p>
+
+<p>In this post we see how to rename interactively a function that
+appears in several files using <a href="https://github.com/dajva/rg.el">rg.el</a> and <a href="https://github.com/mhayashi1120/Emacs-wgrep">wgrep</a>!
+</p>
+
+<p>Let&apos;s go ;)
+</p>
+</div>
+
+<div><h2 id="one-90eb526e17">Initial state</h2><div><p>Let assume that we are working on the <code class="one-hl one-hl-inline">org-mode</code> code base
+</p>
+
+<pre><code class="one-hl one-hl-block">git clone https://git.savannah.gnu.org/git/emacs/org-mode.git</code></pre>
+
+
+<p>and we want to rename the function <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> (that
+replaces link abbreviations in a given org link, read its <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/#org-link-expand-abbrev">dedicated
+section</a> in the post <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">search options and link abbreviations</a> for more
+details) into <code class="one-hl one-hl-inline">org-link-RENAMED</code> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">org-link-expand-abbrev  -&gt;  org-link-RENAMED</code></pre>
+
+
+<p>We use <code class="one-hl one-hl-inline">git</code> (in a terminal) to &quot;monitor&quot; our changes in the code base
+and to revert back to the initial state at the end of this
+&quot;demonstration&quot;.
+</p>
+
+<p>First, running <code class="one-hl one-hl-inline">git status</code> tells us that we are on the branch <code class="one-hl one-hl-inline">main</code>, we
+have nothing to commit and our working tree is clean:
+</p>
+
+<pre><code class="one-hl one-hl-block">git status</code></pre>
+
+<p>prints:
+</p>
+
+<pre><code class="one-hl one-hl-block">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</code></pre>
+
+<p>We can obtain the current commit (on which I&apos;m running the example,
+your ouptuts might differ a little bit if you&apos;re checked out at
+another commit) by running this following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git rev-parse --short HEAD</code></pre>
+
+<p>that prints:
+</p>
+
+<pre><code class="one-hl one-hl-block">685d78f63</code></pre>
+
+<p>Now that we are clear about the initial state, we can continue.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-a12427b32f">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</h2><div><p>Let&apos;s search for the regexp <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> (that exactly matches
+the string <code class="one-hl one-hl-inline">org-link-expand-abbrev</code>) in <code class="one-hl one-hl-inline">org-mode</code> directory using <code class="one-hl one-hl-inline">rg.el</code>:
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">M-x rg</code>,
+</p>
+</li>
+<li><p>write <code class="one-hl one-hl-inline">org-link-expand-abbrev</code>,
+</p>
+</li>
+<li><p>select the directory where <code class="one-hl one-hl-inline">org-mode</code> source code is,
+</p>
+</li>
+<li><p>choose <code class="one-hl one-hl-inline">all</code> as type file.
+</p>
+</li>
+</ol>
+
+<p>We get the following buffer named <code class="one-hl one-hl-inline">*rg*</code> (in the mode <code class="one-hl one-hl-inline">rg-mode</code>) that
+shows that we&apos;ve matched <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> twice, once in the
+file <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el">lisp/ol.el</a> and once in the file <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el">lisp/org-element.el</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-expand-abbrev (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-expand-abbrev
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59</code></pre>
+
+<p>Now in the buffer <code class="one-hl one-hl-inline">*rg*</code>, we press <code class="one-hl one-hl-inline">e</code> (bound to
+<code class="one-hl one-hl-inline">wgrep-change-to-wgrep-mode</code>) and two things happens:
+</p>
+
+<ol><li><p>the matched lines are now editable in the buffer <code class="one-hl one-hl-inline">*rg*</code> and,
+</p>
+</li>
+<li><p>the keymap <code class="one-hl one-hl-inline">wgrep-mode-map</code> becomes the local map.
+</p>
+</li>
+</ol>
+
+<p>Then, in <code class="one-hl one-hl-inline">*rg*</code> buffer, we transform <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> into
+<code class="one-hl one-hl-inline">org-link-RENAMED</code> the way we prefer (we have all the Emacs power, some
+of us might use <code class="one-hl one-hl-inline">query-replace</code>, other might use <a href="https://github.com/magnars/multiple-cursors.el">multiple-cursors.el</a>,
+other <a href="https://github.com/victorhge/iedit">iedit</a>, etc.).  And so <code class="one-hl one-hl-inline">*rg*</code> buffer looks like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-RENAMED (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-RENAMED
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59</code></pre>
+
+<p>Now that we&apos;ve finished editing the buffer <code class="one-hl one-hl-inline">*rg*</code>, we change our mind
+and finally decide that we no longer want to apply those changes to
+the corresponding files.
+</p>
+
+<p>No problem, we just have to hit <code class="one-hl one-hl-inline">C-c C-k</code> (bound to <code class="one-hl one-hl-inline">wgrep-abort-changes</code>)
+to abort the changes. We&apos;re back to the &quot;normal&quot; <code class="one-hl one-hl-inline">*rg*</code> buffer where
+nothing is editable and none of our changes have been taken into
+account:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-expand-abbrev (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-expand-abbrev
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59</code></pre>
+
+<p>At that point maybe you should (must) stop me and ask:
+</p>
+
+<pre><code class="one-hl one-hl-block">Are we really 'back to normal'?
+How can I be sure that my files haven't been compromised?
+Could you prove it?</code></pre>
+
+<p>As we started with a clean working tree in a <code class="one-hl one-hl-inline">git</code> repository with
+nothing to commit, we just have to run the command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git status</code></pre>
+
+<p>that prints:
+</p>
+
+<pre><code class="one-hl one-hl-block">On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean</code></pre>
+
+<p>This way, we can be sure that none of our files have been modified.
+</p>
+
+<p>Note that when we are editing the buffer <code class="one-hl one-hl-inline">*rg*</code>, until we explicitly
+run a command (like <code class="one-hl one-hl-inline">wgrep-abort-changes</code>) of <code class="one-hl one-hl-inline">wgrep</code> package, nothing is
+reflected in the file system (neither in the buffers that are visiting
+files that could be modified by <code class="one-hl one-hl-inline">wgrep</code>, for instance in our case
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el">lisp/ol.el</a> and <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el">lisp/org-element.el</a>).
+</p>
+</div>
+</div>
+
+<div><h2 id="one-74108b7f6c">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</h2><div><p>Now, let&apos;s modify again the <code class="one-hl one-hl-inline">*rg*</code> buffer, the same way as before
+(starting by pressing <code class="one-hl one-hl-inline">e</code> (bound to <code class="one-hl one-hl-inline">wgrep-change-to-wgrep-mode</code>) to make
+the buffer editable):
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: rg; default-directory: "/tmp/org-mode/" -*-
+rg started at Mon Apr 18 13:03:59
+
+/usr/bin/rg [...]
+
+File: [ol.el] lisp/ol.el
+1011  (defun org-link-RENAMED (link)
+
+File: [org-element.el] lisp/org-element.el
+3497  (setq raw-link (org-link-RENAMED
+
+rg finished (2 matches found) at Mon Apr 18 13:03:59</code></pre>
+
+<p>This time we want to save those changes in the buffer <code class="one-hl one-hl-inline">*rg*</code> and want
+to see them reflected in the corresponding files.
+</p>
+
+<p>To do so, we press <code class="one-hl one-hl-inline">C-x C-s</code> (bound to <code class="one-hl one-hl-inline">wgrep-finish-edit</code>) and we see in
+the echo area:
+</p>
+
+<pre><code class="one-hl one-hl-block">Successfully finished. (2 changed)</code></pre>
+
+
+<p>We might think that those changes have been reflected in the file
+sytem but this is not the case by default and we can check it as we
+did before by running the command <code class="one-hl one-hl-inline">git status</code>.
+</p>
+
+<p>In the buffer <code class="one-hl one-hl-inline">*rg*</code> that is no longer editable and that took into
+account those changes, we can do two things:
+</p>
+
+<ol><li><p>navigate between the matched lines that we&apos;ve changed pressing <code class="one-hl one-hl-inline">n</code> or
+<code class="one-hl one-hl-inline">p</code>.  We see the changes reflected in the buffers <code class="one-hl one-hl-inline">ol.el</code> (visiting
+the file <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el">lisp/ol.el</a>) and <code class="one-hl one-hl-inline">org-element.el</code> (visiting the file
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el">lisp/org-element.el</a>).  We also observe that those
+modifications are not saved in the buffers.  And if we change our
+mind again and we no longer want those changes to be applied, in
+each buffer we can &quot;manually&quot; undo those changes.
+</p>
+</li>
+<li><p>if we want those changes to be reflected in the file system, we can
+call the command <code class="one-hl one-hl-inline">wgrep-save-all-buffers</code>.
+</p>
+</li>
+</ol>
+
+<p>We decide to save all the buffers, and so we run:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x wgrep-save-all-buffers</code></pre>
+
+
+<p>This time our our changes have been reflected in the file system and
+we can check it by running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git status</code></pre>
+
+<p>that prints:
+</p>
+
+<pre><code class="one-hl one-hl-block">On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+  modified:   lisp/ol.el
+  modified:   lisp/org-element.el
+
+no changes added to commit (use "git add" and/or "git commit -a")</code></pre>
+
+<p>So the files <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el">lisp/ol.el</a> and <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el">lisp/org-element.el</a> have been modified.
+</p>
+
+<p>To be sure that those modifications correspond to our renaming, we
+can run the following command that prints the <code class="one-hl one-hl-inline">git</code> difference between
+the last commit and the unstaged modified files:
+</p>
+
+<pre><code class="one-hl one-hl-block">git diff</code></pre>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-diff-header">diff --git a/lisp/ol.el b/lisp/ol.el
+index 1b2bb9a9a..642dcb5da 100644
+--- </span><span class="one-hl-diff-header"><span class="one-hl-diff-file-header">a/lisp/ol.el</span></span><span class="one-hl-diff-header">
++++ </span><span class="one-hl-diff-header"><span class="one-hl-diff-file-header">b/lisp/ol.el</span></span><span class="one-hl-diff-header">
+</span><span class="one-hl-diff-hunk-header">@@ -1008,7 +1008,7 @@</span><span class="one-hl-diff-function"> and then used in capture templates."</span>
+<span class="one-hl-diff-context">     if store-func
+     collect store-func))
+</span>
+<span class="one-hl-diff-indicator-removed">-</span><span class="one-hl-diff-removed">(defun org-link-</span><span class="one-hl-diff-removed"><span class="one-hl-diff-refine-removed">expand-abbrev</span></span><span class="one-hl-diff-removed"> (link)
+</span><span class="one-hl-diff-indicator-added">+</span><span class="one-hl-diff-added">(defun org-link-</span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">RENAMED</span></span><span class="one-hl-diff-added"> (link)
+</span><span class="one-hl-diff-context">   "Replace link abbreviations in LINK string.
+ Abbreviations are defined in `org-link-abbrev-alist'."
+   (if (not (string-match "^\\([^:]*\\)\\(::?\\(.*\\)\\)?$" link)) link
+</span><span class="one-hl-diff-header">diff --git a/lisp/org-element.el b/lisp/org-element.el
+index 28339c1b8..cbfcfe074 100644
+--- </span><span class="one-hl-diff-header"><span class="one-hl-diff-file-header">a/lisp/org-element.el</span></span><span class="one-hl-diff-header">
++++ </span><span class="one-hl-diff-header"><span class="one-hl-diff-file-header">b/lisp/org-element.el</span></span><span class="one-hl-diff-header">
+</span><span class="one-hl-diff-hunk-header">@@ -3494,7 +3494,7 @@</span><span class="one-hl-diff-function"> Assume point is at the beginning of the link."</span>
+<span class="one-hl-diff-context">  ;; (e.g., insert [[shell:ls%20*.org]] instead of
+  ;; [[shell:ls *.org]], which defeats Org's focus on
+  ;; simplicity.
+</span><span class="one-hl-diff-indicator-removed">-</span><span class="one-hl-diff-removed"> (setq raw-link (org-link-</span><span class="one-hl-diff-removed"><span class="one-hl-diff-refine-removed">expand-abbrev</span></span><span class="one-hl-diff-removed">
+</span><span class="one-hl-diff-indicator-added">+</span><span class="one-hl-diff-added"> (setq raw-link (org-link-</span><span class="one-hl-diff-added"><span class="one-hl-diff-refine-added">RENAMED</span></span><span class="one-hl-diff-added">
+</span><span class="one-hl-diff-context">      (org-link-unescape
+       (replace-regexp-in-string
+</span>        "[ \t]*\n[ \t]*" " "</code></pre>
+
+<p>If we were in a refactoring phase in our development where we&apos;ve
+decided to rename <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> by <code class="one-hl one-hl-inline">org-link-RENAMED</code>, the next
+step would be to commit those changes.
+</p>
+
+<p>As this is not our case (and also to demonstrate how to revert back
+ALL the changes not commited that we&apos;ve made in a git repository) we
+prefer to revert back to the last commit by running the following
+command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git checkout .</code></pre>
+
+<p>And we can verify that we&apos;re back to our original state by running the
+following commands <code class="one-hl one-hl-inline">git status</code> and <code class="one-hl one-hl-inline">git rev-parse --short HEAD</code> as we did
+at the beginning of this post.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-7f51e11409">Make the changes automatic with wgrep-auto-save-buffer</h2><div><p>As written in the documentation of <code class="one-hl one-hl-inline">wgrep</code>, if we want to save the
+buffers automatically when we call <code class="one-hl one-hl-inline">wgrep-finish-edit</code> (and so apply
+the changes in the file system), we can set the variable
+<code class="one-hl one-hl-inline">wgrep-auto-save-buffer</code> to <code class="one-hl one-hl-inline">t</code> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> wgrep-auto-save-buffer t)</code></pre>
+</div>
+</div>
+
+<div><h2 id="one-39fe73f81b">We could have used sed to do it non interactively</h2><div><p>Renaming a function like we did before with <code class="one-hl one-hl-inline">rg.el</code> and <code class="one-hl one-hl-inline">wgrep</code> could also
+be done using the cli <code class="one-hl one-hl-inline">sed</code> (that can search some regexp in files
+(not only) and replace matches in-place with another string) combined
+with eiter <code class="one-hl one-hl-inline">find</code> or <code class="one-hl one-hl-inline">grep</code> to list the files we want to modify which are
+&quot;passed&quot; to <code class="one-hl one-hl-inline">sed</code> using the utility <code class="one-hl one-hl-inline">xargs</code>.
+</p>
+
+<p>Specifically, in <code class="one-hl one-hl-inline">org-mode</code> directory, we can replace the occurences of
+<code class="one-hl one-hl-inline">org-link-expand-abbrev</code> by <code class="one-hl one-hl-inline">org-link-RENAMED</code>, by running the following
+command line (in a terminal):
+</p>
+
+<pre><code class="one-hl one-hl-block">find . -type f -print0 | xargs -0 sed -i 's/org-link-expand-abbrev/org-link-RENAMED/g'</code></pre>
+
+
+<ol><li><p><code class="one-hl one-hl-inline">-print0</code> tells <code class="one-hl one-hl-inline">find</code> to separate file names with the null character,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">-0</code> tells <code class="one-hl one-hl-inline">xargs</code> that arguments are separated by the null character,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">-i</code> command line flag tells <code class="one-hl one-hl-inline">sed</code> to do the substitions (command <code class="one-hl one-hl-inline">sd</code> of
+<code class="one-hl one-hl-inline">sed</code>) of <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> by <code class="one-hl one-hl-inline">org-link-RENAMED</code> in-place and,
+</p>
+</li>
+<li><p>the flag <code class="one-hl one-hl-inline">g</code> (in <code class="one-hl one-hl-inline">&apos;s/.../.../g&apos;</code>) tells <code class="one-hl one-hl-inline">sed</code> to apply the replacement to
+all matches not just the first.
+</p>
+</li>
+</ol>
+
+<p>Instead of using <code class="one-hl one-hl-inline">find</code>, we could have use <code class="one-hl one-hl-inline">grep</code> to list not all the
+files in <code class="one-hl one-hl-inline">org-mode</code> directory but only those that contains
+<code class="one-hl one-hl-inline">org-link-expand-abbrev</code>.  And doing so, we would have made the same
+replacements.  Here is the full command line to run in a terminal
+that produces the same result:
+</p>
+
+<pre><code class="one-hl one-hl-block">grep -rlZ 'org-link-expand-abbrev' | xargs -0 sed -i 's/org-link-expand-abbrev/org-link-RENAMED/g'</code></pre>
+
+
+<ol><li><p><code class="one-hl one-hl-inline">r</code> flag tells <code class="one-hl one-hl-inline">grep</code> to search recursively in the current directory,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">l</code> flag tells <code class="one-hl one-hl-inline">grep</code> to print only file names (not the matches),
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">Z</code> flag tells grep to print the null characher after each file
+names,
+</p>
+</li>
+<li><p>after the pipe <code class="one-hl one-hl-inline">|</code>, it&apos;s the same as before.
+</p>
+</li>
+</ol>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-04-15-ripgrep-emacs-rg-el/">PREV</a><a href="/2022-02-26-org-mode-visibility-of-headings/">RANDOM</a><a href="/2022-04-22-programming-with-elisp-is-magic/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>org-store-link... powerful and flexible | THIS IS EMACS</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>org-store-link... powerful and flexible | THIS IS EMACS</h1></div><div id="meta-info"><div>2022-05-06</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/ujpq3s/orgstorelink_powerful_and_flexible_this_is_emacs/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-b2fd162796">org-store-link and org-link-keep-stored-after-insertion</a></li>
+<li><a href="#one-a2c242e14d">org-store-link and org-link-context-for-files</a></li>
+<li><a href="#one-54afcfee3a">org-store-link in org-mode files</a></li>
+<li><a href="#one-bf3caaca8a">built-in link types</a></li>
+<li><a href="#one-ec75d5d5b">help link type and the mechanism of org-store-link</a></li>
+<li><a href="#one-5bbcda2fe">Browse all the built-in link types that provide a store function</a></li>
+</ul>
+</div></div></div><div><p>Hey org-mode fans,
+</p>
+
+<p>In <a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">this post</a> we saw that we can open org-mode links everywhere, not only in
+org-mode buffers, thanks to the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8905">org-open-at-point-global</a>.
+</p>
+
+<p>Specifically, we demonstrated it with:
+</p>
+
+<ol><li><p>the link <code class="one-hl one-hl-inline">[[help:pcase]]</code> which links to the help buffer describing
+the macro <code class="one-hl one-hl-inline">pcase</code> and,
+</p>
+</li>
+<li><p>the link <code class="one-hl one-hl-inline">[[info:elisp#Current Buffer]]</code> which to the elisp info node
+&quot;Current Buffer&quot;.
+</p>
+</li>
+</ol>
+
+<p>We left aside two things:
+</p>
+
+<ol><li><p>How can we store a link in the org syntax to the specific &quot;place&quot;
+(in Emacs) we are visiting?
+</p>
+</li>
+<li><p>When we&apos;ve stored an org mode link with the command provided by
+org-mode, how can we insert that link in our current buffer?
+</p>
+</li>
+</ol>
+
+<p>The answers to those questions are:
+</p>
+
+<ol><li><p>using the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> (everywhere) to store the link,
+</p>
+</li>
+<li><p>using either the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1729">org-insert-link</a> if we want to insert the
+link in an Org buffer or the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1970">org-insert-link-global</a> if we
+want to insert the link in a any buffer.
+</p>
+</li>
+</ol>
+
+<p>For the rest of this post, we assume that we have cloned the org-mode
+repository under the directory <code class="one-hl one-hl-inline">/tmp/org-mode/</code>.
+</p>
+
+<p>Let&apos;s go!
+</p>
+</div>
+
+<div><h2 id="one-b2fd162796">org-store-link and org-link-keep-stored-after-insertion</h2><div><p>The command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> is &quot;smart enough&quot; to know what to do in
+many cases (<code class="one-hl one-hl-inline">dired-mode</code>, visiting an <code class="one-hl one-hl-inline">org-mode</code> file, visiting other type
+of files).
+</p>
+
+<p>For instance, if we are visiting the directory <code class="one-hl one-hl-inline">/tmp/org-mode/</code> in
+<code class="one-hl one-hl-inline">dired-mode</code> with the point under the the file <code class="one-hl one-hl-inline">CONTRIBUTE</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">/tmp/org-mode:
+doc
+etc
+.git
+lisp
+mk
+testing
+CONTRIBUTE
+COPYING
+.dir-locals.el
+.gitignore
+.gitmodules
+Makefile
+README
+README_ELPA
+request-assign-future.txt</code></pre>
+
+<p>calling <code class="one-hl one-hl-inline">M-x org-store-link</code> stores the link
+<code class="one-hl one-hl-inline">file:/tmp/org-mode/CONTRIBUTE</code> in the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a>
+like this (assuming <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a> was <code class="one-hl one-hl-inline">nil</code> before calling
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a>)
+</p>
+
+<pre><code class="one-hl one-hl-block">((<span class="one-hl-string">"file:/tmp/org-mode/CONTRIBUTE"</span> <span class="one-hl-string">"file:/tmp/org-mode/CONTRIBUTE"</span>))</code></pre>
+
+<p>Now, let&apos;s say we want to insert that link into an org-mode buffer.
+</p>
+
+<p>We call the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1729">org-insert-link</a> (bound to <code class="one-hl one-hl-inline">C-c C-l</code> by default),
+and we select the stored link <code class="one-hl one-hl-inline">file:/tmp/org-mode/CONTRIBUTE</code> which
+insert the following in our org buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">- <span class="one-hl-org-link"><a href="file:/tmp/org-mode/CONTRIBUTE">file:/tmp/org-mode/CONTRIBUTE</a></span></code></pre>
+
+<p>Let&apos;s try to insert it again.  We call the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1729">org-insert-link</a>
+but the link <code class="one-hl one-hl-inline">file:/tmp/org-mode/CONTRIBUTE</code> is no longer stored.
+</p>
+
+<p>We can inspect the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a> and see that its value is
+<code class="one-hl one-hl-inline">nil</code>.  This is normal because by default the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L473">org-link-keep-stored-after-insertion</a> is set to <code class="one-hl one-hl-inline">nil</code> and so once
+a link that was in <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a> is inserted, it is removed from
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a>.
+</p>
+
+<p>If we prefer to keep the links stored even after inserting them,
+we can set <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L473">org-link-keep-stored-after-insertion</a> to <code class="one-hl one-hl-inline">t</code> (default is <code class="one-hl one-hl-inline">nil</code>)
+like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> org-link-keep-stored-after-insertion t)</code></pre>
+</div>
+</div>
+
+<div><h2 id="one-a2c242e14d">org-store-link and org-link-context-for-files</h2><div><p>Let&apos;s continue with the default value.
+</p>
+
+<p>Another example.
+</p>
+
+<p>If we are visiting the file <code class="one-hl one-hl-inline">ol.el</code> with the point on the line defining
+the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L422">org-link-context-for-files</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defcustom</span> <span class="one-hl-variable-name">org-link-context-for-files</span> t
+  <span class="one-hl-doc">"Non-nil means file links from `</span><span class="one-hl-doc"><span class="one-hl-constant">org-store-link</span></span><span class="one-hl-doc">' contain context.
+..."</span>)</code></pre>
+
+<p>calling <code class="one-hl one-hl-inline">M-x org-store-link</code> stores the link
+<code class="one-hl one-hl-inline">&quot;file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t&quot;</code>
+with its description being <code class="one-hl one-hl-inline">nil</code> in the
+variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a> like this
+</p>
+
+<pre><code class="one-hl one-hl-block">((#(<span class="one-hl-string">"file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t"</span> ...)
+  nil))</code></pre>
+
+<p>Now, in the same Org buffer as above, in another list item, we call
+the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1729">org-insert-link</a> (bound to <code class="one-hl one-hl-inline">C-c C-l</code> by default):
+</p>
+
+<ol><li><p>then we select the stored link
+<code class="one-hl one-hl-inline">&quot;file:~/work/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t&quot;</code>
+</p>
+</li>
+<li><p>then we are asked in the minibuffer to provide a description for the
+link and we provide the description <code class="one-hl one-hl-inline">org-link-context-for-files</code>
+</p>
+</li>
+<li><p>finally the link is inserted as follow:
+</p>
+</li>
+</ol>
+
+<pre><code class="one-hl one-hl-block">- <span class="one-hl-org-link"><a href="file:/tmp/org-mode/CONTRIBUTE">file:/tmp/org-mode/CONTRIBUTE</a></span>
+- <span class="one-hl-org-link"><a href="file:/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t">org-link-context-for-files</a></span></code></pre>
+
+<p>At the previous step <code class="one-hl one-hl-inline">1)</code> we could have remove the search option
+(everything after the two colons <code class="one-hl one-hl-inline">::</code>) and the two colons <code class="one-hl one-hl-inline">::</code> if we only
+wanted to link to the file.
+</p>
+
+<p>If we never want the search option (the context) when storing a link
+to a file, we can set the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L422">org-link-context-for-files</a> to <code class="one-hl one-hl-inline">nil</code>
+(default value is <code class="one-hl one-hl-inline">t</code>) like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> org-link-context-for-files nil)</code></pre>
+
+<p>Note that in that case when we insert the file, we are not asked to
+provide a description.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-54afcfee3a">org-store-link in org-mode files</h2><div><p>If we use <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> in an org-mode file, the search option of the
+link to that file is picked &quot;wisely&quot; by the command depending of the
+position of the point (see <span>org#Search Options</span>).
+</p>
+</div>
+</div>
+
+<div><h2 id="one-bf3caaca8a">built-in link types</h2><div><p>The support of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> for the links we&apos;ve described so far
+are hard coded in <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a>.
+</p>
+
+<p>Beside the hard coded support for storing link, org-mode provides a
+mechanism to add new link types via the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L778">org-link-set-parameters</a> (we already talk about that subject in the
+post <a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit</a>).
+</p>
+
+<p>And by providing a specific function for storing links depending on
+the Emacs context we can use the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> to store
+those new link types.
+</p>
+
+<p>Org provides various built-in link types with support for storing them.
+</p>
+
+<p>We can list them (if you have added other link types with store
+functions, they will be listed too) by evaluating the following s-exp
+(which is just a variant of the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L983">org-store-link-functions</a>):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">cl-loop</span> for link in org-link-parameters
+         if (org-link-get-parameter (car link) <span class="one-hl-ta-colon-keyword">:store</span>)
+         collect (car link))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">("eww" "rmail" "mhe" "irc" "info" "gnus" "docview" "bibtex" "bbdb" "w3m" "help")</span></code></pre>
+</div>
+</div>
+
+<div><h2 id="one-ec75d5d5b">help link type and the mechanism of org-store-link</h2><div><p>Now we focus on the <code class="one-hl one-hl-inline">help</code> link type.
+</p>
+
+<p>It is define using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L778">org-link-set-parameters</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-set-parameters <span class="one-hl-string">"help"</span>
+                         <span class="one-hl-ta-colon-keyword">:follow</span> #'org-link--open-help
+                         <span class="one-hl-ta-colon-keyword">:store</span> #'org-link--store-help)</code></pre>
+
+<p>Specifically <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1347">org-link--store-help</a> is the function responsible to
+produce the links to help buffers when we call <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> in help
+buffers.
+</p>
+
+<p>How does this work?
+</p>
+
+<p>Let&apos;s say we are visiting the following help buffer of the macro <code class="one-hl one-hl-inline">pcase</code>
+and we call <code class="one-hl one-hl-inline">M-x org-store-link</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">pcase is a Lisp macro.
+
+(pcase EXP &amp;rest CASES)
+
+  Probably introduced at or before Emacs version 24.1.
+
+Evaluate EXP to get EXPVAL; try passing control to one of CASES.
+
+...MORE HERE...</code></pre>
+
+<p>As we call the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> without 2 or 3 universal
+arguments (<code class="one-hl one-hl-inline">C-u C-u</code> nor <code class="one-hl one-hl-inline">C-u C-u C-u</code>), the command <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> does
+the following.
+</p>
+
+<p>First, <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> calls all the defined store functions
+(<code class="one-hl one-hl-inline">(org-store-link-functions)</code>) and then
+</p>
+
+<ol><li><p>if they all return <code class="one-hl one-hl-inline">nil</code>, try to store the link with the hard coded
+support,
+</p>
+</li>
+<li><p>if only one, which we call <code class="one-hl one-hl-inline">F</code>, returns a non-nil value, use
+the <code class="one-hl one-hl-inline">:link</code> value and <code class="one-hl one-hl-inline">:description</code> value of the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L527">org-store-link-plist</a> (which has been set by the call to <code class="one-hl one-hl-inline">F</code>) to set
+the local variable <code class="one-hl one-hl-inline">link</code> and <code class="one-hl one-hl-inline">desc</code>,
+</p>
+</li>
+<li><p>if more than one returns a non-nil value (that means that various
+functions can handle/produce the link for the buffer (Emacs
+context) we are visiting), ask us via the minibuffer to choose the
+one we want to use and then use it to set the local variable <code class="one-hl one-hl-inline">link</code>
+and <code class="one-hl one-hl-inline">desc</code>.
+</p>
+</li>
+</ol>
+
+<p>As we are visiting the help buffer of the macro <code class="one-hl one-hl-inline">pcase</code> (and we only use
+the built-in link type offer by org-mode) we are in the second case.
+</p>
+
+<p>Specifically, the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1347">org-link--store-help</a> is the only one that
+returned a non-nil value.
+</p>
+
+<p>So the values of the variable <code class="one-hl one-hl-inline">link</code> and <code class="one-hl one-hl-inline">desc</code> is produced by the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1347">org-link--store-help</a> by setting the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L527">org-store-link-plist</a>.
+</p>
+
+<p>Finally, as we&apos;ve never stored that link before, the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> add it to the global variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L524">org-stored-links</a>
+evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">push</span> (list link desc) org-stored-links)</code></pre>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-store-link</span> (arg <span class="one-hl-type">&amp;optional</span> interactive?)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"P\np"</span>)
+  (org-load-modules-maybe)
+  (<span class="one-hl-keyword">if</span> (<span class="one-hl-keyword">and</span> (equal arg '(64)) (org-region-active-p))
+      ...
+    (<span class="one-hl-keyword">setq</span> org-store-link-plist nil)
+    (<span class="one-hl-keyword">let</span> (link cpltxt desc search custom-id agenda-link)
+      (<span class="one-hl-keyword">cond</span>
+       ((<span class="one-hl-keyword">and</span> (not (equal arg '(16)))
+             (<span class="one-hl-keyword">let</span> ((results-alist nil))
+               (<span class="one-hl-keyword">dolist</span> (f (org-store-link-functions))
+                 (<span class="one-hl-keyword">when</span> (funcall f)
+                   (<span class="one-hl-keyword">push</span> (cons f (copy-sequence org-store-link-plist))
+                         results-alist)))
+               (<span class="one-hl-keyword">pcase</span> results-alist
+                 (`nil nil)
+                 (`((,_ . ,_)) t)  <span class="one-hl-comment-delimiter">;</span><span class="one-hl-comment">single choice: nothing to do
+</span>                 (`((,name . ,_) . ,_)
+                  (apply #'org-link-store-props
+                         (cdr (assoc-string
+                               (completing-read
+                                (format <span class="one-hl-string">"Store link with (default %s): "</span> name)
+                                (mapcar #'car results-alist)
+                                nil t nil nil (symbol-name name))
+                               results-alist)))
+                  t))))
+        (<span class="one-hl-keyword">setq</span> link (plist-get org-store-link-plist <span class="one-hl-ta-colon-keyword">:link</span>))
+        (<span class="one-hl-keyword">setq</span> desc (<span class="one-hl-keyword">if</span> (plist-member org-store-link-plist <span class="one-hl-ta-colon-keyword">:description</span>)
+                       (plist-get org-store-link-plist <span class="one-hl-ta-colon-keyword">:description</span>)
+                     link)))
+       ...
+       (t (<span class="one-hl-keyword">setq</span> link nil)))
+      ...
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Store and return the link
+</span>      (<span class="one-hl-keyword">if</span> (not (<span class="one-hl-keyword">and</span> interactive? link))
+          ...
+        (<span class="one-hl-keyword">if</span> (member (list link desc) org-stored-links)
+            (message <span class="one-hl-string">"This link has already been stored"</span>)
+          (<span class="one-hl-keyword">push</span> (list link desc) org-stored-links)
+          (message <span class="one-hl-string">"Stored: %s"</span> (<span class="one-hl-keyword">or</span> desc link))
+          ...)
+        (car org-stored-links)))))</code></pre>
+
+<p>Now we just have to look at the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1347">org-link--store-help</a> which
+returns a non-nil value only if we call it when we are in <code class="one-hl one-hl-inline">help-mode</code>
+buffers as we can see below:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link--store-help</span> ()
+  <span class="one-hl-doc">"Store \"help\" type link."</span>
+  (<span class="one-hl-keyword">when</span> (eq major-mode 'help-mode)
+    (<span class="one-hl-keyword">let</span> ((symbol
+           (<span class="one-hl-keyword">save-excursion</span>
+             (goto-char (point-min))
+             <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">In case the help is about the key-binding, store the
+</span>             <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">function instead.
+</span>             (search-forward <span class="one-hl-string">"runs the command "</span> (line-end-position) t)
+             (read (current-buffer)))))
+      (org-link-store-props <span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"help"</span>
+                            <span class="one-hl-ta-colon-keyword">:link</span> (format <span class="one-hl-string">"help:%s"</span> symbol)
+                            <span class="one-hl-ta-colon-keyword">:description</span> nil))))</code></pre>
+
+<p>What is important to note is the call to the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L884">org-link-store-props</a> which set the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L527">org-store-link-plist</a> (by
+side effect) which is then used in the body of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1456">org-store-link</a>.
+</p>
+
+<p>Specifically, calling <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1347">org-link--store-help</a> in the help buffer
+of the macro <code class="one-hl one-hl-inline">pcase</code> set the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L527">org-store-link-plist</a> to the
+following plist:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"help"</span>
+ <span class="one-hl-ta-colon-keyword">:link</span> <span class="one-hl-string">"help:pcase"</span>
+ <span class="one-hl-ta-colon-keyword">:description</span> nil)</code></pre>
+
+<p>Finally to to store the link in the same Org buffer as above, in
+another list item, we call the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1729">org-insert-link</a> selecting the
+link to the <code class="one-hl one-hl-inline">pcase</code> help buffer leaving blanck the description, and we
+get:
+</p>
+
+<pre><code class="one-hl one-hl-block">- <span class="one-hl-org-link"><a href="file:/tmp/org-mode/CONTRIBUTE">file:/tmp/org-mode/CONTRIBUTE</a></span>
+- <span class="one-hl-org-link"><a href="file:/tmp/org-mode/lisp/ol.el::(defcustom org-link-context-for-files t">org-link-context-for-files</a></span>
+- <span class="one-hl-org-link"><a href="help:pcase">help:pcase</a></span></code></pre>
+</div>
+</div>
+
+<div><h2 id="one-5bbcda2fe">Browse all the built-in link types that provide a store function</h2><div><p>If we want to look at the implementation of all the built-in link
+types that provide a store function, we can use the built-in command
+<code class="one-hl one-hl-inline">rgrep</code> in org-mode repository (in our case cloned under the directory
+<code class="one-hl one-hl-inline">/tmp/org-mode/</code>) searching for the regexp <code class="one-hl one-hl-inline">:store</code> which pops up the
+following <code class="one-hl one-hl-inline">grep</code> buffer that we can navigate with the keys <code class="one-hl one-hl-inline">n</code> and <code class="one-hl one-hl-inline">p</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">-*- mode: grep; default-directory: "/tmp/org-mode/" -*-
+Grep started at Fri May  6 16:17:31
+
+find [...] -exec grep --color=auto -nH --null -e \:store \{\} +
+./lisp/ol.el:98:are, in this order, `:follow', `:export', and `:store', described
+./lisp/ol.el:121:`:store'
+./lisp/ol.el:1012:The functions are defined in the `:store' property of
+./lisp/ol.el:1033:     do (setq store-func (org-link-get-parameter (car link) :store))
+./lisp/ol.el:1389:                         :store #'org-link--store-help)
+./lisp/ol-w3m.el:49:(org-link-set-parameters "w3m" :store #'org-w3m-store-link)
+./lisp/ol-eww.el:55:       :store #'org-eww-store-link)
+./lisp/ol-irc.el:78:       :store #'org-irc-store-link
+./lisp/ol-bibtex.el:487:       :store #'org-bibtex-store-link)
+./lisp/ol-docview.el:56:       :store #'org-docview-store-link)
+./lisp/ol-eshell.el:34:      :store #'org-eshell-store-link)
+./lisp/ol-mhe.el:77:(org-link-set-parameters "mhe" :follow #'org-mhe-open :store #'org-mhe-store-link)
+./lisp/ol-rmail.el:48:       :store #'org-rmail-store-link)
+./lisp/ol-bbdb.el:222:       :store #'org-bbdb-store-link)
+./lisp/ol-info.el:46:      :store #'org-info-store-link)
+./lisp/ol-man.el:32:       :store #'org-man-store-link)
+./lisp/ol-gnus.el:84:      :store #'org-gnus-store-link)
+
+Grep finished with 17 matches found at Fri May  6 16:17:31</code></pre>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">PREV</a><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">RANDOM</a><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

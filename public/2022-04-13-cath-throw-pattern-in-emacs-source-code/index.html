@@ -1,0 +1,423 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</h1></div><div id="meta-info"><div>2022-04-13</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/">comment on reddit</a></div>/<div>emacs revision: de7901abbc21</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-94858ba552">The catch/throw pattern: handmade examples</a></li>
+<li><a href="#one-c95c76b461">The catch/throw pattern: real world examples</a>
+<ul>
+<li><a href="#one-67ff4d53a1">With dolist</a></li>
+<li><a href="#one-2eefdb0cc4">With re-search-forward</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div><div><p>Hey Elispers,
+</p>
+
+<p>Do you want to expand your Elisp toolbox?
+</p>
+
+<p>In this post we look at the <code class="one-hl one-hl-inline">catch/throw</code> pattern offered by Elisp that
+allows to do nonlocal exits with the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> that can be caught
+by the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> special form.
+</p>
+
+<p>For instance, in the following snippet, in a <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block:
+</p>
+
+<ol><li><p>we define a local list <code class="one-hl one-hl-inline">l</code>,
+</p>
+</li>
+<li><p>then we loop forever (<code class="one-hl one-hl-inline">(while t ...)</code>),
+</p>
+</li>
+<li><p>in this loop we generate a random (integer) number between <code class="one-hl one-hl-inline">0</code> and <code class="one-hl one-hl-inline">9</code>,
+</p>
+</li>
+<li><p>then:
+</p>
+<ul><li><p>if this number is not equal to <code class="one-hl one-hl-inline">1</code>, we add it to the list <code class="one-hl one-hl-inline">l</code> and we
+repeat,
+</p>
+</li>
+<li><p>and if it is equal to <code class="one-hl one-hl-inline">1</code>, the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> statement transfers the
+control to the enclosing <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> with the tag <code class="one-hl one-hl-inline">:one</code> (we leave out
+the <code class="one-hl one-hl-inline">while</code> loop and also the <code class="one-hl one-hl-inline">let</code> block) which returns immediately
+the builded list <code class="one-hl one-hl-inline">l</code> (last argument of the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> statement).
+</p>
+</li>
+</ul>
+</li>
+</ol>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:one</span>
+  (<span class="one-hl-keyword">let</span> (l)
+    (<span class="one-hl-keyword">while</span> t
+      (<span class="one-hl-keyword">setq</span> k (random 10))
+      (<span class="one-hl-keyword">if</span> (/= k 1) (<span class="one-hl-keyword">push</span> k l)
+        (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:one</span> l)))))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">(5 3 8 8 0 3)
+</span><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">these are pseudo-random numbers that depend on the seed
+</span><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">used by `</span><span class="one-hl-comment"><span class="one-hl-constant">random</span></span><span class="one-hl-comment">' on your running Emacs, so evaluting the
+</span><span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">preceding form can return something different on your machine.</span></code></pre>
+
+<p>Handmade examples are effective for discovering new things or
+remembering the syntax of known things.
+</p>
+
+<p>But when we have to write programs that solve &quot;real&quot; problems, having
+already been exposed to REAL WORLD examples is a competitive advantage.
+</p>
+
+<p>Indeed, REAL WORLD examples often provide &quot;standard methods&quot; to
+implement specific actions/tasks in given &quot;environments&quot;.
+</p>
+
+<p>In this post, we first present some handmade examples of the
+<code class="one-hl one-hl-inline">catch/throw</code> pattern and then we look at REAL WORLD examples of the
+<code class="one-hl one-hl-inline">catch/throw</code> pattern that we find in Emacs source code.
+</p>
+
+<p>Let&apos;s go!
+</p>
+</div>
+
+<div><h2 id="one-94858ba552">The catch/throw pattern: handmade examples</h2><div><p>In the info node about <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> and <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> (<span>elisp#Catch and Throw</span>),
+we can read:
+</p>
+
+<pre><code class="one-hl one-hl-block">Most control constructs affect only the flow of control within the
+construct itself.  The function &#8216;throw&#8217; is the exception to this rule of
+normal program execution: it performs a nonlocal exit on request.
+(There are other exceptions, but they are for error handling only.)
+&#8216;throw&#8217; is used inside a &#8216;catch&#8217;, and jumps back to that &#8216;catch&#8217;.</code></pre>
+
+<p>So with <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> inside <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> we can modify the flow of control.
+</p>
+
+<p>Let&apos;s see how with the following examples.
+</p>
+
+<p>We don&apos;t provide any explanation hoping that the evaluations in
+comments show how the flow of control has been modified.
+</p>
+
+<p>Note that if you read this post inside Emacs with org-mode, you can
+hit <code class="one-hl one-hl-inline">C-c &apos;</code> (<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/org.el#L17559">org-edit-special</a> by default) in the source block to
+open a dedicated <code class="one-hl one-hl-inline">emacs-lisp</code> buffer where you can modify and evaluate
+the examples the way you want as much as you need to be confident
+about <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> and <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a>.
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:foo</span>
+  'evaluated
+  (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:foo</span> (+ 2 2))
+  'not-evaluated) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">4
+</span>
+(<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:foo</span>
+  (<span class="one-hl-keyword">let</span> ((a-value (+ 3 3)))
+    'evaluated
+    (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:foo</span> a-value)
+    'not-evaluated)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">6
+</span>
+(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">foo</span>
+  'evaluated
+  (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">foo</span> 'from-throw)
+  'not-evaluated) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">from-throw
+</span>
+(<span class="one-hl-keyword">let</span> ((tag-catch 'foo)
+      (tag-throw 'foo))
+  (<span class="one-hl-keyword">catch</span> <span class="one-hl-constant">tag-catch</span>
+    'evaluated
+    (<span class="one-hl-keyword">throw</span> <span class="one-hl-constant">tag-throw</span> 'from-throw)
+    'not-evaluated)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">from-throw
+</span>
+(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">foo</span>
+  'evaluated-1
+  (<span class="one-hl-keyword">when</span> nil (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">foo</span> 'from-throw))
+  'evaluated-2) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">evaluated-2
+</span>
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">nested `</span><span class="one-hl-comment"><span class="one-hl-constant">catch</span></span><span class="one-hl-comment">'
+</span>(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">foo</span>
+  'evaluated-1
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">bar</span>
+    'evaluated-2
+    (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">foo</span> 'from-throw)
+    'not-evaluated)
+  'not-evaluated) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">from-throw
+</span>
+(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">foo</span>
+  'evaluated-1
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">bar</span>
+    'evaluated-2
+    (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">bar</span> 'from-throw)
+    'not-evaluated)
+  'evaluated-3) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">evaluated-3
+</span>
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">`</span><span class="one-hl-comment"><span class="one-hl-constant">throw</span></span><span class="one-hl-comment">' called from another function
+</span>(<span class="one-hl-keyword">let</span> ((f-throw (<span class="one-hl-keyword">lambda</span> (x) (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:foo</span> x))))
+  (<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:foo</span> (funcall f-throw <span class="one-hl-ta-colon-keyword">:bar</span>))) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">:bar
+</span>
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">raise an error
+</span>(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">foo</span>
+  'evaluated
+  (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">bar</span> t)
+  'not-evaluated) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">error: (no-catch bar t)</span></code></pre>
+</div>
+</div>
+
+<div><h2 id="one-c95c76b461">The catch/throw pattern: real world examples</h2><div><p>There are more than 1000 <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> blocks in Emacs source code.
+</p>
+
+<p>Let&apos;s pick some of them that seems to represent in some way the
+&quot;common&quot; usage of <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> blocks.
+</p>
+
+<p>Almost all those <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> blocks follow the same structure:
+</p>
+
+<ol><li><p>enter in a <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block,
+</p>
+</li>
+<li><p>loop (either by iterating on a structure or by &quot;traversing&quot; a
+buffer),
+</p>
+</li>
+<li><p>for each iteration test something and decide if iterate or <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a>,
+</p>
+</li>
+<li><p>if thrown in the loop, leave the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block and return the value
+passed to the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> statement, if ended the loop normally, evaluate
+the last parts of the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block and return the last one.
+</p>
+</li>
+</ol>
+</div>
+
+<div><h3 id="one-67ff4d53a1">With dolist</h3><div><p>Sometimes, we want to loop over a list and if some &quot;conditions&quot; are
+verified for an item, we want to return without looping over the rest
+of the list.
+</p>
+
+<p>This can be done in a <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block using <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/subr.el#L273">dolist</a> with a structure
+similar to this one:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:tag</span>
+  (<span class="one-hl-keyword">dolist</span> (...)
+    ...
+    (<span class="one-hl-keyword">when</span> some-condition-is-true
+      (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:tag</span> 'some-value)))
+  ...)</code></pre>
+
+<p>We encounter this pattern in the function
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/emacs-lock.el#L130">emacs-lock--exit-locked-buffer</a>  that returns the first exit-locked
+buffer found in the list of all live buffers <code class="one-hl one-hl-inline">(buffer-list)</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">emacs-lock--exit-locked-buffer</span> ()
+  <span class="one-hl-doc">"Return the first exit-locked buffer found."</span>
+  (<span class="one-hl-keyword">save-current-buffer</span>
+    (<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:found</span>
+      (<span class="one-hl-keyword">dolist</span> (buffer (buffer-list))
+        (set-buffer buffer)
+        (<span class="one-hl-keyword">unless</span> (<span class="one-hl-keyword">or</span> (emacs-lock--can-auto-unlock 'exit)
+                    (memq emacs-lock-mode '(nil kill)))
+          (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:found</span> buffer)))
+      nil)))</code></pre>
+
+<p>We also encounter this pattern in the function
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/frame.el#L115">handle-delete-frame</a>
+that handles delete-frame events from the X server.  This function
+looks for a &quot;valid frame&quot; (among other stuff being different from the
+frame where the X event occured) in the list of frames returned by
+<code class="one-hl one-hl-inline">(frame-list)</code> in order to decide if it is safe to delete the frame
+where the X event occured with <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/frame.c#L2375">delete-frame</a> or if it is better to call
+the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/files.el#L7688">save-buffers-kill-emacs</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">handle-delete-frame</span> (event)
+  <span class="one-hl-doc">"Handle delete-frame events from the X server."</span>
+  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"e"</span>)
+  (<span class="one-hl-keyword">let*</span> ((frame (posn-window (event-start event))))
+    (<span class="one-hl-keyword">if</span> (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">other-frame</span>
+          (<span class="one-hl-keyword">dolist</span> (frame-1 (frame-list))
+            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">A valid "other" frame is visible, has its `</span><span class="one-hl-comment"><span class="one-hl-constant">delete-before</span></span><span class="one-hl-comment">'
+</span>            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">parameter unset and is not a child frame.
+</span>            (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">and</span> (not (eq frame-1 frame))
+                       (frame-visible-p frame-1)
+                       (not (frame-parent frame-1))
+                       (not (frame-parameter frame-1 'delete-before)))
+              (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">other-frame</span> t))))
+        (delete-frame frame t)
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">xxx says it is ok to ask questions before terminating.
+</span>      (save-buffers-kill-emacs))))</code></pre>
+
+<p>Note that <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/frame.el#L115">handle-delete-frame</a> is bound to the event <code class="one-hl one-hl-inline">delete-frame</code> in
+the keymap <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/keyboard.c#L12257">special-event-map</a> (<span>special-event-map</span>).
+</p>
+
+<p>Now, let&apos;s have a look on the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/net/newst-reader.el#L286">newsticker--icon-read</a>.  This
+function is defined in the file <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/net/newst-reader.el#L1">lisp/net/newsticker.el</a> part of
+the package <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/net/newst-reader.el#L1">lisp/net/newsticker.el</a> which is from its description
+section:
+</p>
+
+<pre><code class="one-hl one-hl-block">... an "Atom aggregator", "RSS reader", "RSS aggregator", and "Feed Reader".</code></pre>
+
+<p>We did not choose this function for the service it provides to the
+package <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/net/newst-reader.el#L1">lisp/net/newsticker.el</a> but because it is an interesting
+example dealing with two types of &quot;controlled&quot; nonlocal exits:
+</p>
+
+<ol><li><p>a nonlocal exit generated by <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> and handled by <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> and,
+</p>
+</li>
+<li><p>a nonlocal exit due to an error that can occur in a function
+(specifically <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/image.el#L462">create-image</a>) and handled by <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1281">condition-case</a> .
+</p>
+</li>
+</ol>
+
+<p>This function can be seen as a direct application of the material in
+the info node (<span>elisp#Nonlocal Exits</span>).
+</p>
+
+<p>The function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/net/newst-reader.el#L286">newsticker--icon-read</a> takes an icon name as input, try to
+create and return an Emacs image for that icon looking for the image
+from the disk in the user newsticker directory, and if it can&apos;t
+(because it doesn&apos;t exist or it fails at creating the corresponding
+image) it returns a default image provided by Emacs distribution:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">newsticker--icon-read</span> (feed-name-symbol)
+  <span class="one-hl-doc">"Read the cached icon for FEED-NAME-SYMBOL from disk.
+Return the image."</span>
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">icon</span>
+    (<span class="one-hl-keyword">when</span> (file-exists-p (newsticker--icons-dir))
+      (<span class="one-hl-keyword">dolist</span> (file (directory-files (newsticker--icons-dir) t
+                             (concat (symbol-name feed-name-symbol) <span class="one-hl-string">"\\..*"</span>)))
+        (<span class="one-hl-keyword">condition-case</span> error-data
+            (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">icon</span> (create-image
+                          file (<span class="one-hl-keyword">and</span> (fboundp 'imagemagick-types)
+                                    (imagemagick-types)
+                                    'imagemagick)
+                          nil
+                          <span class="one-hl-ta-colon-keyword">:ascent</span> 'center
+                          <span class="one-hl-ta-colon-keyword">:max-width</span> 16
+                          <span class="one-hl-ta-colon-keyword">:max-height</span> 16))
+          (<span class="one-hl-warning">error</span>
+           (message <span class="one-hl-string">"Error: cannot create icon for %s: %s"</span>
+                    feed-name-symbol error-data)))))
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Fallback: default icon.
+</span>    (find-image '((<span class="one-hl-ta-colon-keyword">:type</span> png <span class="one-hl-ta-colon-keyword">:file</span> <span class="one-hl-string">"newsticker/rss-feed.png"</span> <span class="one-hl-ta-colon-keyword">:ascent</span> center)))))</code></pre>
+
+<p>Leaving out the details of this function, we can extract a simplified
+scheme, that says:
+</p>
+
+<ol><li><p>in a <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> block, if the directory <code class="one-hl one-hl-inline">dir</code> doesn&apos;t exist, return a
+default image, if it exists loop over all the files in the
+directory <code class="one-hl one-hl-inline">dir</code>,
+</p>
+</li>
+<li><p>in the loop, for each file try to create an image using that file, if
+it fails, log the error in the message buffer, if it succeeds,
+throw to the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> for the tag <code class="one-hl one-hl-inline">icon</code> and return the created image
+from the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a>:
+</p>
+</li>
+</ol>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">icon</span>
+  (<span class="one-hl-keyword">when</span> (file-exists-p dir)
+    (<span class="one-hl-keyword">dolist</span> (file (directory-files dir))
+      (<span class="one-hl-keyword">condition-case</span> err
+          (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">icon</span> (create-image file ...))
+        (<span class="one-hl-warning">error</span> (message <span class="one-hl-string">"%s: %s"</span> file err)))))
+  (find-image ...))</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-2eefdb0cc4">With re-search-forward</h3><div><p>In Org related packages, a technique used to find something in the
+buffer is to:
+</p>
+
+<ol><li><p>search in the buffer some part that match some regexp (with
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L2250">re-search-forward</a>),
+</p>
+</li>
+<li><p>when we find that part, extract the information available at point
+(specifically we get it with <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/org-element.el#L5983">org-element-at-point</a>),
+</p>
+</li>
+<li><p>check some conditions on the element we&apos;ve parsed,
+</p>
+</li>
+<li><p>depending on the result of the previous check, we continue the
+search in the buffer or we <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> and return some result.
+</p>
+</li>
+</ol>
+
+<p>This technique can be done with some code similar to this snippet:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((case-fold-search t)
+      (re ...))
+  (<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:tag</span>
+    (<span class="one-hl-keyword">while</span> (re-search-forward re nil t)
+      (<span class="one-hl-keyword">let</span> ((element (org-element-at-point)))
+        (<span class="one-hl-keyword">when</span> ...
+          (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:tag</span> ...))))))</code></pre>
+
+<p>We encounter this pattern in the following functions
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/org.el#L10893">org-log-beginning</a>, <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/ob-ref.el#L120">org-babel-ref-resolve</a> and <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/org-colview.el#L799">org-columns-get-format</a>.
+</p>
+
+<p>We reproduce below the source code of <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/ob-core.el#L1862">org-babel-find-named-result</a>
+which also uses that technique but enclosed in a <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/editfns.c#L833">save-excursion</a> that
+saves the point and current buffer, executes what&apos;s in the body and
+restores those things:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-babel-find-named-result</span> (name)
+  <span class="one-hl-doc">"Find a named result.
+Return the location of the result named NAME in the current
+buffer or nil if no such result exists."</span>
+  (<span class="one-hl-keyword">save-excursion</span>
+    (goto-char (point-min))
+    (<span class="one-hl-keyword">let</span> ((case-fold-search t)
+          (re (format <span class="one-hl-string">"^[ \t]*#\\+%s.*?:[ \t]*%s[ \t]*$"</span>
+                      org-babel-results-keyword
+                      (regexp-quote name))))
+      (<span class="one-hl-keyword">catch</span> <span class="one-hl-ta-colon-keyword">:found</span>
+        (<span class="one-hl-keyword">while</span> (re-search-forward re nil t)
+          (<span class="one-hl-keyword">let</span> ((element (org-element-at-point)))
+            (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">or</span> (eq (org-element-type element) 'keyword)
+                      (&lt; (point)
+                         (org-element-property <span class="one-hl-ta-colon-keyword">:post-affiliated</span> element)))
+              (<span class="one-hl-keyword">throw</span> <span class="one-hl-ta-colon-keyword">:found</span> (line-beginning-position)))))))))</code></pre>
+
+<p>The same technique is also used in the function
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/org/org.el#L8608">org-refresh-category-properties</a> but going backward using the function
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L2234">re-search-backward</a> instead of <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L2250">re-search-forward</a>.
+</p>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+</div>
+<div id="nav"><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">PREV</a><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">RANDOM</a><a href="/2022-04-15-ripgrep-emacs-rg-el/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

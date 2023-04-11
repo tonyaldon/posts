@@ -1,0 +1,248 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Programming with Elisp is magic</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Programming with Elisp is magic</h1></div><div id="meta-info"><div>2022-04-22</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/u9e9r3/programming_with_elisp_is_magic/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div><p>BOOM!!! Let&apos;s get to the point!!!
+</p>
+
+<p>What&apos;s magic when programming Elisp code is that at any time:
+</p>
+
+<ol><li><p>we can extract a little part of the program,
+</p>
+</li>
+<li><p>replace some symbols by custom values,
+</p>
+</li>
+<li><p>send it to the minibuffer with <code class="one-hl one-hl-inline">M-x eval-expression</code> (or
+<code class="one-hl one-hl-inline">pp-eval-expression</code>), press <code class="one-hl one-hl-inline">RET</code> and,
+</p>
+</li>
+<li><p>automatically get back some value in the echo area (or in the
+dedicated buffer <code class="one-hl one-hl-inline">*Pp Eval Output*</code>).
+</p>
+</li>
+</ol>
+
+<p>In almost no time, misconceptions about what a program does (or why
+a program fails) can be spot that way.
+</p>
+
+<p>Those who have already read the post about <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">link abbrevations and
+org-open-at-point</a> might be familiar with the above description.
+</p>
+
+<p>Indeed, today&apos;s post is literally a section extracted from this
+previous post.
+</p>
+
+<p>Why am I publishing it again?
+</p>
+
+<p>Because that post didn&apos;t received much success (maybe the wrong topic,
+maybe too long, maybe I don&apos;t know) and so does the section about the
+magic of programming with Elisp.
+</p>
+
+<p>And this is really unfortunate because it describes a super effective
+strategy do deal with Elisp code.
+</p>
+
+<p>Beside adding &quot;print statements everywhere&quot; (<code class="one-hl one-hl-inline">message</code> in Elisp
+parlance) this is my best tool for working with Elisp code, and I want
+everyone to know it and use it.
+</p>
+
+<p>I am not a magician who needs to keep his tricks secret, quite the
+contrary.  So, I decided to give that strategy to deal with Elisp code
+another chance with that post.
+</p>
+
+<p>I hope you find it useful.
+</p>
+
+<p>Here is the context.
+</p>
+
+<p>When we introduced the section &quot;Programming with Elisp is magic&quot; in
+the post about <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">link abbrevations and org-open-at-point</a>, we were
+studying some implementation details of the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a> that parses an Org link at point, if any.
+</p>
+
+<p>For instance, in the following org buffer (if you have never used
+&quot;link abbreviations&quot;, I encourage you to read the info node
+<span>org#Link Abbreviations</span>:
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/
+
+[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+<p>with the point at the beginning of the link, calling the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a> returns the org object (a list):
+</p>
+
+<pre><code class="one-hl one-hl-block">(link
+ (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+  <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+  <span class="one-hl-ta-colon-keyword">:format</span> bracket
+  <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:application</span> nil
+  <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:begin</span> 28
+  <span class="one-hl-ta-colon-keyword">:end</span> 82
+  <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+  <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+  <span class="one-hl-ta-colon-keyword">:post-blank</span> 0))</code></pre>
+
+<p>We were particularly interested in the computation of the values of
+the properties <code class="one-hl one-hl-inline">:path</code> and <code class="one-hl one-hl-inline">:search-option</code>.
+</p>
+
+<p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a> is 128 lines long, uses many
+regexp to do its jobs, mutates several times the local let binded
+variable <code class="one-hl one-hl-inline">path</code> that is returned as the value of the property <code class="one-hl one-hl-inline">:path</code> (the
+one we are interested in).
+</p>
+
+<p>The first time, I looked at its code, I couldn&apos;t understand all the
+subtleties of the implementation just by reading it.
+</p>
+
+<p>This is not a problem, because when reading is not enough, I always
+use the same strategy: I break the problem down into pieces until I
+arrive at simple s-expressions that I can understand.
+</p>
+
+<p>And doing it in Emacs/Elisp is super cheap because you can evaluate
+ANYTHING, ANYWHERE, ANYTIME, for FREE (you just pay the computation).
+</p>
+
+<p>Think about it!
+</p>
+
+<p>Fast feedback, this is the magic of programming with Elisp.
+</p>
+
+<p>So here we are.
+</p>
+
+<p>Let&apos;s say we want to be sure that the following snippet in the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a> does what it seems to do:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+  (<span class="one-hl-keyword">setq</span> search-option (match-string 1 path))
+  (<span class="one-hl-keyword">setq</span> path (replace-match <span class="one-hl-string">""</span> nil nil path)))</code></pre>
+
+<p>In our example, at that point in the function, the local variable <code class="one-hl one-hl-inline">path</code>
+has the string value <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error
+(&amp;optional&quot;</code>.  We can test the result of the <code class="one-hl one-hl-inline">when</code> condition by
+evaluating the following:
+</p>
+
+<pre><code class="one-hl one-hl-block">(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">25</span></code></pre>
+
+<p>By reading the help of <code class="one-hl one-hl-inline">string-match</code>, we know that it returns the index
+of the start of the first match or <code class="one-hl one-hl-inline">nil</code>.
+</p>
+
+<p>Ok, there&apos;s a match.
+</p>
+
+<p>But, to me the string <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error
+(&amp;optional&quot;</code> is to long with to many repetive characters that don&apos;t
+appear in the regexp <code class="one-hl one-hl-inline">&quot;::\\(.*\\)\\&apos;&quot;</code> to wrap my head around what&apos;s
+going on.
+</p>
+
+<p>So, let&apos;s use the good <code class="one-hl one-hl-inline">foo</code> and <code class="one-hl one-hl-inline">bar</code> words to simplify our discoveries
+and gain confidence about this piece of code.
+</p>
+
+<p>In the regexp, the only part &quot;that seems&quot; of interest is <code class="one-hl one-hl-inline">::</code>, so let&apos;s
+try again with the strings <code class="one-hl one-hl-inline">&quot;/tmp/foo::bar&quot;</code>, <code class="one-hl one-hl-inline">&quot;/tmp/foo::&quot;</code> and
+<code class="one-hl one-hl-inline">&quot;/tmp/foo&quot;</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo::bar"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">8
+</span>(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo::"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">8
+</span>(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">nil</span></code></pre>
+
+<p>It become clearer.  We start to get a sense of the match.
+</p>
+
+<p>By reading the documentation (<span>elisp#Simple Match Data</span>), we learn
+(or recall):
+</p>
+
+<ol><li><p>that search functions like <code class="one-hl one-hl-inline">string-match</code> or <code class="one-hl one-hl-inline">looking-at</code> set the
+match data for every successful search,
+</p>
+</li>
+<li><p>and if the first argument of <code class="one-hl one-hl-inline">match-string</code> is <code class="one-hl one-hl-inline">0</code>, we get the entire
+matching text and if it&apos;s <code class="one-hl one-hl-inline">1</code> we get the first parenthetical
+subexpression of the given regular expression.
+</p>
+</li>
+</ol>
+
+<p>So, continuing with the string <code class="one-hl one-hl-inline">&quot;/tmp/foo::bar&quot;</code>, we
+have:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    (list (match-string 0 path)
+          (match-string 1 path))))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">("::bar" "bar")</span></code></pre>
+
+<p>Reading the help buffer about <code class="one-hl one-hl-inline">replace-match</code> tells us that this
+function replaces the text matched by the last search with its first
+argument.  And if we give it an optional fourth argument being a
+string, the replacement is made on that string.
+</p>
+
+<p>So replacing the entire match with the empty string <code class="one-hl one-hl-inline">&quot;&quot;</code> should remove
+the matched part of the string:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    (replace-match <span class="one-hl-string">""</span> nil nil path)))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"/tmp/foo"</span></code></pre>
+
+<p>Now putting everything together we can write the following example:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    `(<span class="one-hl-ta-colon-keyword">:search-option</span> ,(match-string 1 path)
+      <span class="one-hl-ta-colon-keyword">:path</span>          ,(replace-match <span class="one-hl-string">""</span> nil nil path))))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">(:search-option "bar"
+</span><span class="one-hl-comment-delimiter">;;  </span><span class="one-hl-comment">:path          "/tmp/foo")</span></code></pre>
+
+<p>And maybe we&apos;ve removed some misconceptions about this part of the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org-element.el#L3249">org-element-link-parser</a>.
+</p>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+
+<div id="nav"><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">PREV</a><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">RANDOM</a><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>FULL example of org-mode links: internal links and search options</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>FULL example of org-mode links: internal links and search options</h1></div><div id="meta-info"><div>2022-04-27</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/ud75wt/full_example_of_orgmode_links_internal_links_and/">comment on reddit</a></div>/<div>emacs revision: de7901abbc21</div>/<div>org-mode revision: af6f1298b6f6</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-6f8def1413">Full example of org links that use org-link-search when followed</a></li>
+<li><a href="#one-b9fd4d5c5a">Elisp API dealing with strings and regexps</a></li>
+<li><a href="#one-36e82b8c1c">Acknowledgments</a></li>
+</ul>
+</div></div></div><div><p>Hey Emacser,
+</p>
+
+<p>I hope you are doing well :)
+</p>
+
+<p>In <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">this post (2022-04-04)</a> we talked about search options in file
+links, link abbreviations and the implementation of the command
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a>.
+</p>
+
+<p>My goal was to walk the path from pressing <code class="one-hl one-hl-inline">RET</code> (if you have
+<code class="one-hl one-hl-inline">org-return-follows-link</code> set to <code class="one-hl one-hl-inline">t</code>) or <code class="one-hl one-hl-inline">C-c C-o</code> on top of the abbreviated
+org link
+</p>
+
+<pre><code class="one-hl one-hl-block">[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+
+<p>to the file <code class="one-hl one-hl-inline">lisp/simple.el</code> in the Emacs source code (cloned locally)
+with the point at the beginning of the function <code class="one-hl one-hl-inline">next-error</code>.
+</p>
+
+<p>We have seen that this path follows the following &quot;call stack&quot;:
+</p>
+
+<pre><code class="one-hl one-hl-block">org-open-at-point
+&#9474;
+&#9492;&gt; org-link-open
+   &#9474;
+   &#9492;&gt; org-link-open-as-file
+      &#9474;
+      &#9492;&gt; org-open-file
+         &#9474;
+         &#9492;&gt; org-link-search</code></pre>
+
+<p>As the post has become bigger than I expected, I decided not to
+talk about the last call to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>, despite my
+desire to do so.
+</p>
+
+<p>Some time later, I decided to give it a chance.  I looked
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a> in the eyes and I saw that I won&apos;t be able to give a
+clear explanation without talking a least in one post about
+the catch/throw pattern in Elisp.  So, I postponed it and wrote the
+post <a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">A tour of the catch/throw pattern in the Emacs source code (2022-04-13)</a>
+in which we discuss the catch/throw pattern.
+</p>
+
+<p>And today I&apos;m trying to give a clear explanation of its implementation
+and I realized that the way to do it is not by showing bits of code
+and talking about those bits.
+</p>
+
+<p>There is too much details to bring some value doing it like this (at
+least, I still haven&apos;t figured out how to do it that way for that
+function).
+</p>
+
+<p>So let&apos;s try another approach that may give you some &quot;tools&quot; to examine
+its implementation if you are interested.
+</p>
+
+<p>First, we look at a &quot;full&quot; example that features org links that, in
+the end, use <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a> to make the jump when we call
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> on them.
+</p>
+
+<p>Next, we give some practical examples demonstrating part of the Elisp
+API dealing with strings and regexps functions that are used in
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>.
+</p>
+
+<p>With that done, just between us, let&apos;s say we are done with
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a> function and we&apos;ve completed the walk inside
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> function :)
+</p>
+</div>
+
+<div><h2 id="one-6f8def1413">Full example of org links that use org-link-search when followed</h2><div><p>The following example features org links that, in the end, use
+<a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a> to make the jump when we call <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/org.el#L8932">org-open-at-point</a> on
+them.
+</p>
+
+<p>Notes on the example:
+</p>
+
+<p>For three of those links to work you need to cloned the org-mode
+repository under the directory <code class="one-hl one-hl-inline">/tmp/org-mode/</code>.  You can do this by
+running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">cd /tmp/ &amp;&amp; git clone git://git.sv.gnu.org/emacs.git</code></pre>
+
+
+<p>The example is written inside a unique source block (org-mode), so you
+have several options to take advantage of it:
+</p>
+
+<ol><li><p>if you are reading this post on Reddit, copy/paste the block in an
+org-mode buffer and start playing with it,
+</p>
+</li>
+<li><p>if you are reading this post from inside Emacs (using this document
+<a href="https://github.com/tonyaldon/posts">https://github.com/tonyaldon/posts</a>) with the point inside the
+source block you can hit <code class="one-hl one-hl-inline">C-c &apos;</code> (<code class="one-hl one-hl-inline">org-edit-special</code> by default) and
+start playing with the example in a org-mode buffer.
+</p>
+</li>
+</ol>
+
+<p>For convenience and to make the following example almost
+selfcontained, we use for instance the link <code class="one-hl one-hl-inline">[[#custom-id-2]]</code> that is of
+type <code class="one-hl one-hl-inline">custom-id</code> instead of demonstrating the use of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>
+with a link like this <code class="one-hl one-hl-inline">[[/path-to-file.org::#custom-id-2]]</code> which is of type
+<code class="one-hl one-hl-inline">file</code> with the search option component equal to <code class="one-hl one-hl-inline">#custom-id-2</code>.
+</p>
+
+<p>But it doesn&apos;t matter much because, in the end, both are treated
+the same way by the same function <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>, and the exact last
+call in both cases is <code class="one-hl one-hl-inline">(org-link-search &quot;#custom-id-2&quot;)</code>.
+</p>
+
+<p>In the example, the links are presented in the same order as they are
+treated in the <code class="one-hl one-hl-inline">cond</code> special form in the body of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>.  If
+you finally decide to look at the implementation of <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>,
+you&apos;ll be able to follow the &quot;flow&quot; in the implementation following
+the &quot;flow&quot; of the example or vice-versa, maybe side by side using two
+different buffers (by the way this is how I built the example, side by
+side :-)).
+</p>
+
+<p>Lastly, the info node related to this example are the following:
+</p>
+
+<ul><li><p><span>org#Internal Links</span>,
+</p>
+</li>
+<li><p><span>org#Search Options</span>,
+</p>
+</li>
+<li><p><span>org#Literal Examples</span>,
+</p>
+</li>
+<li><p><span>org#Org Syntax</span>.
+</p>
+</li>
+</ul>
+
+<p>Here is the example (if you&apos;re reading in your browser, you don&apos;t
+see the double brackets around links, for instance the first link is
+represented like this <code class="one-hl one-hl-inline">#custom-id-2</code>, but is instead <code class="one-hl one-hl-inline">[[#custom-id-2]]</code>,
+moreover <code class="one-hl one-hl-inline">(ref:coderef)</code> doesn&apos;t appear in the first source block):
+</p>
+
+<pre><code class="one-hl one-hl-block"><span class="one-hl-org-level-1">* headline 1</span>
+
+With <span class="one-hl-org-link"><a href="#custom-id-2">#custom-id-2</a></span> link we jump (with <span class="one-hl-org-code">org-open-at-point</span>) in this
+document to the heading with the <span class="one-hl-org-code">:CUSTOM_ID</span> property equal to
+<span class="one-hl-org-code">custom-id-2</span>.
+
+With <span class="one-hl-org-link"><a href="(coderef)">(coderef)</a></span> link we jump (with <span class="one-hl-org-code">org-open-at-point</span>) to <span class="one-hl-org-code">(ref:coderef)</span>
+in the source block below:
+
+<span class="one-hl-org-meta-line">#+NAME: a named source block</span>
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">let</span></span><span class="one-hl-org-block"> ((x 2))
+  (1+ x))
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+Let assume we have the org repository cloned under the directory
+<span class="one-hl-org-code">/tmp/org-mode/</span>.
+
+With <span class="one-hl-org-link"><a href="/tmp/org-mode/lisp/ol.el::/org-link-search/">/tmp/org-mode/lisp/ol.el::/org-link-search/</a></span> we jump (with
+<span class="one-hl-org-code">org-open-at-point</span>) to an Occur buffer like this one
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC text
+</span><span class="one-hl-org-block">6 matches for "org-link-search" in buffer: ol.el
+    340:(defcustom org-link-search-must-match-exact-headline 'query-to-create
+   1093:       (org-link-search
+   1132:(defun org-link-search (s &amp;optional avoid-pos stealth)
+   1245:     ;; `org-link-search-must-match-exact-headline'.
+   1247:     (eq org-link-search-must-match-exact-headline 'query-to-create)
+   1257:     (or starred org-link-search-must-match-exact-headline))
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+that matches the occurences of <span class="one-hl-org-code">org-link-search~(the text surrounded by
+two slashes </span><span class="one-hl-org-code"><span class="one-hl-org-code">/</span></span> after the two colons <span class="one-hl-org-code">::</span> in the previous link) in the
+file <span class="one-hl-org-code">/tmp/org-mode/lisp/ol.el</span>.
+
+With <span class="one-hl-org-link"><a href="target">target</a></span> link we jump (with <span class="one-hl-org-code">org-open-at-point</span>) to the target
+<span class="one-hl-org-target"><span class="one-hl-org-code">&lt;&lt;target&gt;&gt;</span></span> that is located in the first paragraph of the section
+<span class="one-hl-org-code">headline 2</span>.
+
+With <span class="one-hl-org-link"><a href="a named source block">a named source block</a></span> link we jump (with <span class="one-hl-org-code">org-open-at-point</span>) to the
+previous source block that is named <span class="one-hl-org-code">a named source block</span> via the
+statment <span class="one-hl-org-code">#+NAME: a named source block</span> (because there is no target <span class="one-hl-org-code">&lt;&lt;a
+named source block&gt;&gt;</span> in the document).
+
+With <span class="one-hl-org-link"><a href="headline 2">headline 2</a></span> link we jump (with <span class="one-hl-org-code">org-open-at-point</span>) to the next
+headline <span class="one-hl-org-code">headline 2</span>, whatever the value of the variable
+<span class="one-hl-org-code">org-link-search-must-match-exact-headline</span>, because:
+
+1) this headline exists,
+2) there is no target <span class="one-hl-org-target"><span class="one-hl-org-code">&lt;&lt;headline 2&gt;&gt;</span></span> in the document,
+3) there is no named block, named paragagraph, etc. (see Affiliated
+   Keywords in the org syntax) named with the statment <span class="one-hl-org-code">#+NAME headline
+   2</span>.
+
+<span class="one-hl-org-meta-line">#+NAME: headline 3</span>
+This paragagraph named <span class="one-hl-org-code">headline 3</span> contains a target <span class="one-hl-org-target">&lt;&lt;headline 3&gt;&gt;</span>, so
+we can't use the link <span class="one-hl-org-link"><span class="one-hl-org-code"><a href="headline 3">[[headline 3]]</a></span></span> to jump to the existing headline
+<span class="one-hl-org-code">headline 3</span>.  But, we can use the following link <span class="one-hl-org-link"><a href="* headline 3">* headline 3</a></span> (starting
+with a star <span class="one-hl-org-code">*</span>) to jump to the existing headline <span class="one-hl-org-code">headline 3</span>.  And this
+work whatever the value of the variable
+<span class="one-hl-org-code">org-link-search-must-match-exact-headline</span>.
+
+When <span class="one-hl-org-code">org-link-search-must-match-exact-headline</span> is set to
+<span class="one-hl-org-code">query-to-create</span> (which is the default value)
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> org-link-search-must-match-exact-headline 'query-to-create)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+calling <span class="one-hl-org-code">org-open-at-point</span> on <span class="one-hl-org-link"><a href="headline 4">headline 4</a></span> link offers to create a new
+headline <span class="one-hl-org-code">headline 4</span> at the end of this org document.  If we choose to
+add it we will jump to that new headline and if not nothing happens
+and we don't move.
+
+When <span class="one-hl-org-code">org-link-search-must-match-exact-headline</span> is set to something
+other than <span class="one-hl-org-code">query-to-create</span>, for instance <span class="one-hl-org-code">t</span> or <span class="one-hl-org-code">nil</span> like this:
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> org-link-search-must-match-exact-headline nil)
+</span><span class="one-hl-org-block"><span class="one-hl-comment-delimiter">;; </span></span><span class="one-hl-org-block"><span class="one-hl-comment">or
+</span></span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> org-link-search-must-match-exact-headline t)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+calling <span class="one-hl-org-code">org-open-at-point</span> on the link <span class="one-hl-org-link"><a href="* headline 5">* headline 5</a></span> (starting with a
+star <span class="one-hl-org-code">*</span>) that points to a non existing headline raises the following
+error:
+
+<span class="one-hl-org-code">: No match for fuzzy expression: * headline 5
+</span>
+When <span class="one-hl-org-code">org-link-search-must-match-exact-headline</span> is set <span class="one-hl-org-code">t</span>
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> org-link-search-must-match-exact-headline t)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+calling <span class="one-hl-org-code">org-open-at-point</span> on the link <span class="one-hl-org-link"><a href="headline 5">headline 5</a></span> (and there is no
+existing headline <span class="one-hl-org-code">headline 5</span>, there is no target <span class="one-hl-org-target"><span class="one-hl-org-code">&lt;&lt;headline 5&gt;&gt;</span></span> and
+there is no named element <span class="one-hl-org-code">headline 5</span> in the document) raises the
+following error:
+
+<span class="one-hl-org-code">: No match for fuzzy expression: * headline 5
+</span>
+When <span class="one-hl-org-code">org-link-search-must-match-exact-headline</span> is set <span class="one-hl-org-code">nil</span>
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">setq</span></span><span class="one-hl-org-block"> org-link-search-must-match-exact-headline nil)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+calling <span class="one-hl-org-code">org-open-at-point</span> on the link <span class="one-hl-org-link"><a href="headline 5">headline 5</a></span> (and there is no
+existing headline <span class="one-hl-org-code">headline 5</span>, there is no target <span class="one-hl-org-target"><span class="one-hl-org-code">&lt;&lt;headline 5&gt;&gt;</span></span> and
+there is no named element <span class="one-hl-org-code">headline 5</span> in the document) jumps to first
+occurence of <span class="one-hl-org-code">headline 5</span> in the current document.
+
+We still assume we have the org repository cloned under the directory
+<span class="one-hl-org-code">/tmp/org-mode/</span>.
+
+With <span class="one-hl-org-link"><a href="/tmp/org-mode/lisp/ol.el::org-link-search">/tmp/org-mode/lisp/ol.el::org-link-search</a></span> we jump (with
+<span class="one-hl-org-code">org-open-at-point</span>) to the first occurence of <span class="one-hl-org-code">org-link-search</span> in the
+file <span class="one-hl-org-code">/tmp/org-mode/lisp/ol.el</span> which happens to be on the variable
+<span class="one-hl-org-code">org-link-search-must-match-exact-headline</span>:
+
+<span class="one-hl-org-block-begin-line">#+BEGIN_SRC emacs-lisp
+</span><span class="one-hl-org-block">(</span><span class="one-hl-org-block"><span class="one-hl-keyword">defcustom</span></span><span class="one-hl-org-block"> </span><span class="one-hl-org-block"><span class="one-hl-variable-name">org-link-search-must-match-exact-headline</span></span><span class="one-hl-org-block"> 'query-to-create
+  ...)
+</span><span class="one-hl-org-block-end-line">#+END_SRC
+</span>
+Note that as the file <span class="one-hl-org-code">/tmp/org-mode/lisp/ol.el</span> is not "open" in
+org-mode, <span class="one-hl-org-code">org-link-search</span> does a fuzzy text search and doesn't look
+for target, named elements or headlines.
+
+If the search option (or internal links) we've used doesn't "match"
+one of the previous search, <span class="one-hl-org-code">org-link-search</span> raises an error.
+
+We still assume we have the org repository cloned under the directory
+<span class="one-hl-org-code">/tmp/org-mode/</span>.
+
+With <span class="one-hl-org-link"><a href="/tmp/org-mode/lisp/ol.el::5">/tmp/org-mode/lisp/ol.el::5</a></span> we jump (with <span class="one-hl-org-code">org-open-at-point</span>) to
+jump to the line <span class="one-hl-org-code">5</span> in the file <span class="one-hl-org-code">/tmp/org-mode/lisp/ol.el</span>.
+
+Although this link is of type <span class="one-hl-org-code">file</span> with its search option equal to <span class="one-hl-org-code">5</span>,
+the "jump" isn't done by <span class="one-hl-org-code">org-link-search</span> but by <span class="one-hl-org-code">org-goto-line</span> in the
+function <span class="one-hl-org-code">org-open-file</span>.
+
+<span class="one-hl-org-level-1">* headline 2</span>
+<span class="one-hl-org-drawer">:PROPERTIES:</span>
+<span class="one-hl-org-special-keyword">:CUSTOM_ID:</span> <span class="one-hl-org-property-value">custom-id-2</span>
+<span class="one-hl-org-drawer">:END:</span>
+
+I'm the <span class="one-hl-org-target">&lt;&lt;target&gt;&gt;</span>!
+
+<span class="one-hl-org-level-1">* headline 3</span></code></pre>
+</div>
+</div>
+
+<div><h2 id="one-b9fd4d5c5a">Elisp API dealing with strings and regexps</h2><div><p>Remember that when we are working with Elisp we can obtain information
+about any symbols with the command <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/help-fns.el#L1582">describe-symbol</a> bound by default to
+<code class="one-hl one-hl-inline">C-h o</code>.
+</p>
+
+<p>In <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>, the variable <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/buffer.c#L5674">case-fold-search</a> is set <code class="one-hl one-hl-inline">t</code> which means
+that searches and matches should ignore case:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((case-fold-search t))
+  (string-match <span class="one-hl-string">"FOO"</span> <span class="one-hl-string">"foo"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">0
+</span>
+(<span class="one-hl-keyword">let</span> ((case-fold-search nil))
+  (string-match <span class="one-hl-string">"FOO"</span> <span class="one-hl-string">"foo"</span>)) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">nil</span></code></pre>
+
+<p>In <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>, the search string <code class="one-hl one-hl-inline">s</code> provided can contain newlines
+followed by any numbers of spaces or tabs.  Those patterns are
+replaced by one space.  This is done using the function
+<a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/subr.el#L4979">replace-regexp-in-string</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((s <span class="one-hl-string">"search  \n  \t\t option"</span>))
+  (replace-regexp-in-string <span class="one-hl-string">"\n[ \t]*"</span> <span class="one-hl-string">" "</span> s))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"search   option"</span></code></pre>
+
+<p>The search option string <code class="one-hl one-hl-inline">s</code> given to <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a> can start:
+</p>
+
+<ol><li><p>with a star <code class="one-hl one-hl-inline">*</code> when we search specifically a headline (for instance
+in the link <code class="one-hl one-hl-inline">[[* headline 3]]</code> used in the above example) or,
+</p>
+</li>
+<li><p>with a hash <code class="one-hl one-hl-inline">#</code> when we search a custom id (for instance
+in the link <code class="one-hl one-hl-inline">[[#custom-id-2]]</code> used in the above example)
+</p>
+</li>
+</ol>
+
+<p>The function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/editfns.c#L167">string-to-char</a> returns the first character of a string
+and we can use like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(string-to-char <span class="one-hl-string">"*foo"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">42
+</span>?* <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">42
+</span>(string-to-char <span class="one-hl-string">"#bar"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">35
+</span>?# <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">35
+</span>(eq (string-to-char <span class="one-hl-string">"* headline 3"</span>) ?*) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">t
+</span>(eq (string-to-char <span class="one-hl-string">"#custom-id-2"</span>) ?#) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">t</span></code></pre>
+
+<p>In <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>, the searches are not done directly against its
+given string <code class="one-hl one-hl-inline">s</code> but against different regexps depending on the context
+built from <code class="one-hl one-hl-inline">s</code>.
+</p>
+
+<p>The function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/lisp/subr.el#L4832">split-string</a> is used to split one of the string into
+substrings bounded by whitespace like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(split-string <span class="one-hl-string">"foo bar baz"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">("foo" "bar" "baz")</span></code></pre>
+
+<p>When the given string <code class="one-hl one-hl-inline">s</code> starts with a star <code class="one-hl one-hl-inline">*</code>, the star is removed
+using the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/fns.c#L1434">substring</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(substring <span class="one-hl-string">"*foo"</span> 1) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"foo"</span></code></pre>
+
+<p>The searches are done using the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L2250">re-search-forward</a> that
+searches in the current buffer for regular expression.  So, we have to
+be careful when we give it a string to search for, that string must be a
+regexp.
+</p>
+
+<p>We can ensure that the string we give to <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L2250">re-search-forward</a> is a regexp
+using the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L3133">regexp-quote</a>
+</p>
+
+
+<p>that returns a regexp string which
+matches exactly the string we gave it and this is how <a href="https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ol.el#L1106">org-link-search</a>
+does it.
+</p>
+
+<p>For instance, the characters <code class="one-hl one-hl-inline">.</code>, <code class="one-hl one-hl-inline">?</code>, <code class="one-hl one-hl-inline">+</code> and <code class="one-hl one-hl-inline">*</code> are &quot;special&quot; in regexps, so
+if we want to match them in a regexp we must escape them and we can do
+it using the function <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/search.c#L3133">regexp-quote</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(regexp-quote <span class="one-hl-string">"foo.bar"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"foo\\.bar"
+</span>(regexp-quote <span class="one-hl-string">"foo+bar"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"foo\\+bar"
+</span>(regexp-quote <span class="one-hl-string">"foo?bar"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"foo\\?bar"
+</span>(regexp-quote <span class="one-hl-string">"foo*bar"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">"foo\\*bar"</span></code></pre>
+
+<p>We can go on and on but we won&apos;t, I think that&apos;s enought to get
+started :)
+</p>
+
+<p>WE ARE DONE !!!
+</p>
+</div>
+</div>
+
+<div><h2 id="one-36e82b8c1c">Acknowledgments</h2><div><p>I take the opportunity of this post to thank Ihor Radchenko for his
+work on org-mode.
+</p>
+
+<p>In addition to his contributions he always answers quickly in
+<a href="https://orgmode.org/worg/org-mailing-list.html">https://orgmode.org/worg/org-mailing-list.html</a>.
+</p>
+
+<p>Thank you Ihor Radchenko.
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-04-22-programming-with-elisp-is-magic/">PREV</a><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">RANDOM</a><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

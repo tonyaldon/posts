@@ -1,0 +1,494 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>You want to write a custom org backend?  Let's write onlybold backend together to get you started</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>You want to write a custom org backend?  Let's write onlybold backend together to get you started</h1></div><div id="meta-info"><div>2022-02-20</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/">comment on reddit</a></div>/<div>org-mode revision: 96d91bea658c</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-c4a9325052">what we want to achieve</a></li>
+<li><a href="#one-c17079baa6">org export mechanism</a></li>
+<li><a href="#one-a0ab07d6a0">transcoders, org-export-define-backend and org-export-to-buffer</a></li>
+<li><a href="#one-1f91b030b5">parsed tree, section elements and paragraph elements</a></li>
+<li><a href="#one-e266d541e9">only keep bold elements</a></li>
+<li><a href="#one-6e4144d08e">remove empty paragraphs and the last newline of the section</a></li>
+<li><a href="#one-39042b9f93">acknowledgments</a></li>
+</ul>
+</div></div></div><div><p>Hi Emacsers,
+</p>
+
+<p>Recently I&apos;ve been playing with <code class="one-hl one-hl-inline">org-element</code> and <code class="one-hl one-hl-inline">org-export</code>.
+</p>
+
+<p>Specifically, I was interested in the mechanism of the org exporter
+system and its flexibility.
+</p>
+
+<p>The goal of this post is to get you started with the creation of org
+backends.
+</p>
+
+<p>To do so, we build an org backend that:
+</p>
+
+<ol><li><p>keeps only <code class="one-hl one-hl-inline">bold</code> elements,
+</p>
+</li>
+<li><p>surrounds <code class="one-hl one-hl-inline">bold</code> elements with <code class="one-hl one-hl-inline">***</code> before and after,
+</p>
+</li>
+<li><p>surrounds <code class="one-hl one-hl-inline">paragraph</code> elements with <code class="one-hl one-hl-inline">::</code> before and after,
+</p>
+</li>
+<li><p>surrounds <code class="one-hl one-hl-inline">section</code> elements with <code class="one-hl one-hl-inline">&lt;--</code> before and <code class="one-hl one-hl-inline">--&gt;</code> after (removing
+the last newline).
+</p>
+</li>
+</ol>
+
+<p>We call it <code class="one-hl one-hl-inline">onlybold</code>.
+</p>
+
+<p>Before we start, if you are interested, I recommend you to read in
+org-mode&apos;s source code the following files:
+</p>
+
+<ul><li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox.el">lisp/ox.el</a>,
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox-html.el">lisp/ox-html.el</a>,
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox-md.el">lisp/ox-md.el</a>,
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox-org.el">lisp/ox-org.el</a>,
+</p>
+</li>
+<li><p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/lisp/test-ox.el">lisp/test-ox.el</a> (AMAZING).
+</p>
+</li>
+</ul>
+
+<p>You can get org-mode&apos;s source code by running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git clone https://git.savannah.gnu.org/git/emacs/org-mode.git</code></pre>
+
+
+<p>Let&apos;s get started.
+</p>
+</div>
+
+<div><h2 id="one-c4a9325052">what we want to achieve</h2><div><p>We want to export this org buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">I like <span class="one-hl-bold">bold-1</span> and <span class="one-hl-bold">bold-2</span> and you?
+I don't.  I prefer <span class="one-hl-bold">bold-3</span>.
+
+
+I've loved <span class="one-hl-bold">bold-4</span> since I was a child.
+
+I'm <span class="one-hl-italic">italic</span>.</code></pre>
+
+<p>into another buffer like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">&lt;--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::--&gt;</code></pre>
+</div>
+</div>
+
+<div><h2 id="one-c17079baa6">org export mechanism</h2><div><p>When org exports an org buffer, basically it does two things:
+</p>
+
+<ol><li><p>parse the org buffer producing a tree (a nested elisp list)
+representing the org buffer and,
+</p>
+</li>
+<li><p>recursively build a string by traversing the tree and choosing for
+each node what to do with it by looking up its associated
+transcode function defined by the org backend.
+</p>
+</li>
+</ol>
+
+<p>This means that <b>org</b> does the <b>hard work</b> for us &quot;parsing&quot; and
+&quot;traversing&quot;.
+</p>
+
+<p>To build our <code class="one-hl one-hl-inline">onlybold</code> org backend and any other org backends, in the
+simplest case, we just have to provide the <b>transcode functions</b>
+(or simply <b>transcoders</b>).
+</p>
+</div>
+</div>
+
+<div><h2 id="one-a0ab07d6a0">transcoders, org-export-define-backend and org-export-to-buffer</h2><div><p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox.el#L1126">org-export-define-backend</a> takes as arguments:
+</p>
+
+<ol><li><p>the backend&apos;s name we want to define and
+</p>
+</li>
+<li><p>an alist of transcoders.
+</p>
+</li>
+</ol>
+
+<p>A <b>transcoder</b> (or a transcode function), is a function that handles an
+org element when it is being exported.
+</p>
+
+<p>For instance, our backend <code class="one-hl one-hl-inline">onlybold</code> must define a transcoder for <code class="one-hl one-hl-inline">bold</code>
+elements that surrounds bold texts with 3 stars <code class="one-hl one-hl-inline">***</code> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">bold text -&gt; ***bold text***</code></pre>
+
+
+<p>Most transcoders take three arguments:
+</p>
+
+<ol><li><p>the element as it appears in the parsed tree,
+</p>
+</li>
+<li><p>a content strings corresponding to the children of the element
+already &quot;transcoded&quot;,
+</p>
+</li>
+<li><p>the communication channel that contains all the information the
+export system needs to correctly export the document (the obvious
+ones are the title, date and author of the document that can be
+defined inside the document using lines starting by <code class="one-hl one-hl-inline">#+TITLE:</code>,
+<code class="one-hl one-hl-inline">#+DATE:</code> or <code class="one-hl one-hl-inline">#+AUTHOR</code>).
+</p>
+</li>
+</ol>
+
+<p>Let&apos;s define <code class="one-hl one-hl-inline">onlybold-bold</code>, the transcoder of <code class="one-hl one-hl-inline">bold</code> elements:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-bold</span> (bold contents info)
+  (concat <span class="one-hl-string">"***"</span> contents <span class="one-hl-string">"***"</span>))</code></pre>
+
+<p>Now, we can define the first version of <code class="one-hl one-hl-inline">onlybold</code> backend, which
+transcodes only <code class="one-hl one-hl-inline">bold</code> elements:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)))</code></pre>
+
+<p>Then we defined the command <code class="one-hl one-hl-inline">onlybold-export</code> that pops up the buffer
+<code class="one-hl one-hl-inline">*onlybold*</code> which contains the exported content (using <code class="one-hl one-hl-inline">onlybold</code>
+backend) of the current buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-export</span> ()
+  (<span class="one-hl-keyword">interactive</span>)
+  (org-export-to-buffer 'onlybold <span class="one-hl-string">"*onlybold*"</span>))</code></pre>
+
+<p>Now, if we call the command <code class="one-hl one-hl-inline">onlybold-export</code> inside our org buffer,
+the buffer <code class="one-hl one-hl-inline">*onlybold*</code> pops up with <b>nothing</b> in it.
+</p>
+
+<p>We might be disappointed, but we aren&apos;t.  This is totally normal.
+</p>
+
+<p>In a specific backend, when an element doesn&apos;t have a transcoder to
+handle it, the element is skipped.  (In the same vein, if a transcoder
+return <code class="one-hl one-hl-inline">nil</code> for an element, the element is also skipped).
+</p>
+</div>
+</div>
+
+<div><h2 id="one-1f91b030b5">parsed tree, section elements and paragraph elements</h2><div><p>In our org buffer, the bold elements belong to paragraphs that belong
+to a section. We can see this by looking at the parsed tree in the buffer
+<code class="one-hl one-hl-inline">*Pp Eval Output*</code> after running the following command (being in the org
+buffer):
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x pp-eval-expression RET (org-element-parse-buffer)</code></pre>
+
+
+<p>We get the following tree ( <code class="one-hl one-hl-inline">...</code> represents information that are not related to the shape of the tree):
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-data
+ nil
+ (section
+  (...)
+  (paragraph
+   (...)
+   #(<span class="one-hl-string">"I like "</span> ...)
+   (bold
+    (...)
+    #(<span class="one-hl-string">"bold-1"</span> ...))
+   #(<span class="one-hl-string">"and "</span> ...)
+   (bold
+    (...)
+    #(<span class="one-hl-string">"bold-2"</span> ...))
+   #(<span class="one-hl-string">"and you?\nI don't.  I prefer "</span> ...)
+   (bold
+    (...)
+    #(<span class="one-hl-string">"bold-3"</span> ...))
+   #(<span class="one-hl-string">".\n"</span> ...))
+  (paragraph
+   (...)
+   #(<span class="one-hl-string">"I've loved "</span> ...)
+   (bold
+    (...)
+    #(<span class="one-hl-string">"bold-4"</span> ...))
+   #(<span class="one-hl-string">"since I was a child.\n"</span> ...))
+  (paragraph
+   (...)
+   #(<span class="one-hl-string">"I'm "</span> ...)
+   (italic
+    (...)
+    #(<span class="one-hl-string">"italic"</span> ...))
+   #(<span class="one-hl-string">"."</span> ...))))</code></pre>
+
+<p>Indeed, <code class="one-hl one-hl-inline">bold</code> elements belong to <code class="one-hl one-hl-inline">paragraph</code> elements that belong to a
+<code class="one-hl one-hl-inline">section</code> element.
+</p>
+
+<p>And as we have just seen, if a backend doesn&apos;t provide a transcoder
+for an element, this element will be ignored in the exported result.
+</p>
+
+<p>So let&apos;s write <code class="one-hl one-hl-inline">onlybold-section</code>, the transcoder of <code class="one-hl one-hl-inline">section</code> elements
+which surrounds their content with <code class="one-hl one-hl-inline">&lt;--</code> and <code class="one-hl one-hl-inline">--&gt;</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-section</span> (section contents info)
+  (concat <span class="one-hl-string">"&lt;--"</span> contents <span class="one-hl-string">"--&gt;"</span>))</code></pre>
+
+<p>and <code class="one-hl one-hl-inline">onlybold-paragraph</code>, the transcoder of <code class="one-hl one-hl-inline">paragraph</code> elements
+which surrounds their content with <code class="one-hl one-hl-inline">::</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-paragraph</span> (paragraph contents info)
+  (concat <span class="one-hl-string">"::"</span> contents <span class="one-hl-string">"::"</span>))</code></pre>
+
+<p>Then, we modify <code class="one-hl one-hl-inline">onlybold</code> backend like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)
+    (section . onlybold-section)
+    (paragraph . onlybold-paragraph)))</code></pre>
+
+<p>Now, if we call the command <code class="one-hl one-hl-inline">onlybold-export</code> inside our org buffer,
+the buffer <code class="one-hl one-hl-inline">*onlybold*</code> pops up with this content:
+</p>
+
+<pre><code class="one-hl one-hl-block">&lt;--::I like ***bold-1*** and ***bold-2*** and you?
+I don't.  I prefer ***bold-3***.
+::
+
+
+::I've loved ***bold-4*** since I was a child.
+::
+
+::I'm .
+::
+--&gt;</code></pre>
+
+<p>This is better:
+</p>
+
+<ol><li><p>The <code class="one-hl one-hl-inline">bold</code> elements has been transcoded as we expected,
+</p>
+</li>
+<li><p>The &quot;normal&quot; text remains the same as in our org buffer and,
+</p>
+</li>
+<li><p>note that the <code class="one-hl one-hl-inline">italic</code> element has been ignored (which was expected
+because we didn&apos;t provide a transcoder for <code class="one-hl one-hl-inline">italic</code> elements).
+</p>
+</li>
+</ol>
+</div>
+</div>
+
+<div><h2 id="one-e266d541e9">only keep bold elements</h2><div><p><code class="one-hl one-hl-inline">plain-text</code> elements are the leaves of the parsed tree and they are strings. This
+is the right level to operate in order to keep only <code class="one-hl one-hl-inline">bold</code> elements.
+</p>
+
+<p>So now, let&apos;s handle the <code class="one-hl one-hl-inline">plain-text</code> elements and keep only <code class="one-hl one-hl-inline">bold</code>
+elements.
+</p>
+
+<p>There is at least two ways to do it:
+</p>
+
+<ol><li><p>using the filter system provided by the org export system (and so
+provide a filter that applies to <code class="one-hl one-hl-inline">plain-text</code> elements) or,
+</p>
+</li>
+<li><p>providing a specific transcoder for <code class="one-hl one-hl-inline">plain-text</code> elements.
+</p>
+</li>
+</ol>
+
+<p>We implement the latter.
+</p>
+
+<p>Let&apos;s write the transcoder <code class="one-hl one-hl-inline">onlybold-plain-text</code> which checks if the
+<b>parent</b> of the <code class="one-hl one-hl-inline">plain-text</code> element (the string) is a <code class="one-hl one-hl-inline">bold</code> element.  If
+this is the case, we return the string and if not we return <code class="one-hl one-hl-inline">nil</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-plain-text</span> (text info)
+  (<span class="one-hl-keyword">when</span> (eq 'bold (org-element-type (org-element-property <span class="one-hl-ta-colon-keyword">:parent</span> text)))
+    text))</code></pre>
+
+<p>Note that the arity (number of arguments) of <code class="one-hl one-hl-inline">onlybold-plain-text</code> is
+different from the transcoders that we&apos;ve seen so far.
+</p>
+
+<p>Then we add it to <code class="one-hl one-hl-inline">onlybold</code> backend:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-export-define-backend 'onlybold
+  '((bold . onlybold-bold)
+    (section . onlybold-section)
+    (paragraph . onlybold-paragraph)
+    (plain-text . onlybold-plain-text)))</code></pre>
+
+<p>Now, if we call the command <code class="one-hl one-hl-inline">onlybold-export</code> inside our org buffer,
+the buffer <code class="one-hl one-hl-inline">*onlybold*</code> pops up with this content:
+</p>
+
+<pre><code class="one-hl one-hl-block">&lt;--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::
+
+::::
+--&gt;</code></pre>
+
+<p>We have filtered the text to keep only <code class="one-hl one-hl-inline">bold</code> elements.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-6e4144d08e">remove empty paragraphs and the last newline of the section</h2><div><p>Let&apos;s go further and remove the last empty paragraph.
+</p>
+
+<p>To do so, we can &quot;ask&quot; the transcoder <code class="one-hl one-hl-inline">onlybold-paragraph</code> to return <code class="one-hl one-hl-inline">nil</code>
+when its contents is &quot;empty&quot;, specifically when its content is the
+empty strings <code class="one-hl one-hl-inline">&quot;&quot;</code> or a newline <code class="one-hl one-hl-inline">&quot;\n&quot;</code>.  Here is the new implementation:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-paragraph</span> (paragraph contents info)
+  (<span class="one-hl-keyword">if</span> (member contents '(<span class="one-hl-string">""</span> <span class="one-hl-string">"\n"</span>))
+      nil
+    (concat <span class="one-hl-string">"::"</span> contents <span class="one-hl-string">"::"</span>)))</code></pre>
+
+<p>Now, if we call the command <code class="one-hl one-hl-inline">onlybold-export</code> inside our org buffer,
+the buffer <code class="one-hl one-hl-inline">*onlybold*</code> pops up with this content:
+</p>
+
+<pre><code class="one-hl one-hl-block">&lt;--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::
+--&gt;</code></pre>
+
+<p>We are almost happy :)
+</p>
+
+<p>Only one thing remains...
+</p>
+
+<p>The end of the section <code class="one-hl one-hl-inline">--&gt;</code> alone in the last line is &quot;quite ugly&quot;.
+</p>
+
+<p>Let&apos;s put it just after <code class="one-hl one-hl-inline">::</code> that close the last paragraph.
+</p>
+
+<p>We can do this by modifying <code class="one-hl one-hl-inline">onlybold-section</code> and &quot;asking&quot; it to
+remove the last newline of its content which is matched by the regexp
+<code class="one-hl one-hl-inline">&quot;\n\\&apos;&quot;</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">onlybold-section</span> (section contents info)
+  (<span class="one-hl-keyword">let</span> ((cts (replace-regexp-in-string <span class="one-hl-string">"\n\\'"</span> <span class="one-hl-string">""</span> contents)))
+    (concat <span class="one-hl-string">"&lt;--"</span> cts <span class="one-hl-string">"--&gt;"</span>)))</code></pre>
+
+<p>Now, if we call the command <code class="one-hl one-hl-inline">onlybold-export</code> inside our org buffer,
+the buffer <code class="one-hl one-hl-inline">*onlybold*</code> pops up with this content:
+</p>
+
+<pre><code class="one-hl one-hl-block">&lt;--::***bold-1*** ***bold-2*** ***bold-3***::
+
+
+::***bold-4*** ::--&gt;</code></pre>
+
+<p>We are done ;)
+</p>
+
+<p>I hope that this toy example helps you get started with the creation
+of org backends
+</p>
+</div>
+</div>
+
+<div><h2 id="one-39042b9f93">acknowledgments</h2><div><p>I want to take the opportunity of this post to thank:
+</p>
+
+<ol><li><p>Nicolas Goaziou who is the author and maintainer of
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ox.el#L1126">org-export-define-backend</a>, and <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L5989">org-element-at-point</a>.
+</p>
+</li>
+<li><p>All the people who work and contribute to org-mode (built-in and
+external packages),
+</p>
+</li>
+<li><p>All the people who work and contribute to Emacs (built-in and
+external packages).
+</p>
+</li>
+</ol>
+
+<p>And I want to tell you that:
+</p>
+
+<p>Each time a piece of your code is heavy, I know that:
+</p>
+
+<ol><li><p>this piece of code fixes a bug or,
+</p>
+</li>
+<li><p>this piece of code handles an edge case or,
+</p>
+</li>
+<li><p>this piece of code provides flexibility (via options) to the end
+user.
+</p>
+</li>
+</ol>
+
+<p>Each time your code is simple, I know that you worked hard to make
+it simple.
+</p>
+
+<p>And the more important, each time I read a piece of your code I feel
+closer to you.
+</p>
+
+<p>Emacs is pure joy and it is thanks to you.
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-02-11-closures-and-lexical-binding/">PREV</a><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">RANDOM</a><a href="/2022-02-26-org-mode-visibility-of-headings/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

@@ -1,0 +1,1535 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</h1></div><div id="meta-info"><div>2022-04-04</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/tw3fpu/search_options_in_file_links_link_abbreviations/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div>/<div>org-mode revision: 96d91bea658c</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-544cccb00e">Search options in file links</a>
+<ul>
+<li><a href="#one-3f80fe842">Search by line number</a></li>
+<li><a href="#one-ef6be1dec8">Text search</a></li>
+</ul>
+</li>
+<li><a href="#one-383ea6eca6">Link abbreviations</a>
+<ul>
+<li><a href="#one-75626175b3">An example using #+LINK: statments</a></li>
+<li><a href="#one-df620cc3a9">The global variable org-link-abbrev-alist</a></li>
+</ul>
+</li>
+<li><a href="#one-a632ef9653">How does org-open-at-point work?</a>
+<ul>
+<li><a href="#one-9c77f1ff93">Using the macro org-test-with-temp-text to build our examples</a></li>
+<li><a href="#one-f9ccc0a00c">TLDR</a></li>
+<li><a href="#one-84bd59174e">org-open-at-point</a></li>
+<li><a href="#one-a3173dbb3c">Parsing step</a>
+<ul>
+<li><a href="#one-64909b3033">org-element-context</a></li>
+<li><a href="#one-211c504f6b">org-element--object-lex</a></li>
+<li><a href="#one-6673c386fa">org-element-link-parser</a>
+<ul>
+<li><a href="#one-5774c04b8e">Programming with Elisp is magic</a></li>
+</ul>
+</li>
+<li><a href="#org-link-expand-abbrev">org-link-expand-abbrev</a></li>
+</ul>
+</li>
+<li><a href="#one-10c0aa43fa">org-link-open</a></li>
+<li><a href="#one-4e80429420">org-link-open-as-file</a></li>
+<li><a href="#one-c436e5bcfe">org-open-file</a></li>
+</ul>
+</li>
+<li><a href="#one-5c3b8dd0f8">Q&A</a></li>
+</ul>
+</div></div></div><div><p>Hey you, unconditional Emacser, fanatic Org user, fearless Elisp
+programmer,
+</p>
+
+<p>This post is for you :)
+</p>
+
+<p>We all have different needs when it comes to taking notes.  Fortunately,
+with org-mode many workflows are possible.
+</p>
+
+<p>In my case, my notes consist of:
+</p>
+
+<ol><li><p>some pieces of text (almost no markups),
+</p>
+</li>
+<li><p>many code snippets (inside source blocks) and,
+</p>
+</li>
+<li><p>many, MANY links to specific places (function, variables,
+...) in repositories that I cloned on my machine.
+</p>
+</li>
+</ol>
+
+<p>Today I want to talk about links.
+</p>
+
+<p>Let&apos;s say we are working on the function <code class="one-hl one-hl-inline">next-error</code> which is
+defined in the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> (assuming we have Emacs
+repository cloned under the directory <code class="one-hl one-hl-inline">/tmp/</code>) and we want to add
+a link in an org-mode file to that function.
+</p>
+
+<p>How do we do it?  How does it work?
+</p>
+
+<p>In this post, we answer to those questions.
+</p>
+
+<p>Let&apos;s go ;)
+</p>
+
+<p>To clone Emacs repository under the directory <code class="one-hl one-hl-inline">/tmp/</code>, you can run the
+following command (in a terminal):
+</p>
+
+<pre><code class="one-hl one-hl-block">cd /tmp/ &amp;&amp; git clone git://git.sv.gnu.org/emacs.git</code></pre>
+</div>
+
+<div><h2 id="one-544cccb00e">Search options in file links</h2><div><p>To link to the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> we can use the following
+&quot;external&quot; org link (&quot;external&quot; means a link outside the current
+buffer/file, see <span>org#External Links</span>)
+starting with the identifier <code class="one-hl one-hl-inline">file</code> following by a colon <code class="one-hl one-hl-inline">:</code> and the path
+of the file:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[file:/tmp/emacs/lisp/simple.el]]</code></pre>
+
+<p>As the file name we are providing is &quot;complete&quot; (starting by <code class="one-hl one-hl-inline">/</code>, it
+also works if it starts by <code class="one-hl one-hl-inline">~</code>, <code class="one-hl one-hl-inline">./</code> and <code class="one-hl one-hl-inline">../</code>), we can omit the <code class="one-hl one-hl-inline">file</code>
+identifier.  So, this following link will also works:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[/tmp/emacs/lisp/simple.el]]</code></pre>
+
+<p>Those links (as any links) can have descriptions like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[file:/tmp/emacs/lisp/simple.el][A DESCRIPTION]]
+[[/tmp/emacs/lisp/simple.el][A DESCRIPTION]]</code></pre>
+
+<p>but in this post we don&apos;t consider link&apos;s descriptions in the
+examples.
+</p>
+
+<p>If we call <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> (bound to <code class="one-hl one-hl-inline">C-c C-o</code> by default) on top of
+one of the previous links, we&apos;ll visit the file
+<code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> in another window (due to the default value
+of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L284">org-link-frame-setup</a>).
+</p>
+
+<p>If we just wanted to link the file <code class="one-hl one-hl-inline">simple.el</code>, we can stop here.
+</p>
+
+<p>But, we want something more specific, we want to link to the
+definition of the function <code class="one-hl one-hl-inline">next-error</code> in the file <code class="one-hl one-hl-inline">simple.el</code>.
+</p>
+
+<p>Well, Org provides a way to indicate in the link the search we want to
+perform in the file we&apos;ve indicated.  This can be done (see
+<span>org#Search Options</span>):
+</p>
+
+<ol><li><p>by adding two colons <code class="one-hl one-hl-inline">::</code> after the &quot;complete&quot; file name and,
+</p>
+</li>
+<li><p>adding the &quot;search option&quot; to perform after the two colons <code class="one-hl one-hl-inline">::</code>.
+</p>
+</li>
+</ol>
+</div>
+
+<div><h3 id="one-3f80fe842">Search by line number</h3><div><p>In our case, after visiting the file <code class="one-hl one-hl-inline">simple.el</code>, we want the result of
+the search to place the point at the beginning of the function
+definition <code class="one-hl one-hl-inline">next-error</code>.  This definition starts at the line <code class="one-hl one-hl-inline">320</code> (with
+Emacs checked out at commit <code class="one-hl one-hl-inline">0e7314f6f1</code>).
+</p>
+
+<p>In Org link, do do a &quot;search&quot; by line number, we just have to add the
+line number after the two colons <code class="one-hl one-hl-inline">::</code>.
+</p>
+
+<p>So, the following link links to the definition of the function
+<code class="one-hl one-hl-inline">next-error</code> in the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> (with Emacs checked
+out at commit <code class="one-hl one-hl-inline">0e7314f6f1</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">[[/tmp/emacs/lisp/simple.el::320]]</code></pre>
+
+<p>While, this works well, this is not my preferred method to link to the
+definion of <code class="one-hl one-hl-inline">next-error</code>, because any time the file <code class="one-hl one-hl-inline">simple.el</code> changes,
+the link to the definition might be broken.  Any changes that happened
+before the line <code class="one-hl one-hl-inline">320</code> of the function definition <code class="one-hl one-hl-inline">next-error</code> that adds or
+removes lines in some way modifies the starting lines of the function
+definition <code class="one-hl one-hl-inline">next-error</code>.
+</p>
+
+<p>(For instance before the commit <code class="one-hl one-hl-inline">2ebd950239</code> (2021-03-16) the starting
+point of the definition of <code class="one-hl one-hl-inline">next-error</code> was at line <code class="one-hl one-hl-inline">329</code>).
+</p>
+</div>
+</div>
+
+<div><h3 id="one-ef6be1dec8">Text search</h3><div><p>Let&apos;s see another type of search, the &quot;text search&quot; type, provided by
+Org link mechanism, that can link to the function <code class="one-hl one-hl-inline">next-error</code> and is
+perhaps less dependent on the changes that occurs in the file
+<code class="one-hl one-hl-inline">simple.el</code>.
+</p>
+
+<p>Specifiying the text to search in an Org link is done by adding the
+text to search after the two colons <code class="one-hl one-hl-inline">::</code> added after the file path.
+</p>
+
+<p>Recall that the function <code class="one-hl one-hl-inline">next-error</code> is defined like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">next-error</span> (<span class="one-hl-type">&amp;optional</span> arg reset)
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  )</code></pre>
+
+<p>So, to link to the definition of <code class="one-hl one-hl-inline">next-error</code> in the file
+<code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code>, we can use the (text) search option <code class="one-hl one-hl-inline">(defun
+next-error (&amp;optional</code> as done in the following link:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+<p>Calling <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> on top of that link will effectively visit
+the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> and put the point at the beginning
+of the function definition <code class="one-hl one-hl-inline">next-error</code>.
+</p>
+
+<p>If you didn&apos;t know this was possible, isn&apos;t that SUPER COOL?
+</p>
+
+<p>With those kind of links you can take your notes to ANOTHER LEVEL.
+</p>
+
+<p>OK... But why didn&apos;t we choose another text to search like:
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">(defun next-error (&amp;optional arg reset))</code> (the whole line) or,
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">(defun next-error</code> (just the beginning, up to the name of the
+function).
+</p>
+</li>
+</ol>
+
+<p>In the first case, using <code class="one-hl one-hl-inline">(defun next-error (&amp;optional arg reset))</code> as
+text search option raises an error because the text starts by a
+left parenthesis <code class="one-hl one-hl-inline">(</code> and finish by a right parenthesis <code class="one-hl one-hl-inline">)</code>.  And so,
+after visiting the file <code class="one-hl one-hl-inline">simple.el</code> (in some way) the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> searches a string that looks like <code class="one-hl one-hl-inline">(FOO)</code> with
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1106">org-link-search</a> which will do a search for a code reference (not for
+the string <code class="one-hl one-hl-inline">(FOO)</code>) and will fail.
+</p>
+
+<p>In the second case, using <code class="one-hl one-hl-inline">(defun next-error</code> as text search option puts
+the point at the beginning of the function
+<code class="one-hl one-hl-inline">next-error-buffer-on-selected-frame</code>.  This happens because the search
+done in the file <code class="one-hl one-hl-inline">simple.el</code> starts a the beginning of the buffer and
+stop at the first match which turns to be at the function
+<code class="one-hl one-hl-inline">next-error-buffer-on-selected-frame</code> which is defined before the
+function <code class="one-hl one-hl-inline">next-error</code>.
+</p>
+
+<p>Anyway, if you really want to know why the &quot;search option&quot; you&apos;ve used
+doesn&apos;t work &quot;the way it should works&quot; (note that what you think or I
+think doesn&apos;t matter, the code tell the truth), you can take a look at
+the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1106">org-link-search</a>.
+</p>
+
+<p>This is the function that does the search once the file has been
+visited, where its argument <code class="one-hl one-hl-inline">s</code> is the &quot;search option&quot; after the two
+colon <code class="one-hl one-hl-inline">::</code> in our links.
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-383ea6eca6">Link abbreviations</h2><div><p>Let&apos;s assume that in our org-mode file, we&apos;ve used the previous
+described method to link to dozens of functions and variables in the
+Emacs source code.
+</p>
+
+<p>What if we move Emacs source code from <code class="one-hl one-hl-inline">/tmp/emacs/</code> to
+<code class="one-hl one-hl-inline">/another-path-to/emacs/</code>?
+</p>
+
+<p>All our links are now dead.
+</p>
+
+<p>You might tell me: &quot;what&apos;s the problem?  You just have to search
+all the occurences of <code class="one-hl one-hl-inline">[[/tmp/emacs/</code> and replace them by
+<code class="one-hl one-hl-inline">[[/another-path-to/emacs/</code>.  There are many way to do this (with the
+utility <code class="one-hl one-hl-inline">sed</code>, or from within Emacs with <code class="one-hl one-hl-inline">query-replace</code> for instance).&quot;
+</p>
+
+<p>And yes this is possible, but org-mode is SO GOOD that it provides a
+mechanism that mitigates a lot this case of scenario that is call:
+link abbreviations (see <span>org#Link Abbreviations</span>).
+</p>
+
+<p>Link abbreviations allow us to declare mappings between
+abbreviations (that are a word, starting with a letter, followed by
+letters, numbers, hyphens <code class="one-hl one-hl-inline">-</code>  and underscores <code class="one-hl one-hl-inline">_</code>) and links.  And
+instead of using the links in the bracket links we use the
+abbreviations.
+</p>
+
+<p>This can be done:
+</p>
+
+<ol><li><p>localy (that means per file/buffer) using the org keyword <code class="one-hl one-hl-inline">LINK</code> or,
+</p>
+</li>
+<li><p>globally (valid for all org files) defining the mapping in the
+variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a>.
+</p>
+</li>
+</ol>
+
+<p>Let&apos;s see how to use it with an example.
+</p>
+</div>
+
+<div><h3 id="one-75626175b3">An example using #+LINK: statments</h3><div><p>By evaluating the following s-exp in the minibuffer (<code class="one-hl one-hl-inline">M-x
+eval-expression</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">with-current-buffer</span> (get-buffer-create <span class="one-hl-string">"*link abbrev*"</span>)
+  (org-mode))
+(switch-to-buffer <span class="one-hl-string">"*link abbrev*"</span>)</code></pre>
+
+<p>we create the org-mode buffer <code class="one-hl one-hl-inline">*link abbrev*</code> and we display it in the
+selected window.
+</p>
+
+<p>In this buffer, we add the following abbreviated link that map the
+abbreviation <code class="one-hl one-hl-inline">emacs</code> to the link <code class="one-hl one-hl-inline">/tmp/emacs/</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/</code></pre>
+
+<p>Then we add the following link <code class="one-hl one-hl-inline">[[emacs]]</code> in the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>,
+that should looks like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]</code></pre>
+
+<p>With the point (the cursor) on top of that link, let&apos;s type <code class="one-hl one-hl-inline">C-c C-o</code>
+(bound to <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> by default).
+</p>
+
+<p>What happened?
+</p>
+
+<p>Our cursor moved to the beginning of the word <code class="one-hl one-hl-inline">emacs</code> after the keyword
+<code class="one-hl one-hl-inline">LINK</code>.
+</p>
+
+<p>What?
+</p>
+
+<p>Maybe you were expecting something different, like to visit a dired
+buffer listing the directory <code class="one-hl one-hl-inline">/tmp/emacs/</code>.
+</p>
+
+<p>But, <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> did a text search in the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>
+from its beginning and stopped at the first match of the word <code class="one-hl one-hl-inline">emacs</code>.
+</p>
+
+<p>This is the normal behavior.
+</p>
+
+<p>What we forget is to &quot;active&quot; (to set) the abbreviated link in the
+buffer.
+</p>
+
+<p>To do so, we can type <code class="one-hl one-hl-inline">C-c C-c</code> with point on the line starting by
+<code class="one-hl one-hl-inline">#+LINK:</code>.  This restarts <code class="one-hl one-hl-inline">org-mode</code> and as consequence, due to the
+declaration of the link abbreviation set the local variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> to:
+</p>
+
+<pre><code class="one-hl one-hl-block">((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))</code></pre>
+
+<p>as we can see by running the following with the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>
+being the current buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x eval-expression RET org-link-abbrev-alist-local</code></pre>
+
+
+<p>Now, in the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>, with the point on top of the link
+<code class="one-hl one-hl-inline">[[emacs]],</code> by pressing <code class="one-hl one-hl-inline">C-c C-o</code> we visit a dired buffer listing the
+directory <code class="one-hl one-hl-inline">/tmp/emacs/</code>.
+</p>
+
+<p>If we want to link to the file <code class="one-hl one-hl-inline">lisp/simple.el</code> in the directory
+<code class="one-hl one-hl-inline">/tmp/emacs/</code> using the abbreviation <code class="one-hl one-hl-inline">emacs</code>, we add a colon <code class="one-hl one-hl-inline">:</code> after the
+abbreviation and the rest of the file name after this colon like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]
+2) link to the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el]]</code></pre>
+
+<p>Now, in the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>, with the point on top of the link
+<code class="one-hl one-hl-inline">[[emacs:lisp/simple.el]],</code> by pressing <code class="one-hl one-hl-inline">C-c C-o</code> we visit the file
+<code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code>.
+</p>
+
+<p>If we want to link to the function <code class="one-hl one-hl-inline">next-error</code> in the file <code class="one-hl one-hl-inline">simple.el</code> as
+we did in the previous section but this time using the abbreviation
+<code class="one-hl one-hl-inline">emacs</code>, we use the same syntax.  Specifically, after the abbreviated link
+<code class="one-hl one-hl-inline">emacs:lisp/simple.el</code>, we add two colons <code class="one-hl one-hl-inline">::</code> and the search option
+<code class="one-hl one-hl-inline">(defun next-error (&amp;optional</code> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/
+
+1) link to the directory ~/tmp/emacs/~
+   - [[emacs]]
+2) link to the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el]]
+3) link to the function ~next-error~ in the file ~/tmp/emacs/lisp/simple.el~
+   - [[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+<p>Now, in the buffer <code class="one-hl one-hl-inline">*link abbrev*</code>, with the point on top of the link
+<code class="one-hl one-hl-inline">[[emacs:lisp/simple.el::(defun next-error (&amp;optional]],</code> by pressing
+<code class="one-hl one-hl-inline">C-c C-o</code> we jump to the beginning of the function <code class="one-hl one-hl-inline">next-error</code> in the
+file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code>.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-df620cc3a9">The global variable org-link-abbrev-alist</h3><div><p>Link abbreviations can be defined globally, by setting the variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a>.
+</p>
+
+<p>For instance, to define the abbreviation <code class="one-hl one-hl-inline">emacs</code> that maps to the link
+(here file path) <code class="one-hl one-hl-inline">/tmp/emacs/</code>, we define <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a> like
+this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> org-link-abbrev-alist '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>)))</code></pre>
+
+<p>Assuming we also want to define the abbreviation <code class="one-hl one-hl-inline">org-mode</code> (along with
+<code class="one-hl one-hl-inline">emacs</code> abbreviation) that maps to the link <code class="one-hl one-hl-inline">/tmp/org-mode/</code>, we can
+defined <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a> like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> org-link-abbrev-alist
+      '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>)
+        (<span class="one-hl-string">"org-mode"</span> . <span class="one-hl-string">"/tmp/org-mode/"</span>)))</code></pre>
+
+<p>Note, that per buffer link abbreviations (defined with <code class="one-hl one-hl-inline">#+LINK:</code>) take
+precedence over global abbreviation defined in <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-a632ef9653">How does org-open-at-point work?</h2><div><h3 id="one-9c77f1ff93">Using the macro org-test-with-temp-text to build our examples</h3><div><p>As we can read in the docstring of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>, this command
+can &quot;open&quot; the link, the timestamp, the footnote or the tags at
+point.
+</p>
+
+<p>This commands is versatile and does a lot.
+</p>
+
+<p>In this post, we won&apos;t discuss all the possibilities offered by
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> depending on the &quot;context&quot; of the org object at
+point.
+</p>
+
+<p>We narrow our &quot;study&quot; to the abbreviated link discussed in the
+previous section:
+</p>
+
+<pre><code class="one-hl one-hl-block">[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+
+<p>in a buffer where the local value of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> is
+set to:
+</p>
+
+<pre><code class="one-hl one-hl-block">((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))</code></pre>
+
+<p>We could use an org-mode buffer containing the following content
+</p>
+
+<pre><code class="one-hl one-hl-block">#+LINK: emacs /tmp/emacs/
+
+[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+<p>to do our &quot;study&quot;, but we prefer to take another approach and build
+the examples with the macro <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a> that we discussed
+in the post <a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode&apos;s source code contains more than 5000 examples?</a>.
+</p>
+
+<p>This macro allows to evaluate the forms after the first argument being
+a string that is inserted in an org-mode buffer made current, with
+the point at the beginning of the buffer if there is no substring
+<code class="one-hl one-hl-inline">&lt;point&gt;</code> in the first argument.
+</p>
+
+<p>For instance, the action of calling the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> with
+the point before the first bracket in the previous org-mode buffer
+(assuming the link abbreviation has been set), could be reproduced by
+evaluating the following form that uses <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/testing/org-test.el#L185">org-test-with-temp-text</a>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"#+LINK: emacs /tmp/emacs/
+
+&lt;point&gt;[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (org-mode-restart)
+  (org-open-at-point))</code></pre>
+
+<p>In this previous form, the call to <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L17886">org-mode-restart</a> is used to set the
+(local) abbreviated link.  In other term, to set the local variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> to <code class="one-hl one-hl-inline">((&quot;emacs&quot; . &quot;/tmp/emacs/&quot;))</code>.
+</p>
+
+<p>And to make everything &quot;transparent&quot;, in the preceding form, we can
+replace the <code class="one-hl one-hl-inline">#+LINK:</code> statment and the call to <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L17886">org-mode-restart</a> by a <code class="one-hl one-hl-inline">let</code>
+binding of the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> in which we call
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> with the point still before the first bracket:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-open-at-point)))</code></pre>
+
+<p>As we&apos;ve set our working environment, we can continue our tour :)
+</p>
+</div>
+</div>
+
+<div><h3 id="one-f9ccc0a00c">TLDR</h3><div><p>Before going into the details, we present an overview of the &quot;call
+stack&quot; implied by the call of the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> in the
+following form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-open-at-point)))</code></pre>
+
+<p>The &quot;call stack&quot; can be represented like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">org-open-at-point
+&#9474;
+&#9492;&gt; org-link-open
+   &#9474;
+   &#9492;&gt; org-link-open-as-file
+      &#9474;
+      &#9492;&gt; org-open-file
+         &#9474;
+         &#9492;&gt; org-link-search</code></pre>
+
+<p>This &quot;call stack&quot; brings some information but not as much as if we had
+provided the arguments passed to each function for each call.
+</p>
+
+<p>Here are the function calls with their arguments as they appear when
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> is called.
+</p>
+
+<p>First, we have:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-open-at-point)))</code></pre>
+
+<p>That leads to this function call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open
+ '(link
+   (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+    <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+    <span class="one-hl-ta-colon-keyword">:format</span> bracket
+    <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:application</span> nil
+    <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:begin</span> 1
+    <span class="one-hl-ta-colon-keyword">:end</span> 55
+    <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+    <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+    <span class="one-hl-ta-colon-keyword">:post-blank</span> 0
+    <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph (... <span class="one-hl-ta-colon-keyword">:parent</span> (section (... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data (...))))))))
+ nil)</code></pre>
+
+<p>Which leads to this function call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open-as-file <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span> nil)</code></pre>
+
+<p>Which leads to this function call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-open-file <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span> nil nil <span class="one-hl-string">"(defun next-error"</span>)</code></pre>
+
+<p>Which after visiting the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> leads to this
+last function call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-search <span class="one-hl-string">"(defun next-error (&amp;optional"</span>)</code></pre>
+
+<p>If you are interesting about the details here we go!
+</p>
+</div>
+</div>
+
+<div><h3 id="one-84bd59174e">org-open-at-point</h3><div><p>Besides a check for some org modules, recording the window
+configuration and removing the occur highlights from the buffer,
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> does the following:
+</p>
+
+<ol><li><p>check if the user has defined some functions in the hook
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8926">org-open-at-point-functions</a> (<code class="one-hl one-hl-inline">nil</code> by default) that can &quot;open&quot; the
+link at point:
+</p>
+<ol><li><p>if this the case, &quot;open&quot; the link with that function,
+</p>
+</li>
+<li><p>if this is not the case do other stuff that we discuss below,
+</p>
+</li>
+</ol>
+</li>
+<li><p>after the link has been followed, no matter how, run the hook
+<code class="one-hl one-hl-inline">org-follow-link-hook</code>.
+</p>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-open-at-point</span> (<span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">interactive</span> <span class="one-hl-string">"P"</span>)
+  (org-load-modules-maybe)
+  (<span class="one-hl-keyword">setq</span> org-window-config-before-follow-link (current-window-configuration))
+  (org-remove-occur-highlights nil nil t)
+  (<span class="one-hl-keyword">unless</span> (run-hook-with-args-until-success 'org-open-at-point-functions)
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    )
+  (run-hook-with-args 'org-follow-link-hook))</code></pre>
+
+<p>In our case (as the hook <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8926">org-open-at-point-functions</a> is <code class="one-hl one-hl-inline">nil</code>),
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> enters in the <code class="one-hl one-hl-inline">unless</code> block.  In, the <code class="one-hl one-hl-inline">unless</code> block,
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>:
+</p>
+
+<ol><li><p>locally sets the variable <code class="one-hl one-hl-inline">context</code> to be an appropriate org object
+or org element (as understood by <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el">lisp/org-element.el</a>),
+</p>
+</li>
+<li><p>locally sets the variable <code class="one-hl one-hl-inline">type</code> to be the type of <code class="one-hl one-hl-inline">context</code>, in our
+case, <code class="one-hl one-hl-inline">type</code> is equal to the symbol <code class="one-hl one-hl-inline">link</code>,
+</p>
+</li>
+<li><p>calls an appropriate function depending on the value of <code class="one-hl one-hl-inline">link</code>, in our
+case, the call is the following where <code class="one-hl one-hl-inline">arg</code> is the prefix argument:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open context arg)</code></pre>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-open-at-point</span> (<span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"..."</span>
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  (<span class="one-hl-keyword">unless</span> (run-hook-with-args-until-success 'org-open-at-point-functions)
+    (<span class="one-hl-keyword">let*</span> ((context
+            (org-element-lineage
+             (org-element-context)
+             '(citation citation-reference clock comment comment-block
+                        footnote-definition footnote-reference headline
+                        inline-src-block inlinetask keyword link node-property
+                        planning src-block timestamp)
+             t))
+           (type (org-element-type context))
+           <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>           )
+      (<span class="one-hl-keyword">cond</span>
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       ((eq type 'link) (org-link-open context arg))
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       )))
+  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>  )</code></pre>
+
+<p>We can compute the value assigned to the variable <code class="one-hl one-hl-inline">context</code> by
+evaluating this form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-element-lineage
+     (org-element-context)
+     '(citation citation-reference clock comment comment-block
+                footnote-definition footnote-reference headline
+                inline-src-block inlinetask keyword link node-property
+                planning src-block timestamp)
+     t)))</code></pre>
+
+<p>which gives us:
+</p>
+
+<pre><code class="one-hl one-hl-block">(link
+ (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+  <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+  <span class="one-hl-ta-colon-keyword">:format</span> bracket
+  <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:application</span> nil
+  <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:begin</span> 1
+  <span class="one-hl-ta-colon-keyword">:end</span> 55
+  <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+  <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+  <span class="one-hl-ta-colon-keyword">:post-blank</span> 0
+  <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph (... <span class="one-hl-ta-colon-keyword">:parent</span> (section (... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data (...))))))))</code></pre>
+
+<p>So in the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>, our bracket link is parsed into
+a list that is then passed as first argument to the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1035">org-link-open</a> that way:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open
+ '(link
+   (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+    <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+    <span class="one-hl-ta-colon-keyword">:format</span> bracket
+    <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:application</span> nil
+    <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:begin</span> 1
+    <span class="one-hl-ta-colon-keyword">:end</span> 55
+    <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+    <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+    <span class="one-hl-ta-colon-keyword">:post-blank</span> 0
+    <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph (... <span class="one-hl-ta-colon-keyword">:parent</span> (section (... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data (...))))))))
+ nil)</code></pre>
+
+<p>We&apos;ll look at this function call in a moment, but for now let&apos;s get
+closer to the parsing step.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-a3173dbb3c">Parsing step</h3><div><h4 id="one-64909b3033">org-element-context</h4><div><p>There are many things we can look at regarding the parsing of this
+link, but here we restrict our study to the path (value of <code class="one-hl one-hl-inline">:path</code>
+keyword in the plist) and the search option (value of <code class="one-hl one-hl-inline">:search-option</code>
+keyword in the plist).
+</p>
+
+<p>The way <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6156">org-element-lineage</a> works and the arguments we gave it
+implies that the link object we got is the same object returned by the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a> that can be computed as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-element-context)))</code></pre>
+
+<p><a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a> returns the smallest element or object at point.
+</p>
+
+<p>This happens by:
+</p>
+
+<ol><li><p>getting the element at point using <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L5989">org-element-at-point</a>,
+</p>
+</li>
+<li><p>as this element is of type <code class="one-hl one-hl-inline">paragraph</code>, narrow the buffer according
+to the limits of that element (nothing changed here because the
+limits of the <code class="one-hl one-hl-inline">paragraph</code> are the limits of the whole buffer),
+</p>
+</li>
+<li><p>search for a &quot;valid&quot; object (i.e. that belongs to the list returned by
+<code class="one-hl one-hl-inline">(org-element-restriction &apos;paragraph)</code>) in the narrowed region
+containing point, iterating over all the objects in the narrowed
+region using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L4581">org-element--object-lex</a> that returns,
+starting from point, the next object respecting a given restriction
+which turned out to be the restriction of the container element.
+</p>
+</li>
+<li><p>when the object is found, return it (with its <code class="one-hl one-hl-inline">:parent</code> property
+set &quot;correctly&quot; using <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L494">org-element-put-property</a>), if none, return
+the element container.
+</p>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-element-context</span> (<span class="one-hl-type">&amp;optional</span> element)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">objects-forbidden</span>
+    (<span class="one-hl-keyword">org-with-wide-buffer</span>
+     (<span class="one-hl-keyword">let*</span> ((pos (point))
+            (element (<span class="one-hl-keyword">or</span> element (org-element-at-point)))
+            (type (org-element-type element))
+            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>            )
+       (<span class="one-hl-keyword">cond</span>
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">At a paragraph, a table-row or a verse block, objects are
+</span>        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">located within their contents.
+</span>        ((memq type '(paragraph table-row verse-block))
+         (<span class="one-hl-keyword">let</span> ((cbeg (org-element-property <span class="one-hl-ta-colon-keyword">:contents-begin</span> element))
+               (cend (org-element-property <span class="one-hl-ta-colon-keyword">:contents-end</span> element)))
+           (<span class="one-hl-keyword">if</span> (<span class="one-hl-keyword">and</span> cbeg cend (&gt;= pos cbeg)
+                    (<span class="one-hl-keyword">or</span> (&lt; pos cend) (<span class="one-hl-keyword">and</span> (= pos cend) (eobp))))
+               (narrow-to-region cbeg cend)
+             (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">objects-forbidden</span> element))))
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+       (goto-char (point-min))
+       (<span class="one-hl-keyword">let</span> ((restriction (org-element-restriction type))
+             (parent element)
+             last)
+         (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">exit</span>
+           (<span class="one-hl-keyword">while</span> t
+             (<span class="one-hl-keyword">let</span> ((next (org-element--object-lex restriction)))
+               (<span class="one-hl-keyword">when</span> next (org-element-put-property next <span class="one-hl-ta-colon-keyword">:parent</span> parent))
+               (<span class="one-hl-keyword">if</span> (<span class="one-hl-keyword">or</span> (not next) (&gt; (org-element-property <span class="one-hl-ta-colon-keyword">:begin</span> next) pos))
+                   (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">exit</span> (<span class="one-hl-keyword">or</span> last parent))
+                 (<span class="one-hl-keyword">let</span> ((end (org-element-property <span class="one-hl-ta-colon-keyword">:end</span> next))
+                       (cbeg (org-element-property <span class="one-hl-ta-colon-keyword">:contents-begin</span> next))
+                       (cend (org-element-property <span class="one-hl-ta-colon-keyword">:contents-end</span> next)))
+                   (<span class="one-hl-keyword">cond</span>
+                    (
+                     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Skip objects ending before point. ...
+</span>                     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">move point
+</span>                     (goto-char end)
+                     (<span class="one-hl-keyword">when</span> (<span class="one-hl-keyword">and</span> (= end pos) (not (memq (char-before) '(?\s ?\t))))
+                       (<span class="one-hl-keyword">setq</span> last next)))
+                    (
+                     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">If POS is within a container object, move into that object.
+</span>                     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">move point
+</span>                     (goto-char cbeg)
+                     (narrow-to-region (point) cend)
+                     (<span class="one-hl-keyword">setq</span> parent next)
+                     (<span class="one-hl-keyword">setq</span> restriction (org-element-restriction next)))
+                    (t
+                     (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">exit</span> next)))))))))))))</code></pre>
+
+<p>So, the object that <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a> returned in our specific case
+is exactly the same as the evaluation of the following s-exp returns:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let*</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>)))
+         (parent (org-element-at-point))
+         (restriction (org-element-restriction 'paragraph))
+         (object (org-element--object-lex restriction)))
+    (org-element-put-property object <span class="one-hl-ta-colon-keyword">:parent</span> parent)))</code></pre>
+
+<p>which is:
+</p>
+
+<pre><code class="one-hl one-hl-block">(link
+ (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+  <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+  <span class="one-hl-ta-colon-keyword">:format</span> bracket
+  <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:application</span> nil
+  <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:begin</span> 1
+  <span class="one-hl-ta-colon-keyword">:end</span> 55
+  <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+  <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+  <span class="one-hl-ta-colon-keyword">:post-blank</span> 0
+  <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph (... <span class="one-hl-ta-colon-keyword">:parent</span> (section (... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data (...))))))))</code></pre>
+</div>
+</div>
+
+<div><h4 id="one-211c504f6b">org-element--object-lex</h4><div><p>In <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a>, the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L4581">org-element--object-lex</a>, starting
+at the beginning of the narrowed region, does the following:
+</p>
+
+<ol><li><p>searches for the beginning of a valid object matching the regular
+expression <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L139">org-element--object-regexp</a>,
+</p>
+</li>
+<li><p>moves point to the beginning of the match,
+</p>
+</li>
+<li><p>locally sets the variable <code class="one-hl one-hl-inline">result</code> to be the previous match,
+</p>
+</li>
+<li><p>finds that the character after point matches a left bracket <code class="one-hl one-hl-inline">[</code>
+(written <code class="one-hl one-hl-inline">?\[</code> in elisp),
+</p>
+</li>
+<li><p>then finds that: a) the second element of <code class="one-hl one-hl-inline">result</code> (<code class="one-hl one-hl-inline">(aref result 1)</code>)
+matches another left bracket and b) <code class="one-hl one-hl-inline">link</code> is part of the valid
+object to parse (<code class="one-hl one-hl-inline">restriction</code>),
+</p>
+</li>
+<li><p>due to the checks done at step 5), calls the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a> to parse the link at point,
+</p>
+</li>
+<li><p>then sets the local variable <code class="one-hl one-hl-inline">found</code> to be that link,
+</p>
+</li>
+<li><p>and finally returned <code class="one-hl one-hl-inline">found</code> (the link).
+</p>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L4581">org-element--object-lex</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-element--object-lex</span> (restriction)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">cond</span>
+   <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>   (t
+    (<span class="one-hl-keyword">let*</span> ((start (point))
+           (limit
+            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>            )
+           found)
+      (<span class="one-hl-keyword">save-excursion</span>
+        (<span class="one-hl-keyword">while</span> (<span class="one-hl-keyword">and</span> (not found)
+                    (re-search-forward org-element--object-regexp limit 'move))
+          (goto-char (match-beginning 0))
+          (<span class="one-hl-keyword">let</span> ((result (match-string 0)))
+            (<span class="one-hl-keyword">setq</span> found
+                  (<span class="one-hl-keyword">cond</span>
+                   <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">..
+</span>                   (t
+                    (<span class="one-hl-keyword">pcase</span> (char-after)
+                      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                      (?\[
+                       (<span class="one-hl-keyword">pcase</span> (aref result 1)
+                         ((<span class="one-hl-keyword">and</span> ?\[
+                               (guard (memq 'link restriction)))
+                          (org-element-link-parser))
+                         <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                         ))
+                      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                      ))))
+            <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>            ))
+        (<span class="one-hl-keyword">cond</span> (found)
+              <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>              ))))))</code></pre>
+</div>
+</div>
+
+<div><h4 id="one-6673c386fa">org-element-link-parser</h4><div><p>So, leaving aside the parent of the link object that
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L6028">org-element-context</a> returns, in our specific case the propreties of
+the link object we are interested in are computed by the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a>, and we can see that by evaluating the
+following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-test-with-temp-text <span class="one-hl-string">"[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]"</span>
+  (<span class="one-hl-keyword">let*</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+    (org-element-link-parser)))</code></pre>
+
+<p>which gives us the following link object:
+</p>
+
+<pre><code class="one-hl one-hl-block">(link
+ (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+  <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+  <span class="one-hl-ta-colon-keyword">:format</span> bracket
+  <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:application</span> nil
+  <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+  <span class="one-hl-ta-colon-keyword">:begin</span> 1
+  <span class="one-hl-ta-colon-keyword">:end</span> 55
+  <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+  <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+  <span class="one-hl-ta-colon-keyword">:post-blank</span> 0))</code></pre>
+
+<p>Let&apos;s break down what the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a> does when
+we evaluted the previous s-exp:
+</p>
+
+<ol><li><p>the link at point is recognized as a bracket link via the condition
+<code class="one-hl one-hl-inline">(looking-at org-link-bracket-re)</code> in the second clause of the main
+<code class="one-hl one-hl-inline">cond</code> special form,
+</p>
+</li>
+<li><p>then the expressions in the body of this clause are evaluated,
+</p>
+</li>
+<li><p>one of them sets the local variable <code class="one-hl one-hl-inline">raw-link</code> to be the link matched
+by the first subexpression in <code class="one-hl one-hl-inline">org-link-bracket-re</code> where some string
+manipulation are realized before expanding the abbreviation part
+(its first part, which is <code class="one-hl one-hl-inline">emacs</code>) using the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a> and replaced it by <code class="one-hl one-hl-inline">/tmp/emacs/</code>,
+</p>
+</li>
+<li><p>then another expression in that same clause checks that <code class="one-hl one-hl-inline">raw-link</code>
+looks like a file, sets the local variable <code class="one-hl one-hl-inline">type</code> to be the string
+<code class="one-hl one-hl-inline">&quot;file&quot;</code> and set the local variable <code class="one-hl one-hl-inline">path</code> to be equal to <code class="one-hl one-hl-inline">raw-link</code>,
+</p>
+</li>
+<li><p>then out of the main <code class="one-hl one-hl-inline">cond</code> special form, given that the link is of
+type <code class="one-hl one-hl-inline">file</code>, the local variable <code class="one-hl one-hl-inline">search-option</code> is set to be right part
+(part after the substring <code class="one-hl one-hl-inline">::</code>) of the variable <code class="one-hl one-hl-inline">path</code> (still being the
+string <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional&quot;</code>),
+and then set the variable <code class="one-hl one-hl-inline">path</code> to be the left part (part before the
+substring <code class="one-hl one-hl-inline">::</code>) of itself.
+</p>
+</li>
+<li><p>finally, it returns the link object being a list where its car
+is the symbol <code class="one-hl one-hl-inline">link</code> and the cdr is a property list where for
+instance, the keyword <code class="one-hl one-hl-inline">:search-option</code> is associated with the value
+<code class="one-hl one-hl-inline">search-option</code> previously computed.
+</p>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-element-link-parser</span> ()
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">catch</span> '<span class="one-hl-constant">no-object</span>
+    (<span class="one-hl-keyword">let</span> ((begin (point))
+          <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>          type path raw-link search-option)
+      (<span class="one-hl-keyword">cond</span>
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       ((looking-at org-link-bracket-re)
+        (<span class="one-hl-keyword">setq</span> raw-link (org-link-expand-abbrev
+                        (org-link-unescape
+                         (replace-regexp-in-string
+                          <span class="one-hl-string">"[ \t]*\n[ \t]*"</span> <span class="one-hl-string">" "</span>
+                          (match-string-no-properties 1)))))
+        (<span class="one-hl-keyword">cond</span>
+         ((<span class="one-hl-keyword">or</span> (file-name-absolute-p raw-link)
+              (string-match <span class="one-hl-string">"\\`\\.\\.?/"</span> raw-link))
+          (<span class="one-hl-keyword">setq</span> type <span class="one-hl-string">"file"</span>)
+          (<span class="one-hl-keyword">setq</span> path raw-link))
+         <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>         ))
+       <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>       (t (<span class="one-hl-keyword">throw</span> '<span class="one-hl-constant">no-object</span> nil)))
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>      (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"\\`file</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(?:</span></span><span class="one-hl-string">\\+</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.+</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">?\\'"</span> type)
+        (<span class="one-hl-keyword">setq</span> application (match-string 1 type))
+        (<span class="one-hl-keyword">setq</span> type <span class="one-hl-string">"file"</span>)
+        (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+          (<span class="one-hl-keyword">setq</span> search-option (match-string 1 path))
+          (<span class="one-hl-keyword">setq</span> path (replace-match <span class="one-hl-string">""</span> nil nil path)))
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>      (list 'link
+            (list <span class="one-hl-ta-colon-keyword">:type</span> type
+                  <span class="one-hl-ta-colon-keyword">:path</span> path
+                  <span class="one-hl-ta-colon-keyword">:raw-link</span> (<span class="one-hl-keyword">or</span> raw-link path)
+                  <span class="one-hl-ta-colon-keyword">:search-option</span> search-option
+                  <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                  )))))</code></pre>
+</div>
+
+<div><h5 id="one-5774c04b8e">Programming with Elisp is magic</h5><div><p>What&apos;s magic when programming Elisp code is that at any time we can
+extract a little part of the program, replace some symbols by custom
+values, send it to the minibuffer with <code class="one-hl one-hl-inline">M-x eval-expression</code> (or
+<code class="one-hl one-hl-inline">pp-eval-expression</code>), press <code class="one-hl one-hl-inline">RET</code>, and automatically get back some value
+in the echo area (or in the dedicated buffer <code class="one-hl one-hl-inline">*Pp Eval Output*</code>).
+</p>
+
+<p>In almost no time, misconceptions about what a program does (or why
+a program fails) can be spot that way.
+</p>
+
+<p>Let&apos;s say we want to be sure that the following snippet in the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a> does what it seems to do:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+  (<span class="one-hl-keyword">setq</span> search-option (match-string 1 path))
+  (<span class="one-hl-keyword">setq</span> path (replace-match <span class="one-hl-string">""</span> nil nil path)))</code></pre>
+
+<p>In our example, at that point in the function, the local variable <code class="one-hl one-hl-inline">path</code>
+has the string value <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error
+(&amp;optional&quot;</code>.  We can test the result of the <code class="one-hl one-hl-inline">when</code> condition by
+evaluating the following:
+</p>
+
+<pre><code class="one-hl one-hl-block">(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">25</span></code></pre>
+
+<p>By reading the help of <code class="one-hl one-hl-inline">string-match</code>, we know that it returns the index
+of the start of the first match or nil.
+</p>
+
+<p>Ok, there&apos;s a match.
+</p>
+
+<p>But, to me the string <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error
+(&amp;optional&quot;</code> is to long with to many repetive characters that don&apos;t
+appear in the regexp <code class="one-hl one-hl-inline">&quot;::\\(.*\\)\\&apos;&quot;</code> to wrap my head around what&apos;s
+going on.
+</p>
+
+<p>So, let&apos;s use the good <code class="one-hl one-hl-inline">foo</code> and <code class="one-hl one-hl-inline">bar</code> words to simplify our discoveries
+and gain confidence about this piece of code.
+</p>
+
+<p>In the regexp, the only part &quot;that seems&quot; of interest is <code class="one-hl one-hl-inline">::</code>, so let&apos;s
+try again with the strings <code class="one-hl one-hl-inline">&quot;/tmp/foo::bar&quot;</code>, <code class="one-hl one-hl-inline">&quot;/tmp/foo::&quot;</code> and
+<code class="one-hl one-hl-inline">&quot;/tmp/foo&quot;</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo::bar"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">8
+</span>(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo::"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">8
+</span>(string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> <span class="one-hl-string">"/tmp/foo"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">nil</span></code></pre>
+
+<p>It become clearer.  We start to get a sense of the match.
+</p>
+
+<p>By reading the documentation (<span>elisp#Simple Match Data</span>), we
+learn (or recall):
+</p>
+
+<ol><li><p>that search functions like <code class="one-hl one-hl-inline">string-match</code> or <code class="one-hl one-hl-inline">looking-at</code> set the
+match data for every successful search,
+</p>
+</li>
+<li><p>and if the first argument of <code class="one-hl one-hl-inline">match-string</code> is <code class="one-hl one-hl-inline">0</code>, we get the entire
+matching text and if it&apos;s <code class="one-hl one-hl-inline">1</code> we get the first parenthetical
+subexpression of the given regular expression.
+</p>
+</li>
+</ol>
+
+<p>So, continuing with the string <code class="one-hl one-hl-inline">&quot;/tmp/foo::bar&quot;</code>, we
+have:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    (list (match-string 0 path)
+          (match-string 1 path))))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">("::bar" "bar")</span></code></pre>
+
+<p>Reading the help buffer about <code class="one-hl one-hl-inline">replace-match</code> tells us that this
+function replaces the text matched by the last search with its first
+argument.  And if we give it an optional fourth argument being a
+string, the replacement is made on that string.
+</p>
+
+<p>So replacing the entire match with the empty string <code class="one-hl one-hl-inline">&quot;&quot;</code> should remove
+the matched part of the string:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    (replace-match <span class="one-hl-string">""</span> nil nil path)))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"/tmp/foo"</span></code></pre>
+
+<p>Now putting everything together we can write the following example:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((path <span class="one-hl-string">"/tmp/foo::bar"</span>))
+  (<span class="one-hl-keyword">when</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+    `(<span class="one-hl-ta-colon-keyword">:search-option</span> ,(match-string 1 path)
+      <span class="one-hl-ta-colon-keyword">:path</span>          ,(replace-match <span class="one-hl-string">""</span> nil nil path))))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">(:search-option "bar"
+</span><span class="one-hl-comment-delimiter">;;  </span><span class="one-hl-comment">:path          "/tmp/foo")</span></code></pre>
+
+<p>And maybe we&apos;ve removed some misconceptions about this part of the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-element.el#L3255">org-element-link-parser</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div><h4 id="org-link-expand-abbrev">org-link-expand-abbrev</h4><div><p>Regarding the parsing step of the link, we still have one function
+to cover: <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a>.
+</p>
+
+<p>This function replaces the link abbreviation in the link string
+looking up at the variables <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a> and
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a>.
+</p>
+
+<p>In our case we expect it to transform the link (as a string)
+<code class="one-hl one-hl-inline">&quot;emacs:lisp/simple.el::(defun next-error (&amp;optional&quot;</code> into the link (as
+a string) <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional&quot;</code>
+given that the local variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> is set to
+<code class="one-hl one-hl-inline">&apos;((&quot;emacs&quot; . &quot;/tmp/emacs/&quot;))</code> when we call it.
+</p>
+
+<p>A bunch of examples are often better to describe function calls than to
+stare at the source.  So, let&apos;s do 4 evaluations that shows how
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a> behaves (given our specific link) and its
+relation (dependency) with the variables <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a> and
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a>.  To make those example more readable (as
+done previously), we use as input the &quot;fake&quot; link <code class="one-hl one-hl-inline">&quot;emacs:foo::bar&quot;</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-expand-abbrev <span class="one-hl-string">"emacs:foo::bar"</span>)
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"emacs:foo::bar"
+</span>
+(<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"XXX"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+  (org-link-expand-abbrev <span class="one-hl-string">"emacs:foo::bar"</span>))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"emacs:foo::bar"
+</span>
+(<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+  (org-link-expand-abbrev <span class="one-hl-string">"emacs:foo::bar"</span>))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"/tmp/emacs/foo::bar"
+</span>
+(<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/TMP/EMACS/"</span>))))
+  (org-link-expand-abbrev <span class="one-hl-string">"emacs:foo::bar"</span>))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"/TMP/EMACS/foo::bar"
+</span>
+(<span class="one-hl-keyword">let</span> ((org-link-abbrev-alist '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/TMP/EMACS/"</span>)))
+      (org-link-abbrev-alist-local '((<span class="one-hl-string">"emacs"</span> . <span class="one-hl-string">"/tmp/emacs/"</span>))))
+  (org-link-expand-abbrev <span class="one-hl-string">"emacs:foo::bar"</span>))
+<span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">"/tmp/emacs/foo::bar"</span></code></pre>
+
+<p>So, what did we learnt from running those examples:
+</p>
+
+<ol><li><p>if none of the variables <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a> and
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> are defined the link is not expanded,
+</p>
+</li>
+<li><p>If one of those variables is set when we call the function and if
+the abbreviation is defined in one of them, the link is expanded.
+</p>
+</li>
+<li><p>Finally, if both variables are set and defined the same
+abbreviation, the buffer local wins over the global.
+</p>
+</li>
+</ol>
+
+<p>Now by taking a look at its source, we can tell that the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a> works like this:
+</p>
+
+<ol><li><p>do a string matching on the link to get the part before the
+first colon (which might be an abbreviation),
+</p>
+</li>
+<li><p>do a lookup for this abbreviation in the variables
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> and <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L230">org-link-abbrev-alist</a>, prioritizing
+the local variable,
+</p>
+</li>
+<li><p>if the abbreviation is found, replace it in the link by its
+replacement text.
+</p>
+</li>
+</ol>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-expand-abbrev</span> (link)
+  <span class="one-hl-doc">"Replace link abbreviations in LINK string.
+Abbreviations are defined in `</span><span class="one-hl-doc"><span class="one-hl-constant">org-link-abbrev-alist</span></span><span class="one-hl-doc">'."</span>
+  (<span class="one-hl-keyword">if</span> (not (string-match <span class="one-hl-string">"^</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">[</span><span class="one-hl-string"><span class="one-hl-negation-char">^</span></span><span class="one-hl-string">:]*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">::?</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">?$"</span> link)) link
+    (<span class="one-hl-keyword">let*</span> ((key (match-string 1 link))
+           (as (<span class="one-hl-keyword">or</span> (assoc key org-link-abbrev-alist-local)
+                   (assoc key org-link-abbrev-alist)))
+           (tag (<span class="one-hl-keyword">and</span> (match-end 2) (match-string 3 link)))
+           rpl)
+      (<span class="one-hl-keyword">if</span> (not as)
+          link
+        (<span class="one-hl-keyword">setq</span> rpl (cdr as))
+        (<span class="one-hl-keyword">cond</span>
+         <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>         (t (concat rpl tag)))))))</code></pre>
+
+<p>In those examples showing how the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1011">org-link-expand-abbrev</a>
+works, we&apos;ve left aside other super cool features of abbreviated links
+that we can read in the info node (see <span>org#Link Abbreviations</span>).
+</p>
+
+<p>We&apos;ve finished our tour of the parsing step that happened in
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a> when we try to &quot;open&quot; the link
+</p>
+
+<pre><code class="one-hl one-hl-block">[[emacs:lisp/simple.el::(defun next-error (&amp;optional]]</code></pre>
+
+
+<p>in an org-mode buffer where the local variable
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L520">org-link-abbrev-alist-local</a> is set to <code class="one-hl one-hl-inline">&apos;((&quot;emacs&quot; . &quot;/tmp/emacs/&quot;))</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div><h3 id="one-10c0aa43fa">org-link-open</h3><div><p>Now that we&apos;ve looked at the parsing step that happened in
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>, what we want to understand is the following
+function call (where <code class="one-hl one-hl-inline">nil</code> is due to the way we called
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8933">org-open-at-point</a>, without any prefix argument):
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open
+ '(link
+   (<span class="one-hl-ta-colon-keyword">:type</span> <span class="one-hl-string">"file"</span>
+    <span class="one-hl-ta-colon-keyword">:path</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>
+    <span class="one-hl-ta-colon-keyword">:format</span> bracket
+    <span class="one-hl-ta-colon-keyword">:raw-link</span> <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:application</span> nil
+    <span class="one-hl-ta-colon-keyword">:search-option</span> <span class="one-hl-string">"(defun next-error (&amp;optional"</span>
+    <span class="one-hl-ta-colon-keyword">:begin</span> 1
+    <span class="one-hl-ta-colon-keyword">:end</span> 55
+    <span class="one-hl-ta-colon-keyword">:contents-begin</span> nil
+    <span class="one-hl-ta-colon-keyword">:contents-end</span> nil
+    <span class="one-hl-ta-colon-keyword">:post-blank</span> 0
+    <span class="one-hl-ta-colon-keyword">:parent</span> (paragraph (... <span class="one-hl-ta-colon-keyword">:parent</span> (section (... <span class="one-hl-ta-colon-keyword">:parent</span> (org-data (...))))))))
+ nil)</code></pre>
+
+<p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1035">org-link-open</a> decides what to do next according to the
+type of the link:
+</p>
+
+<ol><li><p>As our link is of type <code class="one-hl one-hl-inline">file</code>, <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1035">org-link-open</a> will delegate the work
+to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a>.
+</p>
+</li>
+<li><p>To do so, it builds up a path concatenating the corresponding value
+of the property <code class="one-hl one-hl-inline">:path</code> and <code class="one-hl one-hl-inline">:search-option</code> of the link separating
+them by two colons <code class="one-hl one-hl-inline">::</code>.  This path is locally stored in the variable
+<code class="one-hl one-hl-inline">path</code>.  This variable will be the first argument passed to the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a>.
+</p>
+</li>
+<li><p>Then, it checks if we passed a prefix argument to <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1035">org-link-open</a> or
+if the application (<code class="one-hl one-hl-inline">:application</code>) specified in the link is <code class="one-hl one-hl-inline">&quot;emacs&quot;</code>
+or <code class="one-hl one-hl-inline">&quot;sys&quot;</code>.  In our case, none are true, so the last argument passed
+to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a> will be <code class="one-hl one-hl-inline">nil</code>.
+</p>
+</li>
+</ol>
+
+<p>So now, fate is in the hands of the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a>,
+and more specifically, the following call:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-link-open-as-file <span class="one-hl-string">"/tmp/emacs/lisp/simple.el::(defun next-error (&amp;optional"</span> nil)</code></pre>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1035">org-link-open</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-open</span> (link <span class="one-hl-type">&amp;optional</span> arg)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">let</span> ((type (org-element-property <span class="one-hl-ta-colon-keyword">:type</span> link))
+        (path (org-element-property <span class="one-hl-ta-colon-keyword">:path</span> link)))
+    (<span class="one-hl-keyword">pcase</span> type
+      (<span class="one-hl-string">"file"</span>
+       (<span class="one-hl-keyword">let*</span> ((option (org-element-property <span class="one-hl-ta-colon-keyword">:search-option</span> link))
+              (path (<span class="one-hl-keyword">if</span> option (concat path <span class="one-hl-string">"::"</span> option) path)))
+         (org-link-open-as-file path
+                                (<span class="one-hl-keyword">pcase</span> (org-element-property <span class="one-hl-ta-colon-keyword">:application</span> link)
+                                  ((guard arg) arg)
+                                  (<span class="one-hl-string">"emacs"</span> 'emacs)
+                                  (<span class="one-hl-string">"sys"</span> 'system)))))
+      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>      )))</code></pre>
+</div>
+</div>
+
+<div><h3 id="one-4e80429420">org-link-open-as-file</h3><div><p>The function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a> does the following:
+</p>
+
+<ol><li><p>split the given path <code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el::(defun next-error
+   (&amp;optional&quot;</code> into two parts a) <code class="one-hl one-hl-inline">option</code> (which is <code class="one-hl one-hl-inline">&quot;(defun next-error
+   (&amp;optional&quot;</code>) and b) <code class="one-hl one-hl-inline">file-name</code> (which is
+<code class="one-hl one-hl-inline">&quot;/tmp/emacs/lisp/simple.el&quot;</code>).
+</p>
+</li>
+<li><p>as <code class="one-hl one-hl-inline">file-name</code> doesn&apos;t follow a pattern expected to be open with
+dired, check if the string <code class="one-hl one-hl-inline">option</code> represents a number, and so the
+search in the file would happened jumping to the line with that
+number, if not this will be a text search which is our case.  This
+is done to determinate the last arguments passed to the function
+<a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> which return.
+</p>
+</li>
+</ol>
+
+<p>So, now the &quot;control&quot; is passed to the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> as
+follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(org-open-file <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span> nil nil <span class="one-hl-string">"(defun next-error"</span>)</code></pre>
+
+<p>As the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1277">org-link-open-as-file</a> is short enough, we reproduce it totally:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-link-open-as-file</span> (path arg)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">let*</span> ((option (<span class="one-hl-keyword">and</span> (string-match <span class="one-hl-string">"::</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">(</span></span><span class="one-hl-string">.*</span><span class="one-hl-string"><span class="one-hl-regexp-grouping-backslash">\\</span></span><span class="one-hl-string"><span class="one-hl-regexp-grouping-construct">)</span></span><span class="one-hl-string">\\'"</span> path)
+                      (match-string 1 path)))
+         (file-name (<span class="one-hl-keyword">if</span> (not option) path
+                      (substring path 0 (match-beginning 0)))))
+    (<span class="one-hl-keyword">if</span> (string-match <span class="one-hl-string">"[*?{]"</span> (file-name-nondirectory file-name))
+        (dired file-name)
+      (apply #'org-open-file
+             file-name
+             arg
+             (<span class="one-hl-keyword">cond</span> ((not option) nil)
+                   ((string-match-p <span class="one-hl-string">"\\`[0-9]+\\'"</span> option)
+                    (list (string-to-number option)))
+                   (t (list nil option)))))))</code></pre>
+
+<p>We get close to the end of this post ;)
+</p>
+
+<p>We just need to look at the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a>.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-c436e5bcfe">org-open-file</h3><div><p>The main part of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> is to determine which application to use
+to open the file taking into account its arguments and user options
+(specifically <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1310">org-file-apps</a> and <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L284">org-link-frame-setup</a>).
+</p>
+
+<p>In our case, as the first association in <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1310">org-file-apps</a> is <code class="one-hl one-hl-inline">(auto-mode
+. emacs)</code> (by default) and the extension of the file
+<code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code> (which is <code class="one-hl one-hl-inline">.el</code>) matches one of the car of the
+associations in <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/files.el#L2745">auto-mode-alist</a>, the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> locally
+sets the variable <code class="one-hl one-hl-inline">cmd</code> to the symbol <code class="one-hl one-hl-inline">emacs</code>.
+</p>
+
+<p>As consequence, in the main <code class="one-hl one-hl-inline">cond</code> special form of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a>, the
+expressions in the body of the clause with the condition <code class="one-hl one-hl-inline">(or (stringp
+cmd) (eq cmd &apos;emacs))</code> (which evaluate to <code class="one-hl one-hl-inline">t</code>) are evaluated.
+</p>
+
+<p>Specifically,
+</p>
+
+<ol><li><p>a lookup in the alist <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L284">org-link-frame-setup</a> returns the function to
+use to visite files, which is <code class="one-hl one-hl-inline">find-file-other-window</code> by default,
+</p>
+</li>
+<li><p>this function is used to visit the file <code class="one-hl one-hl-inline">/tmp/emacs/lisp/simple.el</code>,
+</p>
+</li>
+<li><p>once the file is opened, removed the narrowing restriction from the
+current buffer (using <code class="one-hl one-hl-inline">widen</code>),
+</p>
+</li>
+<li><p>and finally do the search for the text <code class="one-hl one-hl-inline">&quot;(defun next-error
+   (&amp;optional&quot;</code> using the function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/ol.el#L1106">org-link-search</a>.
+</p>
+</li>
+</ol>
+
+<p>Thus, SKIPING all the details (that makes <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> functional in
+real life), specifically the lookups in the alist <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L1310">org-file-apps</a>, the
+function <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> in our case can be reduced to the following
+form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">let</span> ((file <span class="one-hl-string">"/tmp/emacs/lisp/simple.el"</span>)      <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">first argument of `</span><span class="one-hl-comment"><span class="one-hl-constant">org-open-file</span></span><span class="one-hl-comment">'
+</span>      (search <span class="one-hl-string">"(defun next-error (&amp;optional"</span>) <span class="one-hl-comment-delimiter">; </span><span class="one-hl-comment">last urgument of `</span><span class="one-hl-comment"><span class="one-hl-constant">org-open-file</span></span><span class="one-hl-comment">'
+</span>      (f (cdr (assq 'file org-link-frame-setup))))
+  (funcall f file)
+  (widen)
+  (org-link-search search))</code></pre>
+
+<p>Here are the parts of <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L8741">org-open-file</a> we&apos;ve just discussed:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">org-open-file</span> (path <span class="one-hl-type">&amp;optional</span> in-emacs line search)
+  <span class="one-hl-doc">"..."</span>
+  (<span class="one-hl-keyword">let*</span> ((file (<span class="one-hl-keyword">if</span> (equal path <span class="one-hl-string">""</span>) buffer-file-name
+                 (substitute-in-file-name (expand-file-name path))))
+         (file-apps (append org-file-apps (org--file-default-apps)))
+         (apps (cl-remove-if #'org--file-apps-entry-dlink-p file-apps))
+         <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>         (a-m-a-p (assq 'auto-mode apps))
+         (dfile (downcase file))
+         <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>         (save-position-maybe
+          <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>          )
+         cmd link-match-data)
+    (<span class="one-hl-keyword">cond</span>
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>     (t
+      (<span class="one-hl-keyword">setq</span> cmd (<span class="one-hl-keyword">or</span>
+                 <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                 (assoc-default dfile
+                                (org--file-apps-regexp-alist apps a-m-a-p)
+                                'string-match)
+                 <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>                 ))))
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    (<span class="one-hl-keyword">cond</span>
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>     ((<span class="one-hl-keyword">or</span> (stringp cmd)
+          (eq cmd 'emacs))
+      (funcall (cdr (assq 'file org-link-frame-setup)) file)
+      (widen)
+      (<span class="one-hl-keyword">cond</span> (line (org-goto-line line)
+                  (<span class="one-hl-keyword">when</span> (derived-mode-p 'org-mode) (org-reveal)))
+            (search (<span class="one-hl-keyword">condition-case</span> err
+                        (org-link-search search)
+                      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">Save position before error-ing out so user
+</span>                      <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">can easily move back to the original buffer.
+</span>                      (<span class="one-hl-warning">error</span> (funcall save-position-maybe)
+                             (<span class="one-hl-warning">error</span> (nth 1 err)))))))
+     <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>     )
+    <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>    ))</code></pre>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-5c3b8dd0f8">Q&A</h2><div><p>Check <a href="/questions-and-answers/#2022-04-04-search-options-link-abbreviations-and-org-open-at-point">Q&amp;A</a>.
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">PREV</a><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">RANDOM</a><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>

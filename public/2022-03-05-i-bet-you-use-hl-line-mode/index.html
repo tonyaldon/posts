@@ -1,0 +1,599 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</h1></div><div id="meta-info"><div>2022-03-05</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/t7doal/i_bet_you_use_hllinemode_do_you_know_how_it_works/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div></div><div id="toc"><div><div>Table of content</div><div>
+<ul>
+<li><a href="#one-daa5a0da36">hl-line-mode</a>
+<ul>
+<li><a href="#one-77eeeb4311">What is hl-line-mode?</a></li>
+<li><a href="#one-d014e3e25d">How does it work?</a></li>
+<li><a href="#one-72fe83fcdb">global-hl-line-mode</a></li>
+</ul>
+</li>
+<li><a href="#one-ff566221bd">Playing with pre-command-hook and post-command-hook</a></li>
+<li><a href="#one-7e9a87d0da">Moving overlays and priorities</a></li>
+</ul>
+</div></div></div><div><p>Hey Emacsers,
+</p>
+
+<p>How are you doing?
+</p>
+
+<p>I&apos;m excited about this post because when I understood how
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> works, it opened new horizons for me in the world of
+Elisp.
+</p>
+
+<p>I hope you will feel the same way after:
+</p>
+
+<ol><li><p>reading this post or,
+</p>
+</li>
+<li><p>by directly reading the source code of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> that can be
+found in the file <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L1">hl-line.el</a> (only 205 LOC skipping
+comments and empty lines).
+</p>
+</li>
+</ol>
+
+<p>You can get emacs&apos;s source code by running the following command:
+</p>
+
+<pre><code class="one-hl one-hl-block">git clone git://git.sv.gnu.org/emacs.git</code></pre>
+</div>
+
+<div><h2 id="one-daa5a0da36">hl-line-mode</h2><div><h3 id="one-77eeeb4311">What is hl-line-mode?</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> is a minor mode that highlights the current line.
+</p>
+
+<p>If there are multiple windows in your frame using <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L131">hl-line-mode</a> you can
+control whether all windows have the line highlighted or only the
+<code class="one-hl one-hl-inline">selected-window</code> with the option <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L95">hl-line-sticky-flag</a>.
+</p>
+
+<p>If you prefer not to highlight the whole line but only a range around
+the point this is also possible with <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L116">hl-line-range-function</a>.
+</p>
+
+<p>In this post, we are not interested in these options, but only in the
+mechanism and the default behavior that highlights the
+entire line in the current buffer.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-d014e3e25d">How does it work?</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L131">hl-line-mode</a> moves an overlay responsible for highlighting the current
+line after each command call.  This is done by adding a specific
+function to the hook <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> when the mode <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L131">hl-line-mode</a> is
+turned on.
+</p>
+
+<p>If you are already familiar with <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> and Emacs overlays,
+you&apos;re good.
+</p>
+
+<p>But, if not, let&apos;s break things down together.
+</p>
+
+<p>One things to remember about Emacs (<span>elisp#Command Loop</span>) is:
+</p>
+
+<pre><code class="one-hl one-hl-block">When you run Emacs, it enters the &#8220;editor command loop&#8221; almost
+immediately.  This loop reads key sequences, executes their definitions,
+and displays the results.</code></pre>
+
+<p>Specifically, each time we call a command (inserting a character also
+calls a command, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> by default), the &quot;editor
+command loop&quot;:
+</p>
+
+<ol><li><p>runs the hook <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a> before executing the command,
+</p>
+</li>
+<li><p>runs the hook <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> after executing the command.
+</p>
+</li>
+</ol>
+
+<p>(run the hook <code class="one-hl one-hl-inline">X</code> means: call all the functions in the list <code class="one-hl one-hl-inline">X</code>).
+</p>
+
+<p>So we can trigger actions after each command call by adding
+functions in the list <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a>.
+</p>
+
+<p>This is what <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L131">hl-line-mode</a> does.  When turned on, the mode adds the
+function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L162">hl-line-highlight</a> to the list <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(add-hook 'post-command-hook #'hl-line-highlight nil t)</code></pre>
+
+<p>Note the <code class="one-hl one-hl-inline">t</code> at the end of the previous s-exp that makes the hook
+buffer-local.
+</p>
+
+<p>So, in a buffer that has <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L131">hl-line-mode</a> turned on, each time we call a
+command (basically, &quot;each time we do something&quot;):
+</p>
+
+<ol><li><p>the command is executed and,
+</p>
+</li>
+<li><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L162">hl-line-highlight</a> is called.
+</p>
+</li>
+</ol>
+
+<p>What exactly does <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L162">hl-line-highlight</a> do?
+</p>
+
+<p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L162">hl-line-highlight</a>:
+</p>
+
+<ol><li><p>creates an overlay at point with the <code class="one-hl one-hl-inline">face</code> property equal to
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L82">hl-line-face</a> (calling the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L156">hl-line-make-overlay</a>) if it
+doesn&apos;t exist yet,
+</p>
+</li>
+<li><p>assigns this overlay to the variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L60">hl-line-overlay</a> and,
+</p>
+</li>
+<li><p>moves (places) this overlay on the current line (calling the
+function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L269">hl-line-move</a>).
+</p>
+</li>
+</ol>
+
+<p>Here&apos;s the a snippet of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L162">hl-line-highlight</a> (I have removed some details):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">hl-line-highlight</span> ()
+  (<span class="one-hl-keyword">if</span> hl-line-mode
+      (<span class="one-hl-keyword">progn</span>
+        (<span class="one-hl-keyword">unless</span> (overlayp hl-line-overlay)
+          (<span class="one-hl-keyword">setq</span> hl-line-overlay (hl-line-make-overlay)))
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        (hl-line-move hl-line-overlay)
+        <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">...
+</span>        )
+    (hl-line-unhighlight)))</code></pre>
+
+<p>The function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L156">hl-line-make-overlay</a> uses the function <code class="one-hl one-hl-inline">make-overlay</code> to
+make the overlay and uses the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L4428">overlay-put</a> to set the <code class="one-hl one-hl-inline">priority</code>
+and <code class="one-hl one-hl-inline">face</code> property of the newly created overlay:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">hl-line-make-overlay</span> ()
+  (<span class="one-hl-keyword">let</span> ((ol (make-overlay (point) (point))))
+    (overlay-put ol 'priority hl-line-overlay-priority)
+    (overlay-put ol 'face hl-line-face)
+    ol))</code></pre>
+
+<p>As we left aside the range function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L116">hl-line-range-function</a> (which is
+set to <code class="one-hl one-hl-inline">nil</code> by default), we can see below a simplified implementation
+of <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L269">hl-line-move</a>, that we call <code class="one-hl one-hl-inline">hl-line-move-NO-RANGE-FUNCTION</code> that uses
+the function <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L4020">move-overlay</a> to move the limits of the overlay and set
+them to be the beginning of the current line and beginning of the next
+line:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">hl-line-move-NO-RANGE-FUNCTION</span> (overlay)
+  (<span class="one-hl-keyword">let</span> ((beg (line-beginning-position))
+        (end (line-beginning-position 2)))
+    (move-overlay overlay beg end)))</code></pre>
+
+<p>We have left out some details (the functions <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L174">hl-line-unhighlight</a>
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L180">hl-line-maybe-unhighlight</a> and the use of the hook
+<code class="one-hl one-hl-inline">change-major-mode-hook</code>), because our goal was to focus on the
+mechanism and not all the options and implementation details.
+</p>
+
+<p>I hope this was useful.
+</p>
+</div>
+</div>
+
+<div><h3 id="one-72fe83fcdb">global-hl-line-mode</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L197">global-hl-line-mode</a> is a global minor mode that offers line
+highlighting in all buffers.
+</p>
+
+<p>The mechanism is &quot;almost&quot; the same as <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> and both
+share the functions <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L156">hl-line-make-overlay</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L269">hl-line-move</a>, the
+variables <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L128">hl-line-overlay-priority</a>, <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L116">hl-line-range-function</a> and they
+use the same &quot;face&quot; <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L82">hl-line-face</a>.
+</p>
+
+<p>So, if you understand how <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> works, you already almost
+understand how <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L197">global-hl-line-mode</a> works.
+</p>
+
+<p>In the next parts of this post, we build examples using
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> and overlays separately to try to get a good
+overview of their use.
+</p>
+</div>
+</div>
+</div>
+
+<div><h2 id="one-ff566221bd">Playing with pre-command-hook and post-command-hook</h2><div><p>In this section everything happens in the buffer <code class="one-hl one-hl-inline">*test hooks*</code>.
+</p>
+
+<p>Let&apos;s switch to the new buffer <code class="one-hl one-hl-inline">*test hooks*</code> in <code class="one-hl one-hl-inline">emacs-lisp-mode</code>
+by evaluating the following s-exp in the minibuffer (<code class="one-hl one-hl-inline">M-x
+eval-expression</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">progn</span>
+  (<span class="one-hl-keyword">with-current-buffer</span> (get-buffer-create <span class="one-hl-string">"*test hooks*"</span>)
+    (emacs-lisp-mode))
+  (switch-to-buffer <span class="one-hl-string">"*test hooks*"</span>))</code></pre>
+
+<p>We&apos;ve already seen that by adding functions to the hooks (lists)
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> we can trigger actions before
+or after any command call.
+</p>
+
+<p>The first things we can do is to inspect the variable
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> by running:
+</p>
+
+<pre><code class="one-hl one-hl-block">M-x describe-variable RET post-command-hook RET</code></pre>
+
+
+<p>This will pops up an help buffer that looks like this (the value
+depends on the packages you are using):
+</p>
+
+<pre><code class="one-hl one-hl-block">post-command-hook is a variable defined in &#8216;src/keyboard.c&#8217;.
+
+Its value is
+(jit-lock--antiblink-post-command yas--post-command-handler
+eldoc-schedule-timer company-post-command t)
+Local in buffer *test hooks*; global value is
+(global-font-lock-mode-check-buffers global-eldoc-mode-check-buffers
+smartparens-global-mode-check-buffers
+show-smartparens-global-mode-check-buffers
+yas-global-mode-check-buffers magit-auto-revert-mode-check-buffers
+global-hl-line-highlight insight-check-cursor-color
+sp--post-command-hook-handler winner-save-old-configurations)
+
+  This variable may be risky if used as a file-local variable.
+  Probably introduced at or before Emacs version 19.20.
+
+Normal hook run after each command is executed.
+If an unhandled error happens in running this hook,
+the function in which the error occurred is unconditionally removed, since
+otherwise the error might happen repeatedly and make Emacs nonfunctional.
+
+It is a bad idea to use this hook for expensive processing.  If
+unavoidable, wrap your code in &#8216;(while-no-input (redisplay) CODE)&#8217; to
+avoid making Emacs unresponsive while the user types.
+
+See also &#8216;pre-command-hook&#8217;.</code></pre>
+
+<p>In this help buffer, we see that the local value in the buffer <code class="one-hl one-hl-inline">*test
+hooks*</code> is the list:
+</p>
+
+<pre><code class="one-hl one-hl-block">(jit-lock--antiblink-post-command yas--post-command-handler eldoc-schedule-timer company-post-command t)</code></pre>
+
+
+<p>We also see its global value and the last part of the help buffer is
+the docstring of this variable where we can read:
+</p>
+
+<pre><code class="one-hl one-hl-block">If an unhandled error happens in running this hook,
+the function in which the error occurred is unconditionally removed, since
+otherwise the error might happen repeatedly and make Emacs nonfunctional.</code></pre>
+
+<p>This tells us that it is safe to play with <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> because if
+we add a function to it that raises an error the function will be
+unconditionally removed.
+</p>
+
+<p>So let&apos;s add to <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> a symbol that has no function
+definition (ie. raises the error <code class="one-hl one-hl-inline">void-function</code> when called as a
+function). By evaluating the following s-exp (<code class="one-hl one-hl-inline">eval-last-sexp</code> bound
+to <code class="one-hl one-hl-inline">C-x C-e</code>):
+</p>
+
+<pre><code class="one-hl one-hl-block">(add-hook 'post-command-hook 'test-void-function)</code></pre>
+
+<p>we see in the echo area:
+</p>
+
+<pre><code class="one-hl one-hl-block">Error in post-command-hook (test-void-function): (void-function test-void-function)</code></pre>
+
+<p>And if we inspect the variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> (as we did
+previously), we see that <code class="one-hl one-hl-inline">test-void-function</code> symbol isn&apos;t in the hook.
+</p>
+
+<p>What happened?
+</p>
+
+<ol><li><p>we called <code class="one-hl one-hl-inline">eval-last-sexp</code>,
+</p>
+</li>
+<li><p>then the &quot;editor command loop&quot; ran the hook <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a>,
+</p>
+</li>
+<li><p>then the expression <code class="one-hl one-hl-inline">(add-hook &apos;post-command-hook &apos;test-void-function)</code>
+has been evaluated, which added <code class="one-hl one-hl-inline">test-void-function</code> symbol to
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a>,
+</p>
+</li>
+<li><p>then the &quot;editor command loop&quot; ran the hook <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a>, and
+when it try to call the function <code class="one-hl one-hl-inline">test-void-function</code>, it raised the
+error <code class="one-hl one-hl-inline">void-function</code> and remove <code class="one-hl one-hl-inline">test-void-function</code> from the hook.
+</p>
+</li>
+</ol>
+
+<p>Now that we are confident that playing with the hook
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> won&apos;t break our running Emacs, let&apos;s build the main
+example of this section.
+</p>
+
+<p>We write 2 functions <code class="one-hl one-hl-inline">test-hook-pre</code> and <code class="one-hl one-hl-inline">test-hook-post</code>
+that print out respectively the name of the command that is about to
+run and the name of the command that just ran.
+</p>
+
+<p>To do that we use the emacs variable <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L11995">this-command</a> (that holds the
+command now being executed) and adds <code class="one-hl one-hl-inline">test-hook-pre</code> to <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a>
+and <code class="one-hl one-hl-inline">test-hook-post</code> to <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a>.
+</p>
+
+<p>Note that the info nodes related to this examples are:
+</p>
+
+<ul><li><p><span>elisp#Command Overview</span>
+</p>
+</li>
+<li><p><span>elisp#Command Loop Info</span>
+</p>
+</li>
+</ul>
+
+<p>Then we call some commands.
+</p>
+
+<p>And finally we observe what has been printed out in the buffer
+<code class="one-hl one-hl-inline">*Messages*</code>.
+</p>
+
+<p>In the buffer <code class="one-hl one-hl-inline">*test hooks*</code>, we remove everything and add the following
+expressions:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">test-hook-pre</span> ()
+  (message <span class="one-hl-string">"  BEFORE   |   %s"</span> this-command))
+
+(<span class="one-hl-keyword">defun</span> <span class="one-hl-function-name">test-hook-post</span> ()
+  (message <span class="one-hl-string">"   AFTER   |   %s"</span> this-command))
+
+(add-hook 'pre-command-hook 'test-hook-pre)
+(add-hook 'post-command-hook 'test-hook-post)
+
+(message <span class="one-hl-string">":::::::: print me ::::::::"</span>)</code></pre>
+
+<p>Then, with the point after the last s-exp (last parenthesis), we do in
+order (without doing anything else, this is important for the messages
+we want to see printed):
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">M-x eval-buffer</code> (this evaluate all this expressions),
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-a</code> (move to the beginning),
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-e</code> (move to the end of line),
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">C-x C-e</code> (eval the last expression).
+</p>
+</li>
+</ol>
+
+<p>Then, we should see in the buffer (almost at the end) <code class="one-hl one-hl-inline">*Messages*</code> the
+following:
+</p>
+
+<pre><code class="one-hl one-hl-block">:::::::: print me ::::::::
+   AFTER   |   eval-buffer
+  BEFORE   |   move-beginning-of-line
+   AFTER   |   move-beginning-of-line
+  BEFORE   |   move-end-of-line
+   AFTER   |   move-end-of-line
+  BEFORE   |   eval-last-sexp
+:::::::: print me ::::::::
+":::::::: print me ::::::::"
+   AFTER   |   eval-last-sexp</code></pre>
+
+<p>This gives us an overview of the behavior of the &quot;editor command
+loop&quot;.
+</p>
+
+<p>Are you annoyed by the noise you have in your echo area?
+</p>
+
+<p>Me too.
+</p>
+
+<p>Let&apos;s remove the functions <code class="one-hl one-hl-inline">test-hook-pre</code> and <code class="one-hl one-hl-inline">test-hook-post</code>
+respectively from the hooks <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a> by
+evaluating the following s-exps.  This should &quot;clean up&quot; our echo
+area.
+</p>
+
+<pre><code class="one-hl one-hl-block">(remove-hook 'pre-command-hook 'test-hook-pre)
+(remove-hook 'post-command-hook 'test-hook-post)</code></pre>
+
+<p>We are done with the hooks <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12181">pre-command-hook</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/keyboard.c#L12190">post-command-hook</a>.
+Let&apos;s play with overlays.
+</p>
+</div>
+</div>
+
+<div><h2 id="one-7e9a87d0da">Moving overlays and priorities</h2><div><p>In the post <a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility
+of headings?</a>, we already played with overlays specifically the <code class="one-hl one-hl-inline">invisible</code>
+property of overlay.  We also know that overlays take priority over
+text properties.
+</p>
+
+<p>Below we will see:
+</p>
+
+<ol><li><p>how to move overlays (<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L4020">move-overlay</a>) and,
+</p>
+</li>
+<li><p>which overlay wins when they overlap (<code class="one-hl one-hl-inline">priority</code> property).
+</p>
+</li>
+</ol>
+
+<p>Note that all the evaluations of the s-expressions are done in the
+minibuffer with <code class="one-hl one-hl-inline">M-x eval-expression</code> and the point in the buffer we
+operate on, that we call <code class="one-hl one-hl-inline">*overlays*</code>.
+</p>
+
+<p>Let&apos;s switch to the new buffer <code class="one-hl one-hl-inline">*overlays*</code> in <code class="one-hl one-hl-inline">fundamental-mode</code>
+by evaluating the following s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(switch-to-buffer (get-buffer-create <span class="one-hl-string">"*overlays*"</span>))</code></pre>
+
+<p>Let&apos;s insert the characters <code class="one-hl one-hl-inline">FOO---BAR---BAZ</code> such that the buffer
+<code class="one-hl one-hl-inline">*overlays*</code> look likes this:
+</p>
+
+<pre><code class="one-hl one-hl-block">FOO---BAR---BAZ</code></pre>
+
+<p>We make two overlays:
+</p>
+
+<ol><li><p><code class="one-hl one-hl-inline">ov-x</code> on top of <code class="one-hl one-hl-inline">FOO</code> with a background green (<code class="one-hl one-hl-inline">#00ff00</code>),
+</p>
+</li>
+<li><p><code class="one-hl one-hl-inline">ov-y</code> on top of <code class="one-hl one-hl-inline">BAZ</code> with a background red (<code class="one-hl one-hl-inline">#ff0000</code>).
+</p>
+</li>
+</ol>
+
+<p>To do so, we evaluate the following form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">progn</span>
+  (<span class="one-hl-keyword">setq</span> ov-x (make-overlay 1 4))
+  (overlay-put ov-x 'face '(<span class="one-hl-ta-colon-keyword">:background</span> <span class="one-hl-string">"#00ff00"</span>))
+  (<span class="one-hl-keyword">setq</span> ov-y (make-overlay 13 16))
+  (overlay-put ov-y 'face '(<span class="one-hl-ta-colon-keyword">:background</span> <span class="one-hl-string">"#ff0000"</span>)))</code></pre>
+
+<p>Now we have <code class="one-hl one-hl-inline">FOO</code> with a background green and <code class="one-hl one-hl-inline">BAZ</code> with a background
+red.
+</p>
+
+<p>Let&apos;s move the overlay <code class="one-hl one-hl-inline">ov-x</code> (the green) on top of the characters <code class="one-hl one-hl-inline">BAR</code>
+the same way <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/hl-line.el#L132">hl-line-mode</a> does.  To do so we use the function
+<a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/buffer.c#L4020">move-overlay</a> as follow:
+</p>
+
+<pre><code class="one-hl one-hl-block">(move-overlay ov-x 7 10)</code></pre>
+
+<p>When more than one overlay overlaps, Emacs decides for each property
+which overlay &quot;wins&quot; (see <span>elisp#Overlay Properties</span>) over the
+others by looking up at the overlay property <code class="one-hl one-hl-inline">priority</code> which should be
+a positive integer or <code class="one-hl one-hl-inline">nil</code>.
+</p>
+
+<p>Let&apos;s see this in our example.
+</p>
+
+<p>First, we set the overlay <code class="one-hl one-hl-inline">ov-x</code> to have a <code class="one-hl one-hl-inline">priority</code> equal to <code class="one-hl one-hl-inline">10</code> and the
+overlay <code class="one-hl one-hl-inline">ov-y</code> to have a priority equal to <code class="one-hl one-hl-inline">20</code> by evaluating the
+following form:
+</p>
+
+<pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">progn</span>
+  (overlay-put ov-x 'priority 10)
+  (overlay-put ov-y 'priority 20))</code></pre>
+
+<p>Now we move the overlay <code class="one-hl one-hl-inline">ov-y</code> to be on top of the characters <code class="one-hl one-hl-inline">BAR</code> (and so
+overlap with the overlay <code class="one-hl one-hl-inline">ov-x</code>) by evaluating this s-exp:
+</p>
+
+<pre><code class="one-hl one-hl-block">(move-overlay ov-y 7 10)</code></pre>
+
+<p>The buffer <code class="one-hl one-hl-inline">*overlays*</code> shows the characters <code class="one-hl one-hl-inline">BAR</code> with a background red
+that corresponds to the overlay <code class="one-hl one-hl-inline">ov-y</code> which have a priority <code class="one-hl one-hl-inline">20</code> superior
+to the priority <code class="one-hl one-hl-inline">10</code> of the overlay <code class="one-hl one-hl-inline">ov-x</code>.
+</p>
+
+<p>Now let&apos;s make <code class="one-hl one-hl-inline">ov-x</code> win by raising its priority to <code class="one-hl one-hl-inline">30</code>:
+</p>
+
+<pre><code class="one-hl one-hl-block">(overlay-put ov-x 'priority 30)</code></pre>
+
+<p>ISN&apos;T IT SUPER COOL!!!
+</p>
+
+<p>Something interesting we can do now is to <code class="one-hl one-hl-inline">M-x describe-char</code>, with the
+point between <code class="one-hl one-hl-inline">A</code> and <code class="one-hl one-hl-inline">R</code> in the word <code class="one-hl one-hl-inline">BAR</code>, which pops up the following
+help buffer:
+</p>
+
+<pre><code class="one-hl one-hl-block">             position: 9 of 15 (53%), column: 8
+            character: R (displayed as R) (codepoint 82, #o122, #x52)
+              charset: ascii (ASCII (ISO646 IRV))
+code point in charset: 0x52
+               script: latin
+               syntax: w  which means: word
+             category: .:Base, L:Left-to-right (strong), a:ASCII, l:Latin, r:Roman
+             to input: type "C-x 8 RET 52" or "C-x 8 RET LATIN CAPITAL LETTER R"
+          buffer code: #x52
+            file code: #x52 (encoded by coding system utf-8-unix)
+              display: by this font (glyph code)
+    ftcrhb:-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1 (#x35)
+
+Character code properties: customize what to show
+  name: LATIN CAPITAL LETTER R
+  general-category: Lu (Letter, Uppercase)
+  decomposition: (82) ('R')
+
+There are 2 overlays here:
+ From 7 to 10
+  face                 (:background "#00ff00")
+  priority             30
+ From 7 to 10
+  face                 (:background "#ff0000")
+  priority             20</code></pre>
+
+<p>Note that it might differs in your running emacs (different fonts,
+maybe information about overlays if you are using <code class="one-hl one-hl-inline">hl-line-mode</code>, ...).
+</p>
+
+<p>There are 2 overlays!!!
+</p>
+
+<p>To finish this post, we remove the overlays like this:
+</p>
+
+<pre><code class="one-hl one-hl-block">(remove-overlays)</code></pre>
+
+<p>WE ARE DONE!!!
+</p>
+</div>
+</div>
+<div id="nav"><a href="/2022-02-26-org-mode-visibility-of-headings/">PREV</a><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">RANDOM</a><a href="/2022-03-11-org-mode-source-code-5000-examples/">NEXT</a></div></article></div></body><script>
+function sidebarShow() {
+  if (window.innerWidth < 481)
+    document.getElementById('sidebar-left').style.width = '75vw';
+  else {
+    document.getElementById('sidebar-left').style.width = 'min(300px, 34vw)';
+  }
+  document.getElementById('sidebar-main').setAttribute('onclick', 'sidebarHide()');
+  document.getElementById('sidebar-main').style.display = 'block';
+}
+function sidebarHide() {
+  document.getElementById('sidebar-left').style.width = '0';
+  document.getElementById('sidebar-main').style.display = 'none';
+}
+</script></html>
