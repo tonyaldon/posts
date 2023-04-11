@@ -540,7 +540,7 @@ prints out the following into the message buffer:
  :env-of-f nil)
 #+END_SRC
 
-* TODO You want to write a custom org backend?  Let's write onlybold backend together to get you started
+* You want to write a custom org backend?  Let's write onlybold backend together to get you started
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-02-20-onlybold-org-backend/
@@ -571,11 +571,11 @@ We call it ~onlybold~.
 Before we start, if you are interested, I recommend you to read in
 org-mode's source code the following files:
 
-- [[org-mode:lisp/ox.el]],
-- [[org-mode:lisp/ox-html.el]],
-- [[org-mode:lisp/ox-md.el]],
-- [[org-mode:lisp/ox-org.el]],
-- [[org-mode:testing/lisp/test-ox.el]] (AMAZING).
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el][lisp/ox.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-html.el][lisp/ox-html.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-md.el][lisp/ox-md.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox-org.el][lisp/ox-org.el]],
+- [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:testing/lisp/test-ox.el][lisp/test-ox.el]] (AMAZING).
 
 You can get org-mode's source code by running the following command:
 
@@ -625,7 +625,7 @@ simplest case, we just have to provide the *transcode functions*
 
 ** transcoders, org-export-define-backend and org-export-to-buffer
 
-The function [[org-mode:lisp/ox.el::(defun org-export-define-backend][org-export-define-backend]] takes as arguments:
+The function [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el:1126][org-export-define-backend]] takes as arguments:
 
 1) the backend's name we want to define and
 2) an alist of transcoders.
@@ -903,7 +903,7 @@ of org backends
 I want to take the opportunity of this post to thank:
 
 1) Nicolas Goaziou who is the author and maintainer of
-   [[org-mode:lisp/ox.el]], and [[org-mode:lisp/org-element.el]].
+   [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/ox.el:1126][org-export-define-backend]], and [[rev:96d91bea658c4c6b4dd218812f506d923e07b453:/home/tony/work/projects/posts/org-mode/:lisp/org-element.el:5989][org-element-at-point]].
 2) All the people who work and contribute to org-mode (built-in and
    external packages),
 3) All the people who work and contribute to Emacs (built-in and
@@ -4882,7 +4882,7 @@ The same technique is also used in the function
 
 WE ARE DONE!!!
 
-* TODO Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
+* Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-04-15-ripgrep-emacs-rg-el/
@@ -5180,7 +5180,7 @@ and by answering yes the result of an ~rg~ search will pops up in ~*rg*~
 buffer like we did previously (assuming Emacs source code is clone
 under the directory ~/tmp/emacs/~):
 
-#+BEGIN_SRC org
+#+BEGIN_SRC text
 [[elisp:(rg-run "\\(defmacro with" "subr.el" "/tmp/emacs/" nil nil '("--context=2"))]]
 #+END_SRC
 
