@@ -926,12 +926,12 @@ closer to you.
 
 Emacs is pure joy and it is thanks to you.
 
-* TODO Have you ever wondered how org-mode toggles the visibility of headings?
+* Have you ever wondered how org-mode toggles the visibility of headings?
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-02-26-org-mode-visibility-of-headings/
 :REDDIT_POST: https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/
-:COMMIT_ORG_MODE: 96d91bea658c4c6b4dd218812f506d923e07b453
+:COMMIT_EMACS: b8b2dd17c57b73357cae229e010138fd2352a46f
 :END:
 
 Have you ever wondered how org-mode toggles the visibility of headings?
@@ -964,9 +964,9 @@ How does it work?
    ~invisible~ set to the symbol ~outline~.
 
 To see exactly how this is achieved you can refer to the functions
-[[emacs:lisp/outline.el::(defun outline-flag-region][outline-flag-region]], [[emacs:lisp/outline.el::(defun outline-hide-entry][outline-hide-entry]] and [[emacs:lisp/outline.el::(defun outline-show-entry][outline-show-entry]] defined
-in the file [[emacs:lisp/outline.el]] and also the definition of the mode
-[[emacs:lisp/outline.el::(define-derived-mode outline-mode][outline-mode]] in the same file.
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/outline.el:796][outline-flag-region]], [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/outline.el:861][outline-hide-entry]] and [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/outline.el:871][outline-show-entry]] defined
+in the file [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/outline.el][lisp/outline.el]] and also the definition of the mode
+[[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/outline.el:301][outline-mode]] in the same file.
 
 You can get emacs's source code by running the following command:
 
@@ -974,7 +974,7 @@ You can get emacs's source code by running the following command:
 
 OK!
 
-The mechanism of ~outline-mode~ uses overlays, [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("buffer-invisibility-spec"][buffer-invisibility-spec]]
+The mechanism of ~outline-mode~ uses overlays, [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:6249][buffer-invisibility-spec]]
 and ellipsis.
 
 But how do those "emacs/elisp features" play together?
@@ -1008,7 +1008,7 @@ we get:
 The character point "s" (point 2, i.e. the "s" at the second position
 in the buffer) has:
 
-1) the text property ~face~ equal to the face [[emacs:lisp/font-lock.el::(defface font-lock-keyword-face][font-lock-keyword-face]]
+1) the text property ~face~ equal to the face [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/font-lock.el:2021][font-lock-keyword-face]]
    which is why it is displayed with a different foreground color
    (depending on your theme) than the text ~my-var~ for instance,
 2) the text property ~fontified~ equal to ~t~ which we don't describe
@@ -1052,7 +1052,7 @@ There are text properties here:
 Note that your result may differ in your running emacs (different fonts,
 maybe information about overlays if you are using ~hl-line-mode~, ...).
 
-** Why are we talking about text properties if the mechanism of ~outline-mode~ uses overlays?
+** Why are we talking about text properties if the mechanism of outline-mode uses overlays?
 
 Because:
 
@@ -1079,7 +1079,7 @@ We can make a part of a buffer invisible using:
 
 The "admitted" values of the ~invisible~ overlay property (or text
 property) and the invisibility effect expected depend on the value of
-the variable [[emacs:src/buffer.c::DEFVAR_PER_BUFFER ("buffer-invisibility-spec"][buffer-invisibility-spec]].
+the variable [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:6249][buffer-invisibility-spec]].
 
 In this section:
 
@@ -1108,7 +1108,7 @@ Let's insert the characters ~XXXXXX~ at the beginning of the buffer
 XXXXXX
 #+END_SRC
 
-*** ~buffer-invisibility-spec~ equal to ~t~
+*** buffer-invisibility-spec equal to t
 
 Now if we evaluate the variable ~buffer-invisibility-spec~, we should
 get ~t~ (the default) in the echo area.
@@ -1120,7 +1120,7 @@ If not, we set this variable to ~t~ like this:
 #+END_SRC
 
 Now, we make an overlay "on top" of ~XXXXXX~ (from point 1 to point 7 in
-the buffer) that we assign to the variable ~ov-x~ using [[emacs:src/buffer.c::DEFUN ("make-overlay"][make-overlay]]:
+the buffer) that we assign to the variable ~ov-x~ using [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:3902][make-overlay]]:
 
 #+BEGIN_SRC emacs-lisp
 (setq ov-x (make-overlay 1 7))
@@ -1133,7 +1133,7 @@ and we see the following in the echo area:
 #+END_SRC
 
 Now, by setting the property ~invisible~ of the overlay ~ov-x~ to ~t~ using
-the function  [[emacs:src/buffer.c::DEFUN ("overlay-put"][overlay-put]] like this
+the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:4428][overlay-put]] like this
 
 #+BEGIN_SRC emacs-lisp
 (overlay-put ov-x 'invisible t)
@@ -1165,7 +1165,7 @@ First, as previously, we set the ~invisible~ property of the overlay
 #+END_SRC
 
 Then, instead of setting back the ~invisible~ overlay property to ~nil~ of
-~ov-x~ we remove it.  To do so, we use the function [[emacs:lisp/subr.el::(defun remove-overlays][remove-overlays]] that
+~ov-x~ we remove it.  To do so, we use the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/subr.el:3527][remove-overlays]] that
 let you remove all the overlays in a range of the buffer that have a
 specific property set to some value (in our case the property ~invisible~
 set to ~t~ in the range 1 to 7 of the buffer).
@@ -1179,7 +1179,7 @@ So evaluating the following s-exp:
 removes the overlay ~ov-x~ in the buffer ~*invisible*~ and make the
 characters ~XXXXXX~ to reappear.
 
-*** ~buffer-invisibility-spec~ equal to ~nil~
+*** buffer-invisibility-spec equal to nil
 
 As we removed the overlay ~ov-x~, we redefined it as previously by
 evaluating the following s-exp:
@@ -1213,7 +1213,7 @@ interfere with the next example by evaluating:
 (overlay-put ov-x 'invisible nil)
 #+END_SRC
 
-*** ~buffer-invisibility-spec~ equal to ~((foo) t)~
+*** buffer-invisibility-spec equal to ((foo) t)
 
 Let's add the characters ~YYYYYY~ after the characters ~XXXXXX~ with
 3 dashes ~---~ in between such that the buffer ~*invisible*~ is now:
@@ -1236,7 +1236,7 @@ We set back ~buffer-invisibility-spec~ to ~t~ (the default):
 #+END_SRC
 
 Then we add the list ~(foo)~ to the variable ~buffer-invisibility-spec~
-using the function [[emacs:lisp/subr.el::(defun add-to-invisibility-spec][add-to-invisibility-spec]] as follow:
+using the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/subr.el:5285][add-to-invisibility-spec]] as follow:
 
 #+BEGIN_SRC emacs-lisp
 (add-to-invisibility-spec '(foo))
@@ -1249,7 +1249,7 @@ This implies that, now to make a part of the buffer invisible, the
 value that is non-nil.
 
 This way we can toggle the visibility of some parts of the buffer
-while other parts remain invisible (see [[org-mode:lisp/ol.el::(defun org-toggle-link-display][org-toggle-link-display]] for
+while other parts remain invisible (see [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/org/ol.el:1447][org-toggle-link-display]] for
 instance).
 
 Let's make ~XXXXXX~ disappear "permanently" by setting the ~invisible~
@@ -1303,8 +1303,8 @@ You can verify it by evaluating the following s-exp:
 (overlay-get ov-y 'invisible) ; foo
 #+END_SRC
 
-** ellipsis and ~buffer-invisibility-spec~ equal to ~((foo . t) t)~
-*** default ellipsis ~...~
+** ellipsis and buffer-invisibility-spec equal to ((foo . t) t)
+*** default ellipsis
 
 If the variable ~buffer-invisibility-spec~ as a list contains a cons
 ~(foo . t)~, every continuous part of the buffer with the ~invisible~
@@ -1360,11 +1360,11 @@ Our goal in this section is to modify the default ellipsis ~...~.
 
 To do so we:
 
-1) create a display table with the function [[emacs:lisp/disp-table.el::(defun make-display-table][make-display-table]],
+1) create a display table with the function [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/disp-table.el:34][make-display-table]],
 2) we set its special slot 4 (responsible of the display of the
    ellipsis) which must be a vector of glyph using the function
-   [[emacs:lisp/disp-table.el::(defun set-display-table-slot][set-display-table-slot]],
-3) we set the variable [[emacs:src/buffer.c::  DEFVAR_PER_BUFFER ("buffer-display-table"][buffer-display-table]] of the buffer ~*invisible*~
+   [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:lisp/disp-table.el:63][set-display-table-slot]],
+3) we set the variable [[rev:b8b2dd17c57b73357cae229e010138fd2352a46f:emacs:src/buffer.c:5909][buffer-display-table]] of the buffer ~*invisible*~
    to be this new display table,
 4) we observe the appearance of the buffer ~*invisible*~.
 
