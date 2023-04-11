@@ -7122,7 +7122,7 @@ Grep finished with 17 matches found at Fri May  6 16:17:31
 
 WE ARE DONE!!!
 
-* TODO org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS
+* org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS
 :PROPERTIES:
 :ONE: one-default-doc
 :CUSTOM_ID: /2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/
@@ -7213,7 +7213,6 @@ Since ~9.0~ we use ~org-link-set-parameters~ to add the links:
 
 This allows us to open the following link ~[[yt:Febe4lUK5G4]]~ in the
 browser with ~org-open-at-point~ (bound to ~C-c C-o~ by default).
-
 
 In [[https://www.youtube.com/watch?v=aU1EV8gzZb8&ab_channel=ZaisteProgramming][Emacs Doom E12: Org Mode - Linking to words & Bookmarks]] the focus
 is on using command ~org-store-link~ on an org-mode headline and the
