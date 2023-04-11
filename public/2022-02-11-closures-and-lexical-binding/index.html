@@ -1,8 +1,8 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Some examples on closures and lexical-binding</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Some examples on closures and lexical-binding</h1></div><div id="meta-info"><div>2022-02-11</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/sq1esz/some_examples_on_closures_and_lexicalbinding/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div></div><div id="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-cca77b7d12">info and help</a></li>
-<li><a href="#one-db885b517f">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</a></li>
-<li><a href="#one-dd6c111b63">advanced example using lambda, let, dolist, defun</a></li>
+<li><a href="#one-2563b3e260">info and help</a></li>
+<li><a href="#one-150e17af67">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</a></li>
+<li><a href="#one-8598600a0b">advanced example using lambda, let, dolist, defun</a></li>
 </ul>
 </div></div></div><div><p>Hi Emacsers,
 </p>
@@ -43,7 +43,7 @@ really curious... thank you.
 </p>
 </div>
 
-<div><h2 id="one-cca77b7d12">info and help</h2><div><p>Info nodes:
+<div><h2 id="one-2563b3e260">info and help</h2><div><p>Info nodes:
 </p>
 
 <ul><li><p><code class="one-hl one-hl-inline">M-x eval-expression RET (info &quot;(elisp)Variable Scoping&quot;)</code>
@@ -73,7 +73,7 @@ really curious... thank you.
 </div>
 </div>
 
-<div><h2 id="one-db885b517f">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</h2><div><ul><li><p>example 1
+<div><h2 id="one-150e17af67">10 examples with lexical-binding, lambda, defun, let, lexical-let, setq, defvar</h2><div><ul><li><p>example 1
 </p>
 
 <pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding nil)
@@ -164,7 +164,7 @@ really curious... thank you.
 </div>
 </div>
 
-<div><h2 id="one-dd6c111b63">advanced example using lambda, let, dolist, defun</h2><div><p>Evaluating the following forms with lexical binding:
+<div><h2 id="one-8598600a0b">advanced example using lambda, let, dolist, defun</h2><div><p>Evaluating the following forms with lexical binding:
 </p>
 
 <pre><code class="one-hl one-hl-block">(<span class="one-hl-keyword">setq</span> lexical-binding t)
@@ -233,7 +233,7 @@ really curious... thank you.
  <span class="one-hl-ta-colon-keyword">:env-of-f</span> nil)</code></pre>
 </div>
 </div>
-<div id="nav"><a href="/questions-and-answers/">PREV</a><a href="/2022-03-11-org-mode-source-code-5000-examples/">RANDOM</a><a href="/2022-02-20-onlybold-org-backend/">NEXT</a></div></article></div></body><script>
+<div id="nav"><a href="/questions-and-answers/">PREV</a><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">RANDOM</a><a href="/2022-02-20-onlybold-org-backend/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';

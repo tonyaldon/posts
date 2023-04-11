@@ -1,82 +1,82 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</h1></div><div id="meta-info"><div>2022-05-11</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/une2d8/orgmode_links_in_2022_implementation_packages/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div id="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-36eb3de06d">Implementation</a></li>
-<li><a href="#one-9365b84f9e">Videos</a>
+<li><a href="#one-d4d799775a">Implementation</a></li>
+<li><a href="#one-b45ba73170">Videos</a>
 <ul>
-<li><a href="#one-77aabe7c22">Zaiste Programming</a></li>
-<li><a href="#one-d1a7e91dd5">Rainer König</a></li>
-<li><a href="#one-f1ca5f4fd8">John Kitchin</a></li>
+<li><a href="#one-f29ec8b274">Zaiste Programming</a></li>
+<li><a href="#one-2a9fe4b817">Rainer König</a></li>
+<li><a href="#one-3cecd1e936">John Kitchin</a></li>
 </ul>
 </li>
-<li><a href="#one-d21892bab9">Articles</a></li>
-<li><a href="#one-88c84c63d">Packages</a>
+<li><a href="#one-41d6846343">Articles</a></li>
+<li><a href="#one-aa04c2ceb7">Packages</a>
 <ul>
-<li><a href="#one-c24431d8bc">org-contrib</a>
+<li><a href="#one-b84e10611a">org-contrib</a>
 <ul>
-<li><a href="#one-5800b2f61">ol-mew.el</a></li>
-<li><a href="#one-15524193f9">ol-vm.el</a></li>
-<li><a href="#one-152ea0c27e">org-mairix.el</a></li>
-<li><a href="#one-9ff524e754">ol-notmuch.el</a></li>
-<li><a href="#one-a411e13f19">ol-elisp-symbol.el</a></li>
-<li><a href="#one-56cf5bb7ff">org-mac-link.el</a></li>
-<li><a href="#one-af35593354">ol-git-link.el</a></li>
-<li><a href="#one-3567d5cee3">ob-smiles.el</a></li>
-<li><a href="#one-8b81b1a4c9">ol-wl.el</a></li>
-<li><a href="#one-75c335df26">org-contacts.el</a></li>
-<li><a href="#one-7fa3a8935e">ol-bookmark.el</a></li>
+<li><a href="#one-60da1a1fef">ol-mew.el</a></li>
+<li><a href="#one-a71e13516">ol-vm.el</a></li>
+<li><a href="#one-ccf05deaae">org-mairix.el</a></li>
+<li><a href="#one-de6fc4100a">ol-notmuch.el</a></li>
+<li><a href="#one-9131085803">ol-elisp-symbol.el</a></li>
+<li><a href="#one-3aaa50584a">org-mac-link.el</a></li>
+<li><a href="#one-88ef0d2982">ol-git-link.el</a></li>
+<li><a href="#one-7bb107a4bf">ob-smiles.el</a></li>
+<li><a href="#one-74311e2b19">ol-wl.el</a></li>
+<li><a href="#one-d743ccbafd">org-contacts.el</a></li>
+<li><a href="#one-922055e2a5">ol-bookmark.el</a></li>
 </ul>
 </li>
-<li><a href="#one-d588a95edc">On GitHub</a>
+<li><a href="#one-7348ff75ad">On GitHub</a>
 <ul>
-<li><a href="#one-b2e2b14803">calibredb.el</a></li>
-<li><a href="#one-d2cd3a7512">deft</a></li>
-<li><a href="#one-12d9eab821">doomemacs</a></li>
-<li><a href="#one-6b59dc02e9">ebdb</a></li>
-<li><a href="#one-a366efe3fc">ebib</a></li>
-<li><a href="#one-8b4bbfdd68">ejira</a></li>
-<li><a href="#one-41528f4226">el-easydraw</a></li>
-<li><a href="#one-1232f0e3cf">elfeed</a></li>
-<li><a href="#one-b9a0584e48">elpher</a></li>
-<li><a href="#one-97a49a9eeb">emacs-application-framework</a></li>
-<li><a href="#one-4ec1055b45">emacs-document</a></li>
-<li><a href="#one-cfa322cdba">emacs-webkit</a></li>
-<li><a href="#one-c5da8cece0">fanyi.el</a></li>
-<li><a href="#one-c80d7c0034">holy-books</a></li>
-<li><a href="#one-d5227e0e39">mu</a></li>
-<li><a href="#one-28e680118f">mu4e-dashboard</a></li>
-<li><a href="#one-484711b52">org-annotate</a></li>
-<li><a href="#one-499615b4ee">org-brain</a></li>
-<li><a href="#one-89f8bcd7c5">org-jira</a></li>
-<li><a href="#one-efae3d1273">org-krita</a></li>
-<li><a href="#one-99fa4422c6">org-music</a></li>
-<li><a href="#one-f4c3d7d2bf">org-pdftools</a></li>
-<li><a href="#one-f65287244e">org-ql</a></li>
-<li><a href="#one-a7ee1b9279">org-ref</a></li>
-<li><a href="#one-c2a579d85c">org-roam-server</a></li>
-<li><a href="#one-200deef208">org-roam</a></li>
-<li><a href="#one-98fb7b644b">org-sketch</a></li>
-<li><a href="#one-c1e4129bfa">org-yt</a></li>
-<li><a href="#one-9fa0cac815">org2jekyll</a></li>
-<li><a href="#one-47a33c8841">orgit-forge</a></li>
-<li><a href="#one-21d11507d">orgit</a></li>
-<li><a href="#one-a3663f6c04">orgqda</a></li>
-<li><a href="#one-c75f06dcb5">orgstrap</a></li>
-<li><a href="#one-196df45e92">orly</a></li>
-<li><a href="#one-7d552cfb82">osm</a></li>
-<li><a href="#one-b79e6b1abd">ox-ipynb</a></li>
-<li><a href="#one-64173bbd85">paperless</a></li>
-<li><a href="#one-f95237d714">papis.el</a></li>
-<li><a href="#one-eb50d9ae8d">scimax</a></li>
-<li><a href="#one-8af7cbe030">sx.el</a></li>
-<li><a href="#one-71dbd4ded5">telega.el</a></li>
-<li><a href="#one-2c694806b0">treemacs</a></li>
-<li><a href="#one-8e7ff238dd">weblorg</a></li>
-<li><a href="#one-4bd62e05d">zotxt-emacs</a></li>
+<li><a href="#one-af8404c963">calibredb.el</a></li>
+<li><a href="#one-724cacf80b">deft</a></li>
+<li><a href="#one-8c179bd154">doomemacs</a></li>
+<li><a href="#one-b837fcb579">ebdb</a></li>
+<li><a href="#one-5bd45b1564">ebib</a></li>
+<li><a href="#one-2e435d071d">ejira</a></li>
+<li><a href="#one-457d6409d0">el-easydraw</a></li>
+<li><a href="#one-83ef334098">elfeed</a></li>
+<li><a href="#one-eb1fe6992d">elpher</a></li>
+<li><a href="#one-717b0ccd47">emacs-application-framework</a></li>
+<li><a href="#one-daa6818e15">emacs-document</a></li>
+<li><a href="#one-543731d75d">emacs-webkit</a></li>
+<li><a href="#one-ba30a05506">fanyi.el</a></li>
+<li><a href="#one-8ff1330a50">holy-books</a></li>
+<li><a href="#one-d1001bd567">mu</a></li>
+<li><a href="#one-4df46fd5ad">mu4e-dashboard</a></li>
+<li><a href="#one-61a9860449">org-annotate</a></li>
+<li><a href="#one-b0b4269748">org-brain</a></li>
+<li><a href="#one-8f42f0a5f0">org-jira</a></li>
+<li><a href="#one-783b456981">org-krita</a></li>
+<li><a href="#one-463dbedd54">org-music</a></li>
+<li><a href="#one-c58f96d936">org-pdftools</a></li>
+<li><a href="#one-426463779c">org-ql</a></li>
+<li><a href="#one-4f62366452">org-ref</a></li>
+<li><a href="#one-f8c2d707fc">org-roam-server</a></li>
+<li><a href="#one-9813a3a63c">org-roam</a></li>
+<li><a href="#one-c8c3508768">org-sketch</a></li>
+<li><a href="#one-b05c4a2486">org-yt</a></li>
+<li><a href="#one-5d5f939fff">org2jekyll</a></li>
+<li><a href="#one-6d2e4c8a48">orgit-forge</a></li>
+<li><a href="#one-bc360b5b7d">orgit</a></li>
+<li><a href="#one-5ac5a7388b">orgqda</a></li>
+<li><a href="#one-83aa9ccb17">orgstrap</a></li>
+<li><a href="#one-f9aab5ec15">orly</a></li>
+<li><a href="#one-c356b03ee0">osm</a></li>
+<li><a href="#one-c9ee972b0a">ox-ipynb</a></li>
+<li><a href="#one-1a584db81e">paperless</a></li>
+<li><a href="#one-141e3891b8">papis.el</a></li>
+<li><a href="#one-fd123189f2">scimax</a></li>
+<li><a href="#one-acfdafce06">sx.el</a></li>
+<li><a href="#one-fabee70c59">telega.el</a></li>
+<li><a href="#one-11eb4b0bdc">treemacs</a></li>
+<li><a href="#one-91cd28e582">weblorg</a></li>
+<li><a href="#one-ab68e2e78e">zotxt-emacs</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#one-73ace16b96">WE ARE DONE!!!</a></li>
+<li><a href="#one-15c507c780">WE ARE DONE!!!</a></li>
 </ul>
 </div></div></div><div><p>Hey Emacsers,
 </p>
@@ -105,7 +105,7 @@ below.
 </p>
 </div>
 
-<div><h2 id="one-36eb3de06d">Implementation</h2><div><p>In the post <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME
+<div><h2 id="one-d4d799775a">Implementation</h2><div><p>In the post <a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME
 WITH ME on this JOURNEY into the heart of the command
 org-open-at-point</a>, we looked at the implementation of <code class="one-hl one-hl-inline">org-open-at-point</code>.
 </p>
@@ -146,7 +146,7 @@ we looked at <code class="one-hl one-hl-inline">org-store-link</code> and <code 
 </div>
 </div>
 
-<div><h2 id="one-9365b84f9e">Videos</h2><div><h3 id="one-77aabe7c22">Zaiste Programming</h3><div><p>In his series <a href="https://www.youtube.com/watch?v=rCMh7srOqvw&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&ab_channel=ZaisteProgramming">DoomCasts: Emacs Doom Screencasts</a> Zaiste dedicates the
+<div><h2 id="one-b45ba73170">Videos</h2><div><h3 id="one-f29ec8b274">Zaiste Programming</h3><div><p>In his series <a href="https://www.youtube.com/watch?v=rCMh7srOqvw&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj&ab_channel=ZaisteProgramming">DoomCasts: Emacs Doom Screencasts</a> Zaiste dedicates the
 episode 10, 11 and 12 to org-mode links.
 </p>
 
@@ -185,7 +185,7 @@ behavior of <code class="one-hl one-hl-inline">org-open-at-point</code> when we 
 </div>
 </div>
 
-<div><h3 id="one-d1a7e91dd5">Rainer König</h3><div><p>In his series <a href="https://www.youtube.com/watch?v=sQS06Qjnkcc&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&ab_channel=RainerK%C3%B6nig">OrgMode tutorial</a> Rainer König dedicates the episode
+<div><h3 id="one-2a9fe4b817">Rainer König</h3><div><p>In his series <a href="https://www.youtube.com/watch?v=sQS06Qjnkcc&list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE&ab_channel=RainerK%C3%B6nig">OrgMode tutorial</a> Rainer König dedicates the episode
 <code class="one-hl one-hl-inline">E05S01</code> and <code class="one-hl one-hl-inline">E05S02</code> to org-mode links.
 </p>
 
@@ -232,7 +232,7 @@ break when we archive a subtree with the command
 </div>
 </div>
 
-<div><h3 id="one-f1ca5f4fd8">John Kitchin</h3><div><p>In <a href="https://www.youtube.com/watch?v=5haX95nk02E&ab_channel=JohnKitchin">New link features in org-mode v9.0</a> John Kitchin demonstrates
+<div><h3 id="one-3cecd1e936">John Kitchin</h3><div><p>In <a href="https://www.youtube.com/watch?v=5haX95nk02E&ab_channel=JohnKitchin">New link features in org-mode v9.0</a> John Kitchin demonstrates
 how to defines new link types using the function
 <code class="one-hl one-hl-inline">org-link-set-parameters</code>:
 </p>
@@ -267,7 +267,7 @@ demonstrated.
 </div>
 </div>
 
-<div><h2 id="one-d21892bab9">Articles</h2><div><p>In <a href="https://kitchingroup.cheme.cmu.edu/blog/2016/11/04/New-link-features-in-org-9/">New link features in org 9</a> John Kitchin demonstrates how to defines
+<div><h2 id="one-41d6846343">Articles</h2><div><p>In <a href="https://kitchingroup.cheme.cmu.edu/blog/2016/11/04/New-link-features-in-org-9/">New link features in org 9</a> John Kitchin demonstrates how to defines
 new link types using the function <code class="one-hl one-hl-inline">org-link-set-parameters</code>.  This
 article is completed with this videos <a href="https://www.youtube.com/watch?v=5haX95nk02E&ab_channel=JohnKitchin">New link features in org-mode
 v9.0</a>.
@@ -308,7 +308,7 @@ in&#8212;instead of letting fate, or custom, or Emacs decide for you.</code></pr
 </div>
 </div>
 
-<div><h2 id="one-88c84c63d">Packages</h2><div><h3 id="one-c24431d8bc">org-contrib</h3><div><p>The repository <a href="https://git.sr.ht/~bzg/org-contrib">https://git.sr.ht/~bzg/org-contrib</a> contains many
+<div><h2 id="one-aa04c2ceb7">Packages</h2><div><h3 id="one-b84e10611a">org-contrib</h3><div><p>The repository <a href="https://git.sr.ht/~bzg/org-contrib">https://git.sr.ht/~bzg/org-contrib</a> contains many
 add-ons to Org.
 </p>
 
@@ -317,7 +317,7 @@ add-ons to Org.
 </p>
 </div>
 
-<div><h4 id="one-5800b2f61">ol-mew.el</h4><div><p>This file implements links to Mew messages from within Org-mode.
+<div><h4 id="one-60da1a1fef">ol-mew.el</h4><div><p>This file implements links to Mew messages from within Org-mode.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-mew.el#L152">mew</a>.
@@ -325,7 +325,7 @@ add-ons to Org.
 </div>
 </div>
 
-<div><h4 id="one-15524193f9">ol-vm.el</h4><div><p>This file implements links to VM messages and folders from within
+<div><h4 id="one-a71e13516">ol-vm.el</h4><div><p>This file implements links to VM messages and folders from within
 Org-mode.
 </p>
 
@@ -334,7 +334,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-152ea0c27e">org-mairix.el</h4><div><p>Support for hooking mairix search into Org for different MUAs.
+<div><h4 id="one-ccf05deaae">org-mairix.el</h4><div><p>Support for hooking mairix search into Org for different MUAs.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mairix.el#L85">mairix</a>.
@@ -342,7 +342,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-9ff524e754">ol-notmuch.el</h4><div><p>Links to notmuch messages.
+<div><h4 id="one-de6fc4100a">ol-notmuch.el</h4><div><p>Links to notmuch messages.
 </p>
 
 <p>It defines the link types <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L70">notmuch</a>, <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L103">notmuch-search</a> and <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-notmuch.el#L129">notmuch-tree</a>.
@@ -350,7 +350,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-a411e13f19">ol-elisp-symbol.el</h4><div><p>Links to Emacs-lisp symbols.
+<div><h4 id="one-9131085803">ol-elisp-symbol.el</h4><div><p>Links to Emacs-lisp symbols.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-elisp-symbol.el#L81">elisp-symbol</a>.
@@ -358,7 +358,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-56cf5bb7ff">org-mac-link.el</h4><div><p>Insert org-mode links to items selected in various Mac apps.
+<div><h4 id="one-3aaa50584a">org-mac-link.el</h4><div><p>Insert org-mode links to items selected in various Mac apps.
 </p>
 
 <p>It defines the link types <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L498">x-together-item</a>, <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L557">addressbook</a>, <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L592">skim</a>, <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-mac-link.el#L651">acrobat</a>,
@@ -367,7 +367,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-af35593354">ol-git-link.el</h4><div><p>Links to specific file version.
+<div><h4 id="one-88ef0d2982">ol-git-link.el</h4><div><p>Links to specific file version.
 </p>
 
 <p>It defines the link types <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-git-link.el#L74">gitbare</a> and <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-git-link.el#L97">git</a>.
@@ -375,7 +375,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-3567d5cee3">ob-smiles.el</h4><div><p>Org-mode Babel support for SMILES.
+<div><h4 id="one-7bb107a4bf">ob-smiles.el</h4><div><p>Org-mode Babel support for SMILES.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ob-smiles.el#L56">molecule</a>.
@@ -383,7 +383,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-8b81b1a4c9">ol-wl.el</h4><div><p>Links to Wanderlust messages.
+<div><h4 id="one-74311e2b19">ol-wl.el</h4><div><p>Links to Wanderlust messages.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-wl.el#L114">wl</a>.
@@ -391,7 +391,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-75c335df26">org-contacts.el</h4><div><p>This file contains the code for managing your contacts into Org-mode.
+<div><h4 id="one-d743ccbafd">org-contacts.el</h4><div><p>This file contains the code for managing your contacts into Org-mode.
 </p>
 
 <p>It defines the link types <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-contacts.el#L1120">tel</a> and <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/org-contacts.el#L1160">org-contact</a>.
@@ -399,7 +399,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h4 id="one-7fa3a8935e">ol-bookmark.el</h4><div><p>Links to bookmarks.
+<div><h4 id="one-922055e2a5">ol-bookmark.el</h4><div><p>Links to bookmarks.
 </p>
 
 <p>It defines the link type <a href="https://git.sr.ht/~bzg/org-contrib/tree/15b03d5090cd6ef46bdfdd14a3f9e20c3dab60da/lisp/ol-bookmark.el#L52">bookmark</a>.
@@ -408,7 +408,7 @@ Org-mode.
 </div>
 </div>
 
-<div><h3 id="one-d588a95edc">On GitHub</h3><div><p>By doing a search for the function <code class="one-hl one-hl-inline">org-link-set-parameters</code> (used to
+<div><h3 id="one-7348ff75ad">On GitHub</h3><div><p>By doing a search for the function <code class="one-hl one-hl-inline">org-link-set-parameters</code> (used to
 define new Org link types) using <a href="https://grep.app/">https://grep.app/</a> we can find &quot;all&quot;
 the org link types defined in GitHub public repositories.
 </p>
@@ -429,7 +429,7 @@ revision while I was writing this post).
 </p>
 </div>
 
-<div><h4 id="one-b2e2b14803">calibredb.el</h4><div><p><a href="https://github.com/chenyanming/calibredb.el">https://github.com/chenyanming/calibredb.el</a>:  Yet another <a href="https://calibre-ebook.com/">calibre</a>
+<div><h4 id="one-af8404c963">calibredb.el</h4><div><p><a href="https://github.com/chenyanming/calibredb.el">https://github.com/chenyanming/calibredb.el</a>:  Yet another <a href="https://calibre-ebook.com/">calibre</a>
 client for emacs.
 </p>
 
@@ -438,7 +438,7 @@ client for emacs.
 </div>
 </div>
 
-<div><h4 id="one-d2cd3a7512">deft</h4><div><p><a href="https://github.com/jrblevin/deft">https://github.com/jrblevin/deft</a>:  Deft is an Emacs mode for quickly
+<div><h4 id="one-724cacf80b">deft</h4><div><p><a href="https://github.com/jrblevin/deft">https://github.com/jrblevin/deft</a>:  Deft is an Emacs mode for quickly
 browsing, filtering, and editing directories of plain text notes,
 inspired by Notational Velocity.
 </p>
@@ -448,7 +448,7 @@ inspired by Notational Velocity.
 </div>
 </div>
 
-<div><h4 id="one-12d9eab821">doomemacs</h4><div><p><a href="https://github.com/doomemacs/doomemacs">https://github.com/doomemacs/doomemacs</a>:  Doom is a configuration
+<div><h4 id="one-8c179bd154">doomemacs</h4><div><p><a href="https://github.com/doomemacs/doomemacs">https://github.com/doomemacs/doomemacs</a>:  Doom is a configuration
 framework for [GNU Emacs] tailored for Emacs bankruptcy veterans who
 want less framework in their frameworks, a modicum of stability (and
 reproducibility) from their package manager, and the performance of a
@@ -460,7 +460,7 @@ hand rolled config (or better).
 </div>
 </div>
 
-<div><h4 id="one-6b59dc02e9">ebdb</h4><div><p><a href="https://github.com/girzel/ebdb">https://github.com/girzel/ebdb</a>: EBDB is a contact
+<div><h4 id="one-b837fcb579">ebdb</h4><div><p><a href="https://github.com/girzel/ebdb">https://github.com/girzel/ebdb</a>: EBDB is a contact
 management/addressbook package for Emacs.
 </p>
 
@@ -469,7 +469,7 @@ management/addressbook package for Emacs.
 </div>
 </div>
 
-<div><h4 id="one-a366efe3fc">ebib</h4><div><p><a href="https://github.com/joostkremers/ebib">https://github.com/joostkremers/ebib</a>:  Ebib is a BibTeX database
+<div><h4 id="one-5bd45b1564">ebib</h4><div><p><a href="https://github.com/joostkremers/ebib">https://github.com/joostkremers/ebib</a>:  Ebib is a BibTeX database
 manager that runs in GNU Emacs.
 </p>
 
@@ -478,7 +478,7 @@ manager that runs in GNU Emacs.
 </div>
 </div>
 
-<div><h4 id="one-8b4bbfdd68">ejira</h4><div><p><a href="https://github.com/nyyManni/ejira">https://github.com/nyyManni/ejira</a>: JIRA integration to Emacs org-mode
+<div><h4 id="one-2e435d071d">ejira</h4><div><p><a href="https://github.com/nyyManni/ejira">https://github.com/nyyManni/ejira</a>: JIRA integration to Emacs org-mode
 </p>
 
 <p><code class="one-hl one-hl-inline">ejira</code> defines the link type <a href="https://github.com/nyyManni/ejira/blob/1dc2176ec49ec19516e68130552aae34cda4886c/ejira-core.el#L815">jirauser</a>.
@@ -486,7 +486,7 @@ manager that runs in GNU Emacs.
 </div>
 </div>
 
-<div><h4 id="one-41528f4226">el-easydraw</h4><div><p><a href="https://github.com/misohena/el-easydraw">https://github.com/misohena/el-easydraw</a>:  Emacs Easy Draw is a
+<div><h4 id="one-457d6409d0">el-easydraw</h4><div><p><a href="https://github.com/misohena/el-easydraw">https://github.com/misohena/el-easydraw</a>:  Emacs Easy Draw is a
 drawing tool that runs inside Emacs.
 </p>
 
@@ -495,7 +495,7 @@ drawing tool that runs inside Emacs.
 </div>
 </div>
 
-<div><h4 id="one-1232f0e3cf">elfeed</h4><div><p><a href="https://github.com/skeeto/elfeed">https://github.com/skeeto/elfeed</a>:  Elfeed is an extensible web feed
+<div><h4 id="one-83ef334098">elfeed</h4><div><p><a href="https://github.com/skeeto/elfeed">https://github.com/skeeto/elfeed</a>:  Elfeed is an extensible web feed
 reader for Emacs, supporting both Atom and RSS.
 </p>
 
@@ -504,7 +504,7 @@ reader for Emacs, supporting both Atom and RSS.
 </div>
 </div>
 
-<div><h4 id="one-b9a0584e48">elpher</h4><div><p><a href="https://github.com/emacsmirror/elpher">https://github.com/emacsmirror/elpher</a>:  Elpher aims to provide a
+<div><h4 id="one-eb1fe6992d">elpher</h4><div><p><a href="https://github.com/emacsmirror/elpher">https://github.com/emacsmirror/elpher</a>:  Elpher aims to provide a
 full-featured combination gopher and gemini client for GNU Emacs.
 </p>
 
@@ -513,7 +513,7 @@ full-featured combination gopher and gemini client for GNU Emacs.
 </div>
 </div>
 
-<div><h4 id="one-97a49a9eeb">emacs-application-framework</h4><div><p><a href="https://github.com/emacs-eaf/emacs-application-framework">https://github.com/emacs-eaf/emacs-application-framework</a>: The vision
+<div><h4 id="one-717b0ccd47">emacs-application-framework</h4><div><p><a href="https://github.com/emacs-eaf/emacs-application-framework">https://github.com/emacs-eaf/emacs-application-framework</a>: The vision
 of the Emacs Application Framework (EAF) project is, while fully
 retaining the rich history, culture, and ecosystem of Emacs and Emacs
 Lisp, to open up completely new doors to the ecosystems of Python,
@@ -528,7 +528,7 @@ and <code class="one-hl one-hl-inline">pdftools</code> in the <a href="https://g
 </div>
 </div>
 
-<div><h4 id="one-4ec1055b45">emacs-document</h4><div><p><a href="https://github.com/lujun9972/emacs-document">https://github.com/lujun9972/emacs-document</a>:  Translate emacs
+<div><h4 id="one-daa6818e15">emacs-document</h4><div><p><a href="https://github.com/lujun9972/emacs-document">https://github.com/lujun9972/emacs-document</a>:  Translate emacs
 documents to Chinese for convenient reference.
 </p>
 
@@ -537,7 +537,7 @@ documents to Chinese for convenient reference.
 </div>
 </div>
 
-<div><h4 id="one-cfa322cdba">emacs-webkit</h4><div><p><a href="https://github.com/akirakyle/emacs-webkit">https://github.com/akirakyle/emacs-webkit</a>:  A successor to xwidget-webkit.
+<div><h4 id="one-543731d75d">emacs-webkit</h4><div><p><a href="https://github.com/akirakyle/emacs-webkit">https://github.com/akirakyle/emacs-webkit</a>:  A successor to xwidget-webkit.
 </p>
 
 <p><code class="one-hl one-hl-inline">emacs-webkit</code> defines the link type <a href="https://github.com/akirakyle/emacs-webkit/blob/96a4850676b74ffa55b52ff8e9824f7537df6a47/webkit.el#L542">webkit</a>.
@@ -545,7 +545,7 @@ documents to Chinese for convenient reference.
 </div>
 </div>
 
-<div><h4 id="one-c5da8cece0">fanyi.el</h4><div><p><a href="https://github.com/condy0919/fanyi.el">https://github.com/condy0919/fanyi.el</a>:  fanyi.el is a simple yet
+<div><h4 id="one-ba30a05506">fanyi.el</h4><div><p><a href="https://github.com/condy0919/fanyi.el">https://github.com/condy0919/fanyi.el</a>:  fanyi.el is a simple yet
 powerful multi-dictionaries interface for Emacs.
 </p>
 
@@ -554,7 +554,7 @@ powerful multi-dictionaries interface for Emacs.
 </div>
 </div>
 
-<div><h4 id="one-c80d7c0034">holy-books</h4><div><p><a href="https://github.com/alhassy/holy-books">https://github.com/alhassy/holy-books</a>:  An Emacs interface to the
+<div><h4 id="one-8ff1330a50">holy-books</h4><div><p><a href="https://github.com/alhassy/holy-books">https://github.com/alhassy/holy-books</a>:  An Emacs interface to the
 Quran and the Bible: Org-mode links, tooltips, and Lisp look-ups.
 </p>
 
@@ -564,7 +564,7 @@ Quran and the Bible: Org-mode links, tooltips, and Lisp look-ups.
 </div>
 </div>
 
-<div><h4 id="one-d5227e0e39">mu</h4><div><p><a href="https://github.com/djcb/mu">https://github.com/djcb/mu</a>:  mu is a tool for dealing with e-mail messages stored in the
+<div><h4 id="one-d1001bd567">mu</h4><div><p><a href="https://github.com/djcb/mu">https://github.com/djcb/mu</a>:  mu is a tool for dealing with e-mail messages stored in the
 Maildir-format.
 </p>
 
@@ -573,7 +573,7 @@ Maildir-format.
 </div>
 </div>
 
-<div><h4 id="one-28e680118f">mu4e-dashboard</h4><div><p><a href="https://github.com/rougier/mu4e-dashboard">https://github.com/rougier/mu4e-dashboard</a>:  mu4e dashboard provides a
+<div><h4 id="one-4df46fd5ad">mu4e-dashboard</h4><div><p><a href="https://github.com/rougier/mu4e-dashboard">https://github.com/rougier/mu4e-dashboard</a>:  mu4e dashboard provides a
 new <code class="one-hl one-hl-inline">mu4e</code> org link type that allows to execute various mu4e queries
 when clicked.
 </p>
@@ -583,7 +583,7 @@ when clicked.
 </div>
 </div>
 
-<div><h4 id="one-484711b52">org-annotate</h4><div><p><a href="https://github.com/girzel/org-annotate">https://github.com/girzel/org-annotate</a>:   Provides a new link type
+<div><h4 id="one-61a9860449">org-annotate</h4><div><p><a href="https://github.com/girzel/org-annotate">https://github.com/girzel/org-annotate</a>:   Provides a new link type
 for Org that allows you to create annotations on arbitrary chunks of
 text.
 </p>
@@ -593,7 +593,7 @@ text.
 </div>
 </div>
 
-<div><h4 id="one-499615b4ee">org-brain</h4><div><p><a href="https://github.com/Kungsgeten/org-brain">https://github.com/Kungsgeten/org-brain</a>:  org-brain implements a
+<div><h4 id="one-b0b4269748">org-brain</h4><div><p><a href="https://github.com/Kungsgeten/org-brain">https://github.com/Kungsgeten/org-brain</a>:  org-brain implements a
 variant of <a href="https://en.wikipedia.org/wiki/Concept_map">concept mapping</a> in Emacs, using <a href="http://orgmode.org/">org-mode</a>.
 </p>
 
@@ -603,7 +603,7 @@ variant of <a href="https://en.wikipedia.org/wiki/Concept_map">concept mapping</
 </div>
 </div>
 
-<div><h4 id="one-89f8bcd7c5">org-jira</h4><div><p><a href="https://github.com/ahungry/org-jira">https://github.com/ahungry/org-jira</a>:  Use Jira in Emacs org-mode.
+<div><h4 id="one-8f42f0a5f0">org-jira</h4><div><p><a href="https://github.com/ahungry/org-jira">https://github.com/ahungry/org-jira</a>:  Use Jira in Emacs org-mode.
 </p>
 
 <p><code class="one-hl one-hl-inline">org-jira</code> defines the link type <a href="https://github.com/ahungry/org-jira/blob/c0c0086419b4e68bb45bf609931916d6d8ae48a2/org-jira.el#L2382">jira</a>.
@@ -611,7 +611,7 @@ variant of <a href="https://en.wikipedia.org/wiki/Concept_map">concept mapping</
 </div>
 </div>
 
-<div><h4 id="one-efae3d1273">org-krita</h4><div><p><a href="https://github.com/lepisma/org-krita">https://github.com/lepisma/org-krita</a>:  Minor mode for working with
+<div><h4 id="one-783b456981">org-krita</h4><div><p><a href="https://github.com/lepisma/org-krita">https://github.com/lepisma/org-krita</a>:  Minor mode for working with
 <a href="https://krita.org/en/">krita</a> notes, sketches etc. in org mode.
 </p>
 
@@ -620,7 +620,7 @@ variant of <a href="https://en.wikipedia.org/wiki/Concept_map">concept mapping</
 </div>
 </div>
 
-<div><h4 id="one-99fa4422c6">org-music</h4><div><p><a href="https://github.com/tecosaur/org-music">https://github.com/tecosaur/org-music</a>:  This adds a new link type,
+<div><h4 id="one-463dbedd54">org-music</h4><div><p><a href="https://github.com/tecosaur/org-music">https://github.com/tecosaur/org-music</a>:  This adds a new link type,
 <code class="one-hl one-hl-inline">[[music:artist:song]]</code>.
 </p>
 
@@ -629,7 +629,7 @@ variant of <a href="https://en.wikipedia.org/wiki/Concept_map">concept mapping</
 </div>
 </div>
 
-<div><h4 id="one-f4c3d7d2bf">org-pdftools</h4><div><p><a href="https://github.com/fuxialexander/org-pdftools">https://github.com/fuxialexander/org-pdftools</a>:  A custom org link
+<div><h4 id="one-c58f96d936">org-pdftools</h4><div><p><a href="https://github.com/fuxialexander/org-pdftools">https://github.com/fuxialexander/org-pdftools</a>:  A custom org link
 type for pdf-tools.
 </p>
 
@@ -638,7 +638,7 @@ type for pdf-tools.
 </div>
 </div>
 
-<div><h4 id="one-f65287244e">org-ql</h4><div><p><a href="https://github.com/alphapapa/org-ql">https://github.com/alphapapa/org-ql</a>:  This package provides a query
+<div><h4 id="one-426463779c">org-ql</h4><div><p><a href="https://github.com/alphapapa/org-ql">https://github.com/alphapapa/org-ql</a>:  This package provides a query
 language for Org files.  It offers two syntax styles: Lisp-like sexps
 and search engine-like keywords.
 </p>
@@ -648,7 +648,7 @@ and search engine-like keywords.
 </div>
 </div>
 
-<div><h4 id="one-a7ee1b9279">org-ref</h4><div><p><a href="https://github.com/jkitchin/org-ref">https://github.com/jkitchin/org-ref</a>:  org-ref makes it easy to insert
+<div><h4 id="one-4f62366452">org-ref</h4><div><p><a href="https://github.com/jkitchin/org-ref">https://github.com/jkitchin/org-ref</a>:  org-ref makes it easy to insert
 citations, cross-references, indexes and glossaries as
 hyper-functional links into org files.  The links are fontified so you
 can tell them apart from other links, and each link is clickable to
@@ -729,7 +729,7 @@ in <code class="one-hl one-hl-inline">org-ref-bibliography-links.el</code>,
 </div>
 </div>
 
-<div><h4 id="one-c2a579d85c">org-roam-server</h4><div><p><a href="https://github.com/org-roam/org-roam-server">https://github.com/org-roam/org-roam-server</a>:  Server for org-roam v1.
+<div><h4 id="one-f8c2d707fc">org-roam-server</h4><div><p><a href="https://github.com/org-roam/org-roam-server">https://github.com/org-roam/org-roam-server</a>:  Server for org-roam v1.
 </p>
 
 <p><code class="one-hl one-hl-inline">org-roam-server</code> defines the link types: <a href="https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L508">server</a>, <a href="https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L509">file</a> and <a href="https://github.com/org-roam/org-roam-server/blob/a207ecd36e29dad55eb66431f041e39144130ee5/org-roam-server.el#L510">image</a>.
@@ -737,7 +737,7 @@ in <code class="one-hl one-hl-inline">org-ref-bibliography-links.el</code>,
 </div>
 </div>
 
-<div><h4 id="one-200deef208">org-roam</h4><div><p><a href="https://github.com/org-roam/org-roam">https://github.com/org-roam/org-roam</a>:  Org-roam is a plain-text
+<div><h4 id="one-9813a3a63c">org-roam</h4><div><p><a href="https://github.com/org-roam/org-roam">https://github.com/org-roam/org-roam</a>:  Org-roam is a plain-text
 knowledge management system.  It brings some of Roam&apos;s more powerful
 features into the Org-mode ecosystem.
 </p>
@@ -747,7 +747,7 @@ features into the Org-mode ecosystem.
 </div>
 </div>
 
-<div><h4 id="one-98fb7b644b">org-sketch</h4><div><p><a href="https://github.com/yuchen-lea/org-sketch">https://github.com/yuchen-lea/org-sketch</a>:  Xournal, Draw.io support
+<div><h4 id="one-c8c3508768">org-sketch</h4><div><p><a href="https://github.com/yuchen-lea/org-sketch">https://github.com/yuchen-lea/org-sketch</a>:  Xournal, Draw.io support
 for Org Mode.
 </p>
 
@@ -756,7 +756,7 @@ for Org Mode.
 </div>
 </div>
 
-<div><h4 id="one-c1e4129bfa">org-yt</h4><div><p><a href="https://github.com/TobiasZawada/org-yt">https://github.com/TobiasZawada/org-yt</a>: Youtube links in org-mode.
+<div><h4 id="one-b05c4a2486">org-yt</h4><div><p><a href="https://github.com/TobiasZawada/org-yt">https://github.com/TobiasZawada/org-yt</a>: Youtube links in org-mode.
 </p>
 
 <p><code class="one-hl one-hl-inline">org-yt</code> defines the link type <a href="https://github.com/TobiasZawada/org-yt/blob/40cc1ac76d741055cbefa13860d9f070a7ade001/org-yt.el#L135">yt</a>.
@@ -764,7 +764,7 @@ for Org Mode.
 </div>
 </div>
 
-<div><h4 id="one-9fa0cac815">org2jekyll</h4><div><p><a href="https://github.com/ardumont/org2jekyll">https://github.com/ardumont/org2jekyll</a>:  Blogging with org-mode and
+<div><h4 id="one-5d5f939fff">org2jekyll</h4><div><p><a href="https://github.com/ardumont/org2jekyll">https://github.com/ardumont/org2jekyll</a>:  Blogging with org-mode and
 jekyll without alien yaml headers.
 </p>
 
@@ -773,7 +773,7 @@ jekyll without alien yaml headers.
 </div>
 </div>
 
-<div><h4 id="one-47a33c8841">orgit-forge</h4><div><p><a href="https://github.com/magit/orgit-forge">https://github.com/magit/orgit-forge</a>:  This package defines the Org
+<div><h4 id="one-6d2e4c8a48">orgit-forge</h4><div><p><a href="https://github.com/magit/orgit-forge">https://github.com/magit/orgit-forge</a>:  This package defines the Org
 link type orgit-topic, which can be used to link to Forge topic
 buffers.  This is similar to the orgit package, which links to various
 Magit buffers.
@@ -784,7 +784,7 @@ Magit buffers.
 </div>
 </div>
 
-<div><h4 id="one-21d11507d">orgit</h4><div><p><a href="https://github.com/magit/orgit">https://github.com/magit/orgit</a>:  This package defines several Org
+<div><h4 id="one-bc360b5b7d">orgit</h4><div><p><a href="https://github.com/magit/orgit">https://github.com/magit/orgit</a>:  This package defines several Org
 link types, which can be used to link to certain Magit buffers.
 </p>
 
@@ -793,7 +793,7 @@ link types, which can be used to link to certain Magit buffers.
 </div>
 </div>
 
-<div><h4 id="one-a3663f6c04">orgqda</h4><div><p><a href="https://github.com/andersjohansson/orgqda">https://github.com/andersjohansson/orgqda</a>:  <code class="one-hl one-hl-inline">orgqda</code> defines a minor
+<div><h4 id="one-5ac5a7388b">orgqda</h4><div><p><a href="https://github.com/andersjohansson/orgqda">https://github.com/andersjohansson/orgqda</a>:  <code class="one-hl one-hl-inline">orgqda</code> defines a minor
 mode and several commands for making coding, listing of codes, and
 collection of coded extracts possible in text written in org mode.
 </p>
@@ -803,7 +803,7 @@ collection of coded extracts possible in text written in org mode.
 </div>
 </div>
 
-<div><h4 id="one-c75f06dcb5">orgstrap</h4><div><p><a href="https://github.com/tgbugs/orgstrap">https://github.com/tgbugs/orgstrap</a>:  orgstrap allows Org files to
+<div><h4 id="one-83aa9ccb17">orgstrap</h4><div><p><a href="https://github.com/tgbugs/orgstrap">https://github.com/tgbugs/orgstrap</a>:  orgstrap allows Org files to
 describe their own requirements and define their own functionality,
 making them self-contained standalone computational artifacts
 dependent only on Emacs or other implementations of the Org Babel
@@ -816,7 +816,7 @@ protocol in the future.
 </div>
 </div>
 
-<div><h4 id="one-196df45e92">orly</h4><div><p><a href="https://github.com/abo-abo/orly">https://github.com/abo-abo/orly</a>:  Additional Org-mode link types and
+<div><h4 id="one-f9aab5ec15">orly</h4><div><p><a href="https://github.com/abo-abo/orly">https://github.com/abo-abo/orly</a>:  Additional Org-mode link types and
 completion for them.
 </p>
 
@@ -825,7 +825,7 @@ completion for them.
 </div>
 </div>
 
-<div><h4 id="one-7d552cfb82">osm</h4><div><p><a href="https://github.com/minad/osm">https://github.com/minad/osm</a>:  Osm.el is a tile-based map viewer,
+<div><h4 id="one-c356b03ee0">osm</h4><div><p><a href="https://github.com/minad/osm">https://github.com/minad/osm</a>:  Osm.el is a tile-based map viewer,
 with a responsive moveable and zoomable display.  The map can be
 controlled with the keyboard or with the mouse.  The viewer fetches
 the map tiles in parallel from tile servers via the <code class="one-hl one-hl-inline">curl</code> program.  The
@@ -841,7 +841,7 @@ display GPX tracks.
 </div>
 </div>
 
-<div><h4 id="one-b79e6b1abd">ox-ipynb</h4><div><p><a href="https://github.com/jkitchin/ox-ipynb">https://github.com/jkitchin/ox-ipynb</a>:  This module allows you to
+<div><h4 id="one-c9ee972b0a">ox-ipynb</h4><div><p><a href="https://github.com/jkitchin/ox-ipynb">https://github.com/jkitchin/ox-ipynb</a>:  This module allows you to
 export an org-file to an Ipython notebook.  Python and R notebooks are
 currently supported.  It is not currently possible to mix these
 languages.
@@ -852,7 +852,7 @@ languages.
 </div>
 </div>
 
-<div><h4 id="one-64173bbd85">paperless</h4><div><p><a href="https://github.com/atgreen/paperless">https://github.com/atgreen/paperless</a>:  Emacs assisted PDF document filing.
+<div><h4 id="one-1a584db81e">paperless</h4><div><p><a href="https://github.com/atgreen/paperless">https://github.com/atgreen/paperless</a>:  Emacs assisted PDF document filing.
 </p>
 
 <p><code class="one-hl one-hl-inline">paperless</code> defines the link type <a href="https://github.com/atgreen/paperless/blob/2db39586a2914f78f345379511d0e8cea4c96b86/org-paperless.el#L36">paperless</a>.
@@ -860,7 +860,7 @@ languages.
 </div>
 </div>
 
-<div><h4 id="one-f95237d714">papis.el</h4><div><p><a href="https://github.com/papis/papis.el">https://github.com/papis/papis.el</a>:  The main motivation of this
+<div><h4 id="one-141e3891b8">papis.el</h4><div><p><a href="https://github.com/papis/papis.el">https://github.com/papis/papis.el</a>:  The main motivation of this
 package is to make it easy to interact with org-mode and papis.
 </p>
 
@@ -869,7 +869,7 @@ package is to make it easy to interact with org-mode and papis.
 </div>
 </div>
 
-<div><h4 id="one-eb50d9ae8d">scimax</h4><div><p><a href="https://github.com/jkitchin/scimax">https://github.com/jkitchin/scimax</a>:  Scimax is an Emacs starterkit
+<div><h4 id="one-fd123189f2">scimax</h4><div><p><a href="https://github.com/jkitchin/scimax">https://github.com/jkitchin/scimax</a>:  Scimax is an Emacs starterkit
 for scientists and engineers.  It provides a comprehensive
 configuration of Emacs for scientific programming and publishing.
 </p>
@@ -880,7 +880,7 @@ configuration of Emacs for scientific programming and publishing.
 </div>
 </div>
 
-<div><h4 id="one-8af7cbe030">sx.el</h4><div><p><a href="https://github.com/vermiculus/sx.el">https://github.com/vermiculus/sx.el</a>:  SX is a full-featured Stack
+<div><h4 id="one-acfdafce06">sx.el</h4><div><p><a href="https://github.com/vermiculus/sx.el">https://github.com/vermiculus/sx.el</a>:  SX is a full-featured Stack
 Exchange mode for GNU Emacs 24+.  Using the official API, it provides
 a versatile experience for the Stack Exchange network within Emacs
 itself.
@@ -891,7 +891,7 @@ itself.
 </div>
 </div>
 
-<div><h4 id="one-71dbd4ded5">telega.el</h4><div><p><a href="https://github.com/zevlg/telega.el">https://github.com/zevlg/telega.el</a>:  telega.el is full featured unofficial client for
+<div><h4 id="one-fabee70c59">telega.el</h4><div><p><a href="https://github.com/zevlg/telega.el">https://github.com/zevlg/telega.el</a>:  telega.el is full featured unofficial client for
 <a href="https://telegram.org">https://telegram.org</a>  platform for GNU Emacs.
 </p>
 
@@ -900,7 +900,7 @@ itself.
 </div>
 </div>
 
-<div><h4 id="one-2c694806b0">treemacs</h4><div><p><a href="https://github.com/Alexander-Miller/treemacs">https://github.com/Alexander-Miller/treemacs</a>:  A tree layout file explorer for Emacs.
+<div><h4 id="one-11eb4b0bdc">treemacs</h4><div><p><a href="https://github.com/Alexander-Miller/treemacs">https://github.com/Alexander-Miller/treemacs</a>:  A tree layout file explorer for Emacs.
 </p>
 
 <p><code class="one-hl one-hl-inline">treemacs</code> defines the link type <a href="https://github.com/Alexander-Miller/treemacs/blob/dca83bd42918b510173759df4cc8b3663d5d480d/src/elisp/treemacs-compatibility.el#L142">treemacs</a>.
@@ -908,7 +908,7 @@ itself.
 </div>
 </div>
 
-<div><h4 id="one-8e7ff238dd">weblorg</h4><div><p><a href="https://github.com/emacs-love/weblorg">https://github.com/emacs-love/weblorg</a>:  A Static HTML Generator
+<div><h4 id="one-91cd28e582">weblorg</h4><div><p><a href="https://github.com/emacs-love/weblorg">https://github.com/emacs-love/weblorg</a>:  A Static HTML Generator
 entirely written in Emacs-Lisp.
 </p>
 
@@ -917,7 +917,7 @@ entirely written in Emacs-Lisp.
 </div>
 </div>
 
-<div><h4 id="one-4bd62e05d">zotxt-emacs</h4><div><p><a href="https://github.com/egh/zotxt-emacs">https://github.com/egh/zotxt-emacs</a>:  zotxt-emacs works with
+<div><h4 id="one-ab68e2e78e">zotxt-emacs</h4><div><p><a href="https://github.com/egh/zotxt-emacs">https://github.com/egh/zotxt-emacs</a>:  zotxt-emacs works with
 <a href="https://github.com/egh/zotxt">https://github.com/egh/zotxt</a> to provide Emacs integration
 with Zotero, allowing you to manage citation keys for pandoc markdown
 documents as well as org mode links to items in your Zotero
@@ -931,8 +931,8 @@ collection.
 </div>
 </div>
 
-<div><h2 id="one-73ace16b96">WE ARE DONE!!!</h2></div>
-<div id="nav"><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">PREV</a><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">RANDOM</a></div></article></div></body><script>
+<div><h2 id="one-15c507c780">WE ARE DONE!!!</h2></div>
+<div id="nav"><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">PREV</a><a href="/2022-03-11-org-mode-source-code-5000-examples/">RANDOM</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';
