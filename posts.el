@@ -30,7 +30,7 @@
          (pages-list (one-default-pages pages))
          (headlines (cdr (one-default-list-headlines page-tree)))
          (toc (when headlines
-                `(:div/toc
+                `(:div.toc
                   (:div
                    (:div "Table of content")
                    (:div ,(one-default-toc headlines))))))
@@ -59,10 +59,10 @@
         (:div/content-doc
          (:div/sidebar ,pages-list)
          (:article
-          (:div/title (:h1 ,title))
+          (:div.title (:h1 ,title))
           ,(when (not (string-match-p "questions-and-answers" path))
              `(:div/meta-info
-               (:div ,date) "/" (:div "Tony Aldon") "/"
+               (:div ,date) "/" (:a (@ :href "https://tonyaldon.com/") "Tony Aldon") "/"
                (:div (:a (@ :href ,reddit-post) "comment on reddit"))
                ,(cond
                  ((and commit-emacs commit-org-mode)
