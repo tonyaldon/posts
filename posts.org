@@ -18,13 +18,9 @@
 
 * Elisp Posts
 :PROPERTIES:
-:ONE: one-default-home-list-posts
+:ONE: posts-one-default-home-list-pages
 :CUSTOM_ID: /
 :END:
-
-Clone [[https://github.com/tonyaldon/posts][tonyaldon/posts]] repository if you prefer to read those posts in
-~org-mode~ inside Emacs.
-
 * Questions and Answers
 :PROPERTIES:
 :ONE: posts-one-default-doc
