@@ -1,22 +1,22 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div id="title"><h1>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</h1></div><div id="meta-info"><div>2022-03-22</div>/<div>Tony Aldon</div>/<div><a href="https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div>/<div>org-mode revision: 96d91bea658c</div></div><div id="toc"><div><div>Table of content</div><div>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div class="title"><h1>Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</h1></div><div id="meta-info"><div>2022-03-22</div>/<a href="https://tonyaldon.com/">Tony Aldon</a>/<div><a href="https://www.reddit.com/r/emacs/comments/tk8qou/org_speed_keys_boom_great_orgmodes_feature_and_a/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div>/<div>org-mode revision: 96d91bea658c</div></div><div class="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-54357911fe">Org Speed Keys</a></li>
-<li><a href="#one-f451de9f6e">How does org-mode implement Org Speed keys?</a>
+<li><a href="#one-521f21094b">Org Speed Keys</a></li>
+<li><a href="#one-2f44557bf7">How does org-mode implement Org Speed keys?</a>
 <ul>
-<li><a href="#one-72ad9acb10">Remapping self-insert-command</a></li>
-<li><a href="#one-efcb90b27">If it is magic, this is org-self-insert-command</a></li>
-<li><a href="#one-cb71a67a1b">org-self-insert-command implementation</a></li>
-<li><a href="#one-f0036005a5">org-speed-command-activate</a></li>
+<li><a href="#one-59126b0af2">Remapping self-insert-command</a></li>
+<li><a href="#one-cf7fe0df8e">If it is magic, this is org-self-insert-command</a></li>
+<li><a href="#one-555b53fa0b">org-self-insert-command implementation</a></li>
+<li><a href="#one-a78678315d">org-speed-command-activate</a></li>
 </ul>
 </li>
-<li><a href="#one-b0533319ad">self-insert-command</a>
+<li><a href="#one-e64d85b5e0">self-insert-command</a>
 <ul>
-<li><a href="#one-38f66e6595">Bindings of printing characters to self-insert-command in the keymap global-map</a></li>
-<li><a href="#one-466b79248a">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</a></li>
-<li><a href="#one-c9d0014839">Best function name ever: bitch_at_user</a></li>
+<li><a href="#one-baf448b453">Bindings of printing characters to self-insert-command in the keymap global-map</a></li>
+<li><a href="#one-14ce98080a">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</a></li>
+<li><a href="#one-dd1f5b3040">Best function name ever: bitch_at_user</a></li>
 </ul>
 </li>
-<li><a href="#one-31a95fd726">Q&A</a></li>
+<li><a href="#one-c2d2b8c439">Q&A</a></li>
 </ul>
 </div></div></div><div><p>Hey Emacsers,
 </p>
@@ -44,7 +44,7 @@ Elisp journey.
 </p>
 </div>
 
-<div><h2 id="one-54357911fe">Org Speed Keys</h2><div><p>Org speed keys is not a minor mode but an org-mode feature that can be
+<div><h2 id="one-521f21094b">Org Speed Keys</h2><div><p>Org speed keys is not a minor mode but an org-mode feature that can be
 turned on by setting the variable <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L676">org-use-speed-commands</a> to <code class="one-hl one-hl-inline">t</code>.
 </p>
 
@@ -130,7 +130,7 @@ from org-mode 9.6 as we can read in the source code <a href="https://git.sr.ht/~
 </div>
 </div>
 
-<div><h2 id="one-f451de9f6e">How does org-mode implement Org Speed keys?</h2><div><h3 id="one-72ad9acb10">Remapping self-insert-command</h3><div><p>When org-mode is turned on, among other initialization tasks it remaps
+<div><h2 id="one-2f44557bf7">How does org-mode implement Org Speed keys?</h2><div><h3 id="one-59126b0af2">Remapping self-insert-command</h3><div><p>When org-mode is turned on, among other initialization tasks it remaps
 the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a> to the command <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>
 in the keymap <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L223">org-mode-map</a> as we can see in the file <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el">lisp/org-keys.el</a>:
 </p>
@@ -188,7 +188,7 @@ in the buffer.
 </div>
 </div>
 
-<div><h3 id="one-efcb90b27">If it is magic, this is org-self-insert-command</h3><div><p>Before talking about how <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> performs speed keys,
+<div><h3 id="one-cf7fe0df8e">If it is magic, this is org-self-insert-command</h3><div><p>Before talking about how <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a> performs speed keys,
 let me ask you some questions:
 </p>
 
@@ -214,7 +214,7 @@ This is also <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd21
 </div>
 </div>
 
-<div><h3 id="one-cb71a67a1b">org-self-insert-command implementation</h3><div><p>Let&apos;s get back to our example.  We&apos;ve pressed the &quot;printing&quot; key <code class="one-hl one-hl-inline">n</code> and
+<div><h3 id="one-555b53fa0b">org-self-insert-command implementation</h3><div><p>Let&apos;s get back to our example.  We&apos;ve pressed the &quot;printing&quot; key <code class="one-hl one-hl-inline">n</code> and
 &quot;the command loop editor&quot; has called <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org.el#L16707">org-self-insert-command</a>.
 </p>
 
@@ -304,7 +304,7 @@ related to the speed keys feature that we have just discussed:
 </div>
 </div>
 
-<div><h3 id="one-f0036005a5">org-speed-command-activate</h3><div><p>We still have one function to cover: <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a>
+<div><h3 id="one-a78678315d">org-speed-command-activate</h3><div><p>We still have one function to cover: <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L832">org-speed-command-activate</a>
 (knowing that <a href="https://git.sr.ht/~bzg/org-mode/tree/96d91bea658c4c6b4dd218812f506d923e07b453/item/lisp/org-keys.el#L912">org-babel-speed-command-activate</a> does &quot;almost the same
 thing&quot; but for the cursor at the beginning of source blocks).
 </p>
@@ -386,7 +386,7 @@ buffer.
 </div>
 </div>
 
-<div><h2 id="one-b0533319ad">self-insert-command</h2><div><h3 id="one-38f66e6595">Bindings of printing characters to self-insert-command in the keymap global-map</h3><div><p>In this section, our goal is to see what are the printing characters
+<div><h2 id="one-e64d85b5e0">self-insert-command</h2><div><h3 id="one-baf448b453">Bindings of printing characters to self-insert-command in the keymap global-map</h3><div><p>In this section, our goal is to see what are the printing characters
 that are bound to the command <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/cmds.c#L263">self-insert-command</a>.
 </p>
 
@@ -475,7 +475,7 @@ this:
 </div>
 </div>
 
-<div><h3 id="one-466b79248a">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</h3><div><p>In some cases (like in <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/info.el#L4378">Info-mode</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/help-mode.el#L380">help-mode</a>) we want to override
+<div><h3 id="one-14ce98080a">Remapping self-insert-command to undefined in Info-mode, help-mode and special-mode</h3><div><p>In some cases (like in <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/info.el#L4378">Info-mode</a> and <a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/lisp/help-mode.el#L380">help-mode</a>) we want to override
 all printing keys to be undefined before remapping some of them to
 specific commands.
 </p>
@@ -541,7 +541,7 @@ undefined, maps <code class="one-hl one-hl-inline">-</code> to the command <a hr
 </div>
 </div>
 
-<div><h3 id="one-c9d0014839">Best function name ever: bitch_at_user</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c#L6029">bitch_at_user</a>!!!
+<div><h3 id="one-dd1f5b3040">Best function name ever: bitch_at_user</h3><div><p><a href="https://github.com/emacs-mirror/emacs/blob/b8b2dd17c57b73357cae229e010138fd2352a46f/src/dispnew.c#L6029">bitch_at_user</a>!!!
 </p>
 
 <p>What a beautiful name for a function!
@@ -650,11 +650,11 @@ a non-nil value for the inserted character.  At the end, it runs
 </div>
 </div>
 
-<div><h2 id="one-31a95fd726">Q&A</h2><div><p>Check <a href="/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command">Q&amp;A</a>.
+<div><h2 id="one-c2d2b8c439">Q&A</h2><div><p>Check <a href="/questions-and-answers/#2022-03-22-org-speed-keys-and-self-insert-command">Q&amp;A</a>.
 </p>
 </div>
 </div>
-<div id="nav"><a href="/2022-03-11-org-mode-source-code-5000-examples/">PREV</a><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">RANDOM</a><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">NEXT</a></div></article></div></body><script>
+<div class="nav"><a href="/2022-03-11-org-mode-source-code-5000-examples/">PREV</a><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">RANDOM</a><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';
