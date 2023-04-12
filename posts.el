@@ -1,3 +1,23 @@
+(defun posts-one-default-home-list-pages (page-tree pages global)
+  ""
+  (let* ((title (org-element-property :raw-value page-tree))
+         (content (org-export-data-with-backend
+                   (org-element-contents page-tree)
+                   'one nil))
+         (website-name (one-default-website-name pages))
+         (pages-list (one-default-pages pages)))
+    (jack-html
+     "<!DOCTYPE html>"
+     `(:html
+       (:head
+        (:meta (@ :name "viewport" :content "width=device-width,initial-scale=1"))
+        (:link (@ :rel "stylesheet" :type "text/css" :href "/one.css"))
+        (:title ,title))
+       (:body
+        (:div.header ,website-name)
+        (:div.content
+         (:div/home-list-pages ,content)
+         (:div/pages (:ul ,(reverse pages-list)))))))))
 
 (defun posts-one-default-doc (page-tree pages global)
   ""
