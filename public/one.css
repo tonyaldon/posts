@@ -377,7 +377,7 @@ a:visited {
 }
 
 #header-doc > a {
-  color: none;
+  color: inherit;
   cursor: pointer;
   text-decoration: none;
 }
