@@ -4,17 +4,25 @@
 
 # This document is meant to be read inside Emacs.  To make the internal
 # local links to Emacs and Org-mode repositories work correctly,
-# make sure to clone those repositories under this directory and
-# have org-rev packages installed:
+# make sure to clone those repositories
 #
-#    git clone git://git.sv.gnu.org/emacs.git
-#    git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+#     $ git clone https://github.com/emacs-mirror/emacs
+#     $ git clone https://git.sr.ht/~bzg/org-mode
 #
-#    https://github.com/emacs-mirror/emacs
-#    https://git.sr.ht/~bzg/org-mode
-
-#+ORG_REV_LINK: emacs    ./emacs/
-#+ORG_REV_LINK: org-mode ./org-mode/
+# and to have org-rev packages installed.  You also have to add
+# entries  for emacs and org-mode in the plist org-rev-repos.  For
+# instance, if you have cloned emacs repository under the directory
+# /path/to/emacs/ and org-mode under the directory
+# /path/to/org-mode/ you can run the following:
+#
+#     (add-to-list 'org-rev-repos
+#                  '(:repo-abbrev "emacs"
+#                    :repo-dir "/path/to/emacs/"
+#                    :repo-url "https://github.com/emacs-mirror/emacs"))
+#     (add-to-list 'org-rev-repos
+#                  '(:repo-abbrev "org-mode"
+#                    :repo-dir "/path/to/org-mode/"
+#                    :repo-url "https://git.sr.ht/~bzg/org-mode"))
 
 * Elisp Posts
 :PROPERTIES:
