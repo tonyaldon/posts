@@ -6,21 +6,37 @@
 The posts about "emacs/elisp" that I publish on the subreddit
 [[https://www.reddit.com/r/emacs/][r/emacs]] in an org document.
 
+You can also read them at https://posts.tonyaldon.com.
+
 * Install
 
 The posts are in the file [[./posts.org]] and this file is meant to be
 read inside Emacs.
 
 To make the internal local links to Emacs and Org-mode repositories
-work correctly, make sure to clone those repositories.
+work correctly, make sure to clone those repositories
 
-A clean procedure to get started with this document is:
+#+BEGIN_SRC text
+$ git clone https://github.com/emacs-mirror/emacs
+$ git clone https://git.sr.ht/~bzg/org-mode
+#+END_SRC
 
-#+BEGIN_SRC bash
-git clone https://github.com/tonyaldon/posts
-cd posts
-git clone git://git.sv.gnu.org/emacs.git
-git clone https://git.savannah.gnu.org/git/emacs/org-mode.git
+and to have ~org-rev~ packages installed.
+
+You also have to add entries for emacs and org-mode in the plist
+~org-rev-repos~.  For instance, if you have cloned emacs repository
+under the directory ~/path/to/emacs/~ and org-mode under the directory
+~/path/to/org-mode/~ you can run the following:
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'org-rev-repos
+             '(:repo-abbrev "emacs"
+               :repo-dir "/path/to/emacs/"
+               :repo-url "https://github.com/emacs-mirror/emacs"))
+(add-to-list 'org-rev-repos
+             '(:repo-abbrev "org-mode"
+               :repo-dir "/path/to/org-mode/"
+               :repo-url "https://git.sr.ht/~bzg/org-mode"))
 #+END_SRC
 
 * Read the posts on Reddit
