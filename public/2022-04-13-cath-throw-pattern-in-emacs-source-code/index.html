@@ -1,10 +1,10 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div class="title"><h1>Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</h1></div><div id="meta-info"><div>2022-04-13</div>/<a href="https://tonyaldon.com/">Tony Aldon</a>/<div><a href="https://www.reddit.com/r/emacs/comments/u2u229/dont_explain_show_me_examples_a_tour_of_the/">comment on reddit</a></div>/<div>emacs revision: de7901abbc21</div></div><div class="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-978086ea3b">The catch/throw pattern: handmade examples</a></li>
-<li><a href="#one-36cd179dbf">The catch/throw pattern: real world examples</a>
+<li><a href="#one-a177bf6c0">The catch/throw pattern: handmade examples</a></li>
+<li><a href="#one-eb4220cd03">The catch/throw pattern: real world examples</a>
 <ul>
-<li><a href="#one-cc26bdc844">With dolist</a></li>
-<li><a href="#one-ffb8f6c613">With re-search-forward</a></li>
+<li><a href="#one-3a57ae4ec7">With dolist</a></li>
+<li><a href="#one-55118ee2a8">With re-search-forward</a></li>
 </ul>
 </li>
 </ul>
@@ -79,7 +79,7 @@ implement specific actions/tasks in given &quot;environments&quot;.
 </p>
 </div>
 
-<div><h2 id="one-978086ea3b">The catch/throw pattern: handmade examples</h2><div><p>In the info node about <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> and <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> (<span>elisp#Catch and Throw</span>),
+<div><h2 id="one-a177bf6c0">The catch/throw pattern: handmade examples</h2><div><p>In the info node about <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> and <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1245">throw</a> (<span>elisp#Catch and Throw</span>),
 we can read:
 </p>
 
@@ -163,7 +163,7 @@ about <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c
 </div>
 </div>
 
-<div><h2 id="one-36cd179dbf">The catch/throw pattern: real world examples</h2><div><p>There are more than 1000 <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> blocks in Emacs source code.
+<div><h2 id="one-eb4220cd03">The catch/throw pattern: real world examples</h2><div><p>There are more than 1000 <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc21114721057c907cc52455e228f826/src/eval.c#L1146">catch</a> blocks in Emacs source code.
 </p>
 
 <p>Let&apos;s pick some of them that seems to represent in some way the
@@ -191,7 +191,7 @@ the last parts of the <a href="https://github.com/emacs-mirror/emacs/blob/de7901
 </ol>
 </div>
 
-<div><h3 id="one-cc26bdc844">With dolist</h3><div><p>Sometimes, we want to loop over a list and if some &quot;conditions&quot; are
+<div><h3 id="one-3a57ae4ec7">With dolist</h3><div><p>Sometimes, we want to loop over a list and if some &quot;conditions&quot; are
 verified for an item, we want to return without looping over the rest
 of the list.
 </p>
@@ -336,7 +336,7 @@ from the <a href="https://github.com/emacs-mirror/emacs/blob/de7901abbc211147210
 </div>
 </div>
 
-<div><h3 id="one-ffb8f6c613">With re-search-forward</h3><div><p>In Org related packages, a technique used to find something in the
+<div><h3 id="one-55118ee2a8">With re-search-forward</h3><div><p>In Org related packages, a technique used to find something in the
 buffer is to:
 </p>
 
@@ -406,7 +406,7 @@ buffer or nil if no such result exists."</span>
 </div>
 </div>
 </div>
-<div class="nav"><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">PREV</a><a href="/2022-02-11-closures-and-lexical-binding/">RANDOM</a><a href="/2022-04-15-ripgrep-emacs-rg-el/">NEXT</a></div></article></div></body><script>
+<div class="nav"><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">PREV</a><a href="/questions-and-answers/">RANDOM</a><a href="/2022-04-15-ripgrep-emacs-rg-el/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';

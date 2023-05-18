@@ -1,10 +1,10 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div class="title"><h1>If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</h1></div><div id="meta-info"><div>2022-04-19</div>/<a href="https://tonyaldon.com/">Tony Aldon</a>/<div><a href="https://www.reddit.com/r/emacs/comments/u6yibf/if_you_have_never_used_wgrep_with_rgel_to_rename/">comment on reddit</a></div>/<div>org-mode revision: af6f1298b6f6</div></div><div class="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-f469b38da5">Initial state</a></li>
-<li><a href="#one-48e618b449">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</a></li>
-<li><a href="#one-4e957593b4">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</a></li>
-<li><a href="#one-9e6a5d3adf">Make the changes automatic with wgrep-auto-save-buffer</a></li>
-<li><a href="#one-5dfe99f764">We could have used sed to do it non interactively</a></li>
+<li><a href="#one-3859af47f9">Initial state</a></li>
+<li><a href="#one-f2c1d2afe8">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</a></li>
+<li><a href="#one-2db4410947">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</a></li>
+<li><a href="#one-1529662edb">Make the changes automatic with wgrep-auto-save-buffer</a></li>
+<li><a href="#one-23d9f797db">We could have used sed to do it non interactively</a></li>
 </ul>
 </div></div></div><div><p>Hey Emacsers,
 </p>
@@ -31,7 +31,7 @@ appears in several files using <a href="https://github.com/dajva/rg.el">rg.el</a
 </p>
 </div>
 
-<div><h2 id="one-f469b38da5">Initial state</h2><div><p>Let assume that we are working on the <code class="one-hl one-hl-inline">org-mode</code> code base
+<div><h2 id="one-3859af47f9">Initial state</h2><div><p>Let assume that we are working on the <code class="one-hl one-hl-inline">org-mode</code> code base
 </p>
 
 <pre><code class="one-hl one-hl-block">git clone https://git.savannah.gnu.org/git/emacs/org-mode.git</code></pre>
@@ -82,7 +82,7 @@ another commit) by running this following command:
 </div>
 </div>
 
-<div><h2 id="one-48e618b449">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</h2><div><p>Let&apos;s search for the regexp <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> (that exactly matches
+<div><h2 id="one-f2c1d2afe8">Call wgrep-change-to-wgrep-mode, make changes and abort changes with wgrep-abort-changes</h2><div><p>Let&apos;s search for the regexp <code class="one-hl one-hl-inline">org-link-expand-abbrev</code> (that exactly matches
 the string <code class="one-hl one-hl-inline">org-link-expand-abbrev</code>) in <code class="one-hl one-hl-inline">org-mode</code> directory using <code class="one-hl one-hl-inline">rg.el</code>:
 </p>
 
@@ -206,7 +206,7 @@ files that could be modified by <code class="one-hl one-hl-inline">wgrep</code>,
 </div>
 </div>
 
-<div><h2 id="one-4e957593b4">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</h2><div><p>Now, let&apos;s modify again the <code class="one-hl one-hl-inline">*rg*</code> buffer, the same way as before
+<div><h2 id="one-2db4410947">Changes applied to the file system: wgrep-finish-edit and wgrep-save-all-buffers</h2><div><p>Now, let&apos;s modify again the <code class="one-hl one-hl-inline">*rg*</code> buffer, the same way as before
 (starting by pressing <code class="one-hl one-hl-inline">e</code> (bound to <code class="one-hl one-hl-inline">wgrep-change-to-wgrep-mode</code>) to make
 the buffer editable):
 </p>
@@ -343,7 +343,7 @@ at the beginning of this post.
 </div>
 </div>
 
-<div><h2 id="one-9e6a5d3adf">Make the changes automatic with wgrep-auto-save-buffer</h2><div><p>As written in the documentation of <code class="one-hl one-hl-inline">wgrep</code>, if we want to save the
+<div><h2 id="one-1529662edb">Make the changes automatic with wgrep-auto-save-buffer</h2><div><p>As written in the documentation of <code class="one-hl one-hl-inline">wgrep</code>, if we want to save the
 buffers automatically when we call <code class="one-hl one-hl-inline">wgrep-finish-edit</code> (and so apply
 the changes in the file system), we can set the variable
 <code class="one-hl one-hl-inline">wgrep-auto-save-buffer</code> to <code class="one-hl one-hl-inline">t</code> like this:
@@ -353,7 +353,7 @@ the changes in the file system), we can set the variable
 </div>
 </div>
 
-<div><h2 id="one-5dfe99f764">We could have used sed to do it non interactively</h2><div><p>Renaming a function like we did before with <code class="one-hl one-hl-inline">rg.el</code> and <code class="one-hl one-hl-inline">wgrep</code> could also
+<div><h2 id="one-23d9f797db">We could have used sed to do it non interactively</h2><div><p>Renaming a function like we did before with <code class="one-hl one-hl-inline">rg.el</code> and <code class="one-hl one-hl-inline">wgrep</code> could also
 be done using the cli <code class="one-hl one-hl-inline">sed</code> (that can search some regexp in files
 (not only) and replace matches in-place with another string) combined
 with eiter <code class="one-hl one-hl-inline">find</code> or <code class="one-hl one-hl-inline">grep</code> to list the files we want to modify which are
@@ -413,7 +413,7 @@ names,
 </p>
 </div>
 </div>
-<div class="nav"><a href="/2022-04-15-ripgrep-emacs-rg-el/">PREV</a><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">RANDOM</a><a href="/2022-04-22-programming-with-elisp-is-magic/">NEXT</a></div></article></div></body><script>
+<div class="nav"><a href="/2022-04-15-ripgrep-emacs-rg-el/">PREV</a><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">RANDOM</a><a href="/2022-04-22-programming-with-elisp-is-magic/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';

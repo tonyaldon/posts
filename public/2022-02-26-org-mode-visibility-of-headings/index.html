@@ -1,19 +1,19 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1" /><link rel="stylesheet" type="text/css" href="/one.css" /><title>Have you ever wondered how org-mode toggles the visibility of headings?</title></head><body><div id="sidebar-left" onclick="followSidebarLink()"><div><div>Pages</div></div><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><div id="sidebar-main"></div><div id="header-doc"><svg id="hamburger" viewBox="0 0 24 24" onclick="sidebarShow()"><path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z"></path></svg><a href="/">Elisp Posts</a></div><div id="content-doc"><div id="sidebar"><ul><li><a href="/questions-and-answers/">Questions and Answers</a></li><li><a href="/2022-02-11-closures-and-lexical-binding/">Some examples on closures and lexical-binding</a></li><li><a href="/2022-02-20-onlybold-org-backend/">You want to write a custom org backend?  Let's write onlybold backend together to get you started</a></li><li><a href="/2022-02-26-org-mode-visibility-of-headings/">Have you ever wondered how org-mode toggles the visibility of headings?</a></li><li><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">I bet you use hl-line-mode...  Do you know how it works?  Overlays, post-command-hook and only 5 functions!!!</a></li><li><a href="/2022-03-11-org-mode-source-code-5000-examples/">Did you know that org-mode's source code contains more than 5000 examples?</a></li><li><a href="/2022-03-22-org-speed-keys-and-self-insert-command/">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a></li><li><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a></li><li><a href="/2022-04-09-org-links-in-property-drawers-are-not-links/">Did you know that Org links in property drawers are not links?</a></li><li><a href="/2022-04-13-cath-throw-pattern-in-emacs-source-code/">Don't explain, show me examples!  A tour of the catch/throw pattern in the Emacs source code</a></li><li><a href="/2022-04-15-ripgrep-emacs-rg-el/">Ripgrep is fantastic | Emacs is fantastic | BOOM you get the fantastic rg.el</a></li><li><a href="/2022-04-19-wgrep-with-rg-el-to-rename-a-function-in-several-files/">If you have never used wgrep with rg.el to rename a function in several files, try it | that will blow your mind</a></li><li><a href="/2022-04-22-programming-with-elisp-is-magic/">Programming with Elisp is magic</a></li><li><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">FULL example of org-mode links: internal links and search options</a></li><li><a href="/2022-04-29-link-to-a-git-commit-from-org-mode-using-magit-this-is-emacs/">Link to a git commit from Org mode using Magit | THIS IS EMACS</a></li><li><a href="/2022-05-04-org-mode-links-everywhere-not-only-in-org-mode-buffers-this-is-emacs/">org-mode links everywhere, not only in org-mode buffers | THIS IS EMACS</a></li><li><a href="/2022-05-06-org-store-link-powerful-and-flexible-this-is-emacs/">org-store-link... powerful and flexible | THIS IS EMACS</a></li><li><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">org-mode links in 2022: implementation, packages, articles and videos | THIS IS EMACS</a></li></ul></div><article><div class="title"><h1>Have you ever wondered how org-mode toggles the visibility of headings?</h1></div><div id="meta-info"><div>2022-02-26</div>/<a href="https://tonyaldon.com/">Tony Aldon</a>/<div><a href="https://www.reddit.com/r/emacs/comments/t1r2wq/have_you_ever_wondered_how_orgmode_toggles_the/">comment on reddit</a></div>/<div>emacs revision: b8b2dd17c57b</div></div><div class="toc"><div><div>Table of content</div><div>
 <ul>
-<li><a href="#one-23941f9f82">org-mode visibility of headings</a></li>
-<li><a href="#one-67fad898e">text properties</a></li>
-<li><a href="#one-46e929d33c">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</a></li>
-<li><a href="#one-cc9db8b0f1">overlays, invisible overlay property, buffer-invisibility-spec</a>
+<li><a href="#one-6bae0da466">org-mode visibility of headings</a></li>
+<li><a href="#one-2eacb29a0f">text properties</a></li>
+<li><a href="#one-dc6a4b717">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</a></li>
+<li><a href="#one-49c25f2d00">overlays, invisible overlay property, buffer-invisibility-spec</a>
 <ul>
-<li><a href="#one-7ba5877ba7">buffer-invisibility-spec equal to t</a></li>
-<li><a href="#one-843798240e">buffer-invisibility-spec equal to nil</a></li>
-<li><a href="#one-f918125ab">buffer-invisibility-spec equal to ((foo) t)</a></li>
+<li><a href="#one-cfb46781ea">buffer-invisibility-spec equal to t</a></li>
+<li><a href="#one-4fb2f13494">buffer-invisibility-spec equal to nil</a></li>
+<li><a href="#one-b2ec205ff1">buffer-invisibility-spec equal to ((foo) t)</a></li>
 </ul>
 </li>
-<li><a href="#one-126667d428">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</a>
+<li><a href="#one-63f47f070b">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</a>
 <ul>
-<li><a href="#one-85a369471">default ellipsis</a></li>
-<li><a href="#one-499adbb658">custom ellipsis modifying the display table</a></li>
+<li><a href="#one-50398a71d1">default ellipsis</a></li>
+<li><a href="#one-baee13b409">custom ellipsis modifying the display table</a></li>
 </ul>
 </li>
 </ul>
@@ -27,7 +27,7 @@
 </p>
 </div>
 
-<div><h2 id="one-23941f9f82">org-mode visibility of headings</h2><div><p><code class="one-hl one-hl-inline">org-mode</code> is built on top of <code class="one-hl one-hl-inline">outline-mode</code> which is responsible for the
+<div><h2 id="one-6bae0da466">org-mode visibility of headings</h2><div><p><code class="one-hl one-hl-inline">org-mode</code> is built on top of <code class="one-hl one-hl-inline">outline-mode</code> which is responsible for the
 visibility changes of the headings.
 </p>
 
@@ -84,7 +84,7 @@ get a good feel for their use.
 </div>
 </div>
 
-<div><h2 id="one-67fad898e">text properties</h2><div><p>In a buffer, each character point can have text properties attached to
+<div><h2 id="one-2eacb29a0f">text properties</h2><div><p>In a buffer, each character point can have text properties attached to
 it that can be used to do many things (like controlling the appearance
 of the character).
 </p>
@@ -164,7 +164,7 @@ maybe information about overlays if you are using <code class="one-hl one-hl-inl
 </div>
 </div>
 
-<div><h2 id="one-46e929d33c">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</h2><div><p>Because:
+<div><h2 id="one-dc6a4b717">Why are we talking about text properties if the mechanism of outline-mode uses overlays?</h2><div><p>Because:
 </p>
 
 <ol><li><p>Both text properties and overlays can &quot;alter/control&quot; the
@@ -186,7 +186,7 @@ important to notice it.
 </div>
 </div>
 
-<div><h2 id="one-cc9db8b0f1">overlays, invisible overlay property, buffer-invisibility-spec</h2><div><p>We can make a part of a buffer invisible using:
+<div><h2 id="one-49c25f2d00">overlays, invisible overlay property, buffer-invisibility-spec</h2><div><p>We can make a part of a buffer invisible using:
 </p>
 
 <ol><li><p>the <code class="one-hl one-hl-inline">invisible</code> text property (of that part),
@@ -243,7 +243,7 @@ by evaluating the following s-exp:
 <pre><code class="one-hl one-hl-block">XXXXXX</code></pre>
 </div>
 
-<div><h3 id="one-7ba5877ba7">buffer-invisibility-spec equal to t</h3><div><p>Now if we evaluate the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code>, we should
+<div><h3 id="one-cfb46781ea">buffer-invisibility-spec equal to t</h3><div><p>Now if we evaluate the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code>, we should
 get <code class="one-hl one-hl-inline">t</code> (the default) in the echo area.
 </p>
 
@@ -314,7 +314,7 @@ characters <code class="one-hl one-hl-inline">XXXXXX</code> to reappear.
 </div>
 </div>
 
-<div><h3 id="one-843798240e">buffer-invisibility-spec equal to nil</h3><div><p>As we removed the overlay <code class="one-hl one-hl-inline">ov-x</code>, we redefined it as previously by
+<div><h3 id="one-4fb2f13494">buffer-invisibility-spec equal to nil</h3><div><p>As we removed the overlay <code class="one-hl one-hl-inline">ov-x</code>, we redefined it as previously by
 evaluating the following s-exp:
 </p>
 
@@ -346,7 +346,7 @@ interfere with the next example by evaluating:
 </div>
 </div>
 
-<div><h3 id="one-f918125ab">buffer-invisibility-spec equal to ((foo) t)</h3><div><p>Let&apos;s add the characters <code class="one-hl one-hl-inline">YYYYYY</code> after the characters <code class="one-hl one-hl-inline">XXXXXX</code> with
+<div><h3 id="one-b2ec205ff1">buffer-invisibility-spec equal to ((foo) t)</h3><div><p>Let&apos;s add the characters <code class="one-hl one-hl-inline">YYYYYY</code> after the characters <code class="one-hl one-hl-inline">XXXXXX</code> with
 3 dashes <code class="one-hl one-hl-inline">---</code> in between such that the buffer <code class="one-hl one-hl-inline">*invisible*</code> is now:
 </p>
 
@@ -435,7 +435,7 @@ characters <code class="one-hl one-hl-inline">XXXXXX</code> stay invisible:
 </div>
 </div>
 
-<div><h2 id="one-126667d428">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</h2><div><h3 id="one-85a369471">default ellipsis</h3><div><p>If the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> as a list contains a cons
+<div><h2 id="one-63f47f070b">ellipsis and buffer-invisibility-spec equal to ((foo . t) t)</h2><div><h3 id="one-50398a71d1">default ellipsis</h3><div><p>If the variable <code class="one-hl one-hl-inline">buffer-invisibility-spec</code> as a list contains a cons
 <code class="one-hl one-hl-inline">(foo . t)</code>, every continuous part of the buffer with the <code class="one-hl one-hl-inline">invisible</code>
 property set to <code class="one-hl one-hl-inline">foo</code> is replaced by ellipsis which are by default <code class="one-hl one-hl-inline">...</code>.
 </p>
@@ -480,7 +480,7 @@ characters <code class="one-hl one-hl-inline">YYYYYY</code> by the default ellip
 </div>
 </div>
 
-<div><h3 id="one-499adbb658">custom ellipsis modifying the display table</h3><div><p>We assume with the buffer <code class="one-hl one-hl-inline">*invisible*</code> is in the same state as in the
+<div><h3 id="one-baee13b409">custom ellipsis modifying the display table</h3><div><p>We assume with the buffer <code class="one-hl one-hl-inline">*invisible*</code> is in the same state as in the
 previous section.
 </p>
 
@@ -534,7 +534,7 @@ manual (<span>elisp#Character Display</span>).
 </div>
 </div>
 </div>
-<div class="nav"><a href="/2022-02-20-onlybold-org-backend/">PREV</a><a href="/2022-04-04-search-options-link-abbreviations-and-org-open-at-point/">RANDOM</a><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">NEXT</a></div></article></div></body><script>
+<div class="nav"><a href="/2022-02-20-onlybold-org-backend/">PREV</a><a href="/2022-05-11-org-mode-links-in-2022-implementation-packages-articles-and-videos-this-is-emacs/">RANDOM</a><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';

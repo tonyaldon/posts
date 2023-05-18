@@ -2,31 +2,31 @@
 <ul>
 <li><a href="#2022-03-11-org-mode-source-code-5000-examples">Did you know that org-mode's source code contains more than 5000 examples?</a>
 <ul>
-<li><a href="#one-178f81c018">How do you count 5000 examples?</a></li>
+<li><a href="#one-8675f6fc62">How do you count 5000 examples?</a></li>
 </ul>
 </li>
 <li><a href="#2022-03-22-org-speed-keys-and-self-insert-command">Org Speed Keys! BOOM! Great org-mode's feature! And a good OPPORTUNITY to talk about self-insert-command</a>
 <ul>
-<li><a href="#one-6fe3bdccef">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</a>
+<li><a href="#one-75dcd927cc">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</a>
 <ul>
-<li><a href="#one-156283387e">Quick answer</a></li>
-<li><a href="#one-31aeb9f0e2">Answer with more details</a>
+<li><a href="#one-80920683e">Quick answer</a></li>
+<li><a href="#one-23712ca7a4">Answer with more details</a>
 <ul>
-<li><a href="#one-3c56588924">Org speed keys</a></li>
-<li><a href="#one-7aa2978ca9">evil-mode</a></li>
+<li><a href="#one-7162992fef">Org speed keys</a></li>
+<li><a href="#one-7dd7ea60c9">evil-mode</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#one-af50e6b04d">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</a></li>
+<li><a href="#one-bb643f86ab">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</a></li>
 </ul>
 </li>
 <li><a href="#2022-04-04-search-options-link-abbreviations-and-org-open-at-point">Search options in file links | link abbreviations | COME WITH ME on this JOURNEY into the heart of the command org-open-at-point</a>
 <ul>
-<li><a href="#one-cfcf8bbc68">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</a>
+<li><a href="#one-83f08895dc">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</a>
 <ul>
-<li><a href="#one-ab9d7e79f0">Using the built-in command org-babel-goto-named-src-block</a></li>
-<li><a href="#one-fceebec014">Using the hook org-open-at-point-functions</a></li>
+<li><a href="#one-d7f08d05d2">Using the built-in command org-babel-goto-named-src-block</a></li>
+<li><a href="#one-bbb3e2b44d">Using the hook org-open-at-point-functions</a></li>
 </ul>
 </li>
 </ul>
@@ -37,7 +37,7 @@
 </p>
 </div>
 
-<div><h3 id="one-178f81c018">How do you count 5000 examples?</h3><div><p>Any <code class="one-hl one-hl-inline">should</code>, <code class="one-hl one-hl-inline">should-not</code> and <code class="one-hl one-hl-inline">should-error</code> used in a <code class="one-hl one-hl-inline">ert</code> test in the
+<div><h3 id="one-8675f6fc62">How do you count 5000 examples?</h3><div><p>Any <code class="one-hl one-hl-inline">should</code>, <code class="one-hl one-hl-inline">should-not</code> and <code class="one-hl one-hl-inline">should-error</code> used in a <code class="one-hl one-hl-inline">ert</code> test in the
 <code class="one-hl one-hl-inline">testing</code> directory of <code class="one-hl one-hl-inline">org-mode</code> repository is counted as an example.
 </p>
 
@@ -63,7 +63,7 @@ grep -r <span class="one-hl-string">'(should'</span> | wc -l</code></pre>
 </p>
 </div>
 
-<div><h3 id="one-6fe3bdccef">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</h3><div><h4 id="one-156283387e">Quick answer</h4><div><ol><li><p>If we are in evil normal state <code class="one-hl one-hl-inline">&lt;N&gt;</code>, Org speed keys won&apos;t work
+<div><h3 id="one-75dcd927cc">How are speed keys different from/better than evil-mode?  Does speed keys can be use along with evil-mode?</h3><div><h4 id="one-80920683e">Quick answer</h4><div><ol><li><p>If we are in evil normal state <code class="one-hl one-hl-inline">&lt;N&gt;</code>, Org speed keys won&apos;t work
 (because most of the printing keys are used for something else,
 specifically they are bound in <code class="one-hl one-hl-inline">evil-normal-state-map</code>),
 </p>
@@ -77,12 +77,12 @@ speed keys works (because the printing keys are not bound by
 </div>
 </div>
 
-<div><h4 id="one-31aeb9f0e2">Answer with more details</h4><div><p>Org speed keys are not better than <code class="one-hl one-hl-inline">evil-mode</code> nor the other way, they
+<div><h4 id="one-23712ca7a4">Answer with more details</h4><div><p>Org speed keys are not better than <code class="one-hl one-hl-inline">evil-mode</code> nor the other way, they
 are really differents.
 </p>
 </div>
 
-<div><h5 id="one-3c56588924">Org speed keys</h5><div><p>Org speed keys are a kind of a &quot;hack&quot; that hijack the &quot;inserting emacs
+<div><h5 id="one-7162992fef">Org speed keys</h5><div><p>Org speed keys are a kind of a &quot;hack&quot; that hijack the &quot;inserting emacs
 process&quot;.
 </p>
 
@@ -97,7 +97,7 @@ none, insert the character.  It is all about one command
 </div>
 </div>
 
-<div><h5 id="one-7aa2978ca9">evil-mode</h5><div><p><code class="one-hl one-hl-inline">evil-mode</code> manipulates the hierarchy of all the keymaps that are
+<div><h5 id="one-7dd7ea60c9">evil-mode</h5><div><p><code class="one-hl one-hl-inline">evil-mode</code> manipulates the hierarchy of all the keymaps that are
 active, making the current evil &quot;state&quot; map to win over the others.
 </p>
 
@@ -151,7 +151,7 @@ global map which resolves (by default) to the command
 </div>
 </div>
 
-<div><h3 id="one-af50e6b04d">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</h3><div><p>I think that the benefit of this approach (remapping
+<div><h3 id="one-bb643f86ab">Is there a good reason for the entry point to be a variable switch, and for the bindings to be managed by a list, instead of having a minor mode layering its keymap onto standard org-mode bindings?</h3><div><p>I think that the benefit of this approach (remapping
 <code class="one-hl one-hl-inline">self-insert-command</code> to <code class="one-hl one-hl-inline">org-self-insert-command</code>) over having a minor
 mode layering its keymap onto standard <code class="one-hl one-hl-inline">org-mode</code> is that we don&apos;t have
 to switch between keymaps or minor modes to get the feature.
@@ -185,7 +185,7 @@ is to be at the beginning of a heading.  There is always a trade off.
 </p>
 </div>
 
-<div><h3 id="one-cfcf8bbc68">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</h3><div><p>What we want to accomplish here is to jump to the definition of a
+<div><h3 id="one-83f08895dc">Is there a way to make clickable noweb references <<link>> in source blocks in order to jump to its block definition?</h3><div><p>What we want to accomplish here is to jump to the definition of a
 noweb block, let&apos;s say <code class="one-hl one-hl-inline">my-noweb</code>, by calling a command (maybe
 <code class="one-hl one-hl-inline">org-open-at-point</code>) when the point is on a reference <code class="one-hl one-hl-inline">&lt;&lt;my-noweb&gt;&gt;</code> of
 that block, for instance in an org buffer with the following content:
@@ -208,7 +208,7 @@ that block, for instance in an org buffer with the following content:
 </p>
 </div>
 
-<div><h4 id="one-ab9d7e79f0">Using the built-in command org-babel-goto-named-src-block</h4><div><p>First, we can use the built-in command <code class="one-hl one-hl-inline">org-babel-goto-named-src-block</code>
+<div><h4 id="one-d7f08d05d2">Using the built-in command org-babel-goto-named-src-block</h4><div><p>First, we can use the built-in command <code class="one-hl one-hl-inline">org-babel-goto-named-src-block</code>
 (bound to <code class="one-hl one-hl-inline">C-c C-v g</code> by default).
 </p>
 
@@ -229,7 +229,7 @@ the reference <code class="one-hl one-hl-inline">&lt;&lt;my-noweb&gt;&gt;</code>
 </div>
 </div>
 
-<div><h4 id="one-fceebec014">Using the hook org-open-at-point-functions</h4><div><p>Second possibility, we can define a command that jump to a noweb
+<div><h4 id="one-bbb3e2b44d">Using the hook org-open-at-point-functions</h4><div><p>Second possibility, we can define a command that jump to a noweb
 block definition when we call it with the point on top of a noweb
 reference without prompting anything in the minibuffer.
 </p>
@@ -307,15 +307,15 @@ otherwise place the point at the beginning of the inserted text."</span>
        ,@body)))
 
 (<span class="one-hl-keyword">ert-deftest</span> <span class="one-hl-function-name">org-goto-noweb-test</span> ()
-  (<span class="one-hl-keyword">should</span>
-   (<span class="one-hl-keyword">org-test-with-temp-text</span>
+  (should
+   (org-test-with-temp-text
        <span class="one-hl-string">"#+BEGIN_SRC emacs-lisp :noweb yes
 &lt;point&gt;&lt;&lt;my-noweb&gt;&gt;
 (reverse sentence)
 #+END_SRC"</span>
      (org-noweb-ref-p)))
-  (<span class="one-hl-keyword">should-not</span>
-   (<span class="one-hl-keyword">org-test-with-temp-text</span>
+  (should-not
+   (org-test-with-temp-text
        <span class="one-hl-string">"#+BEGIN_SRC emacs-lisp :noweb yes
 &lt;&lt;my-noweb&gt;&gt;
 (reverse sentence)
@@ -323,8 +323,8 @@ otherwise place the point at the beginning of the inserted text."</span>
      (org-noweb-ref-p)))
 
   <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">source blocks
-</span>  (<span class="one-hl-keyword">should</span>
-   (<span class="one-hl-keyword">org-test-with-temp-text</span>
+</span>  (should
+   (org-test-with-temp-text
        <span class="one-hl-string">"#+NAME: my-noweb
 #+BEGIN_SRC emacs-lisp
 (setq sentence '(foo bar baz))
@@ -337,8 +337,8 @@ otherwise place the point at the beginning of the inserted text."</span>
      (org-goto-noweb)
      (forward-line)
      (looking-at <span class="one-hl-string">"</span><span class="one-hl-string"><span class="one-hl-warning">\</span></span><span class="one-hl-string">(setq"</span>)))
-  (<span class="one-hl-keyword">should-not</span>
-   (<span class="one-hl-keyword">org-test-with-temp-text</span>
+  (should-not
+   (org-test-with-temp-text
        <span class="one-hl-string">"#+NAME: my-noweb
 #+BEGIN_SRC emacs-lisp
 (setq sentence '(foo bar baz))
@@ -351,8 +351,8 @@ otherwise place the point at the beginning of the inserted text."</span>
      (org-goto-noweb)))
 
   <span class="one-hl-comment-delimiter">;; </span><span class="one-hl-comment">inline source blocks
-</span>  (<span class="one-hl-keyword">should</span>
-   (<span class="one-hl-keyword">org-test-with-temp-text</span>
+</span>  (should
+   (org-test-with-temp-text
        <span class="one-hl-string">"#+NAME: my-noweb
 #+BEGIN_SRC emacs-lisp
 (setq sentence '(foo bar baz))
@@ -366,7 +366,7 @@ src_emacs-lisp{&lt;point&gt;&lt;&lt;my-noweb&gt;&gt;}"</span>
 </div>
 </div>
 </div>
-<div class="nav"><a href="/2022-03-05-i-bet-you-use-hl-line-mode/">RANDOM</a><a href="/2022-02-11-closures-and-lexical-binding/">NEXT</a></div></article></div></body><script>
+<div class="nav"><a href="/2022-04-27-full-example-of-org-mode-links-internal-links-and-search-options/">RANDOM</a><a href="/2022-02-11-closures-and-lexical-binding/">NEXT</a></div></article></div></body><script>
 function sidebarShow() {
   if (window.innerWidth < 481)
     document.getElementById('sidebar-left').style.width = '75vw';
