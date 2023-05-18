@@ -131,3 +131,32 @@ function sidebarHide() {
 ;;     (kill-new link-name)))
 ;;
 ;; ;; (key-chord-define-global "//" 'posts-rev-link-store)
+
+;;; feed.xml
+
+(defun posts-feed (pages tree global)
+  "Produce file ./public/feed.xml"
+  (with-temp-file "./public/feed.xml"
+    (insert
+     (jack-html
+      "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+      `(:feed (@ :xmlns "http://www.w3.org/2005/Atom")
+        (:title "Elisp posts")
+        (:link (@ :href "https://posts.tonyaldon.com"))
+        (:updated "2023-05-18T17:21:18+0200")
+        (:author (:name "Tony Aldon"))
+        ,(mapcar
+          (lambda (page)
+            (let* ((title (plist-get page :one-title))
+                   (path (plist-get page :one-path))
+                   (link (concat "https://posts.tonyaldon.com" path))
+                   (date ))
+              (when (not (or (string= path "/")
+                             (string= path "/questions-and-answers/")))
+                `(:entry
+                  (:title ,title)
+                  (:link (@ :href ,link))
+                  (:updated ,(concat (substring path 1 11) "T00:00:00"))))))
+          pages))))))
+
+(add-hook 'one-hook 'posts-feed)
