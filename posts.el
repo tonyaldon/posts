@@ -93,37 +93,6 @@ function sidebarHide() {
 
 ;;; export links
 
-(defun posts-one-ox-link-org-rev (link description type info)
-  "Export `org-rev' links.
-
-See `org-rev-open'."
-  (seq-let (rev repo file line) (split-string link ":")
-    (let (href)
-      (if (string= repo "emacs")
-          (setq href
-                (concat
-                 "https://github.com/emacs-mirror/emacs/blob/"
-                 rev "/"
-                 file (or (and line (concat "#L" line)) "")))
-        (setq href
-              (concat
-               "https://git.sr.ht/~bzg/org-mode/tree/"
-               rev "/item/"
-               file (or (and line (concat "#L" line)) ""))))
-      (jack-html
-       `(:a (@ :href ,href) ,description)))))
-
-
-;; (posts-one-ox-link-org-rev "af6f1298b6f613678ba5ccf9592412872743fe54:org-mode:lisp/ob-awk.el:41"
-;;                            "org-babel-tangle-lang-exts" nil nil)
-;; ;; "<a href=\"https://git.sr.ht/~bzg/org-mode/tree/af6f1298b6f613678ba5ccf9592412872743fe54/item/lisp/ob-awk.el#L41\">org-babel-tangle-lang-exts</a>"
-;; (posts-one-ox-link-org-rev "cb4f4dd89131e5a8956c788fee7ede65f13b2a69:emacs:lisp/ob-awk.el:41"
-;;                            "#ifdef HAVE_PGTK" nil nil)
-;; ;; "<a href=\"https://github.com/emacs-mirror/emacs/blob/cb4f4dd89131e5a8956c788fee7ede65f13b2a69/src/alloc.c#L8214\">#ifdef HAVE_PGTK</a>"
-
-(org-link-set-parameters "rev"
-			                   :export #'posts-one-ox-link-org-rev)
-
 (defun posts-one-ox-link-info (link description type info)
   "Export builtin org info links. "
   (jack-html `(:span ,link)))
