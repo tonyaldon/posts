@@ -143,7 +143,7 @@ function sidebarHide() {
       `(:feed (@ :xmlns "http://www.w3.org/2005/Atom")
         (:title "Elisp posts")
         (:link (@ :href "https://posts.tonyaldon.com"))
-        (:id "urn:posts-tonyaldon-com")
+        (:id "urn:posts-tonyaldon-com:feed")
         (:updated "2023-05-18T00:00:00Z")
         (:author (:name "Tony Aldon"))
         ,(mapcar
