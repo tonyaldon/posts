@@ -143,7 +143,7 @@ function sidebarHide() {
       `(:feed (@ :xmlns "http://www.w3.org/2005/Atom")
         (:title "Elisp posts")
         (:link (@ :href "https://posts.tonyaldon.com"))
-        (:updated "2023-05-18T17:21:18+0200")
+        (:updated "2023-05-18T00:00:00Z")
         (:author (:name "Tony Aldon"))
         ,(mapcar
           (lambda (page)
@@ -156,7 +156,7 @@ function sidebarHide() {
                 `(:entry
                   (:title ,title)
                   (:link (@ :href ,link))
-                  (:updated ,(concat (substring path 1 11) "T00:00:00"))))))
+                  (:updated ,(concat (substring path 1 11) "T00:00:00Z"))))))
           pages))))))
 
 (add-hook 'one-hook 'posts-feed)
