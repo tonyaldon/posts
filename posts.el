@@ -143,20 +143,22 @@ function sidebarHide() {
       `(:feed (@ :xmlns "http://www.w3.org/2005/Atom")
         (:title "Elisp posts")
         (:link (@ :href "https://posts.tonyaldon.com"))
+        (:id "posts-2023-05-18")
         (:updated "2023-05-18T00:00:00Z")
         (:author (:name "Tony Aldon"))
         ,(mapcar
           (lambda (page)
             (let* ((title (plist-get page :one-title))
                    (path (plist-get page :one-path))
-                   (link (concat "https://posts.tonyaldon.com" path))
-                   (date ))
+                   (link (concat "https://posts.tonyaldon.com" path)))
               (when (not (or (string= path "/")
                              (string= path "/questions-and-answers/")))
-                `(:entry
-                  (:title ,title)
-                  (:link (@ :href ,link))
-                  (:updated ,(concat (substring path 1 11) "T00:00:00Z"))))))
+                (let ((date (substring path 1 11)))
+                  `(:entry
+                    (:title ,title)
+                    (:link (@ :href ,link))
+                    (:id ,(concat "posts-" date))
+                    (:updated ,(concat date "T00:00:00Z")))))))
           pages))))))
 
 (add-hook 'one-hook 'posts-feed)
