@@ -99,6 +99,14 @@ function sidebarHide() {
 
 ;;; export links
 
+;; for `org-link-set-parameters' and `help' link type
+(require 'ol)
+
+;; `ol-info' must be loaded before we change the value of
+;; the entry `info' in `org-link-parameters' with
+;; `org-link-set-parameters' below
+(require 'ol-info)
+
 (defun posts-one-ox-link-info (link description type info)
   "Export builtin org info links. "
   (jack-html `(:span ,link)))
