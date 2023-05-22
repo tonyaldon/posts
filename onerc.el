@@ -1,3 +1,9 @@
+(setq org-rev-repos
+      '((:repo-abbrev "emacs"
+         :repo-url "https://github.com/emacs-mirror/emacs")
+        (:repo-abbrev "org-mode"
+         :repo-url "https://git.sr.ht/~bzg/org-mode")))
+
 (defun posts-one-default-home-list-pages (page-tree pages global)
   ""
   (let* ((title (org-element-property :raw-value page-tree))
