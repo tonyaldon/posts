@@ -93,7 +93,7 @@ a:visited {
   color: #ffd787;
 }
 
-/* ------- '.one' classes used by 'one' org backend ------- */
+/* ------- '.one' classes used by 'one-ox' org backend ------- */
 
 .one-hl {
 	font-family: 'Fira Mono', monospace;

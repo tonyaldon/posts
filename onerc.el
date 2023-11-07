@@ -9,7 +9,7 @@
   (let* ((title (org-element-property :raw-value page-tree))
          (content (org-export-data-with-backend
                    (org-element-contents page-tree)
-                   'one nil))
+                   'one-ox nil))
          (website-name (one-default-website-name pages))
          (pages-list (one-default-pages pages)))
     (jack-html
@@ -31,7 +31,7 @@
          (path (org-element-property :CUSTOM_ID page-tree))
          (content (org-export-data-with-backend
                    (org-element-contents page-tree)
-                   'one nil))
+                   'one-ox nil))
          (website-name (one-default-website-name pages))
          (pages-list (one-default-pages pages))
          (headlines (cdr (one-default-list-headlines page-tree)))
